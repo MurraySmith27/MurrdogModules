@@ -63,7 +63,7 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
             {
                InputAction showInputAction = inputActionAsset.FindAction(uiPopup.showPopupActionName);
                InputAction hideInputAction = inputActionAsset.FindAction(uiPopup.hidePopupActionName);
-
+               
                string popupId = uiPopup.id; 
 
                if (showInputAction != null)
@@ -73,10 +73,10 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
                      ShowPopup(popupId);
                   };
                   
-                  _showPopupActions.Add((showInputAction, onShowPopupAction));
-
                   showInputAction.performed += onShowPopupAction;
                   showInputAction.Enable();
+                  
+                  _showPopupActions.Add((showInputAction, onShowPopupAction));
                }
                
                if (hideInputAction != null)
@@ -86,10 +86,10 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
                      HidePopup(popupId);
                   };
                   
-                  _hidePopupActions.Add((hideInputAction, onHidePopupAction));
-
                   hideInputAction.performed += onHidePopupAction;
                   hideInputAction.Enable();
+                  
+                  _hidePopupActions.Add((hideInputAction, onHidePopupAction));
                }
             }
          }
@@ -107,17 +107,14 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          showPopupAction.Item1.performed -= showPopupAction.Item2;
       }
       
-      foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _showPopupActions)
+      foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
       {
          hidePopupAction.Item1.performed -= hidePopupAction.Item2;
       }
       
-      inputActionAsset.Disable();
-      
       _showPopupActions.Clear();
       _hidePopupActions.Clear();
    }
-
 
    public void ShowPopup(string popupId, PanelShowBehaviour showBehaviour = PanelShowBehaviour.KEEP_PREVIOUS)
    {
@@ -147,12 +144,16 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
                _popupQueue.AddFirst(_activePopup);
             }
             
-            
             _activePopup = (uiPopup.id, newPopup.GetComponent<UIPopupComponent>());
          }
          else
          {
             _popupQueue.AddLast((uiPopup.id, newPopup.GetComponent<UIPopupComponent>()));
+         }
+         
+         foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
+         {
+            hidePopupAction.Item1.Enable();
          }
          
          newPopup.OnPopupShow();
@@ -170,6 +171,11 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       if (uiPopup.Item2 != null)
       {
          _popupQueue.Remove(uiPopup);
+         
+         foreach ((InputAction, Action<InputAction.CallbackContext>) showPopupAction in _showPopupActions)
+         {
+            showPopupAction.Item1.Enable();
+         }
          
          uiPopup.Item2.OnPopupHide();
       }

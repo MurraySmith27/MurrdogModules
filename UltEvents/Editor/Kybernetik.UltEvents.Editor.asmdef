@@ -1,11 +1,12 @@
 {
-    "name": "MurrdogModules.UIPopups",
+    "name": "Kybernetik.UltEvents.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:a014b442fa4e86e43b16e24fc1967ee9"
+        "GUID:57a6d82589ae03c4cabdc058f719f231"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
