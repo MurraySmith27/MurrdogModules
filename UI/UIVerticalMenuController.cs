@@ -292,7 +292,6 @@ public class UIVerticalMenuController : MonoBehaviour
 
     private void OnMouseSelectPerformed(InputAction.CallbackContext ctx)
     {
-        Debug.Log("mouse select pefromed");
         OnMouseNavigatePerformed(ctx);
         Vector2 mousePos = _mouseNavigateAction.ReadValue<Vector2>();
         bool foundMenuButton = false;
