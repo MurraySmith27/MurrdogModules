@@ -87,6 +87,8 @@ public class UIVerticalMenuController : MonoBehaviour
     private InputAction _mouseSelectAction;
     
     private bool _freezeNavigation;
+
+    private bool _freezeNavigationExternal;
     
     #endregion
     
@@ -94,6 +96,8 @@ public class UIVerticalMenuController : MonoBehaviour
     private void Awake()
     {
         _freezeNavigation = false;
+
+        _freezeNavigationExternal = false;
 
         _navigateAction = inputActionAsset.FindAction(navigateActionName);
         _selectAction = inputActionAsset.FindAction(selectActionName);
@@ -165,7 +169,7 @@ public class UIVerticalMenuController : MonoBehaviour
 
     private void OnNavigatePeformed(InputAction.CallbackContext ctx)
     {
-        if (!_freezeNavigation)
+        if (!_freezeNavigation && !_freezeNavigationExternal)
         {
             if (_currentlySelectedMenuButton == -1)
             {
@@ -311,6 +315,11 @@ public class UIVerticalMenuController : MonoBehaviour
         {
             OnSelectPerformed(ctx);
         }
+    }
+
+    public void SetFreezeNavigation(bool isFrozen)
+    {
+        _freezeNavigationExternal = isFrozen;
     }
 
     private void OnEnable()
