@@ -130,33 +130,50 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
 
          if (!_popupInstancePool.ContainsKey(popupId))
          {
+            uiPopup.prefab.SetActive(false);
             _popupInstancePool.Add(popupId, Instantiate(uiPopup.prefab, transform).GetComponent<UIPopupComponent>());
          }
          
          UIPopupComponent newPopup = _popupInstancePool[popupId];
-         
-         if (showBehaviour == PanelShowBehaviour.HIDE_PREVIOUS)
-         {
-            if (_activePopup.Item2 != null)
-            {
-               _activePopup.Item2.gameObject.SetActive(false);
 
-               _popupQueue.AddFirst(_activePopup);
+         if (_popupQueue.Count == 0 && _activePopup.Item2 == null)
+         {
+            foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
+            {
+               hidePopupAction.Item1.Enable();
             }
-            
-            _activePopup = (uiPopup.id, newPopup.GetComponent<UIPopupComponent>());
+         
+            _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
+         
+            newPopup.OnPopupShow();
          }
          else
          {
-            _popupQueue.AddLast((uiPopup.id, newPopup.GetComponent<UIPopupComponent>()));
-         }
+            if (showBehaviour == PanelShowBehaviour.HIDE_PREVIOUS)
+            {
+               if (_activePopup.Item2 != null)
+               {
+                  _activePopup.Item2.OnPopupHide();
+
+                  _popupQueue.AddFirst(_activePopup);
+
+                  _activePopup = ("", null);
+               }
+               
+               foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
+               {
+                  hidePopupAction.Item1.Enable();
+               }
          
-         foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
-         {
-            hidePopupAction.Item1.Enable();
-         }
+               _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
          
-         newPopup.OnPopupShow();
+               newPopup.OnPopupShow();
+            }
+            else
+            {
+               _popupQueue.AddLast((popupId, newPopup.GetComponent<UIPopupComponent>()));
+            }
+         }
       }
       else
       {
@@ -164,6 +181,14 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       }
    }
 
+   public void HideActivePopup()
+   {
+      if (_activePopup.Item2 != null)
+      {
+         HidePopup(_activePopup.Item1);
+      }
+   }
+   
    public void HidePopup(string popupId)
    {
       (string, UIPopupComponent) uiPopup = _popupQueue.FirstOrDefault(popup => popup.Item1 == popupId);
@@ -178,6 +203,33 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          }
          
          uiPopup.Item2.OnPopupHide();
+         
+         ShowNextQueuedPopup();
+      }
+      else if (_activePopup.Item1 == popupId)
+      {
+         foreach ((InputAction, Action<InputAction.CallbackContext>) showPopupAction in _showPopupActions)
+         {
+            showPopupAction.Item1.Enable();
+         }
+         
+         _activePopup.Item2.OnPopupHide();
+         
+         _activePopup = ("", null);
+
+         ShowNextQueuedPopup();
+      }
+   }
+
+   private void ShowNextQueuedPopup()
+   {
+      if (_popupQueue.Count > 0)
+      {
+         string nextPopupId = _popupQueue.First.Value.Item1;
+         
+         _popupQueue.RemoveFirst();
+         
+         ShowPopup(nextPopupId);
       }
    }
 

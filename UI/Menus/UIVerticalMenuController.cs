@@ -111,8 +111,8 @@ public class UIVerticalMenuController : MonoBehaviour
     {
         if (_navigateAction != null)
         {
-            _navigateAction.performed -= OnNavigatePeformed;
-            _navigateAction.performed += OnNavigatePeformed;
+            _navigateAction.performed -= OnNavigatePerformed;
+            _navigateAction.performed += OnNavigatePerformed;
             _navigateAction.Enable();
         }
 
@@ -142,7 +142,7 @@ public class UIVerticalMenuController : MonoBehaviour
     {
         if (_navigateAction != null)
         {
-            _navigateAction.performed -= OnNavigatePeformed;
+            _navigateAction.performed -= OnNavigatePerformed;
             _navigateAction.Disable();
         }
 
@@ -167,7 +167,7 @@ public class UIVerticalMenuController : MonoBehaviour
     
     
 
-    private void OnNavigatePeformed(InputAction.CallbackContext ctx)
+    private void OnNavigatePerformed(InputAction.CallbackContext ctx)
     {
         if (!_freezeNavigation && !_freezeNavigationExternal)
         {

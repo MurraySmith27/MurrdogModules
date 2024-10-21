@@ -15,6 +15,18 @@ public static class UIPopupSystemStaticAccessor
             Debug.LogError("Error trying to call ShowPopup, UIPopupSystem is not initialized!");
         }
     }
+    
+    public static void HideActivePopup()
+    {
+        if (UIPopupSystem.Instance != null)
+        {
+            UIPopupSystem.Instance.HideActivePopup();
+        }
+        else
+        {
+            Debug.LogError("Error trying to call HideActivePopup, UIPopupSystem is not initialized!");
+        }
+    }
 
     public static void HidePopup(string popupId)
     {
@@ -24,7 +36,7 @@ public static class UIPopupSystemStaticAccessor
         }
         else
         {
-            Debug.LogError("Error trying to call ShowPopup, UIPopupSystem is not initialized!");
+            Debug.LogError("Error trying to call HidePopup, UIPopupSystem is not initialized!");
         }
     }
 }
