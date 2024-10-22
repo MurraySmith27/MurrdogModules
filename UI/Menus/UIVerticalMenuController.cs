@@ -58,7 +58,7 @@ public class UIVerticalMenuController : MonoBehaviour
     [SerializeField] private List<UIMenuAnimationIntParameter> onNavigateFromAnimationParameters;
     
     [Header("Input")]
-    [SerializeField] private InputActionAsset inputActionAsset;
+    [SerializeField] private UIInputChannel uiInputChannel;
     
     [SerializeField] private string navigateActionName;
     
@@ -98,70 +98,85 @@ public class UIVerticalMenuController : MonoBehaviour
         _freezeNavigation = false;
 
         _freezeNavigationExternal = false;
-
-        _navigateAction = inputActionAsset.FindAction(navigateActionName);
-        _selectAction = inputActionAsset.FindAction(selectActionName);
-        _mouseNavigateAction = inputActionAsset.FindAction(mouseNavigateActionName);
-        _mouseSelectAction = inputActionAsset.FindAction(mouseSelectActionName);
         
         EnableActions();
     }
 
     private void EnableActions()
     {
-        if (_navigateAction != null)
-        {
-            _navigateAction.performed -= OnNavigatePerformed;
-            _navigateAction.performed += OnNavigatePerformed;
-            _navigateAction.Enable();
-        }
-
-        if (_selectAction != null)
-        {
-            _selectAction.performed -= OnSelectPerformed;
-            _selectAction.performed += OnSelectPerformed;
-            _selectAction.Enable();
-        }
+        uiInputChannel.NavigateUpEvent -= OnNavigateUp;
+        uiInputChannel.NavigateUpEvent += OnNavigateUp;
         
-        if (_mouseNavigateAction != null)
-        {
-            _mouseNavigateAction.performed -= OnMouseNavigatePerformed;
-            _mouseNavigateAction.performed += OnMouseNavigatePerformed;
-            _mouseNavigateAction.Enable();
-        }
+        uiInputChannel.NavigateDownEvent -= OnNavigateDown;
+        uiInputChannel.NavigateDownEvent += OnNavigateDown;
 
-        if (_mouseSelectAction != null)
-        {
-            _mouseSelectAction.performed -= OnMouseSelectPerformed;
-            _mouseSelectAction.performed += OnMouseSelectPerformed;
-            _mouseSelectAction.Enable();
-        }
+        uiInputChannel.SelectEvent -= OnSelectPerformed;
+        uiInputChannel.SelectEvent += OnSelectPerformed;
+
+        uiInputChannel.MouseMoveEvent -= OnMouseNavigatePerformed;
+        uiInputChannel.MouseMoveEvent += OnMouseNavigatePerformed;
+
+        uiInputChannel.MouseSelectEvent -= OnMouseSelectPerformed;
+        uiInputChannel.MouseSelectEvent += OnMouseSelectPerformed;
     }
     
     private void DisableActions()
     {
-        if (_navigateAction != null)
-        {
-            _navigateAction.performed -= OnNavigatePerformed;
-            _navigateAction.Disable();
-        }
-
-        if (_selectAction != null)
-        {
-            _selectAction.performed -= OnSelectPerformed;
-            _selectAction.Disable();
-        }
+        uiInputChannel.NavigateUpEvent -= OnNavigateUp;
         
-        if (_mouseNavigateAction != null)
-        {
-            _mouseNavigateAction.performed -= OnMouseNavigatePerformed;
-            _mouseNavigateAction.Disable();
-        }
+        uiInputChannel.NavigateDownEvent -= OnNavigateDown;
 
-        if (_mouseSelectAction != null)
+        uiInputChannel.SelectEvent -= OnSelectPerformed;
+
+        uiInputChannel.MouseMoveEvent -= OnMouseNavigatePerformed;
+
+        uiInputChannel.MouseSelectEvent -= OnMouseSelectPerformed;
+    }
+
+    private void OnNavigateUp()
+    {
+        if (!_freezeNavigation && !_freezeNavigationExternal)
         {
-            _mouseSelectAction.performed -= OnMouseSelectPerformed;
-            _mouseSelectAction.Disable();
+            if (_currentlySelectedMenuButton == -1)
+            {
+                _currentlySelectedMenuButton = 0;
+            }
+            else if (_currentlySelectedMenuButton != 0)
+            {
+                Debug.Log($"setting currently selected menu button to: {_currentlySelectedMenuButton - 1}");
+                _currentlySelectedMenuButton--;
+                if (menuNavigateSound != null)
+                {
+                    menuNavigateSound.Play();
+                }
+
+                StartCoroutine(ButtonNavigationCooldown());
+            }
+            
+            UpdateMenuButtons();
+        }
+    }
+    
+    private void OnNavigateDown()
+    {
+        if (!_freezeNavigation && !_freezeNavigationExternal)
+        {
+            if (_currentlySelectedMenuButton == -1)
+            {
+                _currentlySelectedMenuButton = 0;
+            }
+            else if (_currentlySelectedMenuButton != buttons.Count-1)
+            {
+                Debug.Log($"setting currently selected menu button to: {_currentlySelectedMenuButton + 1}");
+                _currentlySelectedMenuButton++;
+                if (menuNavigateSound != null)
+                {
+                    menuNavigateSound.Play();
+                }
+                StartCoroutine(ButtonNavigationCooldown());
+            }
+            
+            UpdateMenuButtons();
         }
     }
     
@@ -251,15 +266,14 @@ public class UIVerticalMenuController : MonoBehaviour
         }
     }
     
-    private void OnMouseNavigatePerformed(InputAction.CallbackContext ctx)
+    private void OnMouseNavigatePerformed(Vector2 mousePosition)
     {
-        Vector2 mousePos = _mouseNavigateAction.ReadValue<Vector2>();
         bool foundMenuButton = false;
 
         for (int i = 0; i < buttons.Count; i++)
         {
             RectTransform buttonRectTransform = buttons[i].transform as RectTransform;
-            Vector2 localMousePosition = buttonRectTransform.InverseTransformPoint(mousePos);
+            Vector2 localMousePosition = buttonRectTransform.InverseTransformPoint(mousePosition);
             if (buttonRectTransform.rect.Contains(localMousePosition) && _currentlySelectedMenuButton != i)
             {
                 _currentlySelectedMenuButton = i;
@@ -278,7 +292,7 @@ public class UIVerticalMenuController : MonoBehaviour
         }
     }
 
-    private void OnSelectPerformed(InputAction.CallbackContext ctx)
+    private void OnSelectPerformed()
     {
 
         if (_currentlySelectedMenuButton == -1)
@@ -294,16 +308,15 @@ public class UIVerticalMenuController : MonoBehaviour
     }
 
 
-    private void OnMouseSelectPerformed(InputAction.CallbackContext ctx)
+    private void OnMouseSelectPerformed(Vector2 mousePosition)
     {
-        OnMouseNavigatePerformed(ctx);
-        Vector2 mousePos = _mouseNavigateAction.ReadValue<Vector2>();
+        OnMouseNavigatePerformed(mousePosition);
         bool foundMenuButton = false;
 
         for (int i = 0; i < buttons.Count; i++)
         {
             RectTransform buttonRectTransform = buttons[i].transform as RectTransform;
-            Vector2 localMousePosition = buttonRectTransform.InverseTransformPoint(mousePos);
+            Vector2 localMousePosition = buttonRectTransform.InverseTransformPoint(mousePosition);
             if (buttonRectTransform.rect.Contains(localMousePosition))
             {
                 foundMenuButton = true;
@@ -313,7 +326,7 @@ public class UIVerticalMenuController : MonoBehaviour
 
         if (foundMenuButton)
         {
-            OnSelectPerformed(ctx);
+            OnSelectPerformed();
         }
     }
 

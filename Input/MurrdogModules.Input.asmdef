@@ -1,12 +1,8 @@
 {
-    "name": "MurrdogModules.UI",
+    "name": "MurrdogModules.Input",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:57a6d82589ae03c4cabdc058f719f231",
-        "GUID:0c752da273b17c547ae705acf0f2adf2",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:70bdb038148aaad4f8c5dcaeae5b8e87"
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

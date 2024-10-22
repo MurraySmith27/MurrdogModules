@@ -21,7 +21,7 @@ public class OptionsMenuSelector : MonoBehaviour
    [SerializeField] private List<Button> buttons;
    
    [Header("Input")]
-   [SerializeField] private InputActionAsset inputActionAsset;
+   [SerializeField] private UIInputChannel uiInputChannel;
 
    [SerializeField] private string deselectActionName;
 
@@ -73,7 +73,15 @@ public class OptionsMenuSelector : MonoBehaviour
 
    public void SelectNext()
    {
-      _currentlySelectedItem = (_currentlySelectedItem - 1) % items.Count;
+      if (_currentlySelectedItem == 0)
+      {
+         
+         _currentlySelectedItem = items.Count - 1;
+      }
+      else
+      {
+         _currentlySelectedItem--;
+      }
       UpdateSelectedElement();
    }
    
@@ -84,17 +92,6 @@ public class OptionsMenuSelector : MonoBehaviour
    private void Awake()
    {
       DOTween.Init();
-      _backInputAction = inputActionAsset.FindAction(deselectActionName);
-
-      _backInputAction.performed -= OnBackActionPerformed;
-      _backInputAction.performed += OnBackActionPerformed;
-      _backInputAction.Enable();
-      
-      _changeSelectionAction = inputActionAsset.FindAction(changeSelectionActionName);
-      
-      _changeSelectionAction.performed -= OnChangeSelectionPerformed;
-      _changeSelectionAction.performed += OnChangeSelectionPerformed;
-      _changeSelectionAction.Enable();
 
       _innerSelectorElementsCanvasGroupOriginalAlpha = innerSelectorElementsCanvasGroup.alpha;
 
@@ -105,39 +102,28 @@ public class OptionsMenuSelector : MonoBehaviour
 
    private void OnEnable()
    {
-      if (_backInputAction != null)
-      {
-         _backInputAction.performed -= OnBackActionPerformed;
-         _backInputAction.performed += OnBackActionPerformed;
-         _backInputAction.Enable();
-      }
-
-      if (_changeSelectionAction != null)
-      {
-         _changeSelectionAction.performed -= OnChangeSelectionPerformed;
-         _changeSelectionAction.performed += OnChangeSelectionPerformed;
-         _changeSelectionAction.Enable();
-      }
+      uiInputChannel.BackEvent -= OnBackActionPerformed;
+      uiInputChannel.BackEvent += OnBackActionPerformed;
+      
+      uiInputChannel.NavigateLeftEvent -= SelectPrevious;
+      uiInputChannel.NavigateLeftEvent += SelectPrevious;
+      
+      uiInputChannel.NavigateRightEvent -= SelectNext;
+      uiInputChannel.NavigateRightEvent += SelectNext;
    }
 
    private void OnDisable()
    {
-      if (_backInputAction != null)
-      {
-         _backInputAction.performed -= OnBackActionPerformed;
-         _backInputAction.Disable();
-      }
+      uiInputChannel.BackEvent -= OnBackActionPerformed;
       
-      if (_changeSelectionAction != null)
-      {
-         _changeSelectionAction.performed -= OnChangeSelectionPerformed;
-         _changeSelectionAction.Disable();
-      }
+      uiInputChannel.NavigateLeftEvent -= SelectPrevious;
+      
+      uiInputChannel.NavigateRightEvent -= SelectNext;
    }
    
    #endregion
 
-   private void OnBackActionPerformed(InputAction.CallbackContext ctx)
+   private void OnBackActionPerformed()
    {
       TweenCanvasGroup(1f, _innerSelectorElementsCanvasGroupOriginalAlpha, innersSelectorAnimationDuration);
       
@@ -147,25 +133,6 @@ public class OptionsMenuSelector : MonoBehaviour
       }
       
       onUnfocusedCallbacks?.Invoke();
-   }
-
-   private void OnChangeSelectionPerformed(InputAction.CallbackContext ctx)
-   {
-      Vector2 input = _changeSelectionAction.ReadValue<Vector2>();
-
-      if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
-      {
-         if (input.x > 0f)
-         {
-            //move next
-            SelectNext();
-         }
-         else
-         {
-            //move last
-            SelectPrevious();
-         }
-      }
    }
 
    private void UpdateSelectedElement()
