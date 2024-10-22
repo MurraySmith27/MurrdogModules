@@ -87,8 +87,6 @@ public class UIVerticalMenuController : MonoBehaviour
     private InputAction _mouseSelectAction;
     
     private bool _freezeNavigation;
-
-    private bool _freezeNavigationExternal;
     
     #endregion
     
@@ -96,8 +94,6 @@ public class UIVerticalMenuController : MonoBehaviour
     private void Awake()
     {
         _freezeNavigation = false;
-
-        _freezeNavigationExternal = false;
         
         EnableActions();
     }
@@ -135,7 +131,7 @@ public class UIVerticalMenuController : MonoBehaviour
 
     private void OnNavigateUp()
     {
-        if (!_freezeNavigation && !_freezeNavigationExternal)
+        if (!_freezeNavigation)
         {
             if (_currentlySelectedMenuButton == -1)
             {
@@ -159,7 +155,7 @@ public class UIVerticalMenuController : MonoBehaviour
     
     private void OnNavigateDown()
     {
-        if (!_freezeNavigation && !_freezeNavigationExternal)
+        if (!_freezeNavigation)
         {
             if (_currentlySelectedMenuButton == -1)
             {
@@ -184,7 +180,7 @@ public class UIVerticalMenuController : MonoBehaviour
 
     private void OnNavigatePerformed(InputAction.CallbackContext ctx)
     {
-        if (!_freezeNavigation && !_freezeNavigationExternal)
+        if (!_freezeNavigation)
         {
             if (_currentlySelectedMenuButton == -1)
             {
@@ -294,7 +290,6 @@ public class UIVerticalMenuController : MonoBehaviour
 
     private void OnSelectPerformed()
     {
-
         if (_currentlySelectedMenuButton == -1)
         {
             return;
@@ -303,7 +298,8 @@ public class UIVerticalMenuController : MonoBehaviour
         if (menuSelectSound != null)
         {
             menuSelectSound.Play();
-        } 
+        }
+
         OnSelectedEventsPerButton[_currentlySelectedMenuButton].Invoke();
     }
 
@@ -332,7 +328,14 @@ public class UIVerticalMenuController : MonoBehaviour
 
     public void SetFreezeNavigation(bool isFrozen)
     {
-        _freezeNavigationExternal = isFrozen;
+        if (isFrozen)
+        {
+            DisableActions();
+        }
+        else
+        {
+            EnableActions();
+        }
     }
 
     private void OnEnable()

@@ -28,9 +28,9 @@ public class OptionsMenuSelector : MonoBehaviour
    [SerializeField] private string changeSelectionActionName;
    
    [Header("Animations")]
-   [SerializeField] private CanvasGroup innerSelectorElementsCanvasGroup;
+   [SerializeField] private List<CanvasGroup> onSelectedFadeInCanvasGroups;
 
-   [SerializeField] private float innersSelectorAnimationDuration = 0.1f;
+   [SerializeField] private float onSelectedFadeInAnimationDuration = 0.1f;
 
    [Header("Callbacks")] 
    [SerializeField] private OptionsMenuSelectorFocusedEvent onFocusedCallbacks;
@@ -46,16 +46,18 @@ public class OptionsMenuSelector : MonoBehaviour
 
    private InputAction _changeSelectionAction;
    
-   private float _innerSelectorElementsCanvasGroupOriginalAlpha;
+   private List<float> _innerSelectorElementsCanvasGroupOriginalAlphas;
 
    private int _currentlySelectedItem = -1;
-   
    
    #region Public Methods
    
    public void OnSelectorFocused()
    {
-      TweenCanvasGroup(_innerSelectorElementsCanvasGroupOriginalAlpha, 1f, innersSelectorAnimationDuration);
+      for (int i = 0; i < onSelectedFadeInCanvasGroups.Count; i++)
+      {
+         TweenCanvasGroup(onSelectedFadeInCanvasGroups[i], _innerSelectorElementsCanvasGroupOriginalAlphas[i], 1f, onSelectedFadeInAnimationDuration);
+      }
 
       foreach (Button button in buttons)
       {
@@ -93,7 +95,11 @@ public class OptionsMenuSelector : MonoBehaviour
    {
       DOTween.Init();
 
-      _innerSelectorElementsCanvasGroupOriginalAlpha = innerSelectorElementsCanvasGroup.alpha;
+      _innerSelectorElementsCanvasGroupOriginalAlphas = new List<float>();
+      foreach (CanvasGroup canvasGroup in onSelectedFadeInCanvasGroups)
+      {
+         _innerSelectorElementsCanvasGroupOriginalAlphas.Add(canvasGroup.alpha);
+      }
 
       _currentlySelectedItem = 0;
 
@@ -125,7 +131,10 @@ public class OptionsMenuSelector : MonoBehaviour
 
    private void OnBackActionPerformed()
    {
-      TweenCanvasGroup(1f, _innerSelectorElementsCanvasGroupOriginalAlpha, innersSelectorAnimationDuration);
+      for (int i = 0; i < onSelectedFadeInCanvasGroups.Count; i++)
+      {
+         TweenCanvasGroup(onSelectedFadeInCanvasGroups[i], 1f, _innerSelectorElementsCanvasGroupOriginalAlphas[i], onSelectedFadeInAnimationDuration);
+      }
       
       foreach (Button button in buttons)
       {
@@ -142,17 +151,17 @@ public class OptionsMenuSelector : MonoBehaviour
       onOptionChanged?.Invoke(items[_currentlySelectedItem]);
    }
 
-   private void TweenCanvasGroup(float from, float to, float duration)
+   private void TweenCanvasGroup(CanvasGroup canvasGroup, float from, float to, float duration)
    {
-      innerSelectorElementsCanvasGroup.alpha = from;
+      canvasGroup.alpha = from;
       DOTween.To(
          () =>
          {
-            return innerSelectorElementsCanvasGroup.alpha;
+            return canvasGroup.alpha;
          }, 
          (float alpha) =>
          {
-            innerSelectorElementsCanvasGroup.alpha = alpha;
+            canvasGroup.alpha = alpha;
          },
          to,
          duration
