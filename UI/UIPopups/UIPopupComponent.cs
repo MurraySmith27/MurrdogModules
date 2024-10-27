@@ -18,11 +18,19 @@ public class UIPopupComponent : MonoBehaviour
     public class PopupHideStartEvent : UltEvent {}
     
     [Serializable]
+    public class PopupHideFinishedEvent : UltEvent {}
+    
+    [Serializable]
+    public class PopupShowStartEvent : UltEvent {}
+    
+    [Serializable]
     public class PopupShowFinishedEvent : UltEvent {}
 
-    [SerializeField] private PopupHideStartEvent onPopupHideStart;
-    
+    [SerializeField] private PopupShowStartEvent onPopupShowStart;
     [SerializeField] private PopupShowFinishedEvent onPopupShowFinished;
+
+    [SerializeField] private PopupHideStartEvent onPopupHideStart;
+    [SerializeField] private PopupHideFinishedEvent onPopupHideFinished;
     
     private bool _popupActionTriggeredThisFrame;
     
@@ -56,9 +64,12 @@ public class UIPopupComponent : MonoBehaviour
         
         this.gameObject.SetActive(true);
         
+        onPopupShowStart?.Invoke();
+        
         if (_hidePopupCR != null)
         {
             StopCoroutine(_hidePopupCR);
+            onPopupHideFinished?.Invoke();
             _hidePopupCRRunning = false;
         }
 
@@ -83,7 +94,7 @@ public class UIPopupComponent : MonoBehaviour
             return stateInfo.normalizedTime >= 1 && stateInfo.fullPathHash != beforeStateHash;
         });
         
-        onPopupShowFinished.Invoke();
+        onPopupShowFinished?.Invoke();
         
         _showPopupCRRunning = false;
     }
@@ -95,15 +106,17 @@ public class UIPopupComponent : MonoBehaviour
         {
             return;
         }
-        
+
         _popupActionTriggeredThisFrame = true;
         
         this.gameObject.SetActive(true);
         
+        onPopupHideStart?.Invoke();
+        
         if (_showPopupCR != null)
         {
             StopCoroutine(_showPopupCR);
-            onPopupShowFinished.Invoke();
+            onPopupShowFinished?.Invoke();
             _showPopupCRRunning = false;
         }
 
@@ -119,8 +132,6 @@ public class UIPopupComponent : MonoBehaviour
         
         _animatorComponent.SetTrigger(_outroAnimatorTrigger);
         IsActive = false;
-        
-        onPopupHideStart.Invoke();
 
         yield return new WaitUntil(() =>
         {
@@ -135,7 +146,10 @@ public class UIPopupComponent : MonoBehaviour
             return stateInfo.normalizedTime >= 1 && stateInfo.fullPathHash != beforeStateHash;
         });
         
+        onPopupHideFinished?.Invoke();
+        
         this.gameObject.SetActive(false);
+
         _hidePopupCRRunning = false;
     }
 }

@@ -229,7 +229,7 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          
          _popupQueue.RemoveFirst();
          
-         ShowPopup(nextPopupId);
+         ShowPopup(nextPopupId, PanelShowBehaviour.HIDE_PREVIOUS);
       }
    }
 

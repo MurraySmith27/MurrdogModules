@@ -32,13 +32,15 @@ public class OptionsMenuSelector : MonoBehaviour
 
    [SerializeField] private float onSelectedFadeInAnimationDuration = 0.1f;
 
+   [SerializeField] private bool useUnscaledTime = true;
+   
    [Header("Callbacks")] 
    [SerializeField] private OptionsMenuSelectorFocusedEvent onFocusedCallbacks;
    
    [SerializeField] private OptionsMenuSelectorFocusedEvent onUnfocusedCallbacks;
 
    [SerializeField] private OptionMenuSelectorOptionChangedEvent onOptionChanged;
-
+   
    [Header("Options")] 
    [SerializeField] private List<string> items;
    
@@ -77,7 +79,6 @@ public class OptionsMenuSelector : MonoBehaviour
    {
       if (_currentlySelectedItem == 0)
       {
-         
          _currentlySelectedItem = items.Count - 1;
       }
       else
@@ -86,12 +87,28 @@ public class OptionsMenuSelector : MonoBehaviour
       }
       UpdateSelectedElement();
    }
+
+   public void SetSelectedValue(string elementName)
+   {
+      int newIndex = items.IndexOf(elementName);
+
+      if (newIndex == -1)
+      {
+         Debug.LogError($"Cannot set OptionsMenuSelector value to {elementName}! Value does not exist in items list!");
+         return;
+      }
+      else
+      {
+         _currentlySelectedItem = newIndex;
+         UpdateSelectedElement();
+      }
+   }
    
    #endregion
    
    #region Event Methods
    
-   private void Awake()
+   private void Start()
    {
       DOTween.Init();
 
@@ -101,9 +118,12 @@ public class OptionsMenuSelector : MonoBehaviour
          _innerSelectorElementsCanvasGroupOriginalAlphas.Add(canvasGroup.alpha);
       }
 
-      _currentlySelectedItem = 0;
+      if (_currentlySelectedItem == -1)
+      {
+         _currentlySelectedItem = 0;
 
-      UpdateSelectedElement();
+         UpdateSelectedElement();
+      }
    }
 
    private void OnEnable()
@@ -147,18 +167,23 @@ public class OptionsMenuSelector : MonoBehaviour
    private void UpdateSelectedElement()
    {
       centerTextElement.text = items[_currentlySelectedItem];
-      
       onOptionChanged?.Invoke(items[_currentlySelectedItem]);
    }
 
    private void TweenCanvasGroup(CanvasGroup canvasGroup, float from, float to, float duration)
    {
+      if (DOTween.IsTweening(canvasGroup))
+      {
+         DOTween.Complete(canvasGroup);
+      }
+      
       canvasGroup.alpha = from;
-      DOTween.To(
+      
+      var tween = DOTween.To(
          () =>
          {
             return canvasGroup.alpha;
-         }, 
+         },
          (float alpha) =>
          {
             canvasGroup.alpha = alpha;
@@ -166,5 +191,12 @@ public class OptionsMenuSelector : MonoBehaviour
          to,
          duration
       );
+
+      tween.SetTarget(canvasGroup);
+
+      //sets to update using unscaled time;
+      tween.SetUpdate(useUnscaledTime);
+
+      tween.Play();
    }
 }
