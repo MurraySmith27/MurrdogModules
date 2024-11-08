@@ -58,7 +58,7 @@ public static class ReverseAnimationContext
     [MenuItem("Custom Tools/Create Reversed Clip", true)]
     static bool ReverseClipValidation()
     {
-        return Selection.activeObject.GetType() == typeof(AnimationClip);
+        return Selection.activeObject != null && Selection.activeObject.GetType() == typeof(AnimationClip);
     }
 
     public static AnimationClip GetSelectedClip()
