@@ -16,6 +16,8 @@ public class OptionsMenuSelector : MonoBehaviour
    [Serializable]
    public class OptionMenuSelectorOptionChangedEvent : UltEvent<string> {}
 
+   [SerializeField] private RectTransform rectTransform;
+   
    [SerializeField] private TMP_Text centerTextElement;
 
    [SerializeField] private List<Button> buttons;
@@ -51,11 +53,14 @@ public class OptionsMenuSelector : MonoBehaviour
    private List<float> _innerSelectorElementsCanvasGroupOriginalAlphas;
 
    private int _currentlySelectedItem = -1;
+
+   private bool _isFocused = false;
    
    #region Public Methods
    
    public void OnSelectorFocused()
    {
+      _isFocused = true;
       for (int i = 0; i < onSelectedFadeInCanvasGroups.Count; i++)
       {
          TweenCanvasGroup(onSelectedFadeInCanvasGroups[i], _innerSelectorElementsCanvasGroupOriginalAlphas[i], 1f, onSelectedFadeInAnimationDuration);
@@ -130,6 +135,9 @@ public class OptionsMenuSelector : MonoBehaviour
    {
       uiInputChannel.BackEvent -= OnBackActionPerformed;
       uiInputChannel.BackEvent += OnBackActionPerformed;
+
+      uiInputChannel.MouseSelectEvent -= MouseSelectPerformed;
+      uiInputChannel.MouseSelectEvent += MouseSelectPerformed;
       
       uiInputChannel.NavigateLeftEvent -= SelectPrevious;
       uiInputChannel.NavigateLeftEvent += SelectPrevious;
@@ -151,17 +159,30 @@ public class OptionsMenuSelector : MonoBehaviour
 
    private void OnBackActionPerformed()
    {
-      for (int i = 0; i < onSelectedFadeInCanvasGroups.Count; i++)
+      if (_isFocused)
       {
-         TweenCanvasGroup(onSelectedFadeInCanvasGroups[i], 1f, _innerSelectorElementsCanvasGroupOriginalAlphas[i], onSelectedFadeInAnimationDuration);
+         _isFocused = false;
+         for (int i = 0; i < onSelectedFadeInCanvasGroups.Count; i++)
+         {
+            TweenCanvasGroup(onSelectedFadeInCanvasGroups[i], 1f, _innerSelectorElementsCanvasGroupOriginalAlphas[i], onSelectedFadeInAnimationDuration);
+         }
+         
+         foreach (Button button in buttons)
+         {
+            button.interactable = false;
+         }
+         
+         onUnfocusedCallbacks?.Invoke();
       }
-      
-      foreach (Button button in buttons)
-      {
-         button.interactable = false;
-      }
-      
-      onUnfocusedCallbacks?.Invoke();
+   }
+
+   private void MouseSelectPerformed(Vector2 mousePosition)
+   {
+         Vector2 localMousePosition = rectTransform.InverseTransformPoint(mousePosition);
+         if (!rectTransform.rect.Contains(localMousePosition))
+         {
+            OnBackActionPerformed();
+         }
    }
 
    private void UpdateSelectedElement()
