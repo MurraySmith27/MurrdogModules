@@ -18,16 +18,20 @@ public class TextureSwapper : MonoBehaviour
     private void Awake()
     {
         _currentTextureNum = defaultTextureNum;
+        ChangeTextureNum(_currentTextureNum);
     }
     
     public void ChangeTextureNum(int newTextureNum)
     {
-        int oldTextureNum = _currentTextureNum;
+        if (newTextureNum != _currentTextureNum)
+        {
+            int oldTextureNum = _currentTextureNum;
 
-        _currentTextureNum = newTextureNum;
-        
-        textureSwapMaterial.SetFloat(currentTextureShaderVarName, newTextureNum);
-        
-        OnTextureNumChanged?.Invoke(oldTextureNum, newTextureNum);
+            _currentTextureNum = newTextureNum;
+
+            textureSwapMaterial.SetFloat(currentTextureShaderVarName, newTextureNum);
+
+            OnTextureNumChanged?.Invoke(oldTextureNum, newTextureNum);
+        }
     }
 }
