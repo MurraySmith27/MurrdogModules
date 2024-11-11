@@ -25,4 +25,27 @@ public static class AsyncUtils
         yield return new WaitUntil(() => condition.Invoke());
         onEnd.Invoke();
     }
+    
+    public class WaitForSecondsOrUntil : CustomYieldInstruction
+    {
+        private float t = 0f;
+        private float waitSeconds;
+        private Func<bool> waitCondition;
+        
+        public override bool keepWaiting
+        {
+            get
+            {
+                t += Time.deltaTime;
+                return t <= waitSeconds && !waitCondition();
+            }
+        }
+
+        public WaitForSecondsOrUntil(float seconds, Func<bool> condition)
+        {
+            t = 0f;
+            waitSeconds = seconds;
+            waitCondition = condition;
+        }
+    }
 }
