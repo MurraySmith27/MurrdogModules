@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +15,7 @@ public enum PanelShowBehaviour
 
 public class UIPopupSystem : Singleton<UIPopupSystem>
 {
-   [SerializeField] private InputActionAsset inputActionAsset;
+   [SerializeField] private UIInputChannel inputChannel;
    
    public List<UIPopup> uiPopups;
 
@@ -24,9 +25,9 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
 
    private Dictionary<string, UIPopupComponent> _popupInstancePool = new();
 
-   private List<(InputAction, Action<InputAction.CallbackContext>)> _showPopupActions = new();
+   private List<(UIInputType, UnityAction<UIInputChannel.UIInputChannelCallbackArgs>)> _showPopupActions = new();
    
-   private List<(InputAction, Action<InputAction.CallbackContext>)> _hidePopupActions = new();
+   private List<(UIInputType, UnityAction<UIInputChannel.UIInputChannelCallbackArgs>)> _hidePopupActions = new();
 
    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
    {
@@ -48,68 +49,63 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       SceneManager.sceneUnloaded -= OnSceneUnloaded;
       SceneManager.sceneUnloaded += OnSceneUnloaded;
    }
-
+   
    private void SetUpShowAndHideCallbacks()
    {
       ResetInputActions();
       
       string currentSceneName = SceneManager.GetActiveScene().name;
       
-      if (inputActionAsset != null)
+      if (inputChannel != null)
       {
          foreach (UIPopup uiPopup in uiPopups)
          {
             if (!uiPopup.excludedSceneNames.Contains(currentSceneName))
             {
-               InputAction showInputAction = inputActionAsset.FindAction(uiPopup.showPopupActionName);
-               InputAction hideInputAction = inputActionAsset.FindAction(uiPopup.hidePopupActionName);
-               
                string popupId = uiPopup.id; 
 
-               if (showInputAction != null)
+               UnityAction<UIInputChannel.UIInputChannelCallbackArgs> showCallback = (UIInputChannel.UIInputChannelCallbackArgs args) =>
                {
-                  Action<InputAction.CallbackContext> onShowPopupAction = (InputAction.CallbackContext ctx) =>
-                  {
-                     ShowPopup(popupId);
-                  };
-                  
-                  showInputAction.performed += onShowPopupAction;
-                  showInputAction.Enable();
-                  
-                  _showPopupActions.Add((showInputAction, onShowPopupAction));
-               }
+                  ShowPopup(popupId);
+               };
                
-               if (hideInputAction != null)
+               foreach (UIInputType showInput in uiPopup.showPopupInputs)
                {
-                  Action<InputAction.CallbackContext> onHidePopupAction = (InputAction.CallbackContext ctx) =>
-                  {
-                     HidePopup(popupId);
-                  };
+                  _showPopupActions.Add((showInput, showCallback));
                   
-                  hideInputAction.performed += onHidePopupAction;
-                  hideInputAction.Enable();
+                  RegisterCallbackToInput(showCallback, showInput);
+               }
+
+               UnityAction<UIInputChannel.UIInputChannelCallbackArgs> hideCallback = (UIInputChannel.UIInputChannelCallbackArgs args) =>
+               {
+                  HidePopup(popupId);
+               };
+               
+               foreach (UIInputType hideInput in uiPopup.hidePopupInputs)
+               {
+                  _hidePopupActions.Add((hideInput, hideCallback));
                   
-                  _hidePopupActions.Add((hideInputAction, onHidePopupAction));
+                  RegisterCallbackToInput(hideCallback, hideInput);
                }
             }
          }
       }
       else
       {
-         Debug.LogError("UIPopupSystem has not been assigned an InputActionAsset! Popup show and hide actions might not work.");
+         Debug.LogError("UIPopupSystem has not been assigned a UIInputChannel! Popup show and hide actions might not work.");
       }
    }
 
    private void ResetInputActions()
    {
-      foreach ((InputAction, Action<InputAction.CallbackContext>) showPopupAction in _showPopupActions)
+      foreach ((UIInputType, UnityAction<UIInputChannel.UIInputChannelCallbackArgs>) showPopupAction in _showPopupActions)
       {
-         showPopupAction.Item1.performed -= showPopupAction.Item2;
+         DeregisterCallbackFromInput(showPopupAction.Item2, showPopupAction.Item1);
       }
       
-      foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
+      foreach ((UIInputType, UnityAction<UIInputChannel.UIInputChannelCallbackArgs>) hidePopupAction in _hidePopupActions)
       {
-         hidePopupAction.Item1.performed -= hidePopupAction.Item2;
+         DeregisterCallbackFromInput(hidePopupAction.Item2, hidePopupAction.Item1);
       }
       
       _showPopupActions.Clear();
@@ -138,11 +134,6 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
 
          if (_popupQueue.Count == 0 && _activePopup.Item2 == null)
          {
-            foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
-            {
-               hidePopupAction.Item1.Enable();
-            }
-         
             _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
          
             newPopup.OnPopupShow();
@@ -158,11 +149,6 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
                   _popupQueue.AddFirst(_activePopup);
 
                   _activePopup = ("", null);
-               }
-               
-               foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
-               {
-                  hidePopupAction.Item1.Enable();
                }
          
                _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
@@ -197,22 +183,12 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       {
          _popupQueue.Remove(uiPopup);
          
-         foreach ((InputAction, Action<InputAction.CallbackContext>) showPopupAction in _showPopupActions)
-         {
-            showPopupAction.Item1.Enable();
-         }
-         
          uiPopup.Item2.OnPopupHide();
          
          ShowNextQueuedPopup();
       }
       else if (_activePopup.Item1 == popupId)
       {
-         foreach ((InputAction, Action<InputAction.CallbackContext>) showPopupAction in _showPopupActions)
-         {
-            showPopupAction.Item1.Enable();
-         }
-         
          _activePopup.Item2.OnPopupHide();
          
          _activePopup = ("", null);
@@ -237,30 +213,94 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
    {
       return _activePopup.Item2 != null;
    }
-
-   private void OnEnable()
+   
+   private void RegisterCallbackToInput(UnityAction<UIInputChannel.UIInputChannelCallbackArgs> callback, UIInputType inputType)
    {
-      foreach ((InputAction, Action<InputAction.CallbackContext>) showPopupAction in _showPopupActions)
+      switch (inputType)
       {
-         showPopupAction.Item1.Enable();
-      }
-      
-      foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
-      {
-         hidePopupAction.Item1.Enable();
+         case UIInputType.NAVIGATE:
+            inputChannel.NavigateEvent += callback;
+            break;
+         case UIInputType.NAVIGATE_UP:
+            inputChannel.NavigateUpEvent += callback;
+            break;
+         case UIInputType.NAVIGATE_DOWN:
+            inputChannel.NavigateDownEvent += callback;
+            break;
+         case UIInputType.NAVIGATE_LEFT:
+            inputChannel.NavigateLeftEvent += callback;
+            break;
+         case UIInputType.NAVIGATE_RIGHT:
+            inputChannel.NavigateRightEvent += callback;
+            break;
+         case UIInputType.MOUSE_MOVE:
+            inputChannel.MouseMoveEvent += callback;
+            break;
+         case UIInputType.MOUSE_SELECT:
+            inputChannel.MouseSelectEvent += callback;
+            break;
+         case UIInputType.SELECT:
+            inputChannel.NavigateDownEvent += callback;
+            break;
+         case UIInputType.BACK:
+            inputChannel.BackEvent += callback;
+            break;
+         case UIInputType.PAUSE:
+            inputChannel.PauseEvent += callback;
+            break;
+         case UIInputType.UNPAUSE:
+            inputChannel.UnpauseEvent += callback;
+            break;
+         case UIInputType.QUIT:
+            inputChannel.QuitEvent += callback;
+            break;
+         default:
+            break;
       }
    }
-
-   private void OnDisable()
+   
+   private void DeregisterCallbackFromInput(UnityAction<UIInputChannel.UIInputChannelCallbackArgs> callback, UIInputType inputType)
    {
-      foreach ((InputAction, Action<InputAction.CallbackContext>) showPopupAction in _showPopupActions)
+      switch (inputType)
       {
-         showPopupAction.Item1.Disable();
-      }
-      
-      foreach ((InputAction, Action<InputAction.CallbackContext>) hidePopupAction in _hidePopupActions)
-      {
-         hidePopupAction.Item1.Disable();
+         case UIInputType.NAVIGATE:
+            inputChannel.NavigateEvent -= callback;
+            break;
+         case UIInputType.NAVIGATE_UP:
+            inputChannel.NavigateUpEvent -= callback;
+            break;
+         case UIInputType.NAVIGATE_DOWN:
+            inputChannel.NavigateDownEvent -= callback;
+            break;
+         case UIInputType.NAVIGATE_LEFT:
+            inputChannel.NavigateLeftEvent -= callback;
+            break;
+         case UIInputType.NAVIGATE_RIGHT:
+            inputChannel.NavigateRightEvent -= callback;
+            break;
+         case UIInputType.MOUSE_MOVE:
+            inputChannel.MouseMoveEvent -= callback;
+            break;
+         case UIInputType.MOUSE_SELECT:
+            inputChannel.MouseSelectEvent -= callback;
+            break;
+         case UIInputType.SELECT:
+            inputChannel.NavigateDownEvent -= callback;
+            break;
+         case UIInputType.BACK:
+            inputChannel.BackEvent -= callback;
+            break;
+         case UIInputType.PAUSE:
+            inputChannel.PauseEvent -= callback;
+            break;
+         case UIInputType.UNPAUSE:
+            inputChannel.UnpauseEvent -= callback;
+            break;
+         case UIInputType.QUIT:
+            inputChannel.QuitEvent -= callback;
+            break;
+         default:
+            break;
       }
    }
 }

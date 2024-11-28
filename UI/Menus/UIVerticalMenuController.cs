@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Numerics;
 using UltEvents;
 using Unity.VisualScripting;
 #if USING_FMOD
@@ -13,6 +14,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Vector2 = UnityEngine.Vector2;
 
 
 [Serializable]
@@ -129,7 +131,7 @@ public class UIVerticalMenuController : MonoBehaviour
         uiInputChannel.MouseSelectEvent -= OnMouseSelectPerformed;
     }
 
-    private void OnNavigateUp()
+    private void OnNavigateUp(UIInputChannel.UIInputChannelCallbackArgs args)
     {
         if (!_freezeNavigation)
         {
@@ -153,7 +155,7 @@ public class UIVerticalMenuController : MonoBehaviour
         }
     }
     
-    private void OnNavigateDown()
+    private void OnNavigateDown(UIInputChannel.UIInputChannelCallbackArgs args)
     {
         if (!_freezeNavigation)
         {
@@ -262,8 +264,9 @@ public class UIVerticalMenuController : MonoBehaviour
         }
     }
     
-    private void OnMouseNavigatePerformed(Vector2 mousePosition)
+    private void OnMouseNavigatePerformed(UIInputChannel.UIInputChannelCallbackArgs args)
     {
+        Vector2 mousePosition = (Vector2)args.vector2Arg;
         bool foundMenuButton = false;
 
         for (int i = 0; i < buttons.Count; i++)
@@ -288,7 +291,7 @@ public class UIVerticalMenuController : MonoBehaviour
         }
     }
 
-    private void OnSelectPerformed()
+    private void OnSelectPerformed(UIInputChannel.UIInputChannelCallbackArgs args)
     {
         if (_currentlySelectedMenuButton == -1)
         {
@@ -304,9 +307,10 @@ public class UIVerticalMenuController : MonoBehaviour
     }
 
 
-    private void OnMouseSelectPerformed(Vector2 mousePosition)
+    private void OnMouseSelectPerformed(UIInputChannel.UIInputChannelCallbackArgs args)
     {
-        OnMouseNavigatePerformed(mousePosition);
+        Vector2 mousePosition = (Vector2)args.vector2Arg;
+        OnMouseNavigatePerformed(args);
         bool foundMenuButton = false;
 
         for (int i = 0; i < buttons.Count; i++)
@@ -322,7 +326,7 @@ public class UIVerticalMenuController : MonoBehaviour
 
         if (foundMenuButton)
         {
-            OnSelectPerformed();
+            OnSelectPerformed(args);
         }
     }
 

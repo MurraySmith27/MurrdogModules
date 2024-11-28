@@ -1,0 +1,15 @@
+public enum UIInputType 
+{
+    NAVIGATE,
+    NAVIGATE_UP,
+    NAVIGATE_DOWN,
+    NAVIGATE_LEFT,
+    NAVIGATE_RIGHT,
+    MOUSE_MOVE,
+    MOUSE_SELECT,
+    SELECT,
+    BACK,
+    PAUSE,
+    UNPAUSE,
+    QUIT,
+}

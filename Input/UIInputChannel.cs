@@ -5,84 +5,94 @@ using UnityEngine.Events;
 
 public abstract class UIInputChannel : ScriptableObject
 {
-    public event UnityAction NavigateUpEvent;
-    public event UnityAction NavigateDownEvent;
-    public event UnityAction NavigateLeftEvent;
-    public event UnityAction NavigateRightEvent;
-
-    public event UnityAction<Vector2> NavigateEvent;
+    public struct UIInputChannelCallbackArgs
+    {
+        public readonly Vector2? vector2Arg;
+        
+        public UIInputChannelCallbackArgs(Vector2 arg)
+        {
+            vector2Arg = arg;
+        }
+    }
     
-    public event UnityAction SelectEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> NavigateUpEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> NavigateDownEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> NavigateLeftEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> NavigateRightEvent;
 
-    public event UnityAction<Vector2> MouseSelectEvent;
-
-    public event UnityAction<Vector2> MouseMoveEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> NavigateEvent;
     
-    public event UnityAction BackEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> SelectEvent;
 
-    public event UnityAction PauseEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> MouseSelectEvent;
 
-    public event UnityAction UnpauseEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> MouseMoveEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> BackEvent;
 
-    public event UnityAction QuitEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> PauseEvent;
+
+    public event UnityAction<UIInputChannelCallbackArgs> UnpauseEvent;
+
+    public event UnityAction<UIInputChannelCallbackArgs> QuitEvent;
     
     protected void InvokeNavigateUpEvent()
     {
-        NavigateUpEvent?.Invoke();
+        NavigateUpEvent?.Invoke(new());
     }
     
     protected void InvokeNavigateDownEvent()
     {
-        NavigateDownEvent?.Invoke();
+        NavigateDownEvent?.Invoke(new());
     }
     
     protected void InvokeNavigateLeftEvent()
     {
-        NavigateLeftEvent?.Invoke();
+        NavigateLeftEvent?.Invoke(new());
     }
     
     protected void InvokeNavigateRightEvent()
     {
-        NavigateRightEvent?.Invoke();
+        NavigateRightEvent?.Invoke(new());
     }
     
     protected void InvokeNavigateEvent(Vector2 input)
     {
-        NavigateEvent?.Invoke(input);
+        NavigateEvent?.Invoke(new(input));
     }
     
     protected void InvokeSelectEvent()
     {
-        SelectEvent?.Invoke();
+        SelectEvent?.Invoke(new());
     }
     
     protected void InvokeMouseSelectEvent(Vector2 input)
     {
-        MouseSelectEvent?.Invoke(input);
+        MouseSelectEvent?.Invoke(new(input));
     }
     
     protected void InvokeMouseMoveEvent(Vector2 input)
     {
-        MouseMoveEvent?.Invoke(input);
+        MouseMoveEvent?.Invoke(new(input));
     }
     
     protected void InvokeBackEvent()
     {
-        BackEvent?.Invoke();
+        BackEvent?.Invoke(new());
     }
 
     protected void InvokePauseEvent()
     {
-        PauseEvent?.Invoke();
+        PauseEvent?.Invoke(new());
     }
     
     protected void InvokeUnpauseEvent()
     {
-        UnpauseEvent?.Invoke();   
+        UnpauseEvent?.Invoke(new());   
     }
     
     protected void InvokeQuitEvent()
     {
-        QuitEvent?.Invoke();
+        QuitEvent?.Invoke(new());
     }
 }

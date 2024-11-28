@@ -74,13 +74,13 @@ public class OptionsMenuSelector : MonoBehaviour
       onFocusedCallbacks?.Invoke();
    }
    
-   public void SelectPrevious()
+   public void SelectPrevious(UIInputChannel.UIInputChannelCallbackArgs args)
    {
       _currentlySelectedItem = (_currentlySelectedItem + 1) % items.Count;
       UpdateSelectedElement();
    }
 
-   public void SelectNext()
+   public void SelectNext(UIInputChannel.UIInputChannelCallbackArgs args)
    {
       if (_currentlySelectedItem == 0)
       {
@@ -157,7 +157,7 @@ public class OptionsMenuSelector : MonoBehaviour
    
    #endregion
 
-   private void OnBackActionPerformed()
+   private void OnBackActionPerformed(UIInputChannel.UIInputChannelCallbackArgs args)
    {
       if (_isFocused)
       {
@@ -176,12 +176,13 @@ public class OptionsMenuSelector : MonoBehaviour
       }
    }
 
-   private void MouseSelectPerformed(Vector2 mousePosition)
+   private void MouseSelectPerformed(UIInputChannel.UIInputChannelCallbackArgs args)
    {
+         Vector2 mousePosition = (Vector2)args.vector2Arg;
          Vector2 localMousePosition = rectTransform.InverseTransformPoint(mousePosition);
          if (!rectTransform.rect.Contains(localMousePosition))
          {
-            OnBackActionPerformed();
+            OnBackActionPerformed(args);
          }
    }
 
