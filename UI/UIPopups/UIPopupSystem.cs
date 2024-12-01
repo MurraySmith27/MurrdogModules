@@ -240,7 +240,7 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
             inputChannel.MouseSelectEvent += callback;
             break;
          case UIInputType.SELECT:
-            inputChannel.NavigateDownEvent += callback;
+            inputChannel.SelectEvent += callback;
             break;
          case UIInputType.BACK:
             inputChannel.BackEvent += callback;
