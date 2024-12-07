@@ -6,7 +6,7 @@ using UnityEngine;
 public static class AsyncUtils
 {
 
-    private delegate bool WaitUntilConditionDelegate();
+    public delegate bool WaitUntilConditionDelegate();
     
     public static IEnumerator InvokeAfterSeconds(float seconds, Action onEnd)
     {
@@ -20,7 +20,7 @@ public static class AsyncUtils
         onEnd.Invoke();
     }
     
-    private static IEnumerator InvokeAfterCondition(Action onEnd, WaitUntilConditionDelegate condition)
+    public static IEnumerator InvokeAfterCondition(Action onEnd, WaitUntilConditionDelegate condition)
     {
         yield return new WaitUntil(() => condition.Invoke());
         onEnd.Invoke();
