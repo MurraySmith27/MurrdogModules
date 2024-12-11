@@ -76,21 +76,28 @@ public class OptionsMenuSelector : MonoBehaviour
    
    public void SelectPrevious(UIInputChannel.UIInputChannelCallbackArgs args)
    {
-      _currentlySelectedItem = (_currentlySelectedItem + 1) % items.Count;
-      UpdateSelectedElement();
+      if (_isFocused)
+      {
+         _currentlySelectedItem = (_currentlySelectedItem + 1) % items.Count;
+         UpdateSelectedElement();
+      }
    }
 
    public void SelectNext(UIInputChannel.UIInputChannelCallbackArgs args)
    {
-      if (_currentlySelectedItem == 0)
+      if (_isFocused)
       {
-         _currentlySelectedItem = items.Count - 1;
+         if (_currentlySelectedItem == 0)
+         {
+            _currentlySelectedItem = items.Count - 1;
+         }
+         else
+         {
+            _currentlySelectedItem--;
+         }
+
+         UpdateSelectedElement();
       }
-      else
-      {
-         _currentlySelectedItem--;
-      }
-      UpdateSelectedElement();
    }
 
    public void SetSelectedValue(string elementName)

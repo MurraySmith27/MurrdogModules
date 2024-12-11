@@ -61,14 +61,8 @@ public class UIVerticalMenuController : MonoBehaviour
     
     [Header("Input")]
     [SerializeField] private UIInputChannel uiInputChannel;
-    
-    [SerializeField] private string navigateActionName;
-    
-    [SerializeField] private string selectActionName;
 
-    [SerializeField] private string mouseNavigateActionName;
-    
-    [SerializeField] private string mouseSelectActionName;
+    [SerializeField] private float verticalNavigationInputCooldown = 0.1f;
     
     [Header("Actions")]
     [SerializeField]
@@ -245,7 +239,7 @@ public class UIVerticalMenuController : MonoBehaviour
     private IEnumerator ButtonNavigationCooldown()
     {
         _freezeNavigation = true;
-        yield return null;
+        yield return new WaitForSecondsRealtime(verticalNavigationInputCooldown);
         _freezeNavigation = false;
     }
 
