@@ -135,7 +135,6 @@ public class UIVerticalMenuController : MonoBehaviour
             }
             else if (_currentlySelectedMenuButton != 0)
             {
-                Debug.Log($"setting currently selected menu button to: {_currentlySelectedMenuButton - 1}");
                 _currentlySelectedMenuButton--;
                 if (menuNavigateSound != null)
                 {
@@ -334,6 +333,8 @@ public class UIVerticalMenuController : MonoBehaviour
         {
             EnableActions();
         }
+
+        _freezeNavigation = isFrozen;
     }
 
     private void OnEnable()
@@ -346,6 +347,7 @@ public class UIVerticalMenuController : MonoBehaviour
     
     private void OnDisable()
     {
+        _freezeNavigation = true;
         DisableActions();
     }
 }

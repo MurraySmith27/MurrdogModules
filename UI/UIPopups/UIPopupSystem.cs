@@ -134,19 +134,16 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          
          if (_popupQueue.Count == 0 && _activePopup.Item2 == null)
          {
-            Debug.LogError($"A");
             _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
          
             newPopup.OnPopupShow();
          }
          else if (_activePopup.Item1 != popupId)
          {
-            Debug.LogError($"B");
             if (showBehaviour == PanelShowBehaviour.HIDE_PREVIOUS)
             {
                if (_activePopup.Item2 != null)
                {
-                  Debug.LogError("B.2");
                   _activePopup.Item2.OnPopupHide();
 
                   _popupQueue.AddFirst(_activePopup);

@@ -66,7 +66,7 @@ public class UIPopupComponent : MonoBehaviour
         
         onPopupShowStart?.Invoke();
         
-        if (_hidePopupCR != null)
+        if (_hidePopupCRRunning)
         {
             StopCoroutine(_hidePopupCR);
             onPopupHideFinished?.Invoke();
@@ -113,7 +113,7 @@ public class UIPopupComponent : MonoBehaviour
         
         onPopupHideStart?.Invoke();
         
-        if (_showPopupCR != null)
+        if (_showPopupCRRunning)
         {
             StopCoroutine(_showPopupCR);
             onPopupShowFinished?.Invoke();
