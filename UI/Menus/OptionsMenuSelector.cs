@@ -24,10 +24,6 @@ public class OptionsMenuSelector : MonoBehaviour
    
    [Header("Input")]
    [SerializeField] private UIInputChannel uiInputChannel;
-
-   [SerializeField] private string deselectActionName;
-
-   [SerializeField] private string changeSelectionActionName;
    
    [Header("Animations")]
    [SerializeField] private List<CanvasGroup> onSelectedFadeInCanvasGroups;
@@ -143,6 +139,9 @@ public class OptionsMenuSelector : MonoBehaviour
       uiInputChannel.BackEvent -= OnBackActionPerformed;
       uiInputChannel.BackEvent += OnBackActionPerformed;
 
+      uiInputChannel.SelectEvent -= OnBackActionPerformed;
+      uiInputChannel.SelectEvent += OnBackActionPerformed;
+      
       uiInputChannel.MouseSelectEvent -= MouseSelectPerformed;
       uiInputChannel.MouseSelectEvent += MouseSelectPerformed;
       
@@ -156,6 +155,10 @@ public class OptionsMenuSelector : MonoBehaviour
    private void OnDisable()
    {
       uiInputChannel.BackEvent -= OnBackActionPerformed;
+      
+      uiInputChannel.SelectEvent -= OnBackActionPerformed;
+      
+      uiInputChannel.MouseSelectEvent -= MouseSelectPerformed;
       
       uiInputChannel.NavigateLeftEvent -= SelectPrevious;
       
