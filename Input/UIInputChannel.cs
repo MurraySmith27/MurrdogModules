@@ -26,6 +26,10 @@ public abstract class UIInputChannel : ScriptableObject
 
     public event UnityAction<UIInputChannelCallbackArgs> MouseSelectEvent;
 
+    public event UnityAction<UIInputChannelCallbackArgs> MouseDownEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> MouseUpEvent;
+
     public event UnityAction<UIInputChannelCallbackArgs> MouseMoveEvent;
     
     public event UnityAction<UIInputChannelCallbackArgs> BackEvent;
@@ -69,6 +73,16 @@ public abstract class UIInputChannel : ScriptableObject
     protected void InvokeMouseSelectEvent(Vector2 input)
     {
         MouseSelectEvent?.Invoke(new(input));
+    }
+
+    protected void InvokeMouseDownEvent(Vector2 input)
+    {
+        MouseDownEvent?.Invoke(new(input));
+    }
+    
+    protected void InvokeMouseUpEvent(Vector2 input)
+    {
+        MouseUpEvent?.Invoke(new(input));
     }
     
     protected void InvokeMouseMoveEvent(Vector2 input)

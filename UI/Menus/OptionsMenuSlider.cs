@@ -53,23 +53,29 @@ public class OptionsMenuSlider : MonoBehaviour
    private float _currentValue;
 
    private bool _isFocused = false;
+
+   private bool _isDraggingWithMouse;
    
    #region Public Methods
    
    public void OnSelectorFocused()
    {
-      _isFocused = true;
-      for (int i = 0; i < onSelectedFadeInCanvasGroups.Count; i++)
+      if (!_isFocused)
       {
-         TweenCanvasGroup(onSelectedFadeInCanvasGroups[i], _innerSelectorElementsCanvasGroupOriginalAlphas[i], 1f, onSelectedFadeInAnimationDuration);
+         _isFocused = true;
+         for (int i = 0; i < onSelectedFadeInCanvasGroups.Count; i++)
+         {
+            TweenCanvasGroup(onSelectedFadeInCanvasGroups[i], _innerSelectorElementsCanvasGroupOriginalAlphas[i], 1f,
+               onSelectedFadeInAnimationDuration);
+         }
+
+         onFocusedCallbacks?.Invoke();
       }
-      
-      onFocusedCallbacks?.Invoke();
    }
    
    public void SelectPrevious(UIInputChannel.UIInputChannelCallbackArgs args)
    {
-      if (_isFocused)
+      if (_isFocused && !_isDraggingWithMouse)
       {
          SetSliderValue(Mathf.Clamp(_currentValue - incrementOnInput, valueRange.x, valueRange.y));
       }
@@ -77,7 +83,7 @@ public class OptionsMenuSlider : MonoBehaviour
 
    public void SelectNext(UIInputChannel.UIInputChannelCallbackArgs args)
    {
-      if (_isFocused)
+      if (_isFocused && !_isDraggingWithMouse)
       {
          SetSliderValue(Mathf.Clamp(_currentValue + incrementOnInput, valueRange.x, valueRange.y));
       }
@@ -127,6 +133,12 @@ public class OptionsMenuSlider : MonoBehaviour
       
       uiInputChannel.NavigateRightEvent -= SelectNext;
       uiInputChannel.NavigateRightEvent += SelectNext;
+
+      uiInputChannel.MouseUpEvent -= MouseUpPerformed;
+      uiInputChannel.MouseUpEvent += MouseUpPerformed;
+
+      uiInputChannel.MouseMoveEvent -= MouseMovePerformed;
+      uiInputChannel.MouseMoveEvent += MouseMovePerformed;
    }
 
    private void OnDisable()
@@ -140,6 +152,10 @@ public class OptionsMenuSlider : MonoBehaviour
       uiInputChannel.NavigateLeftEvent -= SelectPrevious;
       
       uiInputChannel.NavigateRightEvent -= SelectNext;
+      
+      uiInputChannel.MouseUpEvent -= MouseUpPerformed;
+      
+      uiInputChannel.MouseMoveEvent -= MouseMovePerformed;
    }
    
    #endregion
@@ -149,6 +165,9 @@ public class OptionsMenuSlider : MonoBehaviour
       if (_isFocused)
       {
          _isFocused = false;
+
+         _isDraggingWithMouse = false;
+         
          for (int i = 0; i < onSelectedFadeInCanvasGroups.Count; i++)
          {
             TweenCanvasGroup(onSelectedFadeInCanvasGroups[i], 1f, _innerSelectorElementsCanvasGroupOriginalAlphas[i], onSelectedFadeInAnimationDuration);
@@ -166,6 +185,39 @@ public class OptionsMenuSlider : MonoBehaviour
          {
             OnBackActionPerformed(args);
          }
+
+         Vector2 sliderMousePosition = sliderButton.InverseTransformPoint(mousePosition);
+         if (!_isDraggingWithMouse && sliderButton.rect.Contains(sliderMousePosition))
+         {
+            Debug.LogError("seleected slider with mouse!");
+            OnSelectorFocused();
+            _isDraggingWithMouse = true;
+         }
+   }
+
+   private void MouseUpPerformed(UIInputChannel.UIInputChannelCallbackArgs args)
+   {
+      if (_isDraggingWithMouse)
+      {
+         OnBackActionPerformed(args);
+      }
+   }
+
+   private void MouseMovePerformed(UIInputChannel.UIInputChannelCallbackArgs args)
+   {
+      if (_isDraggingWithMouse)
+      {
+         Vector2 mousePosition = (Vector2)args.vector2Arg;
+         Vector2 localMousePosition = sliderButton.parent.InverseTransformPoint(mousePosition);
+
+         float sliderButtonParentWidth = (sliderButton.parent as RectTransform).rect.width;
+         Debug.LogError($"slider button parent width: {sliderButtonParentWidth}");
+         float relativeSliderValue = (localMousePosition.x / sliderButtonParentWidth) + 0.5f;
+         
+         Debug.LogError($"local mouse position x: {localMousePosition.x}");
+         
+         SetSliderValue(Mathf.Clamp((relativeSliderValue * (valueRange.y - valueRange.x) + valueRange.x), valueRange.x, valueRange.y));
+      }
    }
 
    private void TweenCanvasGroup(CanvasGroup canvasGroup, float from, float to, float duration)
