@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using System.Collections;
@@ -28,3 +29,4 @@ public static class DeleteBuildStreamingAssetsIfUnnecessary
         }
     }
 }
+#endif

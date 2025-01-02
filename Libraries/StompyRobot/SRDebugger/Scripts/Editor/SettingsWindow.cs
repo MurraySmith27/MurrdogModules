@@ -1,4 +1,5 @@
-﻿namespace SRDebugger.Editor
+﻿#if UNITY_EDITOR
+namespace SRDebugger.Editor
 {
     using System;
     using System.Collections;
@@ -861,3 +862,4 @@
         #endregion
     }
 }
+#endif

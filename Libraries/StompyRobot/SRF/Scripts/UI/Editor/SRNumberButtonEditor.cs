@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.UI;
 
 namespace SRF.UI.Editor
@@ -30,3 +31,4 @@ namespace SRF.UI.Editor
         }
     }
 }
+#endif

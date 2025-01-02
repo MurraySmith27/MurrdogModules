@@ -1,4 +1,5 @@
-﻿using SRDebugger.Internal;
+﻿#if UNITY_EDITOR
+using SRDebugger.Internal;
 using SRDebugger.Profiler;
 using UnityEditor;
 
@@ -13,3 +14,4 @@ namespace SRDebugger.Editor
         }
     }
 }
+#endif

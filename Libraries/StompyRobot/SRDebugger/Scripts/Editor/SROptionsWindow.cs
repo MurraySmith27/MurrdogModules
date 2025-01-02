@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿#if UNITY_EDITOR
+using System.ComponentModel;
 
 namespace SRDebugger.Editor
 {
@@ -387,3 +388,4 @@ namespace SRDebugger.Editor
         }
     }
 }
+#endif
