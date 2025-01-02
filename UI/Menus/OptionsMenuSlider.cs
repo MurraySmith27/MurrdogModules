@@ -211,11 +211,8 @@ public class OptionsMenuSlider : MonoBehaviour
          Vector2 localMousePosition = sliderButton.parent.InverseTransformPoint(mousePosition);
 
          float sliderButtonParentWidth = (sliderButton.parent as RectTransform).rect.width;
-         Debug.LogError($"slider button parent width: {sliderButtonParentWidth}");
+         
          float relativeSliderValue = (localMousePosition.x / sliderButtonParentWidth) + 0.5f;
-         
-         Debug.LogError($"local mouse position x: {localMousePosition.x}");
-         
          SetSliderValue(Mathf.Clamp((relativeSliderValue * (valueRange.y - valueRange.x) + valueRange.x), valueRange.x, valueRange.y));
       }
    }
