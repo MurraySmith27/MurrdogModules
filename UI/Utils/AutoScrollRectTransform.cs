@@ -15,7 +15,7 @@ public class AutoScrollRectTransform : MonoBehaviour
 
     private Coroutine _scrollCoroutine;
     
-    public void Start()
+    public void OnEnable()
     {
         scrollRect.verticalNormalizedPosition = normalizedStartPosition;
 
@@ -25,6 +25,14 @@ public class AutoScrollRectTransform : MonoBehaviour
         }
 
         _scrollCoroutine = StartCoroutine(ScrollCoroutine());
+    }
+    
+    public void OnDisable()
+    {
+        if (_scrollCoroutine != null)
+        {
+            StopCoroutine(_scrollCoroutine);
+        }
     }
 
     private IEnumerator ScrollCoroutine()
