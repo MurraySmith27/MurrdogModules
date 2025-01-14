@@ -4,22 +4,22 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.RenderGraphModule.Util;
 
-public class OutlineEffectRendererFeature : ScriptableRendererFeature
+public class ColorOutlineEffectRendererFeature : ScriptableRendererFeature
 {
-    class OutlineEffectPass : ScriptableRenderPass
+    class ColorOutlineEffectPass : ScriptableRenderPass
     {
-        private const string m_PassName = "OutlineEffectPass";
+        private const string m_PassName = "ColorOutlineEffectPass";
         private Material m_BlitMaterial;
 
         public void Setup(Material mat)
         {
             m_BlitMaterial = mat;
             var stack = VolumeManager.instance.stack;
-            var customEffect = stack.GetComponent<OutlinePostProcessingVolumeComponent>();
-            m_BlitMaterial.SetFloat("_Thickness", customEffect.thickness.value);
-            m_BlitMaterial.SetFloat("_DepthThreshold", customEffect.depthThreshold.value);
-            m_BlitMaterial.SetFloat("_DepthStrength", customEffect.depthStrength.value);
-            m_BlitMaterial.SetFloat("_DepthThickness", customEffect.depthThickness.value);
+            var customEffect = stack.GetComponent<ColorOutlinePostProcessingVolumeComponent>();
+            m_BlitMaterial.SetFloat("_ColorThreshold", customEffect.colorThreshold.value);
+            m_BlitMaterial.SetFloat("_ColorStrength", customEffect.colorStrength.value);
+            m_BlitMaterial.SetFloat("_NormalThreshold", customEffect.normalThreshold.value);
+            m_BlitMaterial.SetFloat("_NormalStrength", customEffect.normalStrength.value);
             m_BlitMaterial.SetColor("_Color", customEffect.color.value);
             requiresIntermediateTexture = true;
         }
@@ -29,7 +29,7 @@ public class OutlineEffectRendererFeature : ScriptableRendererFeature
         public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
         {
             var stack = VolumeManager.instance.stack;
-            var customEffect = stack.GetComponent<OutlinePostProcessingVolumeComponent>();
+            var customEffect = stack.GetComponent<ColorOutlinePostProcessingVolumeComponent>();
 
             if (!customEffect.IsActive())
                 return;
@@ -38,7 +38,7 @@ public class OutlineEffectRendererFeature : ScriptableRendererFeature
 
             if (resourceData.isActiveTargetBackBuffer)
             {
-                Debug.LogError($"Skipping render pass. outlineEffectRendererFeature requires an intermediate " +
+                Debug.LogError($"Skipping render pass. ColorOutlineEffectRendererFeature requires an intermediate " +
                                $"ColorTexture, we can't use the BackBuffer as a texture input.");
                 return;
             }
@@ -61,12 +61,12 @@ public class OutlineEffectRendererFeature : ScriptableRendererFeature
     public RenderPassEvent injectionPoint = RenderPassEvent.AfterRenderingPostProcessing;
     public Material material;
     
-    OutlineEffectPass m_ScriptablePass;
+    ColorOutlineEffectPass m_ScriptablePass;
 
     /// <inheritdoc/>
     public override void Create()
     {
-        m_ScriptablePass = new OutlineEffectPass();
+        m_ScriptablePass = new ColorOutlineEffectPass();
 
         // Configures where the render pass should be injected.
         m_ScriptablePass.renderPassEvent = injectionPoint;
@@ -78,7 +78,7 @@ public class OutlineEffectRendererFeature : ScriptableRendererFeature
     {
         if (material == null)
         {
-            Debug.LogWarning("OutlineEffectRendererFeature material is null and will be skipped.");
+            Debug.LogWarning("ColorOutlineEffectRendererFeature material is null and will be skipped.");
             return;
         }
         m_ScriptablePass.Setup(material);
