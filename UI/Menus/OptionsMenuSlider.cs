@@ -189,7 +189,6 @@ public class OptionsMenuSlider : MonoBehaviour
          Vector2 sliderMousePosition = sliderButton.InverseTransformPoint(mousePosition);
          if (!_isDraggingWithMouse && sliderButton.rect.Contains(sliderMousePosition))
          {
-            Debug.LogError("seleected slider with mouse!");
             OnSelectorFocused();
             _isDraggingWithMouse = true;
          }
