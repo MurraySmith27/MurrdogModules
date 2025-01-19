@@ -22,6 +22,28 @@ MonoBehaviour:
   gain:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
+--- !u!114 &-8852860509666901125
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36895ee10a80784d98e76760151cf2e, type: 3}
+  m_Name: GrayscalePostProcessingVolumeComponent
+  m_EditorClassIdentifier: 
+  active: 1
+  effectStrength:
+    m_OverrideState: 1
+    m_Value: 1
+  lightness:
+    m_OverrideState: 1
+    m_Value: 1
+  grayScaleCoefficients:
+    m_OverrideState: 1
+    m_Value: {x: 0.2126, y: 0.7152, z: 0.0722}
 --- !u!114 &-8270506406425502121
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -123,10 +145,13 @@ MonoBehaviour:
   thickness:
     m_OverrideState: 1
     m_Value: 2
-  edge:
+  depthThreshold:
     m_OverrideState: 1
     m_Value: 0.1
-  transitionSmoothness:
+  depthStrength:
+    m_OverrideState: 1
+    m_Value: 0.1
+  depthThickness:
     m_OverrideState: 1
     m_Value: 0.1
   color:
@@ -324,6 +349,50 @@ MonoBehaviour:
   cropToFit:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &-3669619168495037032
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d0e49d5b490d64b911677795ad792c, type: 3}
+  m_Name: ColorOutlinePostProcessingVolumeComponent
+  m_EditorClassIdentifier: 
+  active: 1
+  normalThreshold:
+    m_OverrideState: 1
+    m_Value: 0.1
+  normalStrength:
+    m_OverrideState: 1
+    m_Value: 0
+  colorThreshold:
+    m_OverrideState: 1
+    m_Value: 0.1
+  colorStrength:
+    m_OverrideState: 1
+    m_Value: 0
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &-3000575358177471814
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d756307ca693e468e79f872bf9f3c7, type: 3}
+  m_Name: CombinationPostProcessingVolumeComponent
+  m_EditorClassIdentifier: 
+  active: 1
+  normalOutlineStrength:
+    m_OverrideState: 1
+    m_Value: 2
 --- !u!114 &-1410297666881709256
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -508,6 +577,9 @@ MonoBehaviour:
   - {fileID: -1410297666881709256}
   - {fileID: -7448377325436786475}
   - {fileID: -1054152135645316103}
+  - {fileID: -3000575358177471814}
+  - {fileID: -3669619168495037032}
+  - {fileID: -8852860509666901125}
 --- !u!114 &853819529557874667
 MonoBehaviour:
   m_ObjectHideFlags: 3

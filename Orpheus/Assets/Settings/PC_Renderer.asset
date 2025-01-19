@@ -58,7 +58,9 @@ MonoBehaviour:
   - {fileID: 7833122117494664109}
   - {fileID: -5764814252784666718}
   - {fileID: -8557843049356665363}
-  m_RendererFeatureMap: ad6b866f10d7b46ca237a9fafa43ffafeddd8c87166f3c89
+  - {fileID: 1341945679692010005}
+  - {fileID: 6704095085611416516}
+  m_RendererFeatureMap: ad6b866f10d7b46ca237a9fafa43ffafeddd8c87166f3c891592e9597c8c9f12c47b4fe6f5ba095d
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -84,6 +86,36 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 0
+--- !u!114 &1341945679692010005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c603b640d83299488a9d1f88a83e105, type: 3}
+  m_Name: GrayscaleEffectRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  injectionPoint: 600
+  material: {fileID: 2100000, guid: 89acd070974c49346a89f858b9418201, type: 2}
+--- !u!114 &6704095085611416516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17a923983e5c5546b05fdcc5065d5a9, type: 3}
+  m_Name: CombinationEffectRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  injectionPoint: 600
+  material: {fileID: 2100000, guid: 63cd4300ea42a2e409223a434e58d7ae, type: 2}
 --- !u!114 &7833122117494664109
 MonoBehaviour:
   m_ObjectHideFlags: 0

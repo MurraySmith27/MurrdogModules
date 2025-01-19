@@ -110,8 +110,9 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorOutlineThickness: 0.2
     - _ColorStrength: 1
-    - _ColorThreshold: 0.07
+    - _ColorThreshold: 0.1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DepthStrength: 0.1
@@ -126,10 +127,12 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NormalStrength: 1
-    - _NormalThreshold: 0.53
+    - _NormalOutlineThickness: 0.1
+    - _NormalStrength: 0
+    - _NormalThreshold: 0.5
     - _OVERLAY: 1
     - _OcclusionStrength: 1
+    - _OutlineThicknessDistanceScaling: 0.4
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -146,6 +149,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineThicknessDistanceThresholds: {r: 0.9, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

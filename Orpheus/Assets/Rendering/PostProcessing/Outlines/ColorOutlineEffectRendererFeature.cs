@@ -24,39 +24,61 @@ public class ColorOutlineEffectRendererFeature : ScriptableRendererFeature
             requiresIntermediateTexture = true;
         }
 
+        class PassData
+        {
+            internal TextureHandle source;
+        }
+        
         // RecordRenderGraph is where the RenderGraph handle can be accessed, through which render passes can be added to the graph.
         // FrameData is a context container through which URP resources can be accessed and managed.
         public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
         {
-            var stack = VolumeManager.instance.stack;
-            var customEffect = stack.GetComponent<ColorOutlinePostProcessingVolumeComponent>();
-
-            if (!customEffect.IsActive())
-                return;
-            
-            var resourceData = frameData.Get<UniversalResourceData>();
-
-            if (resourceData.isActiveTargetBackBuffer)
+            using (var builder =
+                   renderGraph.AddRasterRenderPass<PassData>("Color Outline Render Pass", out var passData))
             {
-                Debug.LogError($"Skipping render pass. ColorOutlineEffectRendererFeature requires an intermediate " +
-                               $"ColorTexture, we can't use the BackBuffer as a texture input.");
-                return;
+                var stack = VolumeManager.instance.stack;
+                var customEffect = stack.GetComponent<ColorOutlinePostProcessingVolumeComponent>();
+
+                if (!customEffect.IsActive())
+                    return;
+
+                var resourceData = frameData.Get<UniversalResourceData>();
+
+                if (resourceData.isActiveTargetBackBuffer)
+                {
+                    Debug.LogError(
+                        $"Skipping render pass. ColorOutlineEffectRendererFeature requires an intermediate " +
+                        $"ColorTexture, we can't use the BackBuffer as a texture input.");
+                    return;
+                }
+                
+                var source = resourceData.activeColorTexture;
+                
+                
+                TexturePassContextItem contextItem = frameData.Create<TexturePassContextItem>();
+                
+                RenderTextureDescriptor textureProperties =
+                    new RenderTextureDescriptor(Screen.width, Screen.height, RenderTextureFormat.Default, 0);
+                contextItem.textureToTransfer = UniversalRenderer.CreateRenderGraphTexture(renderGraph, textureProperties, "Outline Buffer Texture", false);
+                
+                builder.SetRenderAttachment(contextItem.textureToTransfer, 0, AccessFlags.Write);
+
+                builder.AllowPassCulling(false);
+                
+                passData.source = source;
+                
+                builder.UseTexture(source);
+                
+                builder.SetRenderFunc<PassData>(ExecutePass);
             }
+        }
 
-            var source = resourceData.activeColorTexture;
-
-            var destinationDesc = renderGraph.GetTextureDesc(source);
-            destinationDesc.name = $"CameraColor-{m_PassName}";
-            destinationDesc.clearBuffer = false;
-
-            TextureHandle destination = renderGraph.CreateTexture(destinationDesc);
-
-            RenderGraphUtils.BlitMaterialParameters para = new(source, destination, m_BlitMaterial, 0);
-            renderGraph.AddBlitPass(para, passName: m_PassName);
-
-            resourceData.cameraColor = destination;
+        void ExecutePass(PassData data, RasterGraphContext context)
+        {
+            Blitter.BlitTexture(context.cmd, data.source, new Vector4(1,1,0,0), m_BlitMaterial, 0);
         }
     }
+
 
     public RenderPassEvent injectionPoint = RenderPassEvent.AfterRenderingPostProcessing;
     public Material material;
