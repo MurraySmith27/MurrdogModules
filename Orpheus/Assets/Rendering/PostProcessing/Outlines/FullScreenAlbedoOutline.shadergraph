@@ -4,9 +4,6 @@
     "m_ObjectId": "4e122d9b246143d9ad6efe927efcc2c8",
     "m_Properties": [
         {
-            "m_Id": "767cf47e3aa1498391298bcf1ed1eb4e"
-        },
-        {
             "m_Id": "eb20086d743d42ea9c651355fb26291b"
         },
         {
@@ -690,6 +687,20 @@
             },
             "m_InputSlot": {
                 "m_Node": {
+                    "m_Id": "01516541b06043a89738466a9245a0bd"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "638974c0e48f48d6b54247eacebd2821"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
                     "m_Id": "88c4cb06e1cc42c9bf99ed0205012016"
                 },
                 "m_SlotId": 0
@@ -791,20 +802,6 @@
                     "m_Id": "97a1a0a2ed874bd1a897111006ff404d"
                 },
                 "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "926459b575c34161b1b1df390130e2a0"
-                },
-                "m_SlotId": 3
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "01516541b06043a89738466a9245a0bd"
-                },
-                "m_SlotId": 0
             }
         },
         {
@@ -4035,9 +4032,6 @@
             "m_Id": "c0780865d1934bfda4ef5fd0e37a22c5"
         },
         {
-            "m_Id": "767cf47e3aa1498391298bcf1ed1eb4e"
-        },
-        {
             "m_Id": "82e4d4e73f3341079b3cd534f7cea1bd"
         },
         {
@@ -4786,36 +4780,6 @@
         "z": 0.0,
         "w": 0.0
     }
-}
-
-{
-    "m_SGVersion": 3,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
-    "m_ObjectId": "767cf47e3aa1498391298bcf1ed1eb4e",
-    "m_Guid": {
-        "m_GuidSerialized": "d3f05a96-df8a-4f90-bf9d-37f160700cfe"
-    },
-    "m_Name": "Color",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Color",
-    "m_DefaultReferenceName": "_Color",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "r": 0.0,
-        "g": 0.0,
-        "b": 0.0,
-        "a": 0.0
-    },
-    "isMainColor": false,
-    "m_ColorMode": 0
 }
 
 {

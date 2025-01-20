@@ -20,7 +20,6 @@ public class ColorOutlineEffectRendererFeature : ScriptableRendererFeature
             m_BlitMaterial.SetFloat("_ColorStrength", customEffect.colorStrength.value);
             m_BlitMaterial.SetFloat("_NormalThreshold", customEffect.normalThreshold.value);
             m_BlitMaterial.SetFloat("_NormalStrength", customEffect.normalStrength.value);
-            m_BlitMaterial.SetColor("_Color", customEffect.color.value);
             requiresIntermediateTexture = true;
         }
 
@@ -53,7 +52,6 @@ public class ColorOutlineEffectRendererFeature : ScriptableRendererFeature
                 }
                 
                 var source = resourceData.activeColorTexture;
-                
                 
                 TexturePassContextItem contextItem = frameData.Create<TexturePassContextItem>();
                 

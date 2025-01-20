@@ -128,7 +128,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _NormalOutlineThickness: 0.1
-    - _NormalStrength: 0
+    - _NormalStrength: 1
     - _NormalThreshold: 0.5
     - _OVERLAY: 1
     - _OcclusionStrength: 1

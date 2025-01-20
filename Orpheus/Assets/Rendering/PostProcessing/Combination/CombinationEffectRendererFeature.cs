@@ -17,13 +17,13 @@ public class CombinationEffectRendererFeature : ScriptableRendererFeature
             var stack = VolumeManager.instance.stack;
             var customEffect = stack.GetComponent<CombinationPostProcessingVolumeComponent>();
             m_BlitMaterial.SetFloat("_NormalOutlineStrength", customEffect.normalOutlineStrength.value);
+            m_BlitMaterial.SetColor("_NormalOutlineColor", customEffect.normalOutlineColor.value);
             requiresIntermediateTexture = true;
         }
 
         class PassData
         {
             internal TextureHandle source;
-            internal TextureHandle tempBuffer;
             internal TextureHandle destination;
             internal TextureHandle normalOutlineTexture;
             internal Material mat;
@@ -34,7 +34,7 @@ public class CombinationEffectRendererFeature : ScriptableRendererFeature
         public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
         {
             using (var builder =
-                   renderGraph.AddUnsafePass<PassData>("Combination Render Pass", out var passData))
+                   renderGraph.AddRasterRenderPass<PassData>("Combination Render Pass", out var passData))
             {
                 var stack = VolumeManager.instance.stack;
                 var customEffect = stack.GetComponent<CombinationPostProcessingVolumeComponent>();
@@ -63,20 +63,17 @@ public class CombinationEffectRendererFeature : ScriptableRendererFeature
                         new RenderTextureDescriptor(Screen.width, Screen.height, RenderTextureFormat.Default, 0);
                     var tempTexture = UniversalRenderer.CreateRenderGraphTexture(renderGraph, textureProperties, "Temporary texture.", false);
                     
-                    
                     passData.source = source;
-                    passData.tempBuffer = tempTexture;
-                    passData.destination = resourceData.activeColorTexture;
+                    passData.destination = tempTexture;
                     passData.normalOutlineTexture = contextItem.textureToTransfer;
                     passData.mat = m_BlitMaterial;
                     
-                    RenderTextureDescriptor newPassTexture =
-                        new RenderTextureDescriptor(Screen.width, Screen.height, RenderTextureFormat.Default, 0);
-                    contextItem.textureToTransfer = UniversalRenderer.CreateRenderGraphTexture(renderGraph, textureProperties, "Outline Buffer Texture 2", false);
-                    
                     builder.UseTexture(source);
-                    builder.UseTexture(passData.normalOutlineTexture, AccessFlags.Write);
-                    builder.UseTexture(tempTexture, AccessFlags.Write);
+                    builder.UseTexture(passData.normalOutlineTexture);
+                    
+                    contextItem.textureToTransfer = tempTexture;
+
+                    builder.SetRenderAttachment(tempTexture, 0);
                     
                     builder.AllowPassCulling(false);
 
@@ -85,13 +82,10 @@ public class CombinationEffectRendererFeature : ScriptableRendererFeature
             }
         }
 
-        void ExecutePass(PassData data, UnsafeGraphContext context)
+        void ExecutePass(PassData data, RasterGraphContext context)
         {
-            CommandBuffer unsafeCmd = CommandBufferHelpers.GetNativeCommandBuffer(context.cmd);
-            
             data.mat.SetTexture("_NormalOutlineTexture", data.normalOutlineTexture);
-            unsafeCmd.Blit(data.source, data.tempBuffer, data.mat);
-            unsafeCmd.Blit(data.tempBuffer, data.normalOutlineTexture);
+            Blitter.BlitTexture(context.cmd, data.source, new Vector4(1,1,0,0), m_BlitMaterial, 0);
         }
     }
 

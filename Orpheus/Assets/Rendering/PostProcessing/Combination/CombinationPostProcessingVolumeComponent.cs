@@ -10,5 +10,7 @@ public class CombinationPostProcessingVolumeComponent : VolumeComponent, IPostPr
 
     [Range(0f, 1f), Tooltip("Outline thickness.")]
     public FloatParameter normalOutlineStrength = new FloatParameter(2);
+    
+    public ColorParameter normalOutlineColor = new ColorParameter(Color.black);
 }
 

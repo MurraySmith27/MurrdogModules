@@ -15,6 +15,20 @@ MonoBehaviour:
   m_Active: 1
   injectionPoint: 600
   material: {fileID: 2100000, guid: daf400eec36954a46910818904aea8e4, type: 2}
+--- !u!114 &-6610323842001069301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f721a616913fcc44b068087e11303fb, type: 3}
+  m_Name: FinalStepEffectRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  injectionPoint: 600
 --- !u!114 &-5764814252784666718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +74,8 @@ MonoBehaviour:
   - {fileID: -8557843049356665363}
   - {fileID: 1341945679692010005}
   - {fileID: 6704095085611416516}
-  m_RendererFeatureMap: ad6b866f10d7b46ca237a9fafa43ffafeddd8c87166f3c891592e9597c8c9f12c47b4fe6f5ba095d
+  - {fileID: -6610323842001069301}
+  m_RendererFeatureMap: ad6b866f10d7b46ca237a9fafa43ffafeddd8c87166f3c891592e9597c8c9f12c47b4fe6f5ba095d0b1b3b1b7d6943a4
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}

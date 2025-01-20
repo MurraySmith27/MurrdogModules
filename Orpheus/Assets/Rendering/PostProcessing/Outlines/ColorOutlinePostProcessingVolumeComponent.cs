@@ -20,7 +20,4 @@ public class ColorOutlinePostProcessingVolumeComponent : VolumeComponent, IPostP
 
     [Range(0f, 1f), Tooltip("The strength of color-difference outlines.")]
     public FloatParameter colorStrength = new FloatParameter(0f);
-    
-    [Tooltip("Outline color.")] 
-    public ColorParameter color = new ColorParameter(Color.black);
 }
