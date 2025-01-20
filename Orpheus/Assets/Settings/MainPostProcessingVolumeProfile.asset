@@ -15,16 +15,16 @@ MonoBehaviour:
   active: 1
   thickness:
     m_OverrideState: 1
-    m_Value: 0.02
+    m_Value: 0.002
   depthThreshold:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.8
   depthStrength:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 100
   depthThickness:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.5
   color:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d0e49d5b490d64b911677795ad792c, type: 3}
   m_Name: ColorOutlinePostProcessingVolumeComponent
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   normalThreshold:
     m_OverrideState: 1
     m_Value: 0.5

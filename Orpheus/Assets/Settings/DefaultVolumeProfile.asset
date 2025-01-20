@@ -374,9 +374,6 @@ MonoBehaviour:
   colorStrength:
     m_OverrideState: 1
     m_Value: 0
-  color:
-    m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &-3000575358177471814
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -393,6 +390,9 @@ MonoBehaviour:
   normalOutlineStrength:
     m_OverrideState: 1
     m_Value: 2
+  normalOutlineColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &-1410297666881709256
 MonoBehaviour:
   m_ObjectHideFlags: 3

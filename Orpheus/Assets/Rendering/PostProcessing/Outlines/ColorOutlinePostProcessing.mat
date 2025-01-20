@@ -111,7 +111,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorOutlineThickness: 0.2
-    - _ColorStrength: 1
+    - _ColorStrength: 0
     - _ColorThreshold: 0.1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -128,8 +128,8 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _NormalOutlineThickness: 0.1
-    - _NormalStrength: 1
-    - _NormalThreshold: 0.5
+    - _NormalStrength: 0
+    - _NormalThreshold: 0.1
     - _OVERLAY: 1
     - _OcclusionStrength: 1
     - _OutlineThicknessDistanceScaling: 0.4
