@@ -86,6 +86,7 @@
 // }
 
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -147,9 +148,9 @@ public class DepthNormalsTextureFeature : ScriptableRendererFeature
                 TextureHandle destination = UniversalRenderer.CreateRenderGraphTexture(renderGraph, textureProperties, "Depth Normals Texture Temp", false);
                 
                 builder.SetRenderAttachment(destination, 0);
-                
-                builder.SetGlobalTextureAfterPass(destination, globalTextureID);
-
+                //
+                // builder.SetGlobalTextureAfterPass(destination, globalTextureID);
+                //
                 builder.UseTexture(resourceData.activeColorTexture);
                 
                 passData.source = resourceData.activeColorTexture;
@@ -157,13 +158,15 @@ public class DepthNormalsTextureFeature : ScriptableRendererFeature
                 builder.AllowPassCulling(false);
                 
                 resourceData.cameraColor = destination;
+                
+                builder.SetRenderFunc((PassData data, RasterGraphContext context) => ExecutePass(data, context));
             }
         }
     }
 
     DepthNormalsRenderPass pass;
 
-    private Material material;
+    public Material material;
     
     /// <inheritdoc/>
     public override void Create()
@@ -171,8 +174,12 @@ public class DepthNormalsTextureFeature : ScriptableRendererFeature
         pass = new();
         // Configures where the render pass should be injected.
         pass.renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
-        
-        material = CoreUtils.CreateEngineMaterial("Hidden/Internal-DepthNormalsTexture");
+
+        if (material == null)
+        {
+            Debug.LogError("Must assign material to depth normals pass, skipping pass");
+            return;
+        }
 
         pass.Setup(material);
         pass.renderPassEvent = RenderPassEvent.AfterRenderingPrePasses;

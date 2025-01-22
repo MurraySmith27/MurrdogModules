@@ -1247,7 +1247,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "DepthNormalsTexture",
     "m_DefaultReferenceName": "_DepthNormalsTexture",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_DepthNormalsTexture",
     "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -1590,8 +1590,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -212.00003051757813,
-            "y": -334.0,
+            "x": -225.0,
+            "y": -341.0,
             "width": 188.0,
             "height": 34.0
         }

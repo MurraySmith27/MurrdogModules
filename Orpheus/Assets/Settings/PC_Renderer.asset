@@ -136,7 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dcd5213bddc3a40b6b4c2dcd3f77a4, type: 3}
   m_Name: DepthNormalsTexture
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
+  material: {fileID: 2100000, guid: e7c4b6d8cdf63b8429256c4a62b0764a, type: 2}
 --- !u!114 &1341945679692010005
 MonoBehaviour:
   m_ObjectHideFlags: 0
