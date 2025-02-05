@@ -81,7 +81,7 @@ public class DepthNormalsFeature : ScriptableRendererFeature {
 
     public override void Create() {
         // We will use the built-in renderer's depth normals texture shader
-        Material material = CoreUtils.CreateEngineMaterial("Hidden/Internal-DepthNormalsTexture");
+        Material material = CoreUtils.CreateEngineMaterial("Custom/DepthNormalsTexture");
         this.renderPass = new RenderPass(material);
         // Render after shadow caster, depth, etc. passes
         renderPass.renderPassEvent = RenderPassEvent.AfterRenderingPrePasses;
