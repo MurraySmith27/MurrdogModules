@@ -23,10 +23,6 @@
 #ifndef SOBELOUTLINES_INCLUDED
 #define SOBELOUTLINES_INCLUDED
 
-#include "DecodeDepthNormals.hlsl"
-
-TEXTURE2D(_DepthNormalsTexture); SAMPLER(sampler_DepthNormalsTexture);
-
 // The sobel effect runs by sampling the texture around a point to see
 // if there are any large changes. Each sample is multiplied by a convolution
 // matrix weight for the x and y components seperately. Each value is then
@@ -95,8 +91,9 @@ void ColorSobel_float(float2 UV, float Thickness, out float Out) {
 
 // Sample the depth normal map and decode depth and normal from the texture
 void GetDepthAndNormal(float2 uv, out float depth, out float3 normal) {
-    float4 coded = SAMPLE_TEXTURE2D(_DepthNormalsTexture, sampler_DepthNormalsTexture, uv);
-    DecodeDepthNormal(coded, depth, normal);
+    depth = SHADERGRAPH_SAMPLE_SCENE_DEPTH(uv);
+
+    normal = SHADERGRAPH_SAMPLE_SCENE_NORMAL(uv);
 }
 
 // A wrapper around the above function for use in a custom function node
