@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6ca31fcdf5a3b4d98731c2b0193295, type: 3}
   m_Name: Pixelate
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     Event: 300
     blitMaterial: {fileID: 2100000, guid: 8316c356705c60d47a5e86b3c5682356, type: 2}
@@ -93,9 +93,9 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
-  - {fileID: 6349246633494879882}
   - {fileID: -5260457291939835452}
-  m_RendererFeatureMap: adc0de57c6d2eee58a9ece642c0e1d58c411d0cdf619ffb6
+  - {fileID: 6349246633494879882}
+  m_RendererFeatureMap: adc0de57c6d2eee5c411d0cdf619ffb68a9ece642c0e1d58
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     Event: 300
-    blitMaterial: {fileID: 2100000, guid: f650037f285ceb04c90a4a6eeec04e5c, type: 2}
+    blitMaterial: {fileID: 2100000, guid: fc7d804f39a010c43a9aa0c877104e70, type: 2}
     blitMaterialPassIndex: 0
     setInverseViewMatrix: 0
     requireDepthNormals: 1
