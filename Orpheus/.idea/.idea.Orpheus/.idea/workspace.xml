@@ -6,19 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/BlitMaterialFeature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/BlitMaterialFeature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormals.shadergraph" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormals.shadergraph.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormalsFeature.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormalsFeature.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormalsTest.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormalsTest.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormalsTexture.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormalsTexture.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetection.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetection.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetectionOutlines.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetectionOutlines.shadergraph" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetectionOutlinesInclude.hlsl" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetectionOutlinesInclude.hlsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/SobelFineTuning.shadersubgraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/SobelFineTuning.shadersubgraph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/Test.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/Test.shadergraph" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity-Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity-Renderer.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +98,7 @@
       <updated>1738637847513</updated>
       <workItem from="1738637850155" duration="2947000" />
       <workItem from="1738881579243" duration="7297000" />
+      <workItem from="1738969294664" duration="5578000" />
     </task>
     <servers />
   </component>
