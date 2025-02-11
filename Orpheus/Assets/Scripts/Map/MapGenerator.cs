@@ -1,33 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator
 {
     [Header("Cellular Automata Settings")]
-    [SerializeField] private float noiseDensity = 0.5f;
-    [SerializeField] private int cellularAutomataIterations = 5;
-    [SerializeField] private int numAdjacentCellsToMakeLand = 4;
+    private readonly float _noiseDensity = 0.5f;
+    private readonly int _cellularAutomataIterations = 5;
+    private readonly int _numAdjacentCellsToMakeLand = 4;
 
-    [SerializeField] private List<GameObject> TEMPPREFABS;
-    [SerializeField] private Transform tileParent;
-    // [SerializeField] private List<MapTileDescriptor> mapTileDescriptors;
-
-    private void Start()
+    private List<TileDescriptor> _tileDescriptors;
+    
+    public MapGenerator(float noiseDensity, int cellularAutomataIterations, int numAdjacentCellsToMakeLand, List<TileDescriptor> tileDescriptors)
     {
-        GenerateMap(100, 100);
+        this._noiseDensity = noiseDensity;
+        this._cellularAutomataIterations = cellularAutomataIterations;
+        this._numAdjacentCellsToMakeLand = numAdjacentCellsToMakeLand;
+        this._tileDescriptors = tileDescriptors;
     }
     
-    public int[,] GenerateMap(int width, int height)
+    private void Start()
     {
+        GenerateMap(100, 100, Random.Range(Int32.MinValue, Int32.MaxValue));
+    }
+
+    public char[,] GenerateMap(int width, int height, int seed)
+    {
+        Random.InitState(seed);
+        
         //first we generate a land/water map using cellular automata.
         
-        //create a noise
-
-        bool[,] a = GenerateNoiseGrid(width, height, noiseDensity);
+        //create a noise map
+        bool[,] a = GenerateNoiseGrid(width, height, _noiseDensity);
         bool[,] b = new bool[width, height];
 
-        for (int i = 0; i < cellularAutomataIterations; i++)
+        for (int i = 0; i < _cellularAutomataIterations; i++)
         {
             //alternate to avoid reallocating each iteration.
             if (i % 2 == 0)
@@ -41,7 +51,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         bool[,] generatedMap;
-        if (cellularAutomataIterations % 2 == 0)
+        if (_cellularAutomataIterations % 2 == 0)
         {
             generatedMap = a;
         }
@@ -49,24 +59,25 @@ public class MapGenerator : MonoBehaviour
         {
             generatedMap = b;
         }
+        
+        char[,] mapTiles = new char[width, height];
 
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                GameObject newtile;
                 if (generatedMap[i, j])
                 {
-                    newtile = Instantiate(TEMPPREFABS[0], new Vector3(10 * i, 0, 10 * j), Quaternion.identity, tileParent);
+                    mapTiles[i, j] = _tileDescriptors[0].Identifier;
                 }
                 else
                 {
-                    newtile = Instantiate(TEMPPREFABS[1], new Vector3(10 * i, 0, 10 * j), Quaternion.identity, tileParent);
+                    mapTiles[i, j] = _tileDescriptors[1].Identifier;
                 }
             }
         }
 
-        return new int[,]{};
+        return mapTiles;
     }
 
     private void RunCellularAutomata(bool[,] inputMap, ref bool[,] outputMap)
@@ -104,7 +115,7 @@ public class MapGenerator : MonoBehaviour
                             landCount++;
                         }
 
-                        if (landCount >= numAdjacentCellsToMakeLand)
+                        if (landCount >= _numAdjacentCellsToMakeLand)
                         {
                             isLand = true;
                             break;
@@ -120,6 +131,9 @@ public class MapGenerator : MonoBehaviour
                 outputMap[i, j] = isLand;
             }
         }
+        
+        //clear the seed
+        Random.InitState((int)DateTime.Now.Ticks);
     }
 
     private bool[,] GenerateNoiseGrid(int width, int height, float noiseDensity)

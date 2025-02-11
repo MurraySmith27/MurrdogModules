@@ -95,7 +95,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AcuteDepthThreshold: 0.003
+    - _AcuteDepthThreshold: 0.006
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -105,8 +105,8 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DarkenAmount: 0.01
-    - _DepthThreshold: 0.001
+    - _DarkenAmount: 0.2
+    - _DepthThreshold: 0.003
     - _DepthThresholdAcuteDotStart: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -118,10 +118,10 @@ Material:
     - _GlossyReflections: 0
     - _LightenAmount: 3
     - _Metallic: 0
-    - _NormalsFarThreshold: 20
+    - _NormalsFarThreshold: 3
     - _NormalsThreshold: 0.5
-    - _NormalsThresholdCloseDistance: 11.8
-    - _NormalsThresholdFarDistance: 50
+    - _NormalsThresholdCloseDistance: 0
+    - _NormalsThresholdFarDistance: 200
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
