@@ -1,3 +1,5 @@
+#if USING_NEW_INPUT_SYSTEM
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,3 +42,5 @@ public static class UIPopupSystemStaticAccessor
         }
     }
 }
+
+#endif

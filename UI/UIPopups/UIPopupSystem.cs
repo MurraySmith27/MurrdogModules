@@ -1,3 +1,4 @@
+#if USING_NEW_INPUT_SYSTEM
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -304,3 +305,5 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       }
    }
 }
+
+#endif
