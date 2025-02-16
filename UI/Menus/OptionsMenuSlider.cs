@@ -136,8 +136,8 @@ public class OptionsMenuSlider : MonoBehaviour
       uiInputChannel.NavigateRightEvent -= SelectNext;
       uiInputChannel.NavigateRightEvent += SelectNext;
 
-      uiInputChannel.MouseUpEvent -= MouseUpPerformed;
-      uiInputChannel.MouseUpEvent += MouseUpPerformed;
+      uiInputChannel.LeftMouseUpEvent -= MouseUpPerformed;
+      uiInputChannel.LeftMouseUpEvent += MouseUpPerformed;
 
       uiInputChannel.MouseMoveEvent -= MouseMovePerformed;
       uiInputChannel.MouseMoveEvent += MouseMovePerformed;
@@ -155,7 +155,7 @@ public class OptionsMenuSlider : MonoBehaviour
       
       uiInputChannel.NavigateRightEvent -= SelectNext;
       
-      uiInputChannel.MouseUpEvent -= MouseUpPerformed;
+      uiInputChannel.LeftMouseUpEvent -= MouseUpPerformed;
       
       uiInputChannel.MouseMoveEvent -= MouseMovePerformed;
    }

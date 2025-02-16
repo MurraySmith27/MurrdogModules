@@ -7,11 +7,13 @@ public abstract class UIInputChannel : ScriptableObject
 {
     public struct UIInputChannelCallbackArgs
     {
+        public readonly float? floatArg;
         public readonly Vector2? vector2Arg;
-        
-        public UIInputChannelCallbackArgs(Vector2 arg)
+
+        public UIInputChannelCallbackArgs(Vector2 vector2Arg = new Vector2(), float floatArg = 0f)
         {
-            vector2Arg = arg;
+            this.floatArg = floatArg;
+            this.vector2Arg = vector2Arg;
         }
     }
     
@@ -26,11 +28,23 @@ public abstract class UIInputChannel : ScriptableObject
 
     public event UnityAction<UIInputChannelCallbackArgs> MouseSelectEvent;
 
-    public event UnityAction<UIInputChannelCallbackArgs> MouseDownEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> LeftMouseDownEvent;
     
-    public event UnityAction<UIInputChannelCallbackArgs> MouseUpEvent;
+    public event UnityAction<UIInputChannelCallbackArgs> RightMouseDownEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> LeftMouseHeldEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> RightMouseHeldEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> LeftMouseUpEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> RightMouseUpEvent;
 
     public event UnityAction<UIInputChannelCallbackArgs> MouseMoveEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> MouseVerticalScrollEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> MouseHorizontalScrollEvent;
     
     public event UnityAction<UIInputChannelCallbackArgs> BackEvent;
 
@@ -62,7 +76,7 @@ public abstract class UIInputChannel : ScriptableObject
     
     protected void InvokeNavigateEvent(Vector2 input)
     {
-        NavigateEvent?.Invoke(new(input));
+        NavigateEvent?.Invoke(new(vector2Arg: input));
     }
     
     protected void InvokeSelectEvent()
@@ -72,22 +86,52 @@ public abstract class UIInputChannel : ScriptableObject
     
     protected void InvokeMouseSelectEvent(Vector2 input)
     {
-        MouseSelectEvent?.Invoke(new(input));
+        MouseSelectEvent?.Invoke(new(vector2Arg: input));
     }
 
-    protected void InvokeMouseDownEvent(Vector2 input)
+    protected void InvokeLeftMouseDownEvent(Vector2 input)
     {
-        MouseDownEvent?.Invoke(new(input));
+        LeftMouseDownEvent?.Invoke(new(vector2Arg: input));
     }
     
-    protected void InvokeMouseUpEvent(Vector2 input)
+    protected void InvokeRightMouseDownEvent(Vector2 input)
     {
-        MouseUpEvent?.Invoke(new(input));
+        RightMouseDownEvent?.Invoke(new(vector2Arg: input));
+    }
+
+    protected void InvokeLeftMouseHeldEvent(Vector2 input)
+    {
+        LeftMouseHeldEvent?.Invoke(new (input));
+    }
+    
+    protected void InvokeRightMouseHeldEvent(Vector2 input)
+    {
+        RightMouseHeldEvent?.Invoke(new (input));
+    }
+    
+    protected void InvokeLeftMouseUpEvent(Vector2 input)
+    {
+        LeftMouseUpEvent?.Invoke(new(vector2Arg: input));
+    }
+    
+    protected void InvokeRightMouseUpEvent(Vector2 input)
+    {
+        RightMouseUpEvent?.Invoke(new(vector2Arg: input));
     }
     
     protected void InvokeMouseMoveEvent(Vector2 input)
     {
-        MouseMoveEvent?.Invoke(new(input));
+        MouseMoveEvent?.Invoke(new(vector2Arg: input));
+    }
+
+    protected void InvokeMouseVerticalScrollEvent(float input)
+    {
+        MouseVerticalScrollEvent?.Invoke(new (floatArg: input));
+    }
+
+    protected void InvokeMouseHorizontalScrollEvent(float input)
+    {
+        MouseHorizontalScrollEvent?.Invoke(new (floatArg: input));
     }
     
     protected void InvokeBackEvent()
