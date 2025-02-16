@@ -6,26 +6,72 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetection.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetection.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetectionOutlines.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetectionOutlines.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetectionOutlinesInclude.hlsl" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/EdgeDetectionOutlinesInclude.hlsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/SobelFineTuning.shadersubgraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/SobelFineTuning.shadersubgraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/Test.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PostProcessing/Outlines/Test.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/TileData.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/TileData.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/Tile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/Tile.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/water.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/water.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapGeneratorBehaviour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapGeneratorBehaviour.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/TileDescriptor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/TileDescriptor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/TileDescriptorSO.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/TileDescriptorSO.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity-Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity-Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/diffuse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/diffuse.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/normal_specular.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/normal_specular.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/shadow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/shadow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/translucency_gloss.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/translucency_gloss.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/blah 1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/blah 1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/blah 2.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/blah 2.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/blah 3.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/blah 3.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/blah.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/blah.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="autoShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Unity/Hub/Editor/2022.3.55f1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/PostProcessing/Outlines/DepthNormalsFeature.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AssetManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/OrpheusUIInputChannel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/BuildingsDataSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/PlayerResourcesSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourceItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourcesPopulator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/TileDescriptor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/TileGrid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Interface/BuildingBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapMouseController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/TogglePlaceBuildingModeButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.visualstudio@2.0.22/Editor/COMIntegration/COMIntegration~/COMIntegration.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/Runtime/PostProcessing/Shaders/ffx/ffx_cas.hlsl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/ShaderLibrary/Filtering.hlsl" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -40,6 +86,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -77,10 +124,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="38200">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="38200" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -100,6 +147,8 @@
       <workItem from="1738881579243" duration="7297000" />
       <workItem from="1738969294664" duration="6193000" />
       <workItem from="1739035004721" duration="15052000" />
+      <workItem from="1739487553134" duration="13300000" />
+      <workItem from="1739655364946" duration="8550000" />
     </task>
     <servers />
   </component>
@@ -115,5 +164,37 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
+          <line>56</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'TryPlaceBuilding'">
+            <startOffsets>
+              <option value="1681" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1774" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs</url>
+          <line>40</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Controllers\BuildingsController.cs" containingFunctionPresentation="Method 'CanConstructBuildingOnTileType'">
+            <startOffsets>
+              <option value="1126" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1201" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

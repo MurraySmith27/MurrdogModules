@@ -26,7 +26,7 @@ MonoBehaviour:
     dstTextureObject: {fileID: 0}
     overrideGraphicsFormat: 0
     graphicsFormat: 4
-    canShowInSceneView: 1
+    canShowInSceneView: 0
 --- !u!114 &-5260457291939835452
 MonoBehaviour:
   m_ObjectHideFlags: 0
