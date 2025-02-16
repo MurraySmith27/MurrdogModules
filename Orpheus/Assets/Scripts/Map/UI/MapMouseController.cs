@@ -9,35 +9,39 @@ public class MapMouseController : MonoBehaviour
 
     private void Start()
     {
-        inputChannel.MouseDownEvent -= OnMouseDown;
-        inputChannel.MouseDownEvent += OnMouseDown;
+        inputChannel.LeftMouseDownEvent -= OnLeftMouseDown;
+        inputChannel.LeftMouseDownEvent += OnLeftMouseDown;
+
+        inputChannel.MouseMoveEvent -= OnMouseMove;
+        inputChannel.MouseMoveEvent += OnMouseMove;
     }
 
     private void OnDestroy()
     {
-        inputChannel.MouseDownEvent -= OnMouseDown;
+        inputChannel.LeftMouseDownEvent -= OnLeftMouseDown;
+        inputChannel.MouseMoveEvent -= OnMouseMove;
     }
 
-    private void OnMouseDown(UIInputChannel.UIInputChannelCallbackArgs args)
+    private void OnLeftMouseDown(UIInputChannel.UIInputChannelCallbackArgs args)
     {
         if (MapInteractionController.IsAvailable)
         {
             if (args.vector2Arg.HasValue)
             {
-                Vector2 mousePos = args.vector2Arg.Value;
-                Vector3 screenSpacePos = new Vector3(mousePos.x, mousePos.y, 10f);
-
-                Vector3 directionFromEye =
-                    (mainCamera.ScreenToWorldPoint(screenSpacePos) - mainCamera.transform.position).normalized;
-
-                float t = -mainCamera.transform.position.y / directionFromEye.y;
-
-                Vector3 pointOnGroundPlane = directionFromEye * t + mainCamera.transform.position;
-
-                Vector2Int tilePos = new Vector2Int(
-                    Mathf.FloorToInt(pointOnGroundPlane.x / GameConstants.TILE_SIZE),
-                    Mathf.FloorToInt(pointOnGroundPlane.z / GameConstants.TILE_SIZE));
+                Vector2Int tilePos = CameraUtils.GetTilePositionFromMousePosition(args.vector2Arg.Value, mainCamera);
                 MapInteractionController.Instance.SelectTile(tilePos);
+            }
+        }
+    }
+
+    private void OnMouseMove(UIInputChannel.UIInputChannelCallbackArgs args)
+    {
+        if (MapInteractionController.IsAvailable)
+        {
+            if (args.vector2Arg.HasValue)
+            {
+                Vector2Int tilePos = CameraUtils.GetTilePositionFromMousePosition(args.vector2Arg.Value, mainCamera);
+                MapInteractionController.Instance.HoverOverTile(tilePos);
             }
         }
     }

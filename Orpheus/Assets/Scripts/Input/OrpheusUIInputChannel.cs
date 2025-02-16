@@ -10,6 +10,7 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     private UIInputActions _uiInputActions;
 
     private Vector2 _currentMousePosition;
+    
     private void OnEnable()
     {
         if (_uiInputActions == null)
@@ -37,22 +38,54 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
             _uiInputActions.UI.Disable();
         }
     }
-
-
+    
     public void OnRightMouseClick(InputAction.CallbackContext ctx)
     {
-        
+        if (ctx.performed)
+        {
+            base.InvokeRightMouseDownEvent(_currentMousePosition);
+        }
+        else if (ctx.canceled)
+        {
+            base.InvokeRightMouseUpEvent(_currentMousePosition);
+        }
     }
     
     public void OnLeftMouseClick(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            base.InvokeMouseDownEvent(_currentMousePosition);
+            base.InvokeLeftMouseDownEvent(_currentMousePosition);
         }
         else if (ctx.canceled)
         {
-            base.InvokeMouseUpEvent(_currentMousePosition);
+            base.InvokeLeftMouseUpEvent(_currentMousePosition);
+        }
+    }
+
+    public void OnLeftMouseHeld(InputAction.CallbackContext ctx)
+    {
+        Debug.LogError($"Left Mouse Held Event! {ctx.performed}, {ctx.canceled}");
+        
+        if (ctx.performed)
+        {
+            base.InvokeLeftMouseHeldEvent(_currentMousePosition);
+        }
+        else if (ctx.canceled)
+        {
+            base.InvokeLeftMouseUpEvent(_currentMousePosition);
+        }
+    }
+    
+    public void OnRightMouseHeld(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            base.InvokeRightMouseHeldEvent(_currentMousePosition);
+        }
+        else if (ctx.canceled)
+        {
+            base.InvokeRightMouseUpEvent(_currentMousePosition);
         }
     }
     
@@ -60,5 +93,20 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     {
         _currentMousePosition = ctx.ReadValue<Vector2>();
         base.InvokeMouseMoveEvent(_currentMousePosition);
+    }
+
+    public void OnMouseScroll(InputAction.CallbackContext ctx)
+    {
+        Vector2 input = ctx.ReadValue<Vector2>();
+
+        if (input.x != 0)
+        {
+            base.InvokeMouseHorizontalScrollEvent(input.x);
+        }
+
+        if (input.y != 0)
+        {
+            base.InvokeMouseVerticalScrollEvent(input.y);
+        }
     }
 }

@@ -12,8 +12,13 @@ public enum MapInteractionMode
 
 public class MapInteractionController : Singleton<MapInteractionController>
 {
-    private TileBehaviour currentlySelectedTile = null;
+    private Vector2Int _currentlySelectedTilePosition = new Vector2Int(-1, -1);
+    private TileBehaviour _currentlySelectedTile = null;
 
+    private Vector2Int _currentlyHoveredOverTilePosition = new Vector2Int(-1, -1);
+    private TileBehaviour _currentlyHoveredOverTile = null;
+
+    public event Action<TileBehaviour> OnTileHoveredOver;
     public event Action<TileBehaviour> OnTileSelected;
     
     public MapInteractionMode CurrentMode { get; private set; }= MapInteractionMode.Default;
@@ -24,18 +29,34 @@ public class MapInteractionController : Singleton<MapInteractionController>
 
     public void SelectTile(Vector2Int tilePosition)
     {
-        currentlySelectedTile = GetTileFromPosition(tilePosition);
+        _currentlySelectedTile = GetTileFromPosition(tilePosition);
         
-        if (currentlySelectedTile != null)
+        if (_currentlySelectedTile != null)
         {
             switch (CurrentMode)
             {
                 case MapInteractionMode.Default:
-                    OnTileSelected?.Invoke(currentlySelectedTile);
+                    if (_currentlySelectedTilePosition != tilePosition)
+                    {
+                        OnTileSelected?.Invoke(_currentlySelectedTile);
+                    }
                     break;
                 case MapInteractionMode.PlaceBuilding:
                     TryPlaceBuilding(tilePosition, _currentlyPlacingBuildingType);
                     break;
+            }
+        }
+    }
+
+    public void HoverOverTile(Vector2Int tilePosition)
+    {
+        _currentlyHoveredOverTile = GetTileFromPosition(tilePosition);
+        
+        if (_currentlyHoveredOverTile != null)
+        {
+            if (_currentlySelectedTilePosition != tilePosition)
+            {
+                OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile);
             }
         }
     }
