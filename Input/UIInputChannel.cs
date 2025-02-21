@@ -30,6 +30,8 @@ public abstract class UIInputChannel : ScriptableObject
 
     public event UnityAction<UIInputChannelCallbackArgs> LeftMouseDownEvent;
     
+    public event UnityAction<UIInputChannelCallbackArgs> LeftMouseDoubleClickEvent;
+    
     public event UnityAction<UIInputChannelCallbackArgs> RightMouseDownEvent;
     
     public event UnityAction<UIInputChannelCallbackArgs> LeftMouseHeldEvent;
@@ -92,6 +94,11 @@ public abstract class UIInputChannel : ScriptableObject
     protected void InvokeLeftMouseDownEvent(Vector2 input)
     {
         LeftMouseDownEvent?.Invoke(new(vector2Arg: input));
+    }
+
+    protected void InvokeLeftMouseDoubleClickEvent(Vector2 input)
+    {
+        LeftMouseDoubleClickEvent?.Invoke(new(vector2Arg: input));
     }
     
     protected void InvokeRightMouseDownEvent(Vector2 input)
