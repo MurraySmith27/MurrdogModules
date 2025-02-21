@@ -80,6 +80,15 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftMouseDoubleClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""795d2206-7858-4e3e-a576-61b48d5815d7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -148,6 +157,17 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""RightMouseHeld"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61519704-4fa0-4ec9-836e-44efe8039be5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftMouseDoubleClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -179,6 +199,7 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
         m_UI_MouseScroll = m_UI.FindAction("MouseScroll", throwIfNotFound: true);
         m_UI_LeftMouseHeld = m_UI.FindAction("LeftMouseHeld", throwIfNotFound: true);
         m_UI_RightMouseHeld = m_UI.FindAction("RightMouseHeld", throwIfNotFound: true);
+        m_UI_LeftMouseDoubleClick = m_UI.FindAction("LeftMouseDoubleClick", throwIfNotFound: true);
     }
 
     ~@UIInputActions()
@@ -251,6 +272,7 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_MouseScroll;
     private readonly InputAction m_UI_LeftMouseHeld;
     private readonly InputAction m_UI_RightMouseHeld;
+    private readonly InputAction m_UI_LeftMouseDoubleClick;
     public struct UIActions
     {
         private @UIInputActions m_Wrapper;
@@ -261,6 +283,7 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
         public InputAction @MouseScroll => m_Wrapper.m_UI_MouseScroll;
         public InputAction @LeftMouseHeld => m_Wrapper.m_UI_LeftMouseHeld;
         public InputAction @RightMouseHeld => m_Wrapper.m_UI_RightMouseHeld;
+        public InputAction @LeftMouseDoubleClick => m_Wrapper.m_UI_LeftMouseDoubleClick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -288,6 +311,9 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
             @RightMouseHeld.started += instance.OnRightMouseHeld;
             @RightMouseHeld.performed += instance.OnRightMouseHeld;
             @RightMouseHeld.canceled += instance.OnRightMouseHeld;
+            @LeftMouseDoubleClick.started += instance.OnLeftMouseDoubleClick;
+            @LeftMouseDoubleClick.performed += instance.OnLeftMouseDoubleClick;
+            @LeftMouseDoubleClick.canceled += instance.OnLeftMouseDoubleClick;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -310,6 +336,9 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
             @RightMouseHeld.started -= instance.OnRightMouseHeld;
             @RightMouseHeld.performed -= instance.OnRightMouseHeld;
             @RightMouseHeld.canceled -= instance.OnRightMouseHeld;
+            @LeftMouseDoubleClick.started -= instance.OnLeftMouseDoubleClick;
+            @LeftMouseDoubleClick.performed -= instance.OnLeftMouseDoubleClick;
+            @LeftMouseDoubleClick.canceled -= instance.OnLeftMouseDoubleClick;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -344,5 +373,6 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
         void OnMouseScroll(InputAction.CallbackContext context);
         void OnLeftMouseHeld(InputAction.CallbackContext context);
         void OnRightMouseHeld(InputAction.CallbackContext context);
+        void OnLeftMouseDoubleClick(InputAction.CallbackContext context);
     }
 }

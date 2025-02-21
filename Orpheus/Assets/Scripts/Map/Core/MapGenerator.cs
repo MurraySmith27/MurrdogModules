@@ -21,11 +21,6 @@ public class MapGenerator
         this._numAdjacentCellsToMakeLand = numAdjacentCellsToMakeLand;
         this._tileDescriptors = tileDescriptors;
     }
-    
-    private void Start()
-    {
-        GenerateMap(100, 100, Random.Range(Int32.MinValue, Int32.MaxValue));
-    }
 
     public TileType[,] GenerateMap(int width, int height, int seed)
     {

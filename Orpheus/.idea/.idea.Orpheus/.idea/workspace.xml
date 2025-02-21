@@ -5,22 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Input/UIInputActions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Input/UIInputActions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Input/UIInputActions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Input/UIInputActions.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/UI/3D/SelectedTileIndicator/SelectedTileIndicator.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/UI/3D/SelectedTileIndicator/SelectedTileIndicator.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/UI/3D/SelectedTileIndicator/SelectedTileIndicatorMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/UI/3D/SelectedTileIndicator/SelectedTileIndicatorMaterial.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules/Input/UIInputChannel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules/Input/UIInputChannel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules/UI/Menus/OptionsMenuSlider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules/UI/Menus/OptionsMenuSlider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/3D/SelectedTileIndicator.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/3D/SelectedTileIndicator.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Input/OrpheusUIInputChannel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Input/OrpheusUIInputChannel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapMouseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapMouseController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,10 +35,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AssetManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Camera/CameraUtils.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Debug/SROptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Input/OrpheusUIInputChannel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/BuildingsDataSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/PlayerResourcesSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourceItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourcesPopulator.cs" root0="FORCE_HIGHLIGHTING" />
@@ -51,6 +49,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Interface/BuildingBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/MapUtils.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/GenerateMapButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapMouseController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/TogglePlaceBuildingModeButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" root0="FORCE_HIGHLIGHTING" />
@@ -107,10 +107,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="14040">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="14040" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -133,6 +133,8 @@
       <workItem from="1739487553134" duration="13300000" />
       <workItem from="1739655364946" duration="8550000" />
       <workItem from="1739725153617" duration="13850000" />
+      <workItem from="1739833994072" duration="745000" />
+      <workItem from="1740091010643" duration="6859000" />
     </task>
     <servers />
   </component>
@@ -153,30 +155,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
-          <line>77</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'TryPlaceBuilding'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Input/OrpheusUIInputChannel.cs</url>
+          <line>73</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Input\OrpheusUIInputChannel.cs" containingFunctionPresentation="Method 'OnLeftMouseDoubleClick'">
             <startOffsets>
-              <option value="2464" />
+              <option value="1857" />
             </startOffsets>
             <endOffsets>
-              <option value="2557" />
+              <option value="1934" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs</url>
-          <line>40</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Controllers\BuildingsController.cs" containingFunctionPresentation="Method 'CanConstructBuildingOnTileType'">
-            <startOffsets>
-              <option value="1126" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1201" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

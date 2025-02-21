@@ -10,6 +10,9 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     private UIInputActions _uiInputActions;
 
     private Vector2 _currentMousePosition;
+
+    private Vector2 _lastClickPosition;
+    private float _doubleClickDistanceThreshold = 0.01f;
     
     private void OnEnable()
     {
@@ -55,6 +58,7 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     {
         if (ctx.performed)
         {
+            _lastClickPosition = _currentMousePosition;
             base.InvokeLeftMouseDownEvent(_currentMousePosition);
         }
         else if (ctx.canceled)
@@ -62,11 +66,23 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
             base.InvokeLeftMouseUpEvent(_currentMousePosition);
         }
     }
+    
+    public void OnLeftMouseDoubleClick(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            float distance = Vector2.Distance(_lastClickPosition, _currentMousePosition);
+            Debug.Log(distance);
+            if (distance <=
+                new Vector2(Screen.width, Screen.height).magnitude * _doubleClickDistanceThreshold)
+            {
+                base.InvokeLeftMouseDoubleClickEvent(_currentMousePosition);
+            }
+        }
+    }
 
     public void OnLeftMouseHeld(InputAction.CallbackContext ctx)
     {
-        Debug.LogError($"Left Mouse Held Event! {ctx.performed}, {ctx.canceled}");
-        
         if (ctx.performed)
         {
             base.InvokeLeftMouseHeldEvent(_currentMousePosition);

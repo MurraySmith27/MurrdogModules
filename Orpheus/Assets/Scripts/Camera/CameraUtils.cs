@@ -9,8 +9,8 @@ public static class CameraUtils
         Vector3 pointOnGroundPlane = GetPointOnPlaneFromMousePosition(mousePos, camera);
         
         return new Vector2Int(
-            Mathf.FloorToInt(pointOnGroundPlane.x / GameConstants.TILE_SIZE),
-            Mathf.FloorToInt(pointOnGroundPlane.z / GameConstants.TILE_SIZE));
+            Mathf.RoundToInt(pointOnGroundPlane.x / GameConstants.TILE_SIZE),
+            Mathf.RoundToInt(pointOnGroundPlane.z / GameConstants.TILE_SIZE));
     }
 
     public static Vector3 GetPointOnPlaneFromMousePosition(Vector2 mousePos, Camera camera)

@@ -52,9 +52,6 @@ public class MapSystem : Singleton<MapSystem>
         List<TileDescriptor> tileDesriptors = AssetManager.GetTileData();
         
         _mapGenerator = new MapGenerator(noiseDensity, cellularAutomataIterations, numAdjacentCellsToMakeLand, tileDesriptors);
-        
-        //todo eventually put this on a button
-        GenerateMapChunk(0, 0, mapDimensions.x, mapDimensions.y);
     }
 
     public Vector2Int GetMapDimensions()
@@ -92,7 +89,7 @@ public class MapSystem : Singleton<MapSystem>
         return tileInformation.GetValueOrDefault().Type;
     }
 
-    private void GenerateMapChunk(int x, int y, int width, int height)
+    public void GenerateMapChunk(int x, int y, int width, int height)
     {
         if (width == 0 || height == 0)
         {
