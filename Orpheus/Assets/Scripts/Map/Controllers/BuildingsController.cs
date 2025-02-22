@@ -25,7 +25,7 @@ public class BuildingsController : Singleton<BuildingsController>
     {
         BuildingData buildingData = buildingsData.Buildings.FirstOrDefault(data => data.Type == type);
 
-        foreach (ResourceItem cost in buildingData.Costs)
+        foreach (PersistentResourceItem cost in buildingData.Costs)
         {
             if (!PlayerResourcesSystem.Instance.HasResource(cost.Type, cost.Quantity))
             {

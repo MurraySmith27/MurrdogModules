@@ -7,7 +7,7 @@ using UnityEngine;
 public class BuildingData
 {
     public BuildingType Type;
-    public List<ResourceItem> Costs = new List<ResourceItem>();
+    public List<PersistentResourceItem> Costs = new List<PersistentResourceItem>();
     public List<TileType> CanBuildOnTiles = new List<TileType>();
 }
 

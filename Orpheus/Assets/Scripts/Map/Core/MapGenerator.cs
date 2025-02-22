@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class MapGenerator
 {
-    [Header("Cellular Automata Settings")]
     private readonly float _noiseDensity = 0.5f;
     private readonly int _cellularAutomataIterations = 5;
     private readonly int _numAdjacentCellsToMakeLand = 4;
@@ -72,6 +71,9 @@ public class MapGenerator
             }
         }
 
+        //clear the seed
+        Random.InitState((int)DateTime.Now.Ticks);
+        
         return mapTiles;
     }
 
@@ -126,9 +128,6 @@ public class MapGenerator
                 outputMap[i, j] = isLand;
             }
         }
-        
-        //clear the seed
-        Random.InitState((int)DateTime.Now.Ticks);
     }
 
     private bool[,] GenerateNoiseGrid(int width, int height, float noiseDensity)

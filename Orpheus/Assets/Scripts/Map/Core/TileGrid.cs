@@ -118,9 +118,7 @@ public class TileGrid
 
         if (!hadResource)
         {
-            ResourceItem newResource = new ResourceItem();
-            newResource.Type = resourceType;
-            newResource.Quantity = quantity;
+            ResourceItem newResource = new ResourceItem(resourceType, quantity);
 
             this[col, row].Resources.Add(newResource);
         }

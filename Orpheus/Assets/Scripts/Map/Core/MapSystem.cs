@@ -19,7 +19,17 @@ public class MapSystem : Singleton<MapSystem>
     
     [Space(10)]
     
+    [Header("Resource Population Settings")]
+    [SerializeField] private float cornProbabilityOnGrassTile = 0.2f;
+    [SerializeField] private float wheatProbabilityOnGrassTile = 0.2f;
+    [SerializeField] private float fishProbabilityOnWaterTile = 0.4f;
+    [SerializeField] private float woodProbabilityOnGrassTile = 0.6f;
+    [SerializeField] private float stoneProbabbilityOnGrassTile = 0.4f;
+    [SerializeField] private float woodProbabilityOnWaterTile = 0.6f;
+    [SerializeField] private float stoneProbabbilityOnWaterTile = 0.4f;
+    
     private MapGenerator _mapGenerator;
+    private MapResourcesGenerator _mapResourcesGenerator;
     private TileGrid _tiles = new TileGrid();
 
     public delegate void OnMapChunkGeneratedDelegate(int row, int col, int width, int height); 
@@ -51,7 +61,22 @@ public class MapSystem : Singleton<MapSystem>
     {
         List<TileDescriptor> tileDesriptors = AssetManager.GetTileData();
         
-        _mapGenerator = new MapGenerator(noiseDensity, cellularAutomataIterations, numAdjacentCellsToMakeLand, tileDesriptors);
+        _mapGenerator = new MapGenerator(
+            noiseDensity, 
+            cellularAutomataIterations, 
+            numAdjacentCellsToMakeLand, 
+            tileDesriptors
+        );
+
+        _mapResourcesGenerator = new MapResourcesGenerator(
+            cornProbabilityOnGrassTile,
+            wheatProbabilityOnGrassTile,
+            fishProbabilityOnWaterTile,
+            woodProbabilityOnGrassTile,
+            stoneProbabbilityOnGrassTile,
+            woodProbabilityOnWaterTile,
+            stoneProbabbilityOnWaterTile
+        );
     }
 
     public Vector2Int GetMapDimensions()
@@ -111,6 +136,16 @@ public class MapSystem : Singleton<MapSystem>
                 $"Provided dimensions: ({width}, {height}), generated chunk dimensions: ({chunk.GetLength(0)}, {chunk.GetLength(1)})");
             return;
         }
+        
+        List<ResourceItem>[,] resources = _mapResourcesGenerator.GenerateResourceOnChunk(chunk, seed);
+
+        if (resources.GetLength(0) != width || resources.GetLength(1) != height)
+        {
+            Debug.LogError("Resources generated dimensions is not equal to the chunk dimensions! something has gone wrong." +
+                           $"resources list dimensions: ({resources.GetLength(0)}, {resources.GetLength(1)})," +
+                           $" generated chunk dimensions: ({chunk.GetLength(0)}, {chunk.GetLength(1)})");
+            return;
+        }
 
         TileInformation[,] newTiles = new TileInformation[width, height];
 
@@ -121,7 +156,7 @@ public class MapSystem : Singleton<MapSystem>
                 TileInformation newTile = new TileInformation();
                 
                 newTile.Type = chunk[i,j];
-                newTile.Resources = new List<ResourceItem>();
+                newTile.Resources = resources[i,j];
                 newTile.Buildings = new List<TileBuilding>();
 
                 newTiles[i, j] = newTile;

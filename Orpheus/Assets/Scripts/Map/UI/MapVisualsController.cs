@@ -60,6 +60,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
             for (int j = col; j < col + height; j++)
             {
                 TileType tileType = MapSystem.Instance.GetTileType(i, j);
+                
 
                 TileBehaviour tilePrefab;
                 switch (tileType)
@@ -77,6 +78,10 @@ public class MapVisualsController : Singleton<MapVisualsController>
                 InstantiatedMapTiles[i, j] = Instantiate(tilePrefab,
                     new Vector3(GameConstants.TILE_SIZE * i, 0, GameConstants.TILE_SIZE * j), Quaternion.identity,
                     tileParent);
+                
+                List<ResourceItem> resourceItems = MapSystem.Instance.GetAllResourcesOnTile(new Vector2Int(i, j));
+
+                InstantiatedMapTiles[i, j].PopulateResourceVisuals(resourceItems);
             }
         }
     }
@@ -86,7 +91,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
         BuildingBehaviour buildingPrefab = null;
         switch (buildingType)
         {
-            case BuildingType.Farm:
+            case BuildingType.CornFarm:
                 buildingPrefab = farmPrefab;
                 break;
         }

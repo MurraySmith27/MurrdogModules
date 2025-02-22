@@ -9,13 +9,27 @@ public enum TileType
 
 public enum ResourceType
 {
-    Food
+    Corn,
+    Wheat,
+    Fish,
+    Wood,
+    Stone
+}
+
+public enum PersistentResourceType
+{
+    Wood,
+    Stone,
+    Gold
 }
 
 
 public enum BuildingType
 {
-    Farm
+    CornFarm,
+    WheatFarm,
+    FishFarm,
+    Bakery
 }
 
 public struct TileBuilding
