@@ -13,13 +13,13 @@ public enum MapInteractionMode
 public class MapInteractionController : Singleton<MapInteractionController>
 {
     private Vector2Int _currentlySelectedTilePosition = new Vector2Int(-1, -1);
-    private TileBehaviour _currentlySelectedTile = null;
+    private TileVisuals _currentlySelectedTile = null;
 
     private Vector2Int _currentlyHoveredOverTilePosition = new Vector2Int(-1, -1);
-    private TileBehaviour _currentlyHoveredOverTile = null;
+    private TileVisuals _currentlyHoveredOverTile = null;
 
-    public event Action<TileBehaviour> OnTileHoveredOver;
-    public event Action<TileBehaviour> OnTileSelected;
+    public event Action<TileVisuals> OnTileHoveredOver;
+    public event Action<TileVisuals> OnTileSelected;
     
     public MapInteractionMode CurrentMode { get; private set; }= MapInteractionMode.Default;
 
@@ -89,7 +89,7 @@ public class MapInteractionController : Singleton<MapInteractionController>
         }
     }
 
-    private TileBehaviour GetTileFromPosition(Vector2Int position)
+    private TileVisuals GetTileFromPosition(Vector2Int position)
     {
         if (!MapVisualsController.IsAvailable)
         {

@@ -4,29 +4,50 @@ using UnityEngine;
 
 public static class CameraUtils
 {
-    public static Vector2Int GetTilePositionFromMousePosition(Vector2 mousePos, Camera camera)
+    public static bool GetTilePositionFromMousePosition(Vector2 mousePos, Camera camera, out Vector2Int tilePosition)
     {
-        Vector3 pointOnGroundPlane = GetPointOnPlaneFromMousePosition(mousePos, camera);
-        
-        return new Vector2Int(
+        tilePosition = new Vector2Int();
+        Vector3 pointOnGroundPlane;
+        if (CameraUtils.GetPointOnPlaneFromMousePosition(mousePos, camera, out pointOnGroundPlane))
+        {
+            tilePosition = new Vector2Int(
             Mathf.RoundToInt(pointOnGroundPlane.x / GameConstants.TILE_SIZE),
             Mathf.RoundToInt(pointOnGroundPlane.z / GameConstants.TILE_SIZE));
+            return true;
+        }
+        else return false;
     }
 
-    public static Vector3 GetPointOnPlaneFromMousePosition(Vector2 mousePos, Camera camera)
+    public static bool GetPointOnPlaneFromMousePosition(Vector2 mousePos, Camera camera, out Vector3 pointOnGroundPlane)
     {
         Vector3 screenSpacePos = new Vector3(mousePos.x, mousePos.y, 10f);
 
         Vector3 directionFromEye =
-            (camera.ScreenToWorldPoint(screenSpacePos) - camera.transform.position).normalized;
-
-        float t = -camera.transform.position.y / directionFromEye.y;
-
-        return directionFromEye * t + camera.transform.position;        
+            (camera.ScreenToWorldPoint(screenSpacePos) - camera.transform.position);
+        
+        return GetPointOnGroundPlaneAlongRay(camera.transform.position, directionFromEye, out pointOnGroundPlane);
     }
 
-    public static Vector3 GetCameraCenterPointOnPlane(Camera camera)
+    public static bool GetPointOnGroundPlaneAlongRay(Vector3 origin, Vector3 direction, out Vector3 pointOnGroundPlane)
     {
-        return GetPointOnPlaneFromMousePosition(new Vector2(Screen.width / 2f, Screen.height / 2f), camera);
+        pointOnGroundPlane = new Vector3();
+        if (direction.y == 0)
+        {
+            return false;
+        }
+        
+        float t = -origin.y / direction.normalized.y;
+
+        if (t > 0)
+        {
+            pointOnGroundPlane = direction.normalized * t + origin;
+            return true;
+        }
+        else return false;
+    }
+
+    public static bool GetCameraCenterPointOnPlane(Camera camera, out Vector3 centerPointOnPlane)
+    {
+        return GetPointOnPlaneFromMousePosition(new Vector2(Screen.width / 2f, Screen.height / 2f), camera, out centerPointOnPlane);
     }
 }

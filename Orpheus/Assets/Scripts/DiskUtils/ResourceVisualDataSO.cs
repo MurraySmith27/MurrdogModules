@@ -7,17 +7,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ResourceVisualData", menuName = "Orpheus/ResourceVisualData", order = 1)]
 public class ResourceVisualDataSO : ScriptableObject
 {
-    [SerializeField] private Texture2D cornIcon;
-    [SerializeField] private Texture2D wheatIcon;
-    [SerializeField] private Texture2D fishIcon;
-    [SerializeField] private Texture2D woodIcon;
-    [SerializeField] private Texture2D stoneIcon;
+    [SerializeField] private Sprite cornIcon;
+    [SerializeField] private Sprite wheatIcon;
+    [SerializeField] private Sprite fishIcon;
+    [SerializeField] private Sprite woodIcon;
+    [SerializeField] private Sprite stoneIcon;
 
 
-    public Texture2D GetTextureForResourceItem(ResourceItem resourceItem)
+    public Sprite GetSpriteForResourceItem(ResourceType type)
     {
-
-        switch (resourceItem.Type)
+        switch (type)
         {
             case ResourceType.Corn:
                 return cornIcon;

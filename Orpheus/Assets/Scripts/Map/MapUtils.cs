@@ -13,4 +13,11 @@ public static class MapUtils
                    0,
                    Mathf.Round(worldPosition.z / GameConstants.TILE_SIZE)) * GameConstants.TILE_SIZE;
     }
+
+    public static Vector2Int GetGridPositionFromWorldPosition(Vector3 worldPosition)
+    {
+        return new Vector2Int(
+            Mathf.RoundToInt(worldPosition.x / GameConstants.TILE_SIZE),
+            Mathf.RoundToInt(worldPosition.z / GameConstants.TILE_SIZE));
+    }
 }

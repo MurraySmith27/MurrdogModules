@@ -22,7 +22,7 @@ public class TileSelectedIndicator : MonoBehaviour
         }
     }
 
-    private void OnTileSelected(TileBehaviour tile)
+    private void OnTileSelected(TileVisuals tile)
     {
         transform.position = tile.transform.position;
     }

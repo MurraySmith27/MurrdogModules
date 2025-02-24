@@ -18,7 +18,7 @@ public class TileHoveredOverIndicator : MonoBehaviour
         }
     }
 
-    private void OnTileHoveredOver(TileBehaviour tile)
+    private void OnTileHoveredOver(TileVisuals tile)
     {
         transform.position = tile.transform.position;
     }

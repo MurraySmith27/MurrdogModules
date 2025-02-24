@@ -28,8 +28,11 @@ public class MapMouseController : MonoBehaviour
         {
             if (args.vector2Arg.HasValue)
             {
-                Vector2Int tilePos = CameraUtils.GetTilePositionFromMousePosition(args.vector2Arg.Value, mainCamera);
-                MapInteractionController.Instance.SelectTile(tilePos);
+                Vector2Int tilePos;
+                if (CameraUtils.GetTilePositionFromMousePosition(args.vector2Arg.Value, mainCamera, out tilePos))
+                {
+                    MapInteractionController.Instance.SelectTile(tilePos);
+                }
             }
         }
     }
@@ -40,8 +43,12 @@ public class MapMouseController : MonoBehaviour
         {
             if (args.vector2Arg.HasValue)
             {
-                Vector2Int tilePos = CameraUtils.GetTilePositionFromMousePosition(args.vector2Arg.Value, mainCamera);
-                MapInteractionController.Instance.HoverOverTile(tilePos);
+                Vector2Int tilePos;
+                if (CameraUtils.GetTilePositionFromMousePosition(args.vector2Arg.Value, mainCamera,
+                        out tilePos))
+                {
+                    MapInteractionController.Instance.HoverOverTile(tilePos);
+                }
             }
         }
     }

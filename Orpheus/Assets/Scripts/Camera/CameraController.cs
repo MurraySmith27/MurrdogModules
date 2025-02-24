@@ -170,10 +170,10 @@ public class CameraController : Singleton<CameraController>
     {
         if (GlobalSettings.IsMapDraggingEnabled)
         {
-            _isDragging = true;
-            _dragStartWorldPosition =
-                CameraUtils.GetCameraCenterPointOnPlane(mainCamera);
-            _dragStartScreenSpace = args.vector2Arg.GetValueOrDefault();
+            if (CameraUtils.GetCameraCenterPointOnPlane(mainCamera, out _dragStartWorldPosition)) {
+                _isDragging = true;
+                _dragStartScreenSpace = args.vector2Arg.GetValueOrDefault();
+            }
         }
     }
 
@@ -182,10 +182,12 @@ public class CameraController : Singleton<CameraController>
         Vector2 mousePos = args.vector2Arg.GetValueOrDefault();
         if (!_isDragging && !_focusingPosition)
         {
-            Vector3 worldPosition = CameraUtils.GetPointOnPlaneFromMousePosition(mousePos, mainCamera);
-
-            Vector3 tilePosition = MapUtils.GetTileCenterFromPlanePosition(worldPosition);
-            FocusPosition(tilePosition);
+            Vector3 worldPosition;
+            if (CameraUtils.GetPointOnPlaneFromMousePosition(mousePos, mainCamera, out worldPosition))
+            {
+                Vector3 tilePosition = MapUtils.GetTileCenterFromPlanePosition(worldPosition);
+                FocusPosition(tilePosition);
+            }
         }
     }
 

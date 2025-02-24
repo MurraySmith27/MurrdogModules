@@ -8,17 +8,19 @@ public class MapVisualsController : Singleton<MapVisualsController>
 {
     [Header("Tile Spawning")]
     [SerializeField] private Transform tileParent;
-    [SerializeField] private TileBehaviour waterTilePrefab;
-    [SerializeField] private TileBehaviour grassTilePrefab;
+    [SerializeField] private TileVisuals waterTilePrefab;
+    [SerializeField] private TileVisuals grassTilePrefab;
 
     [Space(10)] 
     
     [Header("Building Spawning")]
     [SerializeField] private BuildingBehaviour farmPrefab;
 
-    public TileBehaviour[,] InstantiatedMapTiles = new TileBehaviour[0, 0];
+    public TileVisuals[,] InstantiatedMapTiles = new TileVisuals[0, 0];
     
     public List<(Vector2Int, BuildingBehaviour)> InstantiatedBuildings = new List<(Vector2Int, BuildingBehaviour)>();
+
+    private RectInt _lastCullingRect = new RectInt(new Vector2Int(-1,-1), new Vector2Int(1,1));
     
     private void Start()
     {
@@ -27,6 +29,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
         MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
         MapSystem.Instance.OnBuildingConstructed += OnBuildingConstructed;
+
+        TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnCullingUpdated;
+        TileFrustrumCulling.Instance.OnTileCullingUpdated += OnCullingUpdated;
     }
 
     private void OnDestroy()
@@ -36,9 +41,14 @@ public class MapVisualsController : Singleton<MapVisualsController>
             MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
             MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
         }
+
+        if (TileFrustrumCulling.IsAvailable)
+        {
+            TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnCullingUpdated;
+        }
     }
 
-    public TileBehaviour GetTileInstanceAtPosition(Vector2Int position)
+    public TileVisuals GetTileInstanceAtPosition(Vector2Int position)
     {
         if (position.x >= InstantiatedMapTiles.GetLength(0) || position.y >= InstantiatedMapTiles.GetLength(0) || position.x < 0 || position.y < 0)
         {
@@ -62,7 +72,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
                 TileType tileType = MapSystem.Instance.GetTileType(i, j);
                 
 
-                TileBehaviour tilePrefab;
+                TileVisuals tilePrefab;
                 switch (tileType)
                 {
                     case TileType.Water:
@@ -82,6 +92,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
                 List<ResourceItem> resourceItems = MapSystem.Instance.GetAllResourcesOnTile(new Vector2Int(i, j));
 
                 InstantiatedMapTiles[i, j].PopulateResourceVisuals(resourceItems);
+
+                //start with visuals disabled, change this in camera frustrum culling
+                InstantiatedMapTiles[i, j].ToggleVisuals(false);
             }
         }
     }
@@ -108,7 +121,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
         int newWidth = Mathf.Max(requiredWidth, InstantiatedMapTiles.GetLength(0));
         int newHeight = Mathf.Max(requiredHeight, InstantiatedMapTiles.GetLength(1));
 
-        TileBehaviour[,] temp = new TileBehaviour[newWidth, newHeight];
+        TileVisuals[,] temp = new TileVisuals[newWidth, newHeight];
         
         for (int i = 0; i < InstantiatedMapTiles.GetLength(0); i++)
         {
@@ -119,5 +132,29 @@ public class MapVisualsController : Singleton<MapVisualsController>
         }
         
         InstantiatedMapTiles = temp;
+    }
+
+    private void OnCullingUpdated(int row, int col, int width, int height)
+    {
+        if (_lastCullingRect.x >= 0)
+        {
+            for (int i = _lastCullingRect.x; i < _lastCullingRect.x + _lastCullingRect.width; i++)
+            {
+                for (int j = _lastCullingRect.y; j < _lastCullingRect.y + _lastCullingRect.height; j++)
+                {
+                    InstantiatedMapTiles[i, j].ToggleVisuals(false);
+                }
+            }
+        }
+        
+        for (int i = row; i < width + row; i++)
+        {
+            for (int j = col; j < height + col; j++)
+            {
+                InstantiatedMapTiles[i, j].ToggleVisuals(true);
+            }
+        }
+        
+        _lastCullingRect = new RectInt(row, col, width, height);
     }
 }

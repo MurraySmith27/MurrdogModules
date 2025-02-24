@@ -184,6 +184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc972474940d324dbe28fbedde07c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceVisualData: {fileID: 11400000, guid: 95c15ae972909994fbe10b5dbb441c00, type: 2}
+  resourceIconParent: {fileID: 0}
+  singleResourceVisualPrefab: {fileID: 5135197250586385125, guid: 6c3731a31c163d84d8e18c6add3c3e2e,
+    type: 3}
+  doubleResourceVisualPrefab: {fileID: 719928194109637569, guid: 9f10617926d910f439691bfa2fba361e,
+    type: 3}
+  tripleResourceVisualPrefab: {fileID: -1973653532346632492, guid: afdabf621210761449bf891d5227295e,
+    type: 3}
 --- !u!1 &7584184389695472651
 GameObject:
   m_ObjectHideFlags: 0
