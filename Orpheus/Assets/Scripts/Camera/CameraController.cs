@@ -31,10 +31,14 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] private float cameraMoveAnimTime = 0.5f;
     
     [Space(10)]
+    
     [Header("Camera On Edge Of Screen Settings")]
     [SerializeField] private Vector4 edgeOfScreenMoveThresholds = new Vector4(0.1f, 0.1f, 0.1f, 0.1f);
-
     [SerializeField] private Vector2 edgeOfScreenCameraVelocityMinMax = new Vector2(0.1f, 0.2f);
+
+    [Header("Camera Culling Update Settings")] 
+    [SerializeField] private float cameraCullingUpdateDistance = 8f;
+    [SerializeField] private float cameraCullingUpdateNormalizedZoomDistance = 0.1f;
 
     private CoroutineHandle _moveCoroutineHandle;
 
@@ -56,7 +60,10 @@ public class CameraController : Singleton<CameraController>
     private Vector2 _cameraVelocity = Vector2.zero;
     
     private Vector3 _cameraLastPosition = Vector3.zero;
-    
+
+    private Vector3 _cameraLastCullingUpdatePosition = Vector3.zero;
+
+    private float _cameraLastCullingZoomNormalizedValue = 1f;
     
     public void Start()
     {
@@ -161,7 +168,7 @@ public class CameraController : Singleton<CameraController>
 
             if (_cameraVelocity.magnitude > cameraHardStopThreshold)
             {
-                cameraFollowRoot.position += new Vector3(_cameraVelocity.x, 0, _cameraVelocity.y) * Time.deltaTime;
+                SetCameraPosition(cameraFollowRoot.position + new Vector3(_cameraVelocity.x, 0, _cameraVelocity.y) * Time.deltaTime);
             }
         }
     }
@@ -239,7 +246,7 @@ public class CameraController : Singleton<CameraController>
             
             _cameraLastPosition = newPosition;
             
-            cameraFollowRoot.position = _dragStartWorldPosition + cumulativeDragDiffWorldSpace;
+            SetCameraPosition(_dragStartWorldPosition + cumulativeDragDiffWorldSpace);
         }
         else
         {
@@ -251,6 +258,17 @@ public class CameraController : Singleton<CameraController>
             {
                 _isMovingOnScreenEdge = false;
             }
+        }
+    }
+
+    private void SetCameraPosition(Vector3 newPosition)
+    {
+        cameraFollowRoot.position = newPosition;
+
+        if (Vector3.Distance(cameraFollowRoot.position, _cameraLastCullingUpdatePosition) > cameraCullingUpdateDistance)
+        {
+            _cameraLastCullingUpdatePosition = cameraFollowRoot.position;
+            TileFrustrumCulling.Instance.UpdateTileCulling();
         }
     }
 
@@ -266,7 +284,7 @@ public class CameraController : Singleton<CameraController>
         Vector3 initialPos = cameraFollowRoot.position;
         for (float t = 0f; t <= cameraMoveAnimTime; t += Time.deltaTime)
         {
-            cameraFollowRoot.position = Vector3.Lerp(initialPos, targetPosition, cameraMoveAnimCurve.Evaluate(t / cameraMoveAnimTime));
+            SetCameraPosition(Vector3.Lerp(initialPos, targetPosition, cameraMoveAnimCurve.Evaluate(t / cameraMoveAnimTime)));
             yield return 0;
         }
         
@@ -281,5 +299,13 @@ public class CameraController : Singleton<CameraController>
     public void AdjustZoom(float delta)
     {
         _trackedDolly.m_PathPosition = Mathf.Clamp(_trackedDolly.m_PathPosition + delta * cameraZoomSensitivity, 0f, 1f);
+
+        if (_trackedDolly.m_PathPosition < 1e-5f || 
+            _trackedDolly.m_PathPosition > (1f-1e5f) || 
+            Mathf.Abs(_cameraLastCullingZoomNormalizedValue - _trackedDolly.m_PathPosition) > cameraCullingUpdateNormalizedZoomDistance)
+        {
+            _cameraLastCullingZoomNormalizedValue = _trackedDolly.m_PathPosition;
+            TileFrustrumCulling.Instance.UpdateTileCulling();
+        }
     }
 }

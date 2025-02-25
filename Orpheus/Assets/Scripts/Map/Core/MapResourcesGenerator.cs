@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MapResourcesGenerator
@@ -38,7 +39,8 @@ public class MapResourcesGenerator
         int height = tileTypeMap.GetLength(1);
 
         List<ResourceItem>[,] resourcesOnChunk = new List<ResourceItem>[width, height];
-        
+
+        int totalResourcesOnChunk = 0;
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -46,9 +48,11 @@ public class MapResourcesGenerator
                 TileType type = tileTypeMap[i, j];
 
                 resourcesOnChunk[i, j] = GenerateResourceOnTile(type);
+                totalResourcesOnChunk += resourcesOnChunk[i, j].Count;
             }
         }
         
+        Debug.LogError($"{totalResourcesOnChunk} resources on chunk in total");
         //clear the seed
         Random.InitState((int)DateTime.Now.Ticks);
 
@@ -91,7 +95,7 @@ public class MapResourcesGenerator
         {
             float corn = Random.Range(0f, 1f);
 
-            if (corn >= cornProbability)
+            if (corn < cornProbability)
             {
                 resourceTypes.Add(new ResourceItem(ResourceType.Corn, 1));
             }
@@ -101,7 +105,7 @@ public class MapResourcesGenerator
         {
             float wheat = Random.Range(0f, 1f);
 
-            if (wheat >= wheatProbability)
+            if (wheat < wheatProbability)
             {
                 resourceTypes.Add(new ResourceItem(ResourceType.Wheat, 1));
             }
@@ -111,7 +115,7 @@ public class MapResourcesGenerator
         {
             float fish = Random.Range(0f, 1f);
 
-            if (fish >= fishProbability)
+            if (fish < fishProbability)
             {
                 resourceTypes.Add(new ResourceItem(ResourceType.Fish, 1));
             }
@@ -121,7 +125,7 @@ public class MapResourcesGenerator
         {
             float wood = Random.Range(0f, 1f);
 
-            if (wood >= woodProbability)
+            if (wood < woodProbability)
             {
                 resourceTypes.Add(new ResourceItem(ResourceType.Wood, 1));
             }
@@ -131,7 +135,7 @@ public class MapResourcesGenerator
         {
             float stone = Random.Range(0f, 1f);
 
-            if (stone >= stoneProbability)
+            if (stone < stoneProbability)
             {
                 resourceTypes.Add(new ResourceItem(ResourceType.Stone, 1));
             }

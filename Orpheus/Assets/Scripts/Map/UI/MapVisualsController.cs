@@ -97,6 +97,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
                 InstantiatedMapTiles[i, j].ToggleVisuals(false);
             }
         }
+        
+        TileFrustrumCulling.Instance.UpdateTileCulling();
     }
 
     private void OnBuildingConstructed(int row, int col, BuildingType buildingType)
@@ -136,13 +138,16 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
     private void OnCullingUpdated(int row, int col, int width, int height)
     {
+        if (InstantiatedMapTiles.GetLength(0) == 0) return;
+        
         if (_lastCullingRect.x >= 0)
         {
             for (int i = _lastCullingRect.x; i < _lastCullingRect.x + _lastCullingRect.width; i++)
             {
                 for (int j = _lastCullingRect.y; j < _lastCullingRect.y + _lastCullingRect.height; j++)
                 {
-                    InstantiatedMapTiles[i, j].ToggleVisuals(false);
+                    if (i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
+                        InstantiatedMapTiles[i, j].ToggleVisuals(false);
                 }
             }
         }
@@ -151,7 +156,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             for (int j = col; j < height + col; j++)
             {
-                InstantiatedMapTiles[i, j].ToggleVisuals(true);
+                if (i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
+                    InstantiatedMapTiles[i, j].ToggleVisuals(true);
             }
         }
         

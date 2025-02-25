@@ -72,7 +72,6 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
         if (ctx.performed)
         {
             float distance = Vector2.Distance(_lastClickPosition, _currentMousePosition);
-            Debug.Log(distance);
             if (distance <=
                 new Vector2(Screen.width, Screen.height).magnitude * _doubleClickDistanceThreshold)
             {

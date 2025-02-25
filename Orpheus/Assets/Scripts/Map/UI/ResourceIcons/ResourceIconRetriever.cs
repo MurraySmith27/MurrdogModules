@@ -11,7 +11,7 @@ public class ResourceIconRetriever : Singleton<ResourceIconRetriever>
     [SerializeField] private ResourceIconObjectPool woodIconsObjectPool;
     [SerializeField] private ResourceIconObjectPool stoneIconsObjectPool;
 
-    public Transform GetResourceIcon(ResourceItem resourceItem)
+    public RectTransform GetResourceIcon(ResourceItem resourceItem)
     {
         switch (resourceItem.Type)
         {
@@ -31,7 +31,7 @@ public class ResourceIconRetriever : Singleton<ResourceIconRetriever>
         }
     }
 
-    public void ReturnResourceIcon(ResourceItem item, Transform resourceIcon)
+    public void ReturnResourceIcon(ResourceItem item, RectTransform resourceIcon)
     {
         switch (item.Type)
         {

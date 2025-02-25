@@ -6,30 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/ResourceVisualData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/ResourceVisualData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/Tile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/Tile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/water.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/water.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/1ResourceIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/1ResourceIcon.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/2ResourceIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/2ResourceIcon.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/3ResourceIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/3ResourceIcon.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/ResourceVisualDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/ResourceVisualDataSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileBehaviour.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/TileFrustrumCulling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/TileFrustrumCulling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Input/OrpheusUIInputChannel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Input/OrpheusUIInputChannel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourcesPopulator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourcesPopulator.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MapUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapMouseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapMouseController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/TileHoveredOverIndicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/TileHoveredOverIndicator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/TileSelectedIndicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/TileSelectedIndicator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/corn.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/corn.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/fish.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/fish.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/icon_background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/icon_background.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/stone.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/stone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/wheat.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/wheat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/wood.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/wood.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconObjectPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconRetriever.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconRetriever.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +62,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/GenerateMapButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapMouseController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconRetriever.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconsOverlayController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/TogglePlaceBuildingModeButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.visualstudio@2.0.22/Editor/COMIntegration/COMIntegration~/COMIntegration.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -126,10 +118,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="14568">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="5716">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="14568" />
+      <option name="pid" value="5716" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -156,6 +148,7 @@
       <workItem from="1740091010643" duration="6859000" />
       <workItem from="1740253439721" duration="4279000" />
       <workItem from="1740341396578" duration="10509000" />
+      <workItem from="1740434684784" duration="6580000" />
     </task>
     <servers />
   </component>
@@ -176,30 +169,108 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Input/OrpheusUIInputChannel.cs</url>
-          <line>73</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Input\OrpheusUIInputChannel.cs" containingFunctionPresentation="Method 'OnLeftMouseDoubleClick'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Camera/TileFrustrumCulling.cs</url>
+          <line>25</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Camera\TileFrustrumCulling.cs" containingFunctionPresentation="Method 'UpdateTileCulling'">
             <startOffsets>
-              <option value="1857" />
+              <option value="773" />
             </startOffsets>
             <endOffsets>
-              <option value="1934" />
+              <option value="842" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Camera/TileFrustrumCulling.cs</url>
-          <line>28</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Camera\TileFrustrumCulling.cs" containingFunctionPresentation="Method 'OnMapChunkGenerated'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs</url>
+          <line>92</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Core\MapResourcesGenerator.cs" containingFunctionPresentation="Method 'RandomlyGenerateReourcesOnTile'">
             <startOffsets>
-              <option value="815" />
+              <option value="3363" />
             </startOffsets>
             <endOffsets>
-              <option value="835" />
+              <option value="3423" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="12" />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs</url>
+          <line>99</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Core\MapResourcesGenerator.cs" containingFunctionPresentation="Method 'RandomlyGenerateReourcesOnTile'">
+            <startOffsets>
+              <option value="3586" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3644" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs</url>
+          <line>109</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Core\MapResourcesGenerator.cs" containingFunctionPresentation="Method 'RandomlyGenerateReourcesOnTile'">
+            <startOffsets>
+              <option value="3844" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3903" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs</url>
+          <line>119</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Core\MapResourcesGenerator.cs" containingFunctionPresentation="Method 'RandomlyGenerateReourcesOnTile'">
+            <startOffsets>
+              <option value="4099" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4157" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs</url>
+          <line>129</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Core\MapResourcesGenerator.cs" containingFunctionPresentation="Method 'RandomlyGenerateReourcesOnTile'">
+            <startOffsets>
+              <option value="4353" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4411" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs</url>
+          <line>139</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Core\MapResourcesGenerator.cs" containingFunctionPresentation="Method 'RandomlyGenerateReourcesOnTile'">
+            <startOffsets>
+              <option value="4611" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4670" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconsOverlayController.cs</url>
+          <line>65</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\ResourceIcons\ResourceIconsOverlayController.cs" containingFunctionPresentation="Method 'SpawnResourceIconsAtTile'">
+            <startOffsets>
+              <option value="2069" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2151" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

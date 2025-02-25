@@ -104,7 +104,11 @@ public class MapSystem : Singleton<MapSystem>
 
     public List<ResourceItem> GetAllResourcesOnTile(Vector2Int position)
     {
-        return _tiles.GetAllResourcesOnTile(position.x, position.y);
+        if (_tiles.ValidPosition(position.x, position.y))
+        {
+            return _tiles.GetAllResourcesOnTile(position.x, position.y);
+        }
+        else return new();
     }
 
     public TileType GetTileType(int col, int row)

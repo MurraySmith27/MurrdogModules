@@ -1,33 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using SRF;
 using UnityEngine;
 
 public class ResourceIconObjectPool : MonoBehaviour
 {
-    [SerializeField] private Transform singleIconsRoot; 
-    [SerializeField] private Transform doubleIconsRoot; 
-    [SerializeField] private Transform tripleIconsRoot; 
+    [SerializeField] private RectTransform singleIconsRoot; 
+    [SerializeField] private RectTransform doubleIconsRoot; 
+    [SerializeField] private RectTransform tripleIconsRoot; 
     
-    private List<Transform> _singleIcons = new List<Transform>();
-    private List<Transform> _doubleIcons = new List<Transform>();
-    private List<Transform> _tripleIcons = new List<Transform>();
+    private List<RectTransform> _singleIcons = new List<RectTransform>();
+    private List<RectTransform> _doubleIcons = new List<RectTransform>();
+    private List<RectTransform> _tripleIcons = new List<RectTransform>();
 
-    private List<Transform> _usedSingleIcons = new List<Transform>();
-    private List<Transform> _usedDoubleIcons = new List<Transform>();
-    private List<Transform> _usedTripleIcons = new List<Transform>();
+    private List<RectTransform> _usedSingleIcons = new List<RectTransform>();
+    private List<RectTransform> _usedDoubleIcons = new List<RectTransform>();
+    private List<RectTransform> _usedTripleIcons = new List<RectTransform>();
 
 
     private void Awake()
     {
-        _singleIcons.AddRange(singleIconsRoot.GetChildren());
-        _doubleIcons.AddRange(doubleIconsRoot.GetChildren());
-        _tripleIcons.AddRange(tripleIconsRoot.GetChildren());
+        _singleIcons.AddRange(singleIconsRoot.GetChildren().Cast<RectTransform>());
+        _doubleIcons.AddRange(doubleIconsRoot.GetChildren().Cast<RectTransform>());
+        _tripleIcons.AddRange(tripleIconsRoot.GetChildren().Cast<RectTransform>());
     }
 
-    public Transform GetIcon(int numIcons)
+    public RectTransform GetIcon(int numIcons)
     {
-        Transform newIcon = null;
+        RectTransform newIcon = null;
         switch (numIcons)
         {
             case 1:
@@ -48,7 +49,7 @@ public class ResourceIconObjectPool : MonoBehaviour
         }
     }
 
-    public void ReturnIcon(Transform icon, int numIcons)
+    public void ReturnIcon(RectTransform icon, int numIcons)
     {
         switch (numIcons)
         {
@@ -79,13 +80,13 @@ public class ResourceIconObjectPool : MonoBehaviour
         }
     }
 
-    private void ReturnIconToList(Transform icon, List<Transform> list, Transform parent)
+    private void ReturnIconToList(RectTransform icon, List<RectTransform> list, RectTransform parent)
     {
         icon.SetParent(parent);
         list.Add(icon);
     }
 
-    private Transform GetIconFromList(List<Transform> list)
+    private RectTransform GetIconFromList(List<RectTransform> list)
     {
         if (list.Count == 0)
         {
@@ -94,7 +95,7 @@ public class ResourceIconObjectPool : MonoBehaviour
         }
         else
         {
-            Transform newIcon = list[^1];
+            RectTransform newIcon = list[^1];
             
             newIcon.SetParent(null);
             
