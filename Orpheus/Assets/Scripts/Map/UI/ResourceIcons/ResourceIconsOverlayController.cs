@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MEC;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class ResourceIconsOverlayController : MonoBehaviour
     [SerializeField] private ResourceIconRetriever resourceIconRetriever;
     [SerializeField] private RectTransform iconsParent;
 
+    [SerializeField] private float iconsDistanceTowardCamera = 1f;
+    
     [Space(10)] 
     
     [Header("UI Spacing Options")] 
@@ -15,9 +18,13 @@ public class ResourceIconsOverlayController : MonoBehaviour
     [SerializeField] private float iconsScale = 1f;
 
     private List<(ResourceItem, RectTransform)> _instantiatedIcons = new();
+
+    private Vector3 _rootOriginalPosition;
     
     private void Start()
     {
+        _rootOriginalPosition = iconsParent.position;
+        
         TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnTileCullingUpdated;
         TileFrustrumCulling.Instance.OnTileCullingUpdated += OnTileCullingUpdated;
     }
@@ -46,18 +53,13 @@ public class ResourceIconsOverlayController : MonoBehaviour
             }
         }
     }
-
-    private int numIconsRetrieved = 0;
+    
     private void SpawnResourceIconsAtTile(int row, int col)
     {
         Vector2Int gridPosition = new Vector2Int(row, col);
         List<ResourceItem> resources = MapSystem.Instance.GetAllResourcesOnTile(gridPosition);
         
         if (resources.Count == 0) return;
-        
-        numIconsRetrieved += resources.Count;
-        
-        Debug.LogError($"{numIconsRetrieved} retrieved so far");
         
         List<RectTransform> iconTransforms = new List<RectTransform>();
                 
@@ -110,8 +112,7 @@ public class ResourceIconsOverlayController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Tried to populate 5 reource icons on a tile! this is not allowed.");
+            Debug.LogError("Tried to populate more than 5 resource icons on a tile! this is not allowed.");
         }
-        
     }
 }

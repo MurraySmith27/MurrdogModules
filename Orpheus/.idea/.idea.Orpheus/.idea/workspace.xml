@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconsOverlayController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/1ResourceIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/1ResourceIcon.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/2ResourceIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/ResourceIcons/2ResourceIcon.prefab" afterDir="false" />
@@ -16,7 +17,7 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapResourcesGenerator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourcesPopulator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourcesPopulator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/ResourcesPopulator.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconsOverlayController.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MapUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/ResourceIcons/ResourceIconObjectPool.cs" afterDir="false" />
@@ -148,7 +149,7 @@
       <workItem from="1740091010643" duration="6859000" />
       <workItem from="1740253439721" duration="4279000" />
       <workItem from="1740341396578" duration="10509000" />
-      <workItem from="1740434684784" duration="6580000" />
+      <workItem from="1740434684784" duration="7252000" />
     </task>
     <servers />
   </component>

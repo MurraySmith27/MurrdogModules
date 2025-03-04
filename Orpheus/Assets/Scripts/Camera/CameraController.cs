@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -39,6 +40,8 @@ public class CameraController : Singleton<CameraController>
     [Header("Camera Culling Update Settings")] 
     [SerializeField] private float cameraCullingUpdateDistance = 8f;
     [SerializeField] private float cameraCullingUpdateNormalizedZoomDistance = 0.1f;
+
+    public event Action<Vector3> OnCameraZoomAdjusted;
 
     private CoroutineHandle _moveCoroutineHandle;
 
@@ -307,5 +310,7 @@ public class CameraController : Singleton<CameraController>
             _cameraLastCullingZoomNormalizedValue = _trackedDolly.m_PathPosition;
             TileFrustrumCulling.Instance.UpdateTileCulling();
         }
+        
+        OnCameraZoomAdjusted?.Invoke(_trackedDolly.m_Path.EvaluatePosition(_trackedDolly.m_PathPosition));
     }
 }
