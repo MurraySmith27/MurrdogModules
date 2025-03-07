@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
 public class TileGrid
 {
     public TileInformation[,] Tiles = new TileInformation[0,0];

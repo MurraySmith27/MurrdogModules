@@ -5,51 +5,6 @@ using UnityEngine;
 //for tracking the player's owned resources
 public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
 {
-    private int _wood = 0;
-    
-    public int Wood
-    {
-        get
-        {
-            //TODO: add serialization and save file
-            return _wood;
-        }
-        set
-        {
-            _wood = value;
-        }
-    }
-    
-    private int _stone = 0;
-    
-    public int Stone
-    {
-        get
-        {
-            //TODO: add serialization and save file
-            return _stone;
-        }
-        set
-        {
-            _stone = value;
-        }
-    }
-    
-    private int _gold = 0;
-    
-    public int Gold
-    {
-        get
-        {
-            //TODO: add serialization and save file
-            return _gold;
-        }
-        set
-        {
-            _gold = value;
-        }
-    }
-
     public void AddResource(PersistentResourceType resourceType, int quantity)
     {
         ModifyResource(resourceType, quantity);
@@ -65,13 +20,13 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
         switch (resourceType)
         {
             case PersistentResourceType.Wood:
-                Wood += diff;
+                RoundState.Instance.ChangeCurrentWood(diff);
                 break;
             case PersistentResourceType.Stone:
-                Stone += diff;
+                RoundState.Instance.ChangeCurrentStone(diff);
                 break;
             case PersistentResourceType.Gold:
-                Gold += diff;
+                RoundState.Instance.ChangeCurrentGold(diff);
                 break;
         }
     }
@@ -81,14 +36,28 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
         switch (resourceType)
         {
             case PersistentResourceType.Wood:
-                return Wood >= quantity;
+                return RoundState.Instance.CurrentWood >= quantity;
             case PersistentResourceType.Stone:
-                return Stone >= quantity;
+                return RoundState.Instance.CurrentStone >= quantity;
             case PersistentResourceType.Gold:
-                return Gold >= quantity;
-            
+                return RoundState.Instance.CurrentGold >= quantity;
         }
 
         return false;
+    }
+
+    public bool PayCost(List<PersistentResourceItem> costs)
+    {
+        foreach (PersistentResourceItem cost in costs)
+        {
+            if (!HasResource(cost.Type, cost.Quantity)) return false;
+        }
+        
+        foreach (PersistentResourceItem cost in costs)
+        {
+            ModifyResource(cost.Type, -cost.Quantity);
+        }
+
+        return true;
     }
 }

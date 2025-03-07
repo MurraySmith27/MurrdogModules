@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,22 +7,40 @@ using UnityEngine;
 public class TogglePlaceBuildingModeButton : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI buttonText;
+
+    [SerializeField] private BuildingType buildingType;
     
-    public void Start()
+    private void Start()
     {
         buttonText.SetText("Tile Select Mode");
+
+        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+    }
+
+    private void OnDestroy()
+    {
+        if (PhaseStateMachine.IsAvailable)
+        {
+            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        }
+    }
+
+    private void OnPhaseChanged(GamePhases phase)
+    {
+        SwitchToDefaultMode();
     }
     
     private void SwitchToPlaceBuildingMode()
     {
-        MapInteractionController.Instance.SwitchMapInteractionMode(MapInteractionMode.PlaceBuilding);
+        MapInteractionController.Instance.SwitchToPlaceBuildingMode(buildingType);
         buttonText.SetText("Tile Select Mode");
     }
 
     private void SwitchToDefaultMode()
     {
         MapInteractionController.Instance.SwitchMapInteractionMode(MapInteractionMode.Default);
-        buttonText.SetText("Place Building");
+        buttonText.SetText($"Place {Enum.GetName(typeof(BuildingType), buttonText)}");
     }
 
     public void OnClick()

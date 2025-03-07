@@ -70,8 +70,8 @@ public class CameraController : Singleton<CameraController>
     
     public void Start()
     {
-        inputChannel.LeftMouseDownEvent -= OnDragStarted;
-        inputChannel.LeftMouseDownEvent += OnDragStarted;
+        inputChannel.LeftMouseHeldEvent -= OnDragStarted;
+        inputChannel.LeftMouseHeldEvent += OnDragStarted;
         
         inputChannel.LeftMouseDoubleClickEvent -= OnDoubleClick;
         inputChannel.LeftMouseDoubleClickEvent += OnDoubleClick;
@@ -95,7 +95,8 @@ public class CameraController : Singleton<CameraController>
 
     private void OnDestroy()
     {
-        inputChannel.LeftMouseDownEvent -= OnDragStarted;
+        inputChannel.LeftMouseHeldEvent -= OnDragStarted;
+        inputChannel.LeftMouseDoubleClickEvent -= OnDoubleClick;
         inputChannel.LeftMouseUpEvent -= OnLeftMouseUp;
         inputChannel.MouseMoveEvent -= OnMouseMove;
         

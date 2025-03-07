@@ -9,8 +9,8 @@ public class MapMouseController : MonoBehaviour
 
     private void Start()
     {
-        inputChannel.LeftMouseDownEvent -= OnLeftMouseDown;
-        inputChannel.LeftMouseDownEvent += OnLeftMouseDown;
+        inputChannel.LeftMouseClickEvent -= OnLeftMouseDown;
+        inputChannel.LeftMouseClickEvent += OnLeftMouseDown;
 
         inputChannel.MouseMoveEvent -= OnMouseMove;
         inputChannel.MouseMoveEvent += OnMouseMove;
@@ -18,7 +18,7 @@ public class MapMouseController : MonoBehaviour
 
     private void OnDestroy()
     {
-        inputChannel.LeftMouseDownEvent -= OnLeftMouseDown;
+        inputChannel.LeftMouseClickEvent -= OnLeftMouseDown;
         inputChannel.MouseMoveEvent -= OnMouseMove;
     }
 
@@ -43,11 +43,17 @@ public class MapMouseController : MonoBehaviour
         {
             if (args.vector2Arg.HasValue)
             {
-                Vector2Int tilePos;
-                if (CameraUtils.GetTilePositionFromMousePosition(args.vector2Arg.Value, mainCamera,
-                        out tilePos))
+                Vector2 mousePos = args.vector2Arg.Value;
+
+                if (mousePos.x >= 0 && mousePos.x <= Screen.width && mousePos.y >= 0 && mousePos.y <= Screen.height)
                 {
-                    MapInteractionController.Instance.HoverOverTile(tilePos);
+
+                    Vector2Int tilePos;
+                    if (CameraUtils.GetTilePositionFromMousePosition(args.vector2Arg.Value, mainCamera,
+                            out tilePos))
+                    {
+                        MapInteractionController.Instance.HoverOverTile(tilePos);
+                    }
                 }
             }
         }

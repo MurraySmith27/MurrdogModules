@@ -37,6 +37,15 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""LeftMouseDoubleClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""795d2206-7858-4e3e-a576-61b48d5815d7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""LeftMouseClick"",
                     ""type"": ""Button"",
                     ""id"": ""0e6052ea-d915-4713-b044-d0762d1eae03"",
@@ -76,15 +85,6 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""RightMouseHeld"",
                     ""type"": ""Button"",
                     ""id"": ""e9b28aa1-33c1-4eac-a021-d82ce651819f"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LeftMouseDoubleClick"",
-                    ""type"": ""Button"",
-                    ""id"": ""795d2206-7858-4e3e-a576-61b48d5815d7"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -140,7 +140,7 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""ec789cf8-6412-470a-b6f5-9e8d97b1e8ad"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Hold(duration=0.1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LeftMouseHeld"",
@@ -162,7 +162,7 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""61519704-4fa0-4ec9-836e-44efe8039be5"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""MultiTap"",
+                    ""interactions"": ""MultiTap(tapTime=0.1,tapDelay=0.1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LeftMouseDoubleClick"",
@@ -194,12 +194,12 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_MouseNavigation = m_UI.FindAction("MouseNavigation", throwIfNotFound: true);
+        m_UI_LeftMouseDoubleClick = m_UI.FindAction("LeftMouseDoubleClick", throwIfNotFound: true);
         m_UI_LeftMouseClick = m_UI.FindAction("LeftMouseClick", throwIfNotFound: true);
         m_UI_RightMouseClick = m_UI.FindAction("RightMouseClick", throwIfNotFound: true);
         m_UI_MouseScroll = m_UI.FindAction("MouseScroll", throwIfNotFound: true);
         m_UI_LeftMouseHeld = m_UI.FindAction("LeftMouseHeld", throwIfNotFound: true);
         m_UI_RightMouseHeld = m_UI.FindAction("RightMouseHeld", throwIfNotFound: true);
-        m_UI_LeftMouseDoubleClick = m_UI.FindAction("LeftMouseDoubleClick", throwIfNotFound: true);
     }
 
     ~@UIInputActions()
@@ -267,23 +267,23 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_MouseNavigation;
+    private readonly InputAction m_UI_LeftMouseDoubleClick;
     private readonly InputAction m_UI_LeftMouseClick;
     private readonly InputAction m_UI_RightMouseClick;
     private readonly InputAction m_UI_MouseScroll;
     private readonly InputAction m_UI_LeftMouseHeld;
     private readonly InputAction m_UI_RightMouseHeld;
-    private readonly InputAction m_UI_LeftMouseDoubleClick;
     public struct UIActions
     {
         private @UIInputActions m_Wrapper;
         public UIActions(@UIInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @MouseNavigation => m_Wrapper.m_UI_MouseNavigation;
+        public InputAction @LeftMouseDoubleClick => m_Wrapper.m_UI_LeftMouseDoubleClick;
         public InputAction @LeftMouseClick => m_Wrapper.m_UI_LeftMouseClick;
         public InputAction @RightMouseClick => m_Wrapper.m_UI_RightMouseClick;
         public InputAction @MouseScroll => m_Wrapper.m_UI_MouseScroll;
         public InputAction @LeftMouseHeld => m_Wrapper.m_UI_LeftMouseHeld;
         public InputAction @RightMouseHeld => m_Wrapper.m_UI_RightMouseHeld;
-        public InputAction @LeftMouseDoubleClick => m_Wrapper.m_UI_LeftMouseDoubleClick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -296,6 +296,9 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
             @MouseNavigation.started += instance.OnMouseNavigation;
             @MouseNavigation.performed += instance.OnMouseNavigation;
             @MouseNavigation.canceled += instance.OnMouseNavigation;
+            @LeftMouseDoubleClick.started += instance.OnLeftMouseDoubleClick;
+            @LeftMouseDoubleClick.performed += instance.OnLeftMouseDoubleClick;
+            @LeftMouseDoubleClick.canceled += instance.OnLeftMouseDoubleClick;
             @LeftMouseClick.started += instance.OnLeftMouseClick;
             @LeftMouseClick.performed += instance.OnLeftMouseClick;
             @LeftMouseClick.canceled += instance.OnLeftMouseClick;
@@ -311,9 +314,6 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
             @RightMouseHeld.started += instance.OnRightMouseHeld;
             @RightMouseHeld.performed += instance.OnRightMouseHeld;
             @RightMouseHeld.canceled += instance.OnRightMouseHeld;
-            @LeftMouseDoubleClick.started += instance.OnLeftMouseDoubleClick;
-            @LeftMouseDoubleClick.performed += instance.OnLeftMouseDoubleClick;
-            @LeftMouseDoubleClick.canceled += instance.OnLeftMouseDoubleClick;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -321,6 +321,9 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
             @MouseNavigation.started -= instance.OnMouseNavigation;
             @MouseNavigation.performed -= instance.OnMouseNavigation;
             @MouseNavigation.canceled -= instance.OnMouseNavigation;
+            @LeftMouseDoubleClick.started -= instance.OnLeftMouseDoubleClick;
+            @LeftMouseDoubleClick.performed -= instance.OnLeftMouseDoubleClick;
+            @LeftMouseDoubleClick.canceled -= instance.OnLeftMouseDoubleClick;
             @LeftMouseClick.started -= instance.OnLeftMouseClick;
             @LeftMouseClick.performed -= instance.OnLeftMouseClick;
             @LeftMouseClick.canceled -= instance.OnLeftMouseClick;
@@ -336,9 +339,6 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
             @RightMouseHeld.started -= instance.OnRightMouseHeld;
             @RightMouseHeld.performed -= instance.OnRightMouseHeld;
             @RightMouseHeld.canceled -= instance.OnRightMouseHeld;
-            @LeftMouseDoubleClick.started -= instance.OnLeftMouseDoubleClick;
-            @LeftMouseDoubleClick.performed -= instance.OnLeftMouseDoubleClick;
-            @LeftMouseDoubleClick.canceled -= instance.OnLeftMouseDoubleClick;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -368,11 +368,11 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         void OnMouseNavigation(InputAction.CallbackContext context);
+        void OnLeftMouseDoubleClick(InputAction.CallbackContext context);
         void OnLeftMouseClick(InputAction.CallbackContext context);
         void OnRightMouseClick(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
         void OnLeftMouseHeld(InputAction.CallbackContext context);
         void OnRightMouseHeld(InputAction.CallbackContext context);
-        void OnLeftMouseDoubleClick(InputAction.CallbackContext context);
     }
 }

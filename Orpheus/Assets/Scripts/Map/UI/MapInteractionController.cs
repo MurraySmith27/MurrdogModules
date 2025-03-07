@@ -61,6 +61,15 @@ public class MapInteractionController : Singleton<MapInteractionController>
         }
     }
 
+    public void SwitchToPlaceBuildingMode(BuildingType buildingType)
+    {
+        _currentlyPlacingBuildingType = buildingType;
+        if (CurrentMode != MapInteractionMode.PlaceBuilding)
+        {
+            SwitchMapInteractionMode(MapInteractionMode.PlaceBuilding);
+        }
+    }
+    
     public void SwitchMapInteractionMode(MapInteractionMode newMode)
     {
         CurrentMode = newMode;
@@ -68,10 +77,13 @@ public class MapInteractionController : Singleton<MapInteractionController>
         OnMapInteractionModeChanged?.Invoke(CurrentMode);
     }
 
-
     private void TryPlaceBuilding(Vector2Int tilePosition, BuildingType buildingType)
     {
-        if (!BuildingsController.Instance.CanBuildOverExistingStructures(tilePosition, buildingType))
+        if (buildingType == BuildingType.CityCapital && !BuildingsController.Instance.CanBuildCityCapital(tilePosition))
+        {
+            Debug.LogError("CANNOT BUILD CITY TOO CLOSE TO OTHER CITY");
+        }
+        else if (!BuildingsController.Instance.CanBuildOverExistingStructures(tilePosition, buildingType))
         {
             Debug.LogError("CANNOT BUILD BUILDING ON TILE WITH EXISTING STRUCTURE");
         }

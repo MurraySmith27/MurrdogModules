@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "LeftMouseDoubleClick",
+                    "type": "Button",
+                    "id": "795d2206-7858-4e3e-a576-61b48d5815d7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LeftMouseClick",
                     "type": "Button",
                     "id": "0e6052ea-d915-4713-b044-d0762d1eae03",
@@ -54,15 +63,6 @@
                     "name": "RightMouseHeld",
                     "type": "Button",
                     "id": "e9b28aa1-33c1-4eac-a021-d82ce651819f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LeftMouseDoubleClick",
-                    "type": "Button",
-                    "id": "795d2206-7858-4e3e-a576-61b48d5815d7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -118,7 +118,7 @@
                     "name": "",
                     "id": "ec789cf8-6412-470a-b6f5-9e8d97b1e8ad",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Hold",
+                    "interactions": "Hold(duration=0.1)",
                     "processors": "",
                     "groups": "",
                     "action": "LeftMouseHeld",
@@ -140,7 +140,7 @@
                     "name": "",
                     "id": "61519704-4fa0-4ec9-836e-44efe8039be5",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "MultiTap",
+                    "interactions": "MultiTap(tapTime=0.1,tapDelay=0.1)",
                     "processors": "",
                     "groups": "",
                     "action": "LeftMouseDoubleClick",

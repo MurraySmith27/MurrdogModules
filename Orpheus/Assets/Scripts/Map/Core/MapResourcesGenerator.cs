@@ -52,7 +52,6 @@ public class MapResourcesGenerator
             }
         }
         
-        Debug.LogError($"{totalResourcesOnChunk} resources on chunk in total");
         //clear the seed
         Random.InitState((int)DateTime.Now.Ticks);
 

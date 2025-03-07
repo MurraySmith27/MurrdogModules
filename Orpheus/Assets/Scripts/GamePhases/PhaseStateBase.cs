@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhaseStateBase : MonoBehaviour
+public class PhaseStateBase
 {
     public virtual void StateEnter(PhaseStateMachine context)
     {

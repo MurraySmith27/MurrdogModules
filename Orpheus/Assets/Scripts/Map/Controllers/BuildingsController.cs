@@ -11,14 +11,26 @@ public class BuildingsController : Singleton<BuildingsController>
     
     public bool TryPlaceBuilding(Vector2Int position, BuildingType type)
     {
+        BuildingData buildingData = buildingsData.Buildings.FirstOrDefault(data => data.Type == type);
+
+        if (buildingData == null)
+        {
+            Debug.LogError("Building data is null! cannot place building");
+            return false;
+        }
+        
         if (!HasBuildingCost(type) || !CanConstructBuildingOnTileType(position, type) ||
             !CanBuildOverExistingStructures(position, type))
         {
             return false;
         }
-        
-        MapSystem.Instance.ConstructBuilding(position, type);
-        return true;
+
+        if (PlayerResourcesSystem.Instance.PayCost(buildingData.Costs))
+        {
+            MapSystem.Instance.ConstructBuilding(position, type);
+            return true;
+        }
+        else return false;
     }
 
     public bool HasBuildingCost(BuildingType type)
@@ -55,6 +67,21 @@ public class BuildingsController : Singleton<BuildingsController>
             return false;
         }
         
+        return true;
+    }
+
+    public bool CanBuildCityCapital(Vector2Int position)
+    {
+        List<Vector2Int> allOwnedCityTiles = MapSystem.Instance.GetAllOwnedCityTiles();
+
+        foreach (Vector2Int tileOffset in GameConstants.INITIAL_CITY_TILES)
+        {
+            if (allOwnedCityTiles.Contains(position + tileOffset))
+            {
+                return false;
+            }
+        }
+
         return true;
     }
 }

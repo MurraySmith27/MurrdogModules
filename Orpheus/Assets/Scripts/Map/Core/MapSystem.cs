@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = System.Random;
 
 public class MapSystem : Singleton<MapSystem>
@@ -24,13 +25,15 @@ public class MapSystem : Singleton<MapSystem>
     [SerializeField] private float wheatProbabilityOnGrassTile = 0.2f;
     [SerializeField] private float fishProbabilityOnWaterTile = 0.4f;
     [SerializeField] private float woodProbabilityOnGrassTile = 0.6f;
-    [SerializeField] private float stoneProbabbilityOnGrassTile = 0.4f;
+    [SerializeField] private float stoneProbabilityOnGrassTile = 0.4f;
     [SerializeField] private float woodProbabilityOnWaterTile = 0.6f;
-    [SerializeField] private float stoneProbabbilityOnWaterTile = 0.4f;
+    [SerializeField] private float stoneProbabilityOnWaterTile = 0.4f;
     
     private MapGenerator _mapGenerator;
     private MapResourcesGenerator _mapResourcesGenerator;
     private TileGrid _tiles = new TileGrid();
+
+    private List<CityTileData> _cities = new List<CityTileData>();
 
     public delegate void OnMapChunkGeneratedDelegate(int row, int col, int width, int height); 
     
@@ -56,6 +59,12 @@ public class MapSystem : Singleton<MapSystem>
     public delegate void OnBuildingConstructedDelegate(int row, int col, BuildingType building);
     
     public event OnBuildingConstructedDelegate OnBuildingConstructed;
+
+    public delegate void OnCityOwnedTilesChangedDelegate(Vector2Int cityCapitalLocation,
+        List<Vector2Int> cityOwnedTiles);
+    
+    public event OnCityOwnedTilesChangedDelegate OnCityOwnedTilesChanged;
+    
     
     private void Start()
     {
@@ -73,9 +82,9 @@ public class MapSystem : Singleton<MapSystem>
             wheatProbabilityOnGrassTile,
             fishProbabilityOnWaterTile,
             woodProbabilityOnGrassTile,
-            stoneProbabbilityOnGrassTile,
+            stoneProbabilityOnGrassTile,
             woodProbabilityOnWaterTile,
-            stoneProbabbilityOnWaterTile
+            stoneProbabilityOnWaterTile
         );
     }
 
@@ -88,7 +97,48 @@ public class MapSystem : Singleton<MapSystem>
     public void ConstructBuilding(Vector2Int position, BuildingType buildingType)
     {
         _tiles.AddBuildingToTile(position.x, position.y, buildingType);
-        OnBuildingConstructed?.Invoke(position.x, position.y, buildingType);
+
+        if (buildingType == BuildingType.CityCapital)
+        {
+
+            List<Vector2Int> initialTileLocations = GameConstants.INITIAL_CITY_TILES.Select((Vector2Int offset) =>
+            {
+                return offset + position;
+            }).ToList();
+            
+            CityTileData newCity = new CityTileData(position, initialTileLocations);
+            
+            _cities.Add(newCity);
+            
+            OnBuildingConstructed?.Invoke(position.x, position.y, buildingType);
+            OnCityOwnedTilesChanged?.Invoke(position, initialTileLocations);
+        }
+        else
+        {
+            OnBuildingConstructed?.Invoke(position.x, position.y, buildingType);
+        }
+    }
+
+    public List<Vector2Int> GetAllOwnedCityTiles()
+    {
+        List<Vector2Int> allCityTiles = new List<Vector2Int>();
+        foreach (CityTileData cityTileData in _cities)
+        {
+            allCityTiles.AddRange(cityTileData.GetTilesInOrder());
+        }
+
+        return allCityTiles;
+    }
+
+    public List<Vector2Int> GetOwnedTilesOfCity(Guid cityGuid)
+    {
+        CityTileData city = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
+
+        if (city != null)
+        {
+            return city.GetTilesInOrder();
+        }
+        else return new();
     }
 
     public List<TileBuilding> GetBuildingsOnTile(Vector2Int position)
@@ -96,7 +146,6 @@ public class MapSystem : Singleton<MapSystem>
         return _tiles.GetAllBuildingsOnTile(position.x, position.y);
     }
     
-
     public void AddResourcesToTile(Vector2Int position, ResourceType resourceType, int quantity)
     {
         _tiles.AddResourceToTile(position.x, position.y, resourceType, quantity);

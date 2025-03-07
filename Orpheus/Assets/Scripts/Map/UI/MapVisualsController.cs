@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -8,13 +9,17 @@ public class MapVisualsController : Singleton<MapVisualsController>
 {
     [Header("Tile Spawning")]
     [SerializeField] private Transform tileParent;
-    [SerializeField] private TileVisuals waterTilePrefab;
-    [SerializeField] private TileVisuals grassTilePrefab;
+    [SerializeField] private TilesVisualsSO tilesVisuals;
 
-    [Space(10)] 
-    
-    [Header("Building Spawning")]
-    [SerializeField] private BuildingBehaviour farmPrefab;
+    [Space(10)]
+    [Header("Building Spawning")] 
+    [SerializeField] private BuildingsVisualsSO buildingsVisualsData;
+
+    [Header("City Visualization")] 
+    [SerializeField] private Transform cityBorderVisualsParent;
+    [SerializeField] private CityBorderVisuals cityBorderVisualsPrefab;
+
+    private Dictionary<Vector2Int, CityBorderVisuals> _instantiatedCityBorderVisuals;
 
     public TileVisuals[,] InstantiatedMapTiles = new TileVisuals[0, 0];
     
@@ -30,6 +35,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
         MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
         MapSystem.Instance.OnBuildingConstructed += OnBuildingConstructed;
 
+        MapSystem.Instance.OnCityOwnedTilesChanged -= OnCityOwnedTilesChanged;
+        MapSystem.Instance.OnCityOwnedTilesChanged += OnCityOwnedTilesChanged;
+
         TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnCullingUpdated;
         TileFrustrumCulling.Instance.OnTileCullingUpdated += OnCullingUpdated;
     }
@@ -40,6 +48,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
             MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
+            MapSystem.Instance.OnCityOwnedTilesChanged -= OnCityOwnedTilesChanged;
         }
 
         if (TileFrustrumCulling.IsAvailable)
@@ -70,20 +79,19 @@ public class MapVisualsController : Singleton<MapVisualsController>
             for (int j = col; j < col + height; j++)
             {
                 TileType tileType = MapSystem.Instance.GetTileType(i, j);
-                
 
-                TileVisuals tilePrefab;
-                switch (tileType)
+                TileVisualsData tileVisualsData = tilesVisuals.TilesVisualsData.FirstOrDefault(((TileVisualsData data) =>
                 {
-                    case TileType.Water:
-                        tilePrefab = waterTilePrefab;
-                        break;
-                    case TileType.Grass:
-                        tilePrefab = grassTilePrefab;
-                        break;
-                    default:
-                        continue;
+                    return data.Type == tileType;
+                }));
+
+                if (tileVisualsData == null)
+                {
+                    Debug.LogError($"Unable to find tile of type {tileType} in tile visuals data SO");
+                    return;
                 }
+                
+                TileVisuals tilePrefab = tileVisualsData.Prefab;
 
                 InstantiatedMapTiles[i, j] = Instantiate(tilePrefab,
                     new Vector3(GameConstants.TILE_SIZE * i, 0, GameConstants.TILE_SIZE * j), Quaternion.identity,
@@ -103,19 +111,37 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
     private void OnBuildingConstructed(int row, int col, BuildingType buildingType)
     {
-        BuildingBehaviour buildingPrefab = null;
-        switch (buildingType)
+        BuildingVisualsData visualData = buildingsVisualsData.BuildingsVisualsData.FirstOrDefault(
+            (BuildingVisualsData data) =>
+            {
+                return data.Type == buildingType;
+            });
+
+        if (visualData == null)
         {
-            case BuildingType.CornFarm:
-                buildingPrefab = farmPrefab;
-                break;
+            Debug.LogError($"Building visuals data could not be found for type: {buildingType}");
+            return;
         }
+        
+        BuildingBehaviour buildingPrefab = visualData.Prefab;
         
         BuildingBehaviour newBuilding = Instantiate(buildingPrefab,
             new Vector3(GameConstants.TILE_SIZE * row, 0, GameConstants.TILE_SIZE * col), Quaternion.identity,
             tileParent);
         
         InstantiatedBuildings.Add((new Vector2Int(row, col), newBuilding));
+    }
+
+    private void OnCityOwnedTilesChanged(Vector2Int cityCapitalPosition, List<Vector2Int> cityOwnedTiles)
+    {
+        if (!_instantiatedCityBorderVisuals.ContainsKey(cityCapitalPosition))
+        {
+            _instantiatedCityBorderVisuals[cityCapitalPosition] = Instantiate(cityBorderVisualsPrefab,
+                MapUtils.GetTileWorldPositionFromGridPosition(cityCapitalPosition), Quaternion.identity,
+                cityBorderVisualsParent);
+        }
+        
+        _instantiatedCityBorderVisuals[cityCapitalPosition].PopulateCityOwnedTiles(cityOwnedTiles);
     }
 
     private void ReallocateMapTilesArray(int requiredWidth, int requiredHeight)

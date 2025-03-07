@@ -29,7 +29,8 @@ public enum BuildingType
     CornFarm,
     WheatFarm,
     FishFarm,
-    Bakery
+    Bakery,
+    CityCapital
 }
 
 public struct TileBuilding
