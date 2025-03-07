@@ -40,7 +40,11 @@ public abstract class UIInputChannel : ScriptableObject
     
     public event UnityAction<UIInputChannelCallbackArgs> LeftMouseUpEvent;
     
+    public event UnityAction<UIInputChannelCallbackArgs> LeftMouseClickEvent;
+    
     public event UnityAction<UIInputChannelCallbackArgs> RightMouseUpEvent;
+    
+    public event UnityAction<UIInputChannelCallbackArgs> RightMouseClickEvent;
 
     public event UnityAction<UIInputChannelCallbackArgs> MouseMoveEvent;
     
@@ -120,10 +124,20 @@ public abstract class UIInputChannel : ScriptableObject
     {
         LeftMouseUpEvent?.Invoke(new(vector2Arg: input));
     }
+
+    protected void InvokeMouseLeftClickEvent(Vector2 input)
+    {
+        LeftMouseClickEvent?.Invoke(new(vector2Arg: input));
+    }
     
     protected void InvokeRightMouseUpEvent(Vector2 input)
     {
         RightMouseUpEvent?.Invoke(new(vector2Arg: input));
+    }
+    
+    protected void InvokeMouseRightClickEvent(Vector2 input)
+    {
+        RightMouseClickEvent?.Invoke(new(vector2Arg: input));
     }
     
     protected void InvokeMouseMoveEvent(Vector2 input)
