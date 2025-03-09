@@ -19,7 +19,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
     [SerializeField] private Transform cityBorderVisualsParent;
     [SerializeField] private CityBorderVisuals cityBorderVisualsPrefab;
 
-    private Dictionary<Vector2Int, CityBorderVisuals> _instantiatedCityBorderVisuals;
+    private Dictionary<Vector2Int, CityBorderVisuals> _instantiatedCityBorderVisuals = new();
 
     public TileVisuals[,] InstantiatedMapTiles = new TileVisuals[0, 0];
     

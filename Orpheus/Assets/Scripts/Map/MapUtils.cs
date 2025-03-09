@@ -25,4 +25,9 @@ public static class MapUtils
             Mathf.RoundToInt(worldPosition.x / GameConstants.TILE_SIZE),
             Mathf.RoundToInt(worldPosition.z / GameConstants.TILE_SIZE));
     }
+
+    public static Vector2 GetWorldPostiionFromPlanePosition(Vector3 planePosition)
+    {
+        return new Vector3((planePosition.x) * GameConstants.TILE_SIZE, 0, (planePosition.y) * GameConstants.TILE_SIZE);
+    }
 }
