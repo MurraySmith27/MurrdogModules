@@ -4,14 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CityBorderVisuals : MonoBehaviour
 {
     [SerializeField] private MeshFilter cityBorderMeshFilter;
+    [SerializeField] private LineRenderer cityBorderOutskirtsLineRenderer;
+    [SerializeField] private float borderLineYOffset;
     
     private Mesh _generatedCityBorderMesh;
     
     public void PopulateCityOwnedTiles(List<Vector2Int> ownedTiles)
+    {
+        List<Vector3> outskirtsLinePoints = GenerateMesh(ownedTiles);
+
+        
+        Vector3 yOffset = new Vector3(0, borderLineYOffset, 0);
+        //need to convert to world space
+        for (int i = 0; i < outskirtsLinePoints.Count; i++)
+        {
+            outskirtsLinePoints[i] = (Vector3)(cityBorderMeshFilter.transform.localToWorldMatrix * outskirtsLinePoints[i]) + cityBorderMeshFilter.transform.position + yOffset;
+        }
+        
+        cityBorderOutskirtsLineRenderer.positionCount = outskirtsLinePoints.Count;
+        cityBorderOutskirtsLineRenderer.SetPositions(outskirtsLinePoints.ToArray());
+    }
+
+    private List<Vector3> GenerateMesh(List<Vector2Int> ownedTiles)
     {
         if (_generatedCityBorderMesh != null)
         {
@@ -19,8 +38,6 @@ public class CityBorderVisuals : MonoBehaviour
         }
         
         _generatedCityBorderMesh = new Mesh();
-
-        //TODO: Generate mesh, and apply the material, make the mesh bounds the outskirts of the border.
         
         int minX = Int32.MaxValue;
         int maxX = Int32.MinValue;
@@ -30,10 +47,10 @@ public class CityBorderVisuals : MonoBehaviour
         foreach (Vector2Int tile in ownedTiles)
         {
             if (tile.x < minX) minX = tile.x;
-            else if (tile.x > maxX) maxX = tile.x;
+            if (tile.x > maxX) maxX = tile.x;
             
             if (tile.y < minY) minY = tile.y;
-            else if (tile.y > maxY) maxY = tile.y;
+            if (tile.y > maxY) maxY = tile.y;
         }
         
         bool[,] isOwned = new bool[1 + maxX - minX, 1 + maxY - minY];
@@ -46,8 +63,6 @@ public class CityBorderVisuals : MonoBehaviour
         //create sets of all corners inside and all corners outside, the union of these sets is our set of vertices.
         HashSet<Vector3> cornerOfOutside = new HashSet<Vector3>();
         HashSet<Vector3> cornerOfInside = new HashSet<Vector3>();
-        
-        // HashSet<Vector3> innerVertices = new HashSet<Vector3>();
 
         int xDim = isOwned.GetLength(0);
         int yDim = isOwned.GetLength(1);
@@ -67,31 +82,23 @@ public class CityBorderVisuals : MonoBehaviour
                 else if (i == 0)
                 {
                     //add bottom left
-                    cornerOfOutside.Add(corners[0]);
+                    cornerOfOutside.Add(corners[3]);
                 }
                 else if (j == 0)
                 {
                     //add top right
-                    cornerOfOutside.Add(corners[2]);
+                    cornerOfOutside.Add(corners[1]);
                 }
                 
                 if (i == xDim - 1 || j == yDim - 1)
                 {
                     //add bottom right
-                    cornerOfOutside.Add(corners[3]);
+                    cornerOfOutside.Add(corners[2]);
                 }
                 
                 if (isOwned[i, j])
                 {
                     cornerOfInside.AddRange(corners);
-                    
-                    // //also for owned tiles start to generate inner vertices
-                    // if (i < isOwned.GetLength(0) - 1 && j < isOwned.GetLength(1) - 1 &&
-                    //     isOwned[i + 1, j] && isOwned[i, j + 1] && isOwned[i + 1, j + 1])
-                    // {
-                    //     //if this is true, add bottom right corner, which is index 3
-                    //     innerVertices.Add(corners[3]);
-                    // }
                 }
                 else
                 {
@@ -103,20 +110,30 @@ public class CityBorderVisuals : MonoBehaviour
         cornerOfOutside.IntersectWith(cornerOfInside);
         // cornerOfOutside.UnionWith(innerVertices);
         
-        List<Vector3> vertices = cornerOfOutside.ToList();
+        List<Vector3> verticesWorldSpace = cornerOfOutside.ToList();
+        
+        float width = 1 + maxX - minX;
+        float height = 1 + maxY - minY;
 
         Vector3 centerPointWorldSpace =
-            MapUtils.GetWorldPostiionFromPlanePosition(new Vector3((maxX - minX) / 2f + minX, 0,
-                (maxY - minY) / 2f + minY));
-
+            MapUtils.GetWorldPostiionFromPlanePosition(new Vector3(width / 2f + minX, 0, height / 2f + minY));
         
         //convert the vertices to polar coordinates in order to sort them by angle
         List<Vector3> verticesPolarCoordinates = new List<Vector3>();
 
-        foreach (Vector3 vertex in vertices)
+        foreach (Vector3 vertex in verticesWorldSpace)
         {
-            float r = Vector3.Distance(vertex, centerPointWorldSpace);
-            verticesPolarCoordinates.Add(new Vector3(Mathf.Acos((vertex.x - centerPointWorldSpace.x) / r), 0, r));
+            Vector3 relativeVertex = vertex - centerPointWorldSpace;
+
+            float r = relativeVertex.magnitude;
+            
+            Vector3 newPolarVertex = (new Vector3(Mathf.Acos(relativeVertex.x / r), 0, r));
+            if (relativeVertex.z < 0)
+            {
+                newPolarVertex = new Vector3(newPolarVertex.x + (Mathf.PI - newPolarVertex.x) * 2f, 0, newPolarVertex.z);
+            }
+            
+            verticesPolarCoordinates.Add(newPolarVertex);
         }
         
         //sort
@@ -125,45 +142,51 @@ public class CityBorderVisuals : MonoBehaviour
             return a.x.CompareTo(b.x);
         });
 
-        vertices.Clear();
+        List<Vector3> verticesObjectSpace = new List<Vector3>();
         
         foreach (Vector3 vertex in verticesPolarCoordinates)
         {
-            vertices.Add(new Vector3(vertex.z * Mathf.Cos(vertex.x), 0, vertex.z * Mathf.Sin(vertex.x)));
+            verticesObjectSpace.Add(new Vector3(vertex.z * Mathf.Cos(vertex.x), 0, vertex.z * Mathf.Sin(vertex.x)));
         }
         
         //add one extra vertex on the end for the center point
-        vertices.Add(new Vector3(0,0,0));
+        verticesObjectSpace.Add(new Vector3(0,0,0));
 
         //now cornerOfOutside contains only our desired vertices, we now create triangles and UVs.
-        int[] triangles = new int[vertices.Count - 1];
-        Vector2[] uv = new Vector2[vertices.Count];
+        int[] triangles = new int[(verticesObjectSpace.Count - 1) * 3];
+        Vector2[] uv = new Vector2[verticesObjectSpace.Count];
         
-        for (int i = 0; i < vertices.Count; i++)
+        for (int i = 0; i < verticesObjectSpace.Count - 1; i++)
         {
             int nextIndex = (i + 1);
 
-            if (nextIndex >= vertices.Count - 1)
+            if (nextIndex >= verticesObjectSpace.Count - 1)
             {
                 nextIndex = 0;
             }
 
-            triangles[i * 3] = i;
+            triangles[i * 3] = verticesObjectSpace.Count - 1;
             triangles[i * 3 + 1] = nextIndex;
-            triangles[i * 3 + 2] = vertices.Count - 1;
+            triangles[i * 3 + 2] = i;
             
-            //TODO: Add UVs
+            uv[i] = new Vector2((verticesObjectSpace[i].x + width / 2f) / width, (verticesObjectSpace[i].z + height / 2f) / height);
         }
+
+        uv[verticesObjectSpace.Count - 1] = new Vector2(0.5f, 0.5f);
         
-        _generatedCityBorderMesh.vertices = vertices.ToArray();
+        _generatedCityBorderMesh.vertices = verticesObjectSpace.ToArray();
         _generatedCityBorderMesh.triangles = triangles;
+        _generatedCityBorderMesh.uv = uv;
         
         cityBorderMeshFilter.mesh = _generatedCityBorderMesh;
+
+        //return all object space vertices, except the center one
+        return verticesObjectSpace.GetRange(0, verticesObjectSpace.Count - 1);
     }
 
     private List<Vector3> GetCornersWorldSpace(int x, int y)
     {
-        Vector3 centerPosition = MapUtils.GetTileWorldPositionFromGridPosition(new Vector2Int(x, y));
+        Vector3 centerPosition = MapUtils.GetTileWorldPositionFromGridPosition(new Vector2Int(x, y)) + new Vector3(GameConstants.TILE_SIZE / 2f, 0f, GameConstants.TILE_SIZE / 2f);
         
         List<Vector3> corners = new List<Vector3>();
         

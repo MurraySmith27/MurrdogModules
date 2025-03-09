@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CityBorderVisuals.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CityBorderVisuals.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/TileOverlayCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/TileOverlayCanvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MapUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/CityBorderVisuals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/CityBorderVisuals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +26,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Unity/Hub/Editor/2022.3.55f1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/69cf3f5d501444b69536f0c0ef5f823810fc00/fb/419b841d/Enumerable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c648d86e9013479d818310c5918e31a4176600/46/0aa03bb8/Vector3.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c648d86e9013479d818310c5918e31a4176600/7a/3213bb52/Transform.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ebfec80368a647c592b8bab0d1e83689216b8/8e/c1f3860c/Physics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MurrdogModules/Libraries/Trinary Software/Timing.cs" root0="SKIP_HIGHLIGHTING" />
@@ -76,19 +78,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.55f1\Editor\Unity.exe" />
@@ -116,10 +118,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="36216">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="9280">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="36216" />
+      <option name="pid" value="9280" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -149,7 +151,8 @@
       <workItem from="1740434684784" duration="7252000" />
       <workItem from="1741130510247" duration="6488000" />
       <workItem from="1741302483319" duration="8181000" />
-      <workItem from="1741479754620" duration="6062000" />
+      <workItem from="1741479754620" duration="6607000" />
+      <workItem from="1741553670979" duration="6045000" />
     </task>
     <servers />
   </component>
@@ -181,84 +184,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/CityBorderVisuals.cs</url>
-          <line>20</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\CityBorderVisuals.cs" containingFunctionPresentation="Method 'PopulateCityOwnedTiles'">
-            <startOffsets>
-              <option value="509" />
-            </startOffsets>
-            <endOffsets>
-              <option value="547" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/CityBorderVisuals.cs</url>
-          <line>38</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\CityBorderVisuals.cs" containingFunctionPresentation="Method 'PopulateCityOwnedTiles'">
-            <startOffsets>
-              <option value="1096" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1157" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/CityBorderVisuals.cs</url>
-          <line>46</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\CityBorderVisuals.cs" containingFunctionPresentation="Method 'PopulateCityOwnedTiles'">
-            <startOffsets>
-              <option value="1419" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1477" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/CityBorderVisuals.cs</url>
-          <line>102</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\CityBorderVisuals.cs" containingFunctionPresentation="Method 'PopulateCityOwnedTiles'">
-            <startOffsets>
-              <option value="3494" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3540" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/CityBorderVisuals.cs</url>
-          <line>53</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\CityBorderVisuals.cs" containingFunctionPresentation="Method 'PopulateCityOwnedTiles'">
-            <startOffsets>
-              <option value="1712" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1742" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/CityBorderVisuals.cs</url>
-          <line>55</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\CityBorderVisuals.cs" containingFunctionPresentation="Method 'PopulateCityOwnedTiles'">
-            <startOffsets>
-              <option value="1765" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1795" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
