@@ -21,11 +21,17 @@ public class MapInteractionController : Singleton<MapInteractionController>
     public event Action<TileVisuals> OnTileHoveredOver;
     public event Action<TileVisuals> OnTileSelected;
     
-    public MapInteractionMode CurrentMode { get; private set; }= MapInteractionMode.Default;
+    public MapInteractionMode CurrentMode { get; private set; } = MapInteractionMode.Default;
 
-    private BuildingType _currentlyPlacingBuildingType;
+    public BuildingType CurrentlyPlacingBuildingType
+    {
+        get;
+        private set;
+    }
 
     public event Action<MapInteractionMode> OnMapInteractionModeChanged;
+
+    public event Action<BuildingType> OnPlacingBuildingTypeChanged;
 
     public void SelectTile(Vector2Int tilePosition)
     {
@@ -42,7 +48,7 @@ public class MapInteractionController : Singleton<MapInteractionController>
                     }
                     break;
                 case MapInteractionMode.PlaceBuilding:
-                    TryPlaceBuilding(tilePosition, _currentlyPlacingBuildingType);
+                    TryPlaceBuilding(tilePosition, CurrentlyPlacingBuildingType);
                     break;
             }
         }
@@ -63,10 +69,19 @@ public class MapInteractionController : Singleton<MapInteractionController>
 
     public void SwitchToPlaceBuildingMode(BuildingType buildingType)
     {
-        _currentlyPlacingBuildingType = buildingType;
+        bool wasInDifferentBuildingType = CurrentlyPlacingBuildingType != buildingType;
+        if (wasInDifferentBuildingType)
+        {
+            CurrentlyPlacingBuildingType = buildingType;
+        }
         if (CurrentMode != MapInteractionMode.PlaceBuilding)
         {
             SwitchMapInteractionMode(MapInteractionMode.PlaceBuilding);
+        }
+
+        if (wasInDifferentBuildingType)
+        {
+            OnPlacingBuildingTypeChanged?.Invoke(buildingType);
         }
     }
     
@@ -82,6 +97,10 @@ public class MapInteractionController : Singleton<MapInteractionController>
         if (buildingType == BuildingType.CityCapital && !BuildingsController.Instance.CanBuildCityCapital(tilePosition))
         {
             Debug.LogError("CANNOT BUILD CITY TOO CLOSE TO OTHER CITY");
+        }
+        else if (buildingType != BuildingType.CityCapital && !BuildingsController.Instance.IsTileOwned(tilePosition))
+        {
+            Debug.LogError("CANNOT BUILD BUILDING ON TILE THAT ISN'T OWNED BY A CITY");   
         }
         else if (!BuildingsController.Instance.CanBuildOverExistingStructures(tilePosition, buildingType))
         {

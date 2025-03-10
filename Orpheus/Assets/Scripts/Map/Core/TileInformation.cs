@@ -13,7 +13,8 @@ public enum ResourceType
     Wheat,
     Fish,
     Wood,
-    Stone
+    Stone,
+    Bread
 }
 
 public enum PersistentResourceType

@@ -70,6 +70,11 @@ public class BuildingsController : Singleton<BuildingsController>
         return true;
     }
 
+    public bool IsTileOwned(Vector2Int position)
+    {
+        return MapSystem.Instance.IsTileOwnedByCity(position);
+    }
+    
     public bool CanBuildCityCapital(Vector2Int position)
     {
         List<Vector2Int> allOwnedCityTiles = MapSystem.Instance.GetAllOwnedCityTiles();

@@ -130,6 +130,11 @@ public class MapSystem : Singleton<MapSystem>
         return allCityTiles;
     }
 
+    public List<Guid> GetAllCityGuids()
+    {
+        return _cities.Select((CityTileData cityTileData) => cityTileData.CityGuid).ToList();
+    }
+
     public List<Vector2Int> GetOwnedTilesOfCity(Guid cityGuid)
     {
         CityTileData city = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
@@ -139,6 +144,14 @@ public class MapSystem : Singleton<MapSystem>
             return city.GetTilesInOrder();
         }
         else return new();
+    }
+
+    public bool IsTileOwnedByCity(Vector2Int position)
+    {
+        return _cities.FirstOrDefault((CityTileData city) =>
+        {
+            return city.IsLocationInCity(position);
+        }) != null;
     }
 
     public List<TileBuilding> GetBuildingsOnTile(Vector2Int position)

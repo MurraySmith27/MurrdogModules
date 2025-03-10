@@ -23,11 +23,11 @@ public static class GameConstants
         77000000000000000,
     };
 
-    public static readonly long STARTING_WOOD = 3;
+    public static readonly long STARTING_WOOD = 100;
 
-    public static readonly long STARTING_STONE = 2;
+    public static readonly long STARTING_STONE = 100;
 
-    public static readonly long STARTING_GOLD = 10;
+    public static readonly long STARTING_GOLD = 1000;
 
     public static readonly Vector2Int[] INITIAL_CITY_TILES = new Vector2Int[]
     {
@@ -37,5 +37,13 @@ public static class GameConstants
         new Vector2Int(-1, -1), new Vector2Int(0, -1), new Vector2Int(1, -1),
         new Vector2Int(0, -2)
     };
+    
+    // building yields
+
+    public static readonly int CORN_PER_CORN_FARM = 1;
+    public static readonly int WHEAT_PER_WHEAT_FARM = 1;
+    public static readonly int FISH_PER_FISH_FARM = 1;
+    public static readonly int WHEAT_PER_BREAD = 1;
+    public static readonly int BREAD_PER_BAKERY = 1;
 
 }

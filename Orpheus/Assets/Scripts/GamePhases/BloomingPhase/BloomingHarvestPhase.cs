@@ -6,7 +6,7 @@ public class BloomingHarvestPhase : PhaseStateBase
 {
     public override void StateEnter(PhaseStateMachine context)
     {
-        
+        BloomingHarvestController.Instance.StartHarvest();
     }
     
     public override void StateUpdate(PhaseStateMachine context)
