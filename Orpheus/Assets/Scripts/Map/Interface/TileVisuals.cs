@@ -8,17 +8,18 @@ public class TileVisuals : MonoBehaviour
     [Header("Tile Resource VisualData")]
     [SerializeField] private ResourceVisualDataSO resourceVisualData;
 
-    [Header("Resource Visuals")] 
-    [SerializeField] private Transform resourceIconParent;
-    [SerializeField] private ResourceIcon singleResourceVisualPrefab;
-    [SerializeField] private ResourceIcon doubleResourceVisualPrefab;
-    [SerializeField] private ResourceIcon tripleResourceVisualPrefab;
+    private const string TILE_SHAKE_ANIMATION_TRIGGER = "Shake";
     
-    private const string MAT_TEXTURE_ACCESSOR = "_MainTex";
+    [SerializeField] private Animator animator;
+
+    [SerializeField] private Transform buildingsRoot = new RectTransform();
     
     private List<ResourceIcon> _instantiatedResourceIcons = new List<ResourceIcon>();
 
     private Renderer[] _tileRenderers;
+
+    private List<BuildingBehaviour> _attachedBuildings = new(); 
+    
     private void Awake()
     {
         CollectRenderers();
@@ -31,39 +32,19 @@ public class TileVisuals : MonoBehaviour
     
     public void PopulateResourceVisuals(List<ResourceItem> resources)
     {
-        //TODO: add special prefabs on top of this for tile resources of different types
-        CollectRenderers();
-        return;
-        foreach (ResourceIcon icon in _instantiatedResourceIcons)
-        {
-            Destroy(icon.gameObject);
-        }
         
-        _instantiatedResourceIcons.Clear();
+    }
+
+    public void TriggerTileHarvestAnimation(Dictionary<ResourceType, int> harvestChange)
+    {
+        animator.SetTrigger(TILE_SHAKE_ANIMATION_TRIGGER);
+    }
+
+    public void AttachBuilding(BuildingBehaviour building)
+    {
+        _attachedBuildings.Add(building);
         
-        for (int i = 0; i < resources.Count; i++)
-        {
-            ResourceIcon resourceIconPrefab = null;
-            switch (resources[i].Quantity)
-            {
-                case 1:
-                    resourceIconPrefab = singleResourceVisualPrefab;
-                    break;
-                case 2:
-                    resourceIconPrefab = doubleResourceVisualPrefab;
-                    break;
-                case 3:
-                    resourceIconPrefab = tripleResourceVisualPrefab;
-                    break;
-                default:
-                    continue;
-            }
-            ResourceIcon newResourceIcon = Instantiate(resourceIconPrefab, resourceIconParent);
-            
-            newResourceIcon.SetIconImage(resourceVisualData.GetSpriteForResourceItem(resources[i].Type));
-            
-            _instantiatedResourceIcons.Add(newResourceIcon);
-        }
+        building.transform.SetParent(buildingsRoot);
     }
 
     public void ToggleVisuals(bool enabled)

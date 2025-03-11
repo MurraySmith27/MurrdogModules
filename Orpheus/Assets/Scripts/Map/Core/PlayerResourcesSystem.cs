@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,10 @@ using UnityEngine;
 //for tracking the player's owned resources
 public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
 {
+    private Dictionary<ResourceType, int> _currentRoundResources = new();
+
+    public event Action<Dictionary<ResourceType, int>> OnCurrentRoundResourcesChange;
+    
     public void AddResource(PersistentResourceType resourceType, int quantity)
     {
         ModifyResource(resourceType, quantity);
@@ -59,5 +64,12 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
         }
 
         return true;
+    }
+
+    public void RegisterCurrentRoundResources(Dictionary<ResourceType, int> currentRoundResources)
+    {
+        _currentRoundResources = currentRoundResources;
+        
+        OnCurrentRoundResourcesChange?.Invoke(currentRoundResources);
     }
 }

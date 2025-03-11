@@ -40,7 +40,7 @@ public class TogglePlaceBuildingModeButton : MonoBehaviour
     private void SwitchToDefaultMode()
     {
         MapInteractionController.Instance.SwitchMapInteractionMode(MapInteractionMode.Default);
-        buttonText.SetText($"Place {Enum.GetName(typeof(BuildingType), buttonText)}");
+        buttonText.SetText($"Place {Enum.GetName(typeof(BuildingType), buildingType)}");
     }
 
     public void OnClick()

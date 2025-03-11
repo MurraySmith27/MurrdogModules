@@ -130,6 +130,17 @@ public class MapVisualsController : Singleton<MapVisualsController>
             tileParent);
         
         InstantiatedBuildings.Add((new Vector2Int(row, col), newBuilding));
+
+        TileVisuals tile = GetTileInstanceAtPosition(new Vector2Int(row, col));
+
+        if (tile == null)
+        {
+            Debug.LogError($"Error when constructing building type {newBuilding}: no such tile at position ({row}, {col})");
+        }
+        else
+        {
+            tile.AttachBuilding(newBuilding);
+        }
     }
 
     private void OnCityOwnedTilesChanged(Vector2Int cityCapitalPosition, List<Vector2Int> cityOwnedTiles)

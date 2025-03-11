@@ -67,7 +67,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
         
         OnHarvestEnd?.Invoke();
         
-        //TODO: Get the final resource values to convert to food score somewhere, taking into account multipliers.
+        PlayerResourcesSystem.Instance.RegisterCurrentRoundResources(resources);
     }
     
 }

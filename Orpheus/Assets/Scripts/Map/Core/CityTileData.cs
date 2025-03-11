@@ -42,6 +42,11 @@ public class CityTileData
         return false;
     }
 
+    public Vector2Int GetCapitalLocation()
+    {
+        return _capitalLocation;
+    }
+
     public void AddTileToCity(Vector2Int newTile)
     {
         if (!IsLocationInCity(newTile)) 

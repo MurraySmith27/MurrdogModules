@@ -146,6 +146,18 @@ public class MapSystem : Singleton<MapSystem>
         else return new();
     }
 
+    public Vector2Int GetCityCenterPosition(Guid cityGuid)
+    {
+        CityTileData city = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
+        
+        if (city == null)
+        {
+            Debug.LogError($"Error in GetCityCenterPosition: No such city with guid {cityGuid} exists!");
+            return new Vector2Int(0, 0);
+        }
+        else return city.GetCapitalLocation();
+    }
+
     public bool IsTileOwnedByCity(Vector2Int position)
     {
         return _cities.FirstOrDefault((CityTileData city) =>
