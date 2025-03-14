@@ -11,6 +11,7 @@ public enum GamePhases
     BuddingEndStep,
     BloomingUpkeep,
     BloomingHarvest,
+    BloomingResourceConversion,
     BloomingEndStep,
     WiltingUpkeep,
     WiltingChallenge,
@@ -33,22 +34,23 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
 
     public Action<GamePhases> OnPhaseChanged;
 
-    private BuddingGoalsUpdatePhase buddingGoalsUpdatePhase = new();
-    private BuddingUpkeepPhase buddingUpkeepPhase = new();
-    private BuddingBuildingPhase buddingBuildingPhase = new();
-    private BuddingEndStepPhase buddingEndStepPhase = new();
-    private BloomingUpkeepPhase bloomingUpkeepPhase = new();
-    private BloomingHarvestPhase bloomingHarvestPhase = new();
-    private BloomingEndStepPhase bloomingEndStepPhase = new();
-    private WiltingUpkeepPhase wiltingUpkeepPhase = new();
-    private WiltingChallengePhase wiltingChallengePhase = new();
-    private WiltingExtraResourceConversionPhase wiltingExtraResourceConversionPhase = new();
-    private WiltingEndStepPhase wiltingEndStepPhase = new();
+    private BuddingGoalsUpdatePhase _buddingGoalsUpdatePhase = new();
+    private BuddingUpkeepPhase _buddingUpkeepPhase = new();
+    private BuddingBuildingPhase _buddingBuildingPhase = new();
+    private BuddingEndStepPhase _buddingEndStepPhase = new();
+    private BloomingUpkeepPhase _bloomingUpkeepPhase = new();
+    private BloomingHarvestPhase _bloomingHarvestPhase = new();
+    private BloomingResourceConversionPhase _bloomingResourceConversionPhase = new();
+    private BloomingEndStepPhase _bloomingEndStepPhase = new();
+    private WiltingUpkeepPhase _wiltingUpkeepPhase = new();
+    private WiltingChallengePhase _wiltingChallengePhase = new();
+    private WiltingExtraResourceConversionPhase _wiltingExtraResourceConversionPhase = new();
+    private WiltingEndStepPhase _wiltingEndStepPhase = new();
 
     void Start()
     {
         currentPhaseState = GamePhases.BuddingUpkeep;
-        currentPhase = buddingUpkeepPhase;
+        currentPhase = _buddingUpkeepPhase;
         
         currentPhase.StateEnter(this);
         
@@ -73,27 +75,29 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
         switch (phase)
         {
             case GamePhases.BuddingGoalsUpdate:
-                return buddingGoalsUpdatePhase;
+                return _buddingGoalsUpdatePhase;
             case GamePhases.BuddingUpkeep:
-                return buddingUpkeepPhase;
+                return _buddingUpkeepPhase;
             case GamePhases.BuddingBuilding:
-                return buddingBuildingPhase;
+                return _buddingBuildingPhase;
             case GamePhases.BuddingEndStep:
-                return buddingEndStepPhase;
+                return _buddingEndStepPhase;
             case GamePhases.BloomingUpkeep:
-                return bloomingUpkeepPhase;
+                return _bloomingUpkeepPhase;
             case GamePhases.BloomingHarvest:
-                return bloomingHarvestPhase;
+                return _bloomingHarvestPhase;
+            case GamePhases.BloomingResourceConversion:
+                return _bloomingResourceConversionPhase;
             case GamePhases.BloomingEndStep:
-                return bloomingEndStepPhase;
+                return _bloomingEndStepPhase;
             case GamePhases.WiltingUpkeep:
-                return wiltingUpkeepPhase;
+                return _wiltingUpkeepPhase;
             case GamePhases.WiltingChallenge:
-                return wiltingChallengePhase;
+                return _wiltingChallengePhase;
             case GamePhases.WiltingExtraResourceConversion:
-                return wiltingExtraResourceConversionPhase;
+                return _wiltingExtraResourceConversionPhase;
             case GamePhases.WiltingEndStep:
-                return wiltingEndStepPhase;
+                return _wiltingEndStepPhase;
             default:
                 return null;
         }
