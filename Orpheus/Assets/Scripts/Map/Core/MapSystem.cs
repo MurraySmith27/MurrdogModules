@@ -166,6 +166,86 @@ public class MapSystem : Singleton<MapSystem>
         }) != null;
     }
 
+    public Vector2Int AddRandomTileToCity(Guid cityGuid)
+    {
+        HashSet<Vector2Int> extremumTiles = new HashSet<Vector2Int>();
+        
+        CityTileData city = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
+
+        if (city == null)
+        {
+            Debug.LogError($"Cannot find city with guid: {cityGuid}");
+            return new Vector2Int(-1, -1);
+        }
+        
+        Vector2Int cityCenterPosition = city.GetCapitalLocation();
+        
+        List<Vector2Int> ownedCityTiles = city.GetTilesInOrder();
+
+        foreach (Vector2Int ownedCityTile in ownedCityTiles)
+        {
+            extremumTiles.Add(ownedCityTile + new Vector2Int(0, 1));
+            extremumTiles.Add(ownedCityTile + new Vector2Int(0, -1));
+            extremumTiles.Add(ownedCityTile + new Vector2Int(1, 0));
+            extremumTiles.Add(ownedCityTile + new Vector2Int(-1, 0));
+        }
+        
+        Dictionary<int, List<Vector2Int>> taxicabDistancePositions = new Dictionary<int, List<Vector2Int>>();
+
+        int minDistance = int.MaxValue;
+        
+        foreach (Vector2Int ownedTile in extremumTiles)
+        {
+            int taxicabDistance = Math.Abs(ownedTile.x - cityCenterPosition.x) + Math.Abs(ownedTile.y - cityCenterPosition.y);
+            
+            if (!taxicabDistancePositions.ContainsKey(taxicabDistance))
+            {
+                taxicabDistancePositions.Add(taxicabDistance, new List<Vector2Int>());
+            }
+            
+            taxicabDistancePositions[taxicabDistance].Add(ownedTile);
+
+            if (taxicabDistance < minDistance)
+            {
+                minDistance = taxicabDistance;
+            }
+        }
+        
+        Vector2Int newTile = taxicabDistancePositions[minDistance][UnityEngine.Random.Range(0, taxicabDistancePositions[minDistance].Count)];
+        
+        city.AddTileToCity(newTile);
+        
+        return newTile;
+    }
+
+    public bool GetUnoccupiedTileInCity(Guid cityGuid, out Vector2Int location)
+    {
+        location = new Vector2Int();
+        
+        CityTileData cityTileData = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
+
+        if (cityTileData == null)
+        {
+            Debug.LogError($"no such city with id: {cityGuid} exists!");
+            return false;
+        }
+        
+        List<Vector2Int> ownedCityTiles = cityTileData.GetTilesInOrder();
+        
+        List<Vector2Int> unoccupiedTiles = ownedCityTiles.Where(
+            (Vector2Int tile) =>
+            {
+                return _tiles.GetAllBuildingsOnTile(tile.x, tile.y).Count > 0;
+            }).ToList();
+
+        if (unoccupiedTiles.Count > 0)
+        {
+            location = unoccupiedTiles[UnityEngine.Random.Range(0, unoccupiedTiles.Count)];
+            return true;
+        }
+        else return false;
+    }
+
     public List<TileBuilding> GetBuildingsOnTile(Vector2Int position)
     {
         return _tiles.GetAllBuildingsOnTile(position.x, position.y);

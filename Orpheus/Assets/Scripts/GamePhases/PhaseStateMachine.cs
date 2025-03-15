@@ -54,6 +54,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
         
         currentPhase.StateEnter(this);
         
+        RelicSystem.Instance.OnPhaseChanged(GamePhases.BuddingUpkeep);
+        
         OnPhaseChanged?.Invoke(GamePhases.BuddingUpkeep);
     }
 
@@ -66,6 +68,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
         currentPhase = GetPhaseFromEnumValue(nextPhase);
 
         currentPhase.StateEnter(this);
+        
+        RelicSystem.Instance.OnPhaseChanged(nextPhase);
 
         OnPhaseChanged?.Invoke(nextPhase);
     }

@@ -10,17 +10,17 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
 
     public event Action<Dictionary<ResourceType, int>> OnCurrentRoundResourcesChange;
     
-    public void AddResource(PersistentResourceType resourceType, int quantity)
+    public void AddResource(PersistentResourceType resourceType, long quantity)
     {
         ModifyResource(resourceType, quantity);
     }
 
-    public void SpendResource(PersistentResourceType resourceType, int quantity)
+    public void SpendResource(PersistentResourceType resourceType, long quantity)
     {
         ModifyResource(resourceType, -quantity);
     }
 
-    private void ModifyResource(PersistentResourceType resourceType, int diff)
+    private void ModifyResource(PersistentResourceType resourceType, long diff)
     {
         switch (resourceType)
         {
@@ -36,7 +36,7 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
         }
     }
 
-    public bool HasResource(PersistentResourceType resourceType, int quantity)
+    public bool HasResource(PersistentResourceType resourceType, long quantity)
     {
         switch (resourceType)
         {
@@ -71,5 +71,10 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
         _currentRoundResources = currentRoundResources;
         
         OnCurrentRoundResourcesChange?.Invoke(currentRoundResources);
+    }
+
+    public Dictionary<ResourceType, int> GetCurrentRoundResources()
+    {
+        return _currentRoundResources;
     }
 }

@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PhaseStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PhaseStateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +160,8 @@
       <workItem from="1741479754620" duration="6607000" />
       <workItem from="1741553670979" duration="6045000" />
       <workItem from="1741572003002" duration="7504000" />
-      <workItem from="1741903993628" duration="5082000" />
+      <workItem from="1741903993628" duration="5690000" />
+      <workItem from="1742050964940" duration="4508000" />
     </task>
     <servers />
   </component>
@@ -175,6 +175,17 @@
     <option name="unityProjectFolder" value="true" />
   </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

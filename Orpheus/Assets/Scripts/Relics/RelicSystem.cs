@@ -23,11 +23,15 @@ public enum RelicTypes
 public struct AdditionalRelicTriggeredArgs
 {
     public int IntArg;
+    public long LongArg;
     public Vector2 Vector2Arg;
     public string StringArg;
     public bool BoolArg;
+    public List<int> IntListArgs;
+    public List<long> LongListArgs;
     public List<Vector2> Vector2ListArgs;
     public List<Vector2Int> Vector2IntListArgs;
+    public List<Guid> GuidListArgs;
 }
 
 public class RelicSystem : Singleton<RelicSystem>
@@ -69,24 +73,24 @@ public class RelicSystem : Singleton<RelicSystem>
         }
     }
     
-    public Dictionary<ResourceType, int> OnResourcesProcessed(Dictionary<ResourceType, int> resourceState)
+    public Dictionary<ResourceType, int> OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position)
     {
         //make a copy
-        Dictionary<ResourceType, int> modifiedResources = resourceState.ToDictionary(entry => entry.Key, entry => entry.Value);
+        Dictionary<ResourceType, int> modifiedResourceDiff = resourceDiff.ToDictionary(entry => entry.Key, entry => entry.Value);
         
         foreach (RelicTypes relic in relics)
         {
             AdditionalRelicTriggeredArgs args;
-            if (_relicInstances[relic].OnResourcesProcessed(modifiedResources, out modifiedResources, out args))
+            if (_relicInstances[relic].OnResourcesProcessed(modifiedResourceDiff, position, out modifiedResourceDiff, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
             }
         }
         
-        return modifiedResources;
+        return modifiedResourceDiff;
     }
     
-    public Dictionary<ResourceType, int> OnResourcesHarvested(Dictionary<ResourceType, int> resourcesToBeHarvested)
+    public Dictionary<ResourceType, int> OnResourcesHarvested(Dictionary<ResourceType, int> resourcesToBeHarvested, Vector2Int position)
     {
         //make a copy
         Dictionary<ResourceType, int> modifiedResources = resourcesToBeHarvested.ToDictionary(entry => entry.Key, entry => entry.Value);
@@ -94,7 +98,7 @@ public class RelicSystem : Singleton<RelicSystem>
         foreach (RelicTypes relic in relics)
         {
             AdditionalRelicTriggeredArgs args;
-            if (_relicInstances[relic].OnResourcesHarvested(modifiedResources, out modifiedResources, out args))
+            if (_relicInstances[relic].OnResourcesHarvested(modifiedResources, position, out modifiedResources, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
             }
@@ -115,9 +119,9 @@ public class RelicSystem : Singleton<RelicSystem>
         }
     }
     
-    public int OnGoldInterestAdded(int coinTotalBefore, int interest)
+    public long OnGoldInterestAdded(long coinTotalBefore, long interest)
     {
-        int currentInterest = interest;
+        long currentInterest = interest;
         foreach (RelicTypes relic in relics)
         {
             AdditionalRelicTriggeredArgs args;
@@ -130,9 +134,9 @@ public class RelicSystem : Singleton<RelicSystem>
         return currentInterest;
     }
     
-    public int OnFoodScoreConversion(int baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert)
+    public long OnFoodScoreConversion(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert)
     {
-        int currentFoodScore = baseFoodScore;
+        long currentFoodScore = baseFoodScore;
         
         foreach (RelicTypes relic in relics)
         {

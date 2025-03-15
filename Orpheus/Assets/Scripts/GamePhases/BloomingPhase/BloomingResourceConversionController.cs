@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BloomingResourceConversionController : MonoBehaviour
+public static class BloomingResourceConversionController
 {
     
-    public void ConvertResourcesToFoodScore(Dictionary<ResourceType, int> resourcesToConvert)
+    public static void ConvertResourcesToFoodScore(Dictionary<ResourceType, int> resourcesToConvert)
     {
+
+        long foodScore = 0;
         
+        //TODO
+        
+        RelicSystem.Instance.OnFoodScoreConversion(foodScore, resourcesToConvert);
     }
 }

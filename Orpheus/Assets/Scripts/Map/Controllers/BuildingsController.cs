@@ -28,6 +28,9 @@ public class BuildingsController : Singleton<BuildingsController>
         if (PlayerResourcesSystem.Instance.PayCost(buildingData.Costs))
         {
             MapSystem.Instance.ConstructBuilding(position, type);
+            
+            RelicSystem.Instance.OnBuildingConstructed(position, type);
+            
             return true;
         }
         else return false;

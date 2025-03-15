@@ -53,13 +53,14 @@ public class PrivateEyesRelic : Relic
                     _totalCornHarvestedPerCity[cityGuid] = 0;
 
                     Vector2Int newTileLocation = MapSystem.Instance.AddRandomTileToCity(cityGuid);
-
+                    
                     newTileLocations.Add(newTileLocation);
                     
                     builtTile = true;
                 }
             }
 
+            args.GuidListArgs = cityGuids;
             args.Vector2IntListArgs = newTileLocations;
             
             return builtTile;

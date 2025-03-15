@@ -11,16 +11,17 @@ public class TileHarvestController : Singleton<TileHarvestController>
         //get resources on tile
         List<ResourceItem> resourcesOnTile = MapSystem.Instance.GetAllResourcesOnTile(tilePosition);
         
-        Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
+        Dictionary<ResourceType, int> resourcesHarvested = new Dictionary<ResourceType, int>();
         
+        //do harvest
         foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
         {
-            resources[resourceType] = 0;
+            resourcesHarvested[resourceType] = 0;
         }
 
         foreach (ResourceItem resourceItem in resourcesOnTile)
         {
-            resources[resourceItem.Type] += resourceItem.Quantity;
+            resourcesHarvested[resourceItem.Type] += resourceItem.Quantity;
         }
         
         List<TileBuilding> buildingsOnTile = MapSystem.Instance.GetBuildingsOnTile(tilePosition);
@@ -30,29 +31,76 @@ public class TileHarvestController : Singleton<TileHarvestController>
             switch (building.Type)
             {
                 case BuildingType.CornFarm:
-                    resources[ResourceType.Corn] += GameConstants.CORN_PER_CORN_FARM;
+                    resourcesHarvested[ResourceType.Corn] += GameConstants.CORN_PER_CORN_FARM;
                     break;
                 
                 case BuildingType.WheatFarm:
-                    resources[ResourceType.Wheat] += GameConstants.WHEAT_PER_WHEAT_FARM;
+                    resourcesHarvested[ResourceType.Wheat] += GameConstants.WHEAT_PER_WHEAT_FARM;
                     break;
                 
                 case BuildingType.FishFarm:
-                    resources[ResourceType.Fish] += GameConstants.FISH_PER_FISH_FARM;
+                    resourcesHarvested[ResourceType.Fish] += GameConstants.FISH_PER_FISH_FARM;
                     break;
-                
-                case BuildingType.Bakery:
-                    if (resourcesSoFar[ResourceType.Wheat] >= GameConstants.WHEAT_PER_BREAD)
-                    {
-                        resources[ResourceType.Bread] += GameConstants.BREAD_PER_BAKERY;
-                    }
-                    break;
-                
                 default:
                     break;
             }            
         }
 
-        return resources;
+        resourcesHarvested = RelicSystem.Instance.OnResourcesHarvested(resourcesHarvested, tilePosition);
+
+        Dictionary<ResourceType, int> resourcesProcessed = new Dictionary<ResourceType, int>();
+        
+        foreach (TileBuilding building in buildingsOnTile)
+        {
+            switch (building.Type)
+            {
+                case BuildingType.Bakery:
+                    if (resourcesSoFar[ResourceType.Wheat] >= GameConstants.WHEAT_PER_BREAD)
+                    {
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Bread))
+                        {
+                            resourcesProcessed[ResourceType.Bread] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Bread] += GameConstants.BREAD_PER_BAKERY;
+
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Wheat))
+                        {
+                            resourcesProcessed[ResourceType.Wheat] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Wheat] -= GameConstants.WHEAT_PER_BREAD;
+                    }
+                    break;
+            }
+        }
+        
+        resourcesProcessed = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed, tilePosition);
+        
+        
+        Dictionary<ResourceType, int> finalResources = new Dictionary<ResourceType, int>();
+
+        foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
+        {
+            if (resourcesHarvested.ContainsKey(resourceType))
+            {
+                if (!finalResources.ContainsKey(resourceType))
+                {
+                    finalResources[resourceType] = 0;
+                }
+                
+                finalResources[resourceType] += resourcesHarvested[resourceType];
+            }
+
+            if (resourcesProcessed.ContainsKey(resourceType))
+            {
+                if (!finalResources.ContainsKey(resourceType))
+                {
+                    finalResources[resourceType] = 0;
+                }
+                
+                finalResources[resourceType] += resourcesProcessed[resourceType];
+            }
+        }
+        
+        return finalResources;
     }
 }

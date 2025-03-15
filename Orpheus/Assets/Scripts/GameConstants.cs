@@ -38,6 +38,11 @@ public static class GameConstants
         new Vector2Int(0, -2)
     };
     
+    //interest
+    public static readonly long GOLD_INTEREST_CAP = 50;
+    public static readonly long GOLD_INTEREST_INTERVAL = 10;
+    public static readonly long GOLD_INTEREST_PER_INTERVAL = 1;
+    
     // building yields
 
     public static readonly int CORN_PER_CORN_FARM = 1;
