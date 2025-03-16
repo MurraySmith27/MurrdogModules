@@ -6,13 +6,13 @@ public class TheMolluskRelic : Relic
 {
     private const int THE_MOLLUSK_RELIC_STONE_PER_FISH_FARM = 1;
     
-    public virtual bool OnBuildingConstructed(Vector2Int position, BuildingType buildingType, out AdditionalRelicTriggeredArgs args)
+    public override bool OnBuildingConstructed(Vector2Int position, BuildingType buildingType, out AdditionalRelicTriggeredArgs args)
     {
         args = new();
 
         if (buildingType == BuildingType.FishFarm)
         {
-            MapSystem.Instance.AddResourcesToTile(position, ResourceType.Stone, 1);
+            MapSystem.Instance.AddResourcesToTile(position, ResourceType.Stone, THE_MOLLUSK_RELIC_STONE_PER_FISH_FARM);
             args.IntArg = 1;
             return true;
         }

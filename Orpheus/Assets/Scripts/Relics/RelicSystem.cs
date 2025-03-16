@@ -73,6 +73,11 @@ public class RelicSystem : Singleton<RelicSystem>
         }
     }
     
+    public bool HasRelic(RelicTypes relic)
+    {
+        return relics.Contains(relic);
+    }
+    
     public Dictionary<ResourceType, int> OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position)
     {
         //make a copy

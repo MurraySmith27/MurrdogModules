@@ -17,7 +17,7 @@ public class ResourceIconsOverlayController : MonoBehaviour
     [SerializeField] private float iconsSpacing = 5f;
     [SerializeField] private float iconsScale = 1f;
 
-    private List<(ResourceItem, RectTransform)> _instantiatedIcons = new();
+    private Dictionary<Vector2Int, List<(ResourceItem, RectTransform)>> _instantiatedIcons = new();
 
     private Vector3 _rootOriginalPosition;
     
@@ -25,24 +25,37 @@ public class ResourceIconsOverlayController : MonoBehaviour
     {
         _rootOriginalPosition = iconsParent.position;
         
-        TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnTileCullingUpdated;
-        TileFrustrumCulling.Instance.OnTileCullingUpdated += OnTileCullingUpdated;
+        TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnTileCullingChanged;
+        TileFrustrumCulling.Instance.OnTileCullingUpdated += OnTileCullingChanged;
+
+        MapSystem.Instance.OnTileResourcesChanged -= OnTileResourcesChanged;
+        MapSystem.Instance.OnTileResourcesChanged += OnTileResourcesChanged;
     }
 
     private void OnDestroy()
     {
         if (TileFrustrumCulling.IsAvailable)
         {
-            TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnTileCullingUpdated;
+            TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnTileCullingChanged;
+        }
+
+        if (MapSystem.IsAvailable)
+        {
+            MapSystem.Instance.OnTileResourcesChanged -= OnTileResourcesChanged;
         }
     }
 
-    private void OnTileCullingUpdated(int row, int col, int width, int height)
+    private void OnTileCullingChanged(int row, int col, int width, int height)
     {
         //first clear all instantiated icons:
-        foreach ((ResourceItem, RectTransform) icon in _instantiatedIcons)
+        foreach (Vector2Int position in _instantiatedIcons.Keys)
         {
-            resourceIconRetriever.ReturnResourceIcon(icon.Item1, icon.Item2);
+            List<(ResourceItem, RectTransform)> icons = _instantiatedIcons[position];
+
+            foreach ((ResourceItem, RectTransform) icon in icons)
+            {
+                resourceIconRetriever.ReturnResourceIcon(icon.Item1, icon.Item2);
+            }
         }
         
         for (int i = row; i < row + width; i++)
@@ -52,6 +65,19 @@ public class ResourceIconsOverlayController : MonoBehaviour
                 SpawnResourceIconsAtTile(i, j);
             }
         }
+    }
+
+    private void OnTileResourcesChanged(Vector2Int position, ResourceType type, int difference)
+    {
+        if (_instantiatedIcons.ContainsKey(position))
+        {
+            foreach ((ResourceItem, RectTransform) icon in _instantiatedIcons[position])
+            {
+                resourceIconRetriever.ReturnResourceIcon(icon.Item1, icon.Item2);
+            }
+        }
+        
+        SpawnResourceIconsAtTile(position.x, position.y);
     }
     
     private void SpawnResourceIconsAtTile(int row, int col)
@@ -68,7 +94,13 @@ public class ResourceIconsOverlayController : MonoBehaviour
             RectTransform resourceTransform = resourceIconRetriever.GetResourceIcon(resource);
             resourceTransform.SetParent(iconsParent);
             iconTransforms.Add(resourceTransform);
-            _instantiatedIcons.Add((resource, resourceTransform));
+
+            if (!_instantiatedIcons.ContainsKey(gridPosition))
+            {
+                _instantiatedIcons[gridPosition] = new List<(ResourceItem, RectTransform)>();
+            }
+            
+            _instantiatedIcons[gridPosition].Add((resource, resourceTransform));
         }
 
         Vector3 tileWorldPosition = MapUtils.GetTileWorldPositionFromGridPosition(gridPosition);
@@ -85,6 +117,9 @@ public class ResourceIconsOverlayController : MonoBehaviour
             Vector3 spacing = new Vector3(iconsSpacing / 2f, 0, 0);
             iconTransforms[0].localPosition = canvasPosition - spacing;
             iconTransforms[1].localPosition = canvasPosition + spacing;
+            
+            iconTransforms[0].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[1].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
         }
         else if (resources.Count == 3)
         {
@@ -92,6 +127,10 @@ public class ResourceIconsOverlayController : MonoBehaviour
             iconTransforms[0].localPosition = canvasPosition - spacing;
             iconTransforms[1].localPosition = canvasPosition;
             iconTransforms[2].localPosition = canvasPosition + spacing;
+            
+            iconTransforms[0].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[1].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[2].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
         }
         else if (resources.Count == 4)
         {
@@ -100,6 +139,11 @@ public class ResourceIconsOverlayController : MonoBehaviour
             iconTransforms[1].localPosition = canvasPosition - spacing;
             iconTransforms[2].localPosition = canvasPosition + spacing;
             iconTransforms[3].localPosition = canvasPosition + spacing * 1.5f;
+            
+            iconTransforms[0].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[1].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[2].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[3].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
         }
         else if (resources.Count == 5)
         {
@@ -109,6 +153,12 @@ public class ResourceIconsOverlayController : MonoBehaviour
             iconTransforms[2].localPosition = canvasPosition;
             iconTransforms[3].localPosition = canvasPosition + spacing;
             iconTransforms[4].localPosition = canvasPosition + spacing * 2f;
+            
+            iconTransforms[0].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[1].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[2].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[3].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
+            iconTransforms[4].localScale = new Vector3(iconsScale, iconsScale, iconsScale);
         }
         else
         {

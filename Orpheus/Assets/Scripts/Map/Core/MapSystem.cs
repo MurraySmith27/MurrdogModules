@@ -65,6 +65,8 @@ public class MapSystem : Singleton<MapSystem>
     
     public event OnCityOwnedTilesChangedDelegate OnCityOwnedTilesChanged;
     
+    public delegate void OnTileResourcesChangedDelegate(Vector2Int position, ResourceType resourceType, int difference);
+    public event OnTileResourcesChangedDelegate OnTileResourcesChanged;
     
     private void Start()
     {
@@ -254,6 +256,8 @@ public class MapSystem : Singleton<MapSystem>
     public void AddResourcesToTile(Vector2Int position, ResourceType resourceType, int quantity)
     {
         _tiles.AddResourceToTile(position.x, position.y, resourceType, quantity);
+
+        OnTileResourcesChanged?.Invoke(position, resourceType, quantity);
     }
 
     public List<ResourceItem> GetAllResourcesOnTile(Vector2Int position)
