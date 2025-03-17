@@ -6,6 +6,8 @@ public class WiltingChallengePhase : PhaseStateBase
 {
     public override void StateEnter(PhaseStateMachine context)
     {
+        long currentFoodGoal = RoundState.Instance.CurrentFoodGoal;
+        
         
     }
     
