@@ -51,4 +51,14 @@ public static class GameConstants
     public static readonly int WHEAT_PER_BREAD = 1;
     public static readonly int BREAD_PER_BAKERY = 1;
 
+    public static readonly Dictionary<ResourceType, long> BASE_FOOD_SCORE_PER_RESOURCE =
+    new Dictionary<ResourceType, long> {
+        {ResourceType.Corn, 1},
+        {ResourceType.Wheat, 0},
+        {ResourceType.Bread, 3},
+        {ResourceType.Fish, 2}
+    };
+
+    public static readonly long GOLD_PER_LEFTOVER_FOOD_SCORE = 10;
+
 }

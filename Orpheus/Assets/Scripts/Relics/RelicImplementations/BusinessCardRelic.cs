@@ -9,7 +9,7 @@ public class BusinessCardRelic : Relic
 
     private const int BUSINESS_CARD_FOOD_SCORE_PER_GOLD = 1;
     
-    public override bool OnFoodScoreConversion(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalRelicTriggeredArgs args)
+    public override bool OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalRelicTriggeredArgs args)
     {
         convertedFoodScore = baseFoodScore;
         args = new();

@@ -9,10 +9,18 @@ public class PrivateEyesRelic : Relic
     
     private Dictionary<Guid, int> _totalCornHarvestedPerCity = new Dictionary<Guid, int>();
     
-    public bool OnResourcesHarvested(Dictionary<ResourceType, int> resourcesToBeHarvested, Guid cityGuid, out  Dictionary<ResourceType, int> outResourcesToBeHarvested, out AdditionalRelicTriggeredArgs args)
-    {
+    public override bool OnResourcesHarvested(Dictionary<ResourceType, int> resourcesToBeHarvested, Vector2Int position, out  Dictionary<ResourceType, int> outResourcesToBeHarvested, out AdditionalRelicTriggeredArgs args)
+    { 
         outResourcesToBeHarvested = resourcesToBeHarvested;
         args = new();
+
+        Guid cityGuid;
+        
+        if (!MapSystem.Instance.GetCityGuidFromTile(position, out cityGuid))
+        {
+            Debug.LogError($"City guid is null! tile at {position} is not in a city!");
+            return false;
+        }
         
         int cornCount = 0;
         if (resourcesToBeHarvested.ContainsKey(ResourceType.Corn))
@@ -35,7 +43,7 @@ public class PrivateEyesRelic : Relic
         else return false;
     }
     
-    public bool OnPhaseChanged(GamePhases phase, out AdditionalRelicTriggeredArgs args)
+    public override bool OnPhaseChanged(GamePhases phase, out AdditionalRelicTriggeredArgs args)
     {
         args = new();
         if (phase == GamePhases.BloomingEndStep)

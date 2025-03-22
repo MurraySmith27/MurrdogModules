@@ -7,7 +7,7 @@ public class BuddingUpkeepPhase : PhaseStateBase
 {
     public event Action<long> OnInterestApplied;
     
-    public override void StateEnter(PhaseStateMachine context)
+    public override void StateEnter(PhaseStateMachine context, Action onPhaseEnterComplete)
     {
      
         //firstly, apply interest
@@ -16,17 +16,9 @@ public class BuddingUpkeepPhase : PhaseStateBase
         interestAcquired = RelicSystem.Instance.OnGoldInterestAdded(RoundState.Instance.CurrentGold, interestAcquired);
         
         PlayerResourcesSystem.Instance.AddResource(PersistentResourceType.Gold, interestAcquired);
-        
-        OnInterestApplied?.Invoke(interestAcquired);
-    }
-    
-    public override void StateUpdate(PhaseStateMachine context)
-    {
-        
-    }
 
-    public override void StateExit(PhaseStateMachine context)
-    {
+        OnInterestApplied?.Invoke(interestAcquired);
         
+        onPhaseEnterComplete?.Invoke();
     }
 }

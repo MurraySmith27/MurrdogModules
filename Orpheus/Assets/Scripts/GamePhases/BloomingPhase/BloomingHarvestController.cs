@@ -7,7 +7,8 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
 {
     [SerializeField] private float cityStartAnimationTime = 1f;
     [SerializeField] private float cityEndAnimationTime = 1f;
-    [SerializeField] private float tileAnimationTime = 1f;
+    [SerializeField] private float tileHarvestAnimationTime = 0.5f;
+    [SerializeField] private float tileHarvestAnimationTimePerResource = 0.5f;
 
     public event Action OnHarvestStart;
     public event Action OnHarvestEnd;
@@ -53,9 +54,13 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                 foreach (KeyValuePair<ResourceType, int> resource in resourcesChange)
                 {
                     resources[resource.Key] += resource.Value;
+                    if (resource.Value != 0)
+                    {
+                        yield return new WaitForSeconds(tileHarvestAnimationTimePerResource);
+                    }
                 }
 
-                yield return new WaitForSeconds(tileAnimationTime);
+                yield return new WaitForSeconds(tileHarvestAnimationTime);
                 
                 OnTileHarvestEnd?.Invoke(cityTile);
             }

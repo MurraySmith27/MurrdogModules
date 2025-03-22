@@ -10,6 +10,7 @@ public class ResourceTextOverlay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI woodText;
     [SerializeField] private TextMeshProUGUI stoneText;
     [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI foodScoreText;
     
     private void Start()
     {
@@ -25,10 +26,14 @@ public class ResourceTextOverlay : MonoBehaviour
         RoundState.Instance.OnGoldValueChanged -= OnGoldUpdated;
         RoundState.Instance.OnGoldValueChanged += OnGoldUpdated;
         
+        RoundState.Instance.OnCurrentFoodScoreChanged -= OnFoodScoreUpdated;
+        RoundState.Instance.OnCurrentFoodScoreChanged += OnFoodScoreUpdated;
+        
         OnGoalUpdated(RoundState.Instance.CurrentFoodGoal);
         OnWoodUpdated(RoundState.Instance.CurrentWood);
         OnStoneUpdated(RoundState.Instance.CurrentStone);
         OnGoldUpdated(RoundState.Instance.CurrentGold);
+        OnFoodScoreUpdated(RoundState.Instance.CurrentFoodScore);
     }
 
     private void OnDestroy()
@@ -39,6 +44,7 @@ public class ResourceTextOverlay : MonoBehaviour
             RoundState.Instance.OnWoodValueChanged -= OnWoodUpdated;
             RoundState.Instance.OnStoneValueChanged -= OnStoneUpdated;
             RoundState.Instance.OnGoldValueChanged -= OnGoldUpdated;
+            RoundState.Instance.OnCurrentFoodScoreChanged -= OnFoodScoreUpdated;
         }
     }
 
@@ -60,6 +66,11 @@ public class ResourceTextOverlay : MonoBehaviour
     private void OnGoldUpdated(long newGold)
     {
         goldText.SetText($"Gold: {newGold}");
+    }
+
+    private void OnFoodScoreUpdated(long newFoodScore)
+    {
+        foodScoreText.SetText($"Score: {newFoodScore}");
     }
     
 }

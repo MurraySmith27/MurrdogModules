@@ -1,25 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BuddingGoalsUpdatePhase : PhaseStateBase
 {
-    public override void StateEnter(PhaseStateMachine context)
+    public override void StateEnter(PhaseStateMachine context, Action onPhaseEnterComplete)
     {
         RoundState.Instance.IncrementRoundNumber();
         IncreaseFoodGoal();
+
+        onPhaseEnterComplete?.Invoke();
     }
     
-    public override void StateUpdate(PhaseStateMachine context)
-    {
-        
-    }
-
-    public override void StateExit(PhaseStateMachine context)
-    {
-        
-    }
-
     private void IncreaseFoodGoal()
     {
         //use a 

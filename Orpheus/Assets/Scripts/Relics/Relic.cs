@@ -40,9 +40,17 @@ public abstract class Relic
         return false;
     }
 
+    public virtual bool OnConvertResourceToFoodScore(long foodScoreSoFar, ResourceType resourceType, 
+        int resourceQuantity, out long foodScoreChange, out AdditionalRelicTriggeredArgs args)
+    {
+        foodScoreChange = 0;
+        args = new();
+        return false;
+    }
+
     //called when resources are being converted to food score, the passed in baseFoodScore is the score so far,
     //  so any returned score should be additive to that
-    public virtual bool OnFoodScoreConversion(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalRelicTriggeredArgs args)
+    public virtual bool OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalRelicTriggeredArgs args)
     {
         convertedFoodScore = baseFoodScore;
         args = new();

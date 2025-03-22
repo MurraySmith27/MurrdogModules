@@ -138,15 +138,33 @@ public class RelicSystem : Singleton<RelicSystem>
         
         return currentInterest;
     }
+
+    public long OnConvertResourceToFoodScore(long foodScoreSoFar, ResourceType resourceType, int resourceQuantity)
+    {
+        long currentFoodScore = foodScoreSoFar;
+
+        foreach (RelicTypes relic in relics)
+        {
+            AdditionalRelicTriggeredArgs args;
+
+            if (_relicInstances[relic].OnConvertResourceToFoodScore(currentFoodScore, resourceType, resourceQuantity, out long foodScoreDifference, out args))
+            {
+                currentFoodScore += foodScoreDifference;
+                OnRelicTriggered?.Invoke(relic, args);
+            }
+        }
+
+        return currentFoodScore - foodScoreSoFar;
+    }
     
-    public long OnFoodScoreConversion(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert)
+    public long OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert)
     {
         long currentFoodScore = baseFoodScore;
         
         foreach (RelicTypes relic in relics)
         {
             AdditionalRelicTriggeredArgs args;
-            if (_relicInstances[relic].OnFoodScoreConversion(currentFoodScore, resourcesToConvert, out currentFoodScore, out args))
+            if (_relicInstances[relic].OnFoodScoreConversionComplete(currentFoodScore, resourcesToConvert, out currentFoodScore, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
             }

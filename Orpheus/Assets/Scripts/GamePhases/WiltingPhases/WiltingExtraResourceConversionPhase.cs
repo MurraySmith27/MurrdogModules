@@ -1,21 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WiltingExtraResourceConversionPhase : PhaseStateBase
 {
-    public override void StateEnter(PhaseStateMachine context)
+    public override void StateEnter(PhaseStateMachine context, Action onPhaseComplete)
     {
+        WiltingExtraResourceConversionController.Instance.ConvertRemainingFoodScoreToGold();
         
-    }
-    
-    public override void StateUpdate(PhaseStateMachine context)
-    {
-        
-    }
-
-    public override void StateExit(PhaseStateMachine context)
-    {
-        
+        onPhaseComplete?.Invoke();
     }
 }

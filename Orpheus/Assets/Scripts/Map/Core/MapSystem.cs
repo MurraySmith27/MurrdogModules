@@ -137,6 +137,22 @@ public class MapSystem : Singleton<MapSystem>
         return _cities.Select((CityTileData cityTileData) => cityTileData.CityGuid).ToList();
     }
 
+    public bool GetCityGuidFromTile(Vector2Int position, out Guid cityGuid)
+    {
+        cityGuid = new();
+        
+        foreach (CityTileData city in _cities)
+        {
+            if (city.GetTilesInOrder().Contains(position))
+            {
+                cityGuid = city.CityGuid;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public List<Vector2Int> GetOwnedTilesOfCity(Guid cityGuid)
     {
         CityTileData city = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);

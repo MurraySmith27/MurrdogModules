@@ -1,21 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BloomingHarvestPhase : PhaseStateBase
 {
-    public override void StateEnter(PhaseStateMachine context)
+
+    private Action _onPhaseEnterComplete;
+    
+    public override void StateEnter(PhaseStateMachine context, Action onPhaseEnterComplete)
     {
+        _onPhaseEnterComplete = onPhaseEnterComplete;
+        
+        BloomingHarvestController.Instance.OnHarvestEnd -= OnHarvestComplete;
+        BloomingHarvestController.Instance.OnHarvestEnd += OnHarvestComplete;
+        
         BloomingHarvestController.Instance.StartHarvest();
     }
-    
-    public override void StateUpdate(PhaseStateMachine context)
-    {
-        
-    }
 
-    public override void StateExit(PhaseStateMachine context)
+    private void OnHarvestComplete()
     {
-        
+        _onPhaseEnterComplete?.Invoke();
+        BloomingHarvestController.Instance.OnHarvestEnd -= OnHarvestComplete;
     }
 }

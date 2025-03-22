@@ -35,6 +35,8 @@ public class CameraController : Singleton<CameraController>
     
     [Header("Camera On Edge Of Screen Settings")]
     [SerializeField] private Vector4 edgeOfScreenMoveThresholds = new Vector4(0.1f, 0.1f, 0.1f, 0.1f);
+
+    [SerializeField] private float edgeOfScreenDeadZoneWidth = 10f;
     [SerializeField] private Vector2 edgeOfScreenCameraVelocityMinMax = new Vector2(0.1f, 0.2f);
 
     [Header("Camera Culling Update Settings")] 
@@ -43,11 +45,15 @@ public class CameraController : Singleton<CameraController>
 
     public event Action<Vector3> OnCameraZoomAdjusted;
 
+    public event Action OnCameraMoved;
+
     private CoroutineHandle _moveCoroutineHandle;
 
     private CinemachineTrackedDolly _trackedDolly;
 
     private bool _isDragging;
+
+    private bool _isLocked;
 
     private bool _isInEdgeOfScreen;
 
@@ -107,7 +113,10 @@ public class CameraController : Singleton<CameraController>
     {
         if (_isMovingOnScreenEdge)
         {
-            bool inScreen = Screen.width > _mousePos.x && _mousePos.x > 0 && Screen.height > _mousePos.y && _mousePos.y > 0;
+            bool inScreen = Screen.width - edgeOfScreenDeadZoneWidth > _mousePos.x && 
+                            _mousePos.x > edgeOfScreenDeadZoneWidth && 
+                            Screen.height - edgeOfScreenDeadZoneWidth> _mousePos.y && 
+                            _mousePos.y > edgeOfScreenDeadZoneWidth;
             bool inLeftEdge = inScreen && _mousePos.x < edgeOfScreenMoveThresholds.x * Screen.width;
             bool inRightEdge = inScreen && _mousePos.x > Screen.width - (edgeOfScreenMoveThresholds.y * Screen.width);
             bool inBottomEdge = inScreen && _mousePos.y < edgeOfScreenMoveThresholds.z * Screen.height;
@@ -165,7 +174,7 @@ public class CameraController : Singleton<CameraController>
             }
         }
         
-        if (!_focusingPosition && !_isDragging)
+        if (!IsCameraLocked())
         {
             float cameraSpeed = _cameraVelocity.magnitude;
             _cameraVelocity = _cameraVelocity.normalized * Mathf.Clamp(cameraSpeed - cameraDecceleration * Time.deltaTime, 0f, maxCameraVelocity);
@@ -179,7 +188,7 @@ public class CameraController : Singleton<CameraController>
 
     private void OnDragStarted(UIInputChannel.UIInputChannelCallbackArgs args)
     {
-        if (GlobalSettings.IsMapDraggingEnabled)
+        if (GlobalSettings.IsMapDraggingEnabled && !_isLocked && !_focusingPosition)
         {
             if (CameraUtils.GetCameraCenterPointOnPlane(mainCamera, out _dragStartWorldPosition)) {
                 _isDragging = true;
@@ -191,7 +200,7 @@ public class CameraController : Singleton<CameraController>
     private void OnDoubleClick(UIInputChannel.UIInputChannelCallbackArgs args)
     {
         Vector2 mousePos = args.vector2Arg.GetValueOrDefault();
-        if (!_isDragging && !_focusingPosition)
+        if (!IsCameraLocked())
         {
             Vector3 worldPosition;
             if (CameraUtils.GetPointOnPlaneFromMousePosition(mousePos, mainCamera, out worldPosition))
@@ -265,9 +274,16 @@ public class CameraController : Singleton<CameraController>
         }
     }
 
+    private bool IsCameraLocked()
+    {
+        return _isLocked || _isDragging || _focusingPosition;
+    }
+
     private void SetCameraPosition(Vector3 newPosition)
     {
         cameraFollowRoot.position = newPosition;
+        
+        OnCameraMoved?.Invoke();
 
         if (Vector3.Distance(cameraFollowRoot.position, _cameraLastCullingUpdatePosition) > cameraCullingUpdateDistance)
         {
@@ -293,6 +309,13 @@ public class CameraController : Singleton<CameraController>
         }
         
         _focusingPosition = false;
+    }
+
+    public void SetCameraLock(bool locked)
+    {
+        _isLocked = locked;
+        if (locked)
+            _isDragging = false;
     }
 
     private void OnZoomAction(UIInputChannel.UIInputChannelCallbackArgs args)

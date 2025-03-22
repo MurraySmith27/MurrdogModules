@@ -9,6 +9,8 @@ public class RoundState : Singleton<RoundState>
     public int RoundNumber { get; private set; }
     
     public long CurrentFoodGoal { get; private set; }
+    
+    public long CurrentFoodScore { get; private set; }
 
     public long CurrentGold { get; private set; } = GameConstants.STARTING_GOLD;
 
@@ -25,6 +27,8 @@ public class RoundState : Singleton<RoundState>
     public event Action<long> OnWoodValueChanged;
     
     public event Action<long> OnStoneValueChanged;
+
+    public event Action<long> OnCurrentFoodScoreChanged;
     
     public void IncrementRoundNumber()
     {
@@ -44,6 +48,13 @@ public class RoundState : Singleton<RoundState>
         CurrentGold += difference;
 
         OnGoldValueChanged?.Invoke(CurrentGold);
+    }
+
+    public void SetCurrentFoodScore(long foodScore)
+    {
+        CurrentFoodScore = foodScore;
+
+        OnCurrentFoodScoreChanged?.Invoke(foodScore);
     }
     
     public void ChangeCurrentWood(long difference)

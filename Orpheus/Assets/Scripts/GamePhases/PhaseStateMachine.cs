@@ -28,6 +28,10 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
             return currentPhaseState;
         }
     }
+
+    public event Action<GamePhases> OnPhaseEnterComplete;
+
+    public event Action<GamePhases> OnPhaseExitComplete;
     
     private PhaseStateBase currentPhase;
     private GamePhases currentPhaseState;
@@ -52,7 +56,10 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
         currentPhaseState = GamePhases.BuddingUpkeep;
         currentPhase = _buddingUpkeepPhase;
         
-        currentPhase.StateEnter(this);
+        currentPhase.StateEnter(this, () =>
+        {
+            OnPhaseEnterComplete?.Invoke(GamePhases.BuddingUpkeep);
+        });
         
         RelicSystem.Instance.OnPhaseChanged(GamePhases.BuddingUpkeep);
         
@@ -61,13 +68,16 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
 
     public void ChangePhase(GamePhases nextPhase)
     {
-        currentPhase.StateExit(this);
+        currentPhase.StateExit(this, () => { OnPhaseExitComplete?.Invoke(currentPhaseState); });
 
         currentPhaseState = nextPhase;
         
         currentPhase = GetPhaseFromEnumValue(nextPhase);
 
-        currentPhase.StateEnter(this);
+        currentPhase.StateEnter(this, () =>
+        {
+            OnPhaseEnterComplete?.Invoke(nextPhase);
+        });
         
         RelicSystem.Instance.OnPhaseChanged(nextPhase);
 
