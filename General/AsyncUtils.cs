@@ -7,10 +7,15 @@ public static class AsyncUtils
 {
 
     public delegate bool WaitUntilConditionDelegate();
-    
-    public static IEnumerator InvokeAfterSeconds(float seconds, Action onEnd)
+
+    public static void InvokeCallbackAfterSeconds(float seconds, Action callback)
     {
-        yield return new WaitForSeconds(seconds);
+        MEC.Timing.RunCoroutine(InvokeAfterSeconds(seconds, callback));
+    }
+    
+    public static IEnumerator<float> InvokeAfterSeconds(float seconds, Action onEnd)
+    {
+        yield return MEC.Timing.WaitForSeconds(seconds);
         onEnd.Invoke();
     }
     
