@@ -121,7 +121,6 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
                 {
                     OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeIncrementAnim, () =>
                     {
-                        Debug.LogError("BASE INCREMENT TRIGGER");
                         animator.SetTrigger(animatorIncrementResourceTriggerName);
                     });
 

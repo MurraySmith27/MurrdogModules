@@ -48,7 +48,6 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
             Timing.RunCoroutineSingleton(SetMainTextAfterSeconds(incrementTextWaitTime), this.gameObject,
                 SingletonBehavior.Overwrite);
             
-            Debug.LogError("LIST ITEM INCREMENT TRIGGER");
             animator.SetTrigger(incrementAnimatorTriggerName);
         }
         else if (quantityDifference < 0)
@@ -78,6 +77,8 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
 
         GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
         GlobalSettings.OnGameSpeedChanged += SetGameSpeed;
+        
+        SetGameSpeed(GlobalSettings.GameSpeed);
     }
 
     private void OnDestroy()
@@ -98,6 +99,5 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
     private void SetGameSpeed(float gameSpeed)
     {
         animator.speed = gameSpeed;
-        Debug.LogError($"setting animator speed to {gameSpeed}");
     }
 }
