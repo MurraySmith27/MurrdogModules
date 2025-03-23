@@ -11,6 +11,8 @@ public class GenerateMapButton : MonoBehaviour
 
     public void OnClick()
     {
+        GetComponentInChildren<Button>().interactable = false;
+        
         int width = int.Parse(widthInput.text);
         int height = int.Parse(heightInput.text);
 

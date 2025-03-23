@@ -48,6 +48,7 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
             Timing.RunCoroutineSingleton(SetMainTextAfterSeconds(incrementTextWaitTime), this.gameObject,
                 SingletonBehavior.Overwrite);
             
+            Debug.LogError("LIST ITEM INCREMENT TRIGGER");
             animator.SetTrigger(incrementAnimatorTriggerName);
         }
         else if (quantityDifference < 0)
@@ -64,7 +65,7 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
 
     private IEnumerator<float> SetMainTextAfterSeconds(float seconds)
     {
-        yield return Timing.WaitForSeconds(seconds);
+        yield return OrpheusTiming.WaitForSecondsGameTime(seconds);
         
         quantityText.SetText($"{_currentQuantity}");
     }
@@ -74,6 +75,14 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
         ResetAnimator();
         
         animator.SetTrigger(activateAnimatorTriggerName);
+
+        GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
+        GlobalSettings.OnGameSpeedChanged += SetGameSpeed;
+    }
+
+    private void OnDestroy()
+    {
+        GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
     }
 
     private void ResetAnimator()
@@ -84,5 +93,11 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
         {
             animator.ResetTrigger(param.name);
         }
+    }
+
+    private void SetGameSpeed(float gameSpeed)
+    {
+        animator.speed = gameSpeed;
+        Debug.LogError($"setting animator speed to {gameSpeed}");
     }
 }

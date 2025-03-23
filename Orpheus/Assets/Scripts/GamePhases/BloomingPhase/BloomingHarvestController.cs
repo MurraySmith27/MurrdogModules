@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MEC;
 using UnityEngine;
 
 public class BloomingHarvestController : Singleton<BloomingHarvestController>
@@ -21,10 +22,10 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     
     public void StartHarvest()
     {
-        StartCoroutine(HarvestCoroutine());
+        Timing.RunCoroutineSingleton(HarvestCoroutine(), this.gameObject, SingletonBehavior.Wait);
     }
 
-    private IEnumerator HarvestCoroutine()
+    private IEnumerator<float> HarvestCoroutine()
     {
         Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
 
@@ -41,7 +42,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
         {
             OnCityHarvestStart?.Invoke(cityGuid);
             
-            yield return new WaitForSeconds(cityStartAnimationTime);
+            yield return OrpheusTiming.WaitForSecondsGameTime(cityStartAnimationTime);
 
             List<Vector2Int> cityTiles = MapSystem.Instance.GetOwnedTilesOfCity(cityGuid);
 
@@ -56,18 +57,18 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                     resources[resource.Key] += resource.Value;
                     if (resource.Value != 0)
                     {
-                        yield return new WaitForSeconds(tileHarvestAnimationTimePerResource);
+                        yield return OrpheusTiming.WaitForSecondsGameTime(tileHarvestAnimationTimePerResource);
                     }
                 }
 
-                yield return new WaitForSeconds(tileHarvestAnimationTime);
+                yield return OrpheusTiming.WaitForSecondsGameTime(tileHarvestAnimationTime);
                 
                 OnTileHarvestEnd?.Invoke(cityTile);
             }
             
             OnCityHarvestEnd?.Invoke(cityGuid);
             
-            yield return new WaitForSeconds(cityEndAnimationTime);
+            yield return Timing.WaitForSeconds(cityEndAnimationTime);
         }
         
         OnHarvestEnd?.Invoke();

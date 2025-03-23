@@ -107,9 +107,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   movementTimeSeconds: 0.1
-  waitBeforeIncrementAnim: 0.5
+  baseWaitTimePerResourceChange: 0.21
+  waitBeforeIncrementAnim: 0.42
   waitBeforeDecrementAnim: 0.05
-  waitBeforeCreateListItemAnim: 0.5
+  waitBeforeCreateListItemAnim: 0.47
   verticalOffset: 10
 --- !u!225 &2460410277259889735
 CanvasGroup:

@@ -23,6 +23,7 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
     [SerializeField] private string animatorDecrementResourceTriggerName = "DecrementResource";
     [SerializeField] private AnimationCurve movementAnimCurve;
     [SerializeField] private float movementTimeSeconds = 0.2f;
+    [SerializeField] private float baseWaitTimePerResourceChange = 0.1f;
     [SerializeField] private float waitBeforeIncrementAnim = 0.2f;
     [SerializeField] private float waitBeforeDecrementAnim = 0.05f;
     [SerializeField] private float waitBeforeCreateListItemAnim = 0.5f;
@@ -42,6 +43,11 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
         
         BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvested;
         BloomingHarvestController.Instance.OnTileHarvestStart += OnTileHarvested;
+
+        GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
+        GlobalSettings.OnGameSpeedChanged += SetGameSpeed;
+
+        SetGameSpeed(GlobalSettings.GameSpeed);
         
         _mainCamera = Camera.main;
     }
@@ -54,6 +60,8 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
             BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvested;
         }
+        
+        GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
     }
 
     private void OnCityHarvestStart(Guid cityGuid)
@@ -87,11 +95,19 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
 
     private void OnTileHarvested(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
     {
+        Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourcesHarvested), this.gameObject,
+            SingletonBehavior.Overwrite);
+    }
+
+    private IEnumerator<float> HarvestTileCoroutine(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
+    {
         AnimatePositionToTile(position);
         
         foreach (ResourceType resourceType in resourcesHarvested.Keys)
         {
             if (resourcesHarvested[resourceType] == 0) continue;
+            
+            float timeToWait = baseWaitTimePerResourceChange;
             
             int existingQuantity = 0;
             BloomingHarvestResourceListItem newListItem;
@@ -103,42 +119,50 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
                 
                 if (resourcesHarvested[resourceType] > 0)
                 {
-                    AsyncUtils.InvokeCallbackAfterSeconds(waitBeforeIncrementAnim, () =>
+                    OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeIncrementAnim, () =>
                     {
+                        Debug.LogError("BASE INCREMENT TRIGGER");
                         animator.SetTrigger(animatorIncrementResourceTriggerName);
                     });
+
+                    timeToWait += waitBeforeIncrementAnim;
                 }
                 else if (resourcesHarvested[resourceType] < 0)
                 {
-                    AsyncUtils.InvokeCallbackAfterSeconds(waitBeforeDecrementAnim, () =>
+                    OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeDecrementAnim, () =>
                     {
                         animator.SetTrigger(animatorDecrementResourceTriggerName);
                     });
+                    
+                    timeToWait += waitBeforeDecrementAnim;
                 }
             }
             else
             {
                 newListItem = Instantiate(bloomingHarvestResourceListItemPrefab, listParentTransform);
                 newListItem.Populate(resourceType, resourcesHarvested[resourceType]);
-                    
-                AsyncUtils.InvokeCallbackAfterSeconds(waitBeforeCreateListItemAnim, () =>
+                
+                OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeCreateListItemAnim, () =>
                 {
                     animator.SetTrigger(animatorIncrementResourceTriggerName);
                 });
+                
+                timeToWait += waitBeforeCreateListItemAnim;
             }
-            
             
             int newQuantity = existingQuantity + resourcesHarvested[resourceType];
 
             _instantiatedListItemsPerResourceType[resourceType] = (newQuantity, newListItem);
+
+            yield return OrpheusTiming.WaitForSecondsGameTime(timeToWait);
         }
     }
 
-    
+
 
     private void AnimatePositionToTile(Vector2Int tilePosition)
     {
-        MEC.Timing.RunCoroutineSingleton(AnimatePositionToTileCoroutine(tilePosition), this.gameObject, SingletonBehavior.Overwrite);
+        MEC.Timing.RunCoroutine(AnimatePositionToTileCoroutine(tilePosition), this.gameObject);
     }
 
     private IEnumerator<float> AnimatePositionToTileCoroutine(Vector2Int tilePosition)
@@ -148,10 +172,12 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
         Vector3 worldPosition = MapUtils.GetTileWorldPositionFromGridPosition(tilePosition) + verticalOffset * _mainCamera.transform.up;
         
         Vector3 destinationPosition = rootTransform.parent.InverseTransformPoint(worldPosition);
+
+        float movementTime = OrpheusTiming.ConvertToGameTimeSeconds(movementTimeSeconds);
         
-        for (float t = 0f; t < movementTimeSeconds; t += Time.deltaTime)
+        for (float t = 0f; t < movementTime; t += Time.deltaTime)
         {
-            float normalizedT = t / movementTimeSeconds;
+            float normalizedT = t / movementTime;
         
             rootTransform.localPosition = Vector3.Lerp(originalPosition, destinationPosition,
                 movementAnimCurve.Evaluate(normalizedT));
@@ -175,5 +201,10 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
     private void Update()
     {
         rootTransform.localRotation = Quaternion.Euler(Quaternion.LookRotation(transform.position - _mainCamera.transform.position, Vector3.up).eulerAngles.x - 90, 0, 0);
+    }
+
+    private void SetGameSpeed(float gameSpeed)
+    {
+        animator.speed = gameSpeed;
     }
 }

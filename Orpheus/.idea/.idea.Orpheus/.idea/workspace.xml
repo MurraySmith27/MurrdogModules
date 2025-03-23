@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/WiltingChallengePhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/WiltingChallengePhase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestCurrentResources.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestCurrentResources.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/GenerateMapButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/GenerateMapButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceDisplay.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceListItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceListItem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +38,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Camera/CameraUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Camera/TileFrustrumCulling.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Debug/CurrentPhaseText.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Debug/GameSpeedChanged.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Debug/ResourceTextOverlay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Debug/SROptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingsVisualsSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -82,6 +88,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/RelicDebugMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/RelicsList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/SwitchPlacingBuildingTypeButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Timing/OrpheusTiming.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collections@1.2.4/Unity.Collections.Tests/WordsTests.gen.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.visualstudio@2.0.22/Editor/COMIntegration/COMIntegration~/COMIntegration.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/Runtime/PostProcessing/Shaders/ffx/ffx_cas.hlsl" root0="SKIP_HIGHLIGHTING" />
@@ -176,6 +183,7 @@
       <workItem from="1741903993628" duration="5690000" />
       <workItem from="1742050964940" duration="17970000" />
       <workItem from="1742252245544" duration="1161000" />
+      <workItem from="1742660002041" duration="4536000" />
     </task>
     <servers />
   </component>
@@ -247,26 +255,26 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicSystem.cs</url>
-          <line>159</line>
+          <line>177</line>
           <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Relics\RelicSystem.cs" containingFunctionPresentation="Method 'OnBuildingConstructed'">
             <startOffsets>
-              <option value="4749" />
+              <option value="5405" />
             </startOffsets>
             <endOffsets>
-              <option value="4785" />
+              <option value="5441" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs</url>
-          <line>257</line>
+          <line>273</line>
           <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Core\MapSystem.cs" containingFunctionPresentation="Method 'AddResourcesToTile'">
             <startOffsets>
-              <option value="8842" />
+              <option value="9214" />
             </startOffsets>
             <endOffsets>
-              <option value="8915" />
+              <option value="9287" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="25" />
