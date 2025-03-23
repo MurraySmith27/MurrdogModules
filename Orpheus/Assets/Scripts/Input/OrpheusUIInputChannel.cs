@@ -18,6 +18,8 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     private float _doubleClickDistanceThreshold = 0.001f;
 
     private float _mouseClickTimeThreshold = 0.3f;
+
+    private int _uiLayer;
     
     private void OnEnable()
     {
@@ -28,6 +30,8 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
         }
         
         ToggleEnabled(true);
+        
+        _uiLayer = LayerMask.NameToLayer("MainUI");
     }
 
     private void OnDisable()
@@ -47,9 +51,36 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
         }
     }
     
+    static List<RaycastResult> GetEventSystemRaycastResults()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> raysastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, raysastResults);
+        return raysastResults;
+    }
+    
+    public bool IsPointerOverUIElement()
+    {
+        return IsPointerOverUIElement(GetEventSystemRaycastResults());
+    }
+
+
+    //Returns 'true' if we touched or hovering on Unity UI element.
+    private bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)
+    {
+        for (int index = 0; index < eventSystemRaysastResults.Count; index++)
+        {
+            RaycastResult curRaysastResult = eventSystemRaysastResults[index];
+            if (curRaysastResult.gameObject.layer == _uiLayer)
+                return true;
+        }
+        return false;
+    }
+    
     public void OnRightMouseClick(InputAction.CallbackContext ctx)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUIElement())
         {
             return;
         }
@@ -72,7 +103,7 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     
     public void OnLeftMouseClick(InputAction.CallbackContext ctx)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUIElement())
         {
             return;
         }
@@ -94,7 +125,7 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     
     public void OnLeftMouseDoubleClick(InputAction.CallbackContext ctx)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUIElement())
         {
             return;
         }
@@ -119,7 +150,7 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     
     public void OnRightMouseHeld(InputAction.CallbackContext ctx)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUIElement())
         {
             return;
         }
@@ -136,7 +167,7 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
     
     public void OnMouseNavigation(InputAction.CallbackContext ctx)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUIElement())
         {
             base.InvokeMouseMoveEvent(new Vector2(-1, -1));
             _currentMousePosition = new Vector2(-1, -1);
@@ -149,7 +180,7 @@ public class OrpheusUIInputChannel : UIInputChannel, UIInputActions.IUIActions
 
     public void OnMouseScroll(InputAction.CallbackContext ctx)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUIElement())
         {
             return;
         }

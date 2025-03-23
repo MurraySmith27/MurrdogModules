@@ -18,6 +18,12 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         
         BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
         BloomingHarvestController.Instance.OnTileHarvestStart += OnTileHarvestStart;
+        
+        BloomingHarvestController.Instance.OnTileProcessStart -= TryAnimateTile;
+        BloomingHarvestController.Instance.OnTileProcessStart += TryAnimateTile;
+
+        BloomingHarvestController.Instance.OnTileResourceChangeEnd -= OnTileResourceChangeEnd;
+        BloomingHarvestController.Instance.OnTileResourceChangeEnd += OnTileResourceChangeEnd;
     }
 
     private void OnDestroy()
@@ -27,7 +33,8 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
             BloomingHarvestController.Instance.OnHarvestStart -= OnHarvestStart;
             BloomingHarvestController.Instance.OnHarvestEnd -= OnHarvestEnd;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
-            BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
+            BloomingHarvestController.Instance.OnTileProcessStart -= TryAnimateTile;
+            BloomingHarvestController.Instance.OnTileResourceChangeEnd -= OnTileResourceChangeEnd;
         }
     }
 
@@ -54,7 +61,37 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
 
         if (tileInstanceAtPosition != null)
         {
-            tileInstanceAtPosition.TriggerTileHarvestAnimation(resourcesChange);
+            tileInstanceAtPosition.StartTileHarvestAnimation(resourcesChange);
+            
+            TryAnimateTile(position, resourcesChange);
+        }
+    }
+
+    private void TryAnimateTile(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
+    {
+        foreach (ResourceType resourceType in resourcesChange.Keys)
+        {
+            if (resourcesChange[resourceType] != 0)
+            {
+                TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
+
+                if (tileInstanceAtPosition != null)
+                {
+                    tileInstanceAtPosition.TriggerTileHarvestAnimation(resourcesChange);
+                }
+                
+                break;
+            }
+        }
+    }
+    
+    private void OnTileResourceChangeEnd(Vector2Int position)
+    {
+        TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
+
+        if (tileInstanceAtPosition != null)
+        {
+            tileInstanceAtPosition.EndTileHarvestAnimation();
         }
     }
 }

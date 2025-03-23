@@ -41,8 +41,11 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
         BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
         BloomingHarvestController.Instance.OnCityHarvestEnd += OnCityHarvestEnd;
         
-        BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvested;
-        BloomingHarvestController.Instance.OnTileHarvestStart += OnTileHarvested;
+        BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileResourceChanged;
+        BloomingHarvestController.Instance.OnTileHarvestStart += OnTileResourceChanged;
+        
+        BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
+        BloomingHarvestController.Instance.OnTileProcessStart += OnTileResourceChanged;
 
         GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
         GlobalSettings.OnGameSpeedChanged += SetGameSpeed;
@@ -58,7 +61,8 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
         {
             BloomingHarvestController.Instance.OnCityHarvestStart -= OnCityHarvestStart;
             BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
-            BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvested;
+            BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileResourceChanged;
+            BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
         }
         
         GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
@@ -93,7 +97,7 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
         animator.SetTrigger(animatorDeactivateTriggerName);
     }
 
-    private void OnTileHarvested(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
+    private void OnTileResourceChanged(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
     {
         Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourcesHarvested), this.gameObject,
             SingletonBehavior.Overwrite);

@@ -162,7 +162,7 @@ public partial class @UIInputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""61519704-4fa0-4ec9-836e-44efe8039be5"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""MultiTap(tapTime=0.1,tapDelay=0.1)"",
+                    ""interactions"": ""MultiTap(tapTime=0.2,tapDelay=0.1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LeftMouseDoubleClick"",

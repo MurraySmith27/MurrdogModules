@@ -2057,7 +2057,7 @@ GameObject:
   - component: {fileID: 45669395}
   - component: {fileID: 45669394}
   - component: {fileID: 45669393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AddRelicButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4253,7 +4253,7 @@ GameObject:
   - component: {fileID: 131704192}
   - component: {fileID: 131704194}
   - component: {fileID: 131704193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4543,7 +4543,7 @@ GameObject:
   - component: {fileID: 146534561}
   - component: {fileID: 146534563}
   - component: {fileID: 146534562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5083,7 +5083,7 @@ GameObject:
   - component: {fileID: 164734865}
   - component: {fileID: 164734864}
   - component: {fileID: 164734867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Castle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5794,7 +5794,7 @@ GameObject:
   - component: {fileID: 170311576}
   - component: {fileID: 170311578}
   - component: {fileID: 170311577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RelicOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8554,7 +8554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 252771875}
   - component: {fileID: 252771876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9855,7 +9855,7 @@ GameObject:
   - component: {fileID: 279270416}
   - component: {fileID: 279270418}
   - component: {fileID: 279270417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FoodScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11742,7 +11742,7 @@ GameObject:
   - component: {fileID: 342740259}
   - component: {fileID: 342740258}
   - component: {fileID: 342740257}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12187,7 +12187,7 @@ GameObject:
   - component: {fileID: 352068412}
   - component: {fileID: 352068411}
   - component: {fileID: 352068410}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MapHeightInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12835,7 +12835,7 @@ GameObject:
   - component: {fileID: 371659749}
   - component: {fileID: 371659751}
   - component: {fileID: 371659750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15523,7 +15523,7 @@ GameObject:
   - component: {fileID: 471627917}
   - component: {fileID: 471627919}
   - component: {fileID: 471627918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16309,7 +16309,7 @@ GameObject:
   - component: {fileID: 498181431}
   - component: {fileID: 498181430}
   - component: {fileID: 498181433}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WheatFarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17291,7 +17291,7 @@ GameObject:
   - component: {fileID: 511556431}
   - component: {fileID: 511556433}
   - component: {fileID: 511556432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17972,7 +17972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 520565245}
   - component: {fileID: 520565246}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RelicDebug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18171,7 +18171,7 @@ GameObject:
   - component: {fileID: 523811903}
   - component: {fileID: 523811902}
   - component: {fileID: 523811904}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CurrentPhaseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19409,7 +19409,7 @@ GameObject:
   - component: {fileID: 539751552}
   - component: {fileID: 539751554}
   - component: {fileID: 539751553}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MapDimensionsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22491,7 +22491,7 @@ GameObject:
   - component: {fileID: 616667253}
   - component: {fileID: 616667255}
   - component: {fileID: 616667254}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23731,7 +23731,7 @@ GameObject:
   - component: {fileID: 640822947}
   - component: {fileID: 640822946}
   - component: {fileID: 640822945}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MapWidthInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26510,7 +26510,7 @@ GameObject:
   - component: {fileID: 702516546}
   - component: {fileID: 702516545}
   - component: {fileID: 702516548}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GoNextPhase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27679,7 +27679,7 @@ GameObject:
   - component: {fileID: 738103334}
   - component: {fileID: 738103336}
   - component: {fileID: 738103335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27814,7 +27814,7 @@ GameObject:
   - component: {fileID: 741230180}
   - component: {fileID: 741230179}
   - component: {fileID: 741230178}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PreviousRelicButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29459,7 +29459,7 @@ GameObject:
   - component: {fileID: 789937721}
   - component: {fileID: 789937723}
   - component: {fileID: 789937722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29592,7 +29592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 797970991}
   - component: {fileID: 797970992}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33711,7 +33711,7 @@ GameObject:
   - component: {fileID: 867927068}
   - component: {fileID: 867927070}
   - component: {fileID: 867927069}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34308,7 +34308,7 @@ GameObject:
   - component: {fileID: 885589429}
   - component: {fileID: 885589431}
   - component: {fileID: 885589430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CurrentRelicText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35266,7 +35266,7 @@ GameObject:
   - component: {fileID: 907370680}
   - component: {fileID: 907370679}
   - component: {fileID: 907370678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileOptionsRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35764,7 +35764,7 @@ GameObject:
   - component: {fileID: 921476424}
   - component: {fileID: 921476426}
   - component: {fileID: 921476425}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MapSettingsRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36254,7 +36254,7 @@ GameObject:
   - component: {fileID: 931770625}
   - component: {fileID: 931770624}
   - component: {fileID: 931770623}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BuildingTypeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44011,7 +44011,7 @@ GameObject:
   - component: {fileID: 1140510702}
   - component: {fileID: 1140510704}
   - component: {fileID: 1140510703}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45195,7 +45195,7 @@ GameObject:
   - component: {fileID: 1179350926}
   - component: {fileID: 1179350928}
   - component: {fileID: 1179350927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46245,7 +46245,7 @@ GameObject:
   - component: {fileID: 1209154938}
   - component: {fileID: 1209154937}
   - component: {fileID: 1209154940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameSpeedInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49542,7 +49542,7 @@ GameObject:
   - component: {fileID: 1280091148}
   - component: {fileID: 1280091150}
   - component: {fileID: 1280091149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CurrentGoal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51809,7 +51809,7 @@ GameObject:
   - component: {fileID: 1354112360}
   - component: {fileID: 1354112362}
   - component: {fileID: 1354112361}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53306,7 +53306,7 @@ GameObject:
   - component: {fileID: 1371223467}
   - component: {fileID: 1371223469}
   - component: {fileID: 1371223468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53762,7 +53762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1379347002}
   - component: {fileID: 1379347003}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54577,7 +54577,7 @@ GameObject:
   - component: {fileID: 1391225474}
   - component: {fileID: 1391225476}
   - component: {fileID: 1391225475}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55059,7 +55059,7 @@ GameObject:
   - component: {fileID: 1399521290}
   - component: {fileID: 1399521289}
   - component: {fileID: 1399521288}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55682,7 +55682,7 @@ GameObject:
   - component: {fileID: 1429897938}
   - component: {fileID: 1429897937}
   - component: {fileID: 1429897940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bakery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56428,7 +56428,7 @@ GameObject:
   - component: {fileID: 1441274776}
   - component: {fileID: 1441274775}
   - component: {fileID: 1441274774}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RemoveRelicButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56909,7 +56909,7 @@ GameObject:
   - component: {fileID: 1457275315}
   - component: {fileID: 1457275317}
   - component: {fileID: 1457275316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57046,7 +57046,7 @@ GameObject:
   - component: {fileID: 1458104756}
   - component: {fileID: 1458104755}
   - component: {fileID: 1458104754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57200,7 +57200,7 @@ GameObject:
   - component: {fileID: 1460214184}
   - component: {fileID: 1460214186}
   - component: {fileID: 1460214185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57923,7 +57923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1487103806}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CurrentRelics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57962,7 +57962,7 @@ GameObject:
   - component: {fileID: 1496242320}
   - component: {fileID: 1496242319}
   - component: {fileID: 1496242321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ResourceInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60351,7 +60351,7 @@ GameObject:
   - component: {fileID: 1582744519}
   - component: {fileID: 1582744518}
   - component: {fileID: 1582744517}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61922,7 +61922,7 @@ GameObject:
   - component: {fileID: 1622679098}
   - component: {fileID: 1622679100}
   - component: {fileID: 1622679099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameSpeedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62381,7 +62381,7 @@ GameObject:
   - component: {fileID: 1633314805}
   - component: {fileID: 1633314804}
   - component: {fileID: 1633314807}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CornFarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66212,8 +66212,9 @@ MonoBehaviour:
   DDOL: 1
   cityStartAnimationTime: 1
   cityEndAnimationTime: 1
-  tileHarvestAnimationTime: 0.5
-  tileHarvestAnimationTimePerResource: 0.5
+  tileHarvestAnimationTime: 0.25
+  tileProcessAnimationTime: 0.25
+  tileAnimationTimePerResource: 0.5
 --- !u!114 &1762293194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68799,7 +68800,7 @@ GameObject:
   - component: {fileID: 1826057955}
   - component: {fileID: 1826057954}
   - component: {fileID: 1826057953}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RelicsList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69083,7 +69084,7 @@ GameObject:
   - component: {fileID: 1827866513}
   - component: {fileID: 1827866512}
   - component: {fileID: 1827866511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NextRelicButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69217,7 +69218,7 @@ GameObject:
   - component: {fileID: 1829054037}
   - component: {fileID: 1829054036}
   - component: {fileID: 1829054035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TogglePlaceCityMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70595,7 +70596,7 @@ GameObject:
   - component: {fileID: 1864251560}
   - component: {fileID: 1864251562}
   - component: {fileID: 1864251561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71647,7 +71648,7 @@ GameObject:
   - component: {fileID: 1871564583}
   - component: {fileID: 1871564585}
   - component: {fileID: 1871564584}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74127,7 +74128,7 @@ GameObject:
   - component: {fileID: 1944629690}
   - component: {fileID: 1944629689}
   - component: {fileID: 1944629692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FishFarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74566,7 +74567,7 @@ GameObject:
   - component: {fileID: 1955497948}
   - component: {fileID: 1955497950}
   - component: {fileID: 1955497949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75016,7 +75017,7 @@ GameObject:
   - component: {fileID: 1963535883}
   - component: {fileID: 1963535885}
   - component: {fileID: 1963535884}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RelicText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75608,7 +75609,7 @@ GameObject:
   - component: {fileID: 1984336768}
   - component: {fileID: 1984336767}
   - component: {fileID: 1984336770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GenerateMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75632,7 +75633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2}
-  m_AnchoredPosition: {x: 0, y: 5.500496}
+  m_AnchoredPosition: {x: 0, y: 5.500557}
   m_SizeDelta: {x: -22, y: -11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1984336767
@@ -76797,7 +76798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2036095505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77466,7 +77467,7 @@ GameObject:
   - component: {fileID: 2064738013}
   - component: {fileID: 2064738015}
   - component: {fileID: 2064738014}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CurrentModeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79403,7 +79404,7 @@ GameObject:
   - component: {fileID: 2122576651}
   - component: {fileID: 2122576650}
   - component: {fileID: 2122576652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameControlsRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

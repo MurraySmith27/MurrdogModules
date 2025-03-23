@@ -110,7 +110,7 @@ MonoBehaviour:
   baseWaitTimePerResourceChange: 0.21
   waitBeforeIncrementAnim: 0.42
   waitBeforeDecrementAnim: 0.05
-  waitBeforeCreateListItemAnim: 0.47
+  waitBeforeCreateListItemAnim: 0.45
   verticalOffset: 10
 --- !u!225 &2460410277259889735
 CanvasGroup:

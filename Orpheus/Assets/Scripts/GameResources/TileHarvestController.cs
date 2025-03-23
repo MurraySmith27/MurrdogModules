@@ -47,7 +47,15 @@ public class TileHarvestController : Singleton<TileHarvestController>
         }
 
         resourcesHarvested = RelicSystem.Instance.OnResourcesHarvested(resourcesHarvested, tilePosition);
-
+        
+        
+        return resourcesHarvested;
+    }
+    
+    public Dictionary<ResourceType, int> GetResourceChangeOnTileProcess(Guid cityGuid, Vector2Int tilePosition, Dictionary<ResourceType, int> resourcesSoFar)
+    {
+        List<TileBuilding> buildingsOnTile = MapSystem.Instance.GetBuildingsOnTile(tilePosition);
+        
         Dictionary<ResourceType, int> resourcesProcessed = new Dictionary<ResourceType, int>();
         
         foreach (TileBuilding building in buildingsOnTile)
@@ -75,32 +83,6 @@ public class TileHarvestController : Singleton<TileHarvestController>
         
         resourcesProcessed = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed, tilePosition);
         
-        
-        Dictionary<ResourceType, int> finalResources = new Dictionary<ResourceType, int>();
-
-        foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
-        {
-            if (resourcesHarvested.ContainsKey(resourceType))
-            {
-                if (!finalResources.ContainsKey(resourceType))
-                {
-                    finalResources[resourceType] = 0;
-                }
-                
-                finalResources[resourceType] += resourcesHarvested[resourceType];
-            }
-
-            if (resourcesProcessed.ContainsKey(resourceType))
-            {
-                if (!finalResources.ContainsKey(resourceType))
-                {
-                    finalResources[resourceType] = 0;
-                }
-                
-                finalResources[resourceType] += resourcesProcessed[resourceType];
-            }
-        }
-        
-        return finalResources;
+        return resourcesProcessed;
     }
 }

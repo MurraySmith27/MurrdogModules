@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using MEC;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BloomingHarvestController : Singleton<BloomingHarvestController>
 {
     [SerializeField] private float cityStartAnimationTime = 1f;
     [SerializeField] private float cityEndAnimationTime = 1f;
-    [SerializeField] private float tileHarvestAnimationTime = 0.5f;
-    [SerializeField] private float tileHarvestAnimationTimePerResource = 0.5f;
+    [SerializeField] private float tileHarvestAnimationTime = 0.25f;
+    [SerializeField] private float tileProcessAnimationTime = 0.25f;
+    [SerializeField] private float tileAnimationTimePerResource = 0.5f;
 
     public event Action OnHarvestStart;
     public event Action OnHarvestEnd;
@@ -17,8 +19,17 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     public event Action<Guid> OnCityHarvestStart;
     public event Action<Guid> OnCityHarvestEnd;
     
+    public event Action<Vector2Int> OnTileResourceChangeStart;
+    
+    public event Action<Vector2Int> OnTileResourceChangeEnd;
+    
     public event Action<Vector2Int, Dictionary<ResourceType, int>> OnTileHarvestStart;
+    
     public event Action<Vector2Int> OnTileHarvestEnd;
+    
+    public event Action<Vector2Int, Dictionary<ResourceType, int>> OnTileProcessStart;
+    
+    public event Action<Vector2Int> OnTileProcessEnd;
     
     public void StartHarvest()
     {
@@ -40,6 +51,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
         
         foreach (Guid cityGuid in cityGuids)
         {
+            
             OnCityHarvestStart?.Invoke(cityGuid);
             
             yield return OrpheusTiming.WaitForSecondsGameTime(cityStartAnimationTime);
@@ -48,22 +60,45 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
 
             foreach (Vector2Int cityTile in cityTiles)
             {
-                Dictionary<ResourceType, int> resourcesChange = TileHarvestController.Instance.GetResourceChangeOnTileHarvest(cityGuid, cityTile, resources);
                 
-                OnTileHarvestStart?.Invoke(cityTile, resourcesChange);
+                OnTileResourceChangeStart?.Invoke(cityTile);
+                
+                Dictionary<ResourceType, int> resourcesHarvested = TileHarvestController.Instance.GetResourceChangeOnTileHarvest(cityGuid, cityTile, resources);
+                
+                OnTileHarvestStart?.Invoke(cityTile, resourcesHarvested);
 
-                foreach (KeyValuePair<ResourceType, int> resource in resourcesChange)
+                foreach (KeyValuePair<ResourceType, int> resource in resourcesHarvested)
                 {
                     resources[resource.Key] += resource.Value;
                     if (resource.Value != 0)
                     {
-                        yield return OrpheusTiming.WaitForSecondsGameTime(tileHarvestAnimationTimePerResource);
+                        yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
                     }
                 }
 
                 yield return OrpheusTiming.WaitForSecondsGameTime(tileHarvestAnimationTime);
                 
                 OnTileHarvestEnd?.Invoke(cityTile);
+                
+                //then we process the resources from this tile.
+                Dictionary<ResourceType, int> resourcesProcessed = TileHarvestController.Instance.GetResourceChangeOnTileProcess(cityGuid, cityTile, resources);
+                
+                OnTileProcessStart?.Invoke(cityTile, resourcesProcessed);
+
+                foreach (KeyValuePair<ResourceType, int> resource in resourcesProcessed)
+                {
+                    resources[resource.Key] += resource.Value;
+                    if (resource.Value != 0)
+                    {
+                        yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                    }
+                }
+
+                yield return OrpheusTiming.WaitForSecondsGameTime(tileProcessAnimationTime);
+                
+                OnTileProcessEnd?.Invoke(cityTile);
+                
+                OnTileResourceChangeEnd?.Invoke(cityTile);
             }
             
             OnCityHarvestEnd?.Invoke(cityGuid);
