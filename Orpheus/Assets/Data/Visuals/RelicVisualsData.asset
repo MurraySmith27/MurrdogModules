@@ -15,21 +15,41 @@ MonoBehaviour:
   relicTypes:
   - relicType: 1
     sprite: {fileID: 21300000, guid: 799115a0b846e8a45a6581ff98a80e48, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 35a2b4ba8082c5a4ea45cc33bfba5583,
+      type: 3}
   - relicType: 2
     sprite: {fileID: 21300000, guid: d0588e7c87b83fd4a806909ade5e6b56, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: b9d30bef80090db498647184bd9962c0,
+      type: 3}
   - relicType: 3
     sprite: {fileID: 21300000, guid: 4e6b91d21ebcee34d80fde3f81ac45a0, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 4e2ef3aee3263f8439d4aceaccc1cebb,
+      type: 3}
   - relicType: 4
     sprite: {fileID: 21300000, guid: cd60e89b3861c6c469d175a0b10f0d98, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 2c10ab6e1f520e74f86319d367ee5a5b,
+      type: 3}
   - relicType: 5
     sprite: {fileID: 21300000, guid: ab95abf20d3a38c45b64f11c26a98f0f, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 04e976b4a43973f4f817a9f08083c71f,
+      type: 3}
   - relicType: 6
     sprite: {fileID: 21300000, guid: 107e2722aacfbf44890d7c5ef85453c6, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 0c479520c3357464791174e8ced7425d,
+      type: 3}
   - relicType: 7
     sprite: {fileID: 21300000, guid: 49deb4c4d1b84ec48a819e51158b1452, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 2b150e18122aa4340b2d9fc90c4366a8,
+      type: 3}
   - relicType: 8
     sprite: {fileID: 21300000, guid: 8f540302071d02a4e950cf4df5d4271d, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 1b00a36bbf5496247b1462caec94e583,
+      type: 3}
   - relicType: 9
     sprite: {fileID: 21300000, guid: df91b6694cb297e4db6a9714710a9a9c, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: c3dedcb45c5651442952cbe3a6c4b0f6,
+      type: 3}
   - relicType: 10
     sprite: {fileID: 21300000, guid: 5dba5dc5a0a8e0d4bba24467b7ef5dd8, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 3644b3334596cab44be110e9a7e6648f,
+      type: 3}

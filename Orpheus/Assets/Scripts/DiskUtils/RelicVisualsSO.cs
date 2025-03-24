@@ -8,18 +8,26 @@ using UnityEngine;
 public class RelicVisualsSO : ScriptableObject
 {
     [Serializable]
-    public struct RelicTypeToSprite
+    public struct RelicTypeToVisualData
     {
         public RelicTypes relicType;
         public Sprite sprite;
+        public GameObject visualsPrefab;
     }
     
-    [SerializeField] private List<RelicTypeToSprite> relicTypes = new List<RelicTypeToSprite>(); 
+    [SerializeField] private List<RelicTypeToVisualData> relicTypes = new List<RelicTypeToVisualData>(); 
 
     public Sprite GetIconForRelic(RelicTypes relicType)
     {
-        RelicTypeToSprite relicTypeToSprite = relicTypes.Find(x => x.relicType == relicType);
+        RelicTypeToVisualData relicTypeToVisualData = relicTypes.Find(x => x.relicType == relicType);
 
-        return relicTypeToSprite.sprite;
+        return relicTypeToVisualData.sprite;
+    }
+
+    public GameObject GetVisualsPrefabForRelic(RelicTypes relicType)
+    {
+        RelicTypeToVisualData relicTypeToVisualData = relicTypes.Find(x => x.relicType == relicType);
+
+        return relicTypeToVisualData.visualsPrefab;
     }
 }

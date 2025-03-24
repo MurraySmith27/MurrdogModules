@@ -22,11 +22,11 @@ public class CityTileData
         _ownedTiles.Sort(((Vector2Int a, Vector2Int b) =>
         {
             //sort high y values near the start, then sort by low x values near the start
-            int compare = -a.y.CompareTo(b.y);
+            int compare = -a.x.CompareTo(b.x);
 
             if (compare == 0)
             {
-                return a.x.CompareTo(b.x);
+                return -a.y.CompareTo(b.y);
             }
             else return compare;
         }));

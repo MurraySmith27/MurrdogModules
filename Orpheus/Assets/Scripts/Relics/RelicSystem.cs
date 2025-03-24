@@ -42,7 +42,6 @@ public class RelicSystem : Singleton<RelicSystem>
     
     public event Action<RelicTypes> OnRelicAdded;
     public event Action<RelicTypes> OnRelicRemoved;
-
     public event Action<RelicTypes, AdditionalRelicTriggeredArgs> OnRelicTriggered;
     
     private void Awake()

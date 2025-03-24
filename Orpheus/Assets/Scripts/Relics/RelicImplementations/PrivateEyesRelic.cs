@@ -30,7 +30,7 @@ public class PrivateEyesRelic : Relic
 
         if (cornCount > 0)
         {
-            if (_totalCornHarvestedPerCity.ContainsKey(cityGuid))
+            if (!_totalCornHarvestedPerCity.ContainsKey(cityGuid))
             {
                 _totalCornHarvestedPerCity.Add(cityGuid, 0);
             }
