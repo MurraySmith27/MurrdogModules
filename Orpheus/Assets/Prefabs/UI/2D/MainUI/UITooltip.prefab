@@ -67,28 +67,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'testing testing test
-
-    more test text
-
-    testing testing test
-
-    more
-    test text
-
-    testing testing test
-
-    more test text
-
-    testing testing
-    test
-
-    more test text
-
-'
+  m_text: "example text example text <stone>stone</stone>\n <wood>wood</wood>\n <corn>corn</corn>\n
+    <fish>fish</fish>\n <wheat>wheat</wheat>\n <bread>bread</bread>"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af836d4eeaf8f4d33a32fc422c8c87f8, type: 2}
+  m_sharedMaterial: {fileID: 2193892464167414562, guid: af836d4eeaf8f4d33a32fc422c8c87f8,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -169,9 +153,7 @@ MonoBehaviour:
   typewriterStartsAutomatically: 1
   animationLoop: 0
   timeScale: 0
-  _text: 'testing testing test
-
-    more test text'
+  _text: example text example text <color=#aaaaaa>stone</color>
   useDynamicScaling: 1
   referenceFontSize: 10
   isResettingTimeOnNewText: 1
@@ -183,10 +165,11 @@ MonoBehaviour:
   styleSheet: {fileID: 0}
   databaseActions: {fileID: 11400000, guid: 068d92e2e04b9dd4cadd562b656ae79b, type: 2}
   defaultAppearancesTags:
-  - size
+  - offset d=0.5 a=1
   defaultDisappearancesTags:
-  - fade
-  defaultBehaviorsTags: []
+  - offset d=0.5 a=1
+  defaultBehaviorsTags:
+  - swing a=0.2 f=1 w=0.7
   defaultTagsMode: 0
 --- !u!114 &5100900358736892400
 MonoBehaviour:
@@ -224,9 +207,9 @@ MonoBehaviour:
   onMessage:
     m_PersistentCalls:
       m_Calls: []
-  waitForNormalChars: 0.03
-  waitLong: 0.6
-  waitMiddle: 0.2
+  waitForNormalChars: 0.015151516
+  waitLong: 0.25
+  waitMiddle: 0.1
   avoidMultiplePunctuationWait: 0
   waitForNewLines: 1
   waitForLastCharacter: 1
