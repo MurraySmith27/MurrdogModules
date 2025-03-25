@@ -13,6 +13,7 @@ public class RelicVisualsSO : ScriptableObject
         public RelicTypes relicType;
         public Sprite sprite;
         public GameObject visualsPrefab;
+        public string description;
     }
     
     [SerializeField] private List<RelicTypeToVisualData> relicTypes = new List<RelicTypeToVisualData>(); 
@@ -29,5 +30,12 @@ public class RelicVisualsSO : ScriptableObject
         RelicTypeToVisualData relicTypeToVisualData = relicTypes.Find(x => x.relicType == relicType);
 
         return relicTypeToVisualData.visualsPrefab;
+    }
+
+    public string GetDescriptionForRelic(RelicTypes relicType)
+    {
+        RelicTypeToVisualData relicTypeToVisualData = relicTypes.Find(x => x.relicType == relicType);
+
+        return relicTypeToVisualData.description;
     }
 }

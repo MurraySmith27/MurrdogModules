@@ -96,12 +96,12 @@ public class RelicsList : MonoBehaviour
         int rectMinY = relicBatchRenderTexture.height - relicImageDimensions.y *
                        Mathf.FloorToInt(unoccupiedSlotIndex / (relicBatchRenderTexture.height / (float)relicImageDimensions.y)) - relicImageDimensions.y;
 
-        relicIcon.SetRenderTextureUVs(new Rect(
+        relicIcon.Populate(new Rect(
             rectMinX / (float)relicBatchRenderTexture.width,
             rectMinY / (float)relicBatchRenderTexture.height,
             relicImageDimensions.x / (float)relicBatchRenderTexture.width,
             relicImageDimensions.y / (float)relicBatchRenderTexture.height
-        ));
+        ), relicType);
         
         _instantiatedRelicVisuals[relicType] = (unoccupiedSlotIndex, instantiateedRelicVisuals);
         _occupiedRelicSlots[unoccupiedSlotIndex] = true;
