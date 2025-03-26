@@ -219,3 +219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawImage: {fileID: 7296859419920313309}
+  rectTransform: {fileID: 4783009046827722137}
+  relicVisuals: {fileID: 11400000, guid: 96f24972ca8dd0b43ba5a9ff59eef60f, type: 2}
+  uiInputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}

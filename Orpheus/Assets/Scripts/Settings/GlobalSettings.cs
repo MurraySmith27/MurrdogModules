@@ -23,4 +23,16 @@ public static class GlobalSettings
         }
     }
 
+    public static float TextSizeMultiplier
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat(nameof(TextSizeMultiplier), 1f);
+        }
+        set
+        {
+            PlayerPrefs.SetFloat(nameof(TextSizeMultiplier), value);
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UITooltip : MonoBehaviour
@@ -25,6 +26,8 @@ public class UITooltip : MonoBehaviour
     [SerializeField] private int verticalPaddingForMouse = 30;
 
     private bool _isExpandUp;
+
+    private bool _isMouseOverTooltip;
     
     public void Populate(Vector2 anchorPos, string text)
     {
@@ -36,14 +39,19 @@ public class UITooltip : MonoBehaviour
 
         Vector2 textBoxOffset;
         Vector2 textBoxPivot;
+
+        float offsetAmount = 0;
         
-        if (anchorPos.y <= Screen.height / 2f)
+        //anchor is at 0.5, 0.5, so -y means lower half
+        if (anchorPos.y <= 0)
         {
             //expand upward
             animator.SetTrigger(animatorExpandUpTrigger);
             layoutGroup.padding.bottom += verticalPaddingForMouse;
 
-            textBoxOffset = new Vector2(0, verticalPaddingForMouse / 2f);
+            offsetAmount = layoutGroup.padding.bottom;
+            
+            textBoxOffset = new Vector2(0, -offsetAmount / 2f);
 
             textBoxPivot = new Vector2(0, 1);
             
@@ -52,26 +60,28 @@ public class UITooltip : MonoBehaviour
         else
         {
             //expand downward
-            animator.SetTrigger(animatorExpandUpTrigger);
+            animator.SetTrigger(animatorExpandDownTrigger);
             layoutGroup.padding.top += verticalPaddingForMouse;
             
-            textBoxOffset = new Vector2(0, -verticalPaddingForMouse / 2f);
+            offsetAmount = layoutGroup.padding.top;
+            
+            textBoxOffset = new Vector2(0, offsetAmount / 2f);
             
             textBoxPivot = new Vector2(0, 0);
 
             _isExpandUp = false;
         }
 
-        if (anchorPos.x <= Screen.width / 2f)
+        if (anchorPos.x <= 0)
         {
             //expand right
-            textBoxOffset = new Vector2(-verticalPaddingForMouse / 2f, textBoxOffset.y);
+            textBoxOffset = new Vector2(-offsetAmount / 2f, textBoxOffset.y);
             textBoxPivot = new Vector2(0, textBoxPivot.y);
         }
         else
         {
             //expand left
-            textBoxOffset = new Vector2(verticalPaddingForMouse / 2f, textBoxOffset.y);
+            textBoxOffset = new Vector2(offsetAmount / 2f, textBoxOffset.y);
             textBoxPivot = new Vector2(1, textBoxPivot.y);
         }
 
@@ -91,5 +101,10 @@ public class UITooltip : MonoBehaviour
         {
             layoutGroup.padding.top -= verticalPaddingForMouse;
         }
+    }
+
+    public bool IsMouseOnTooltip()
+    {
+        return RectTransformUtils.IsMouseOverRectTransform(textBoxRectTransform);
     }
 }
