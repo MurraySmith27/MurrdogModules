@@ -24,6 +24,7 @@ public class UITooltip : MonoBehaviour
     [Header("Position")] 
     [SerializeField] private HorizontalLayoutGroup layoutGroup;
     [SerializeField] private int verticalPaddingForMouse = 30;
+    [SerializeField] private int defaultVerticalPadding = 10;
 
     private bool _isExpandUp;
 
@@ -47,7 +48,7 @@ public class UITooltip : MonoBehaviour
         {
             //expand upward
             animator.SetTrigger(animatorExpandUpTrigger);
-            layoutGroup.padding.bottom += verticalPaddingForMouse;
+            layoutGroup.padding.bottom = defaultVerticalPadding + verticalPaddingForMouse;
 
             offsetAmount = layoutGroup.padding.bottom;
             
@@ -61,7 +62,7 @@ public class UITooltip : MonoBehaviour
         {
             //expand downward
             animator.SetTrigger(animatorExpandDownTrigger);
-            layoutGroup.padding.top += verticalPaddingForMouse;
+            layoutGroup.padding.top = defaultVerticalPadding + verticalPaddingForMouse;
             
             offsetAmount = layoutGroup.padding.top;
             
@@ -95,16 +96,16 @@ public class UITooltip : MonoBehaviour
 
         if (_isExpandUp)
         {
-            layoutGroup.padding.bottom -= verticalPaddingForMouse;   
+            layoutGroup.padding.bottom = defaultVerticalPadding;   
         }
         else
         {
-            layoutGroup.padding.top -= verticalPaddingForMouse;
+            layoutGroup.padding.top -= defaultVerticalPadding;
         }
     }
 
     public bool IsMouseOnTooltip()
     {
-        return RectTransformUtils.IsMouseOverRectTransform(textBoxRectTransform);
+        return UIMouseData.Instance.IsMouseOverRectTransform(textBoxRectTransform);
     }
 }

@@ -67,6 +67,7 @@ MonoBehaviour:
   animatorExitTrigger: Exit
   layoutGroup: {fileID: 3799952045468057605}
   verticalPaddingForMouse: 30
+  defaultVerticalPadding: 10
 --- !u!1 &5667337504404750277
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,9 +416,9 @@ MonoBehaviour:
   onMessage:
     m_PersistentCalls:
       m_Calls: []
-  waitForNormalChars: 0.015151516
-  waitLong: 0.25
-  waitMiddle: 0.1
+  waitForNormalChars: 0.01010101
+  waitLong: 0.16666667
+  waitMiddle: 0.06666667
   avoidMultiplePunctuationWait: 0
   waitForNewLines: 1
   waitForLastCharacter: 1
@@ -436,6 +437,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003ae6070c7f63c4289c5eda3e560df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  adjustTextSize: 1
+  createTooltips: 1
+  isTextTooltip: 1
+  textRectTransform: {fileID: 4435242227609314303}
+  overrideCamera: {fileID: 0}
 --- !u!1 &8040005582507271938
 GameObject:
   m_ObjectHideFlags: 0

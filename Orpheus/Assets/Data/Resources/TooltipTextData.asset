@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd6afddfaa17454ba8ffae215d37fe4, type: 3}
+  m_Name: TooltipTextData
+  m_EditorClassIdentifier: 
+  tooltipIdToTexts:
+  - Id: corn
+    Text: <b>Corn</b><br><br>A resource that you can harvest.
+  - Id: wheat
+    Text: <b>Wheat</b><br><br>A resource that you can harvest.
+  - Id: fish
+    Text: <b>Fish</b><br><br>A resource that you can harvest.
+  - Id: wood
+    Text: <b>Wood</b><br><br>A resource that you can harvest.<br>Used to construct
+      buildings.
+  - Id: stone
+    Text: <b>Stone</b><br><br>A resource that you can harvest.<br>Used to construct
+      buildings.
+  - Id: gold
+    Text: <b>Gold</b><br><br>Used to purchase various things.

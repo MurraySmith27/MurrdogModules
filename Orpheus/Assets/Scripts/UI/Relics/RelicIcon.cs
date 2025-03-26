@@ -19,53 +19,29 @@ public class RelicIcon : MonoBehaviour
 
     private int _currentRelicIndex = -1;
 
-    private bool _pointerOver;
-
-    private void Start()
-    {
-        uiInputChannel.MouseMoveEvent -= OnMouseMove;
-        uiInputChannel.MouseMoveEvent += OnMouseMove;
-    }
-
-    private void OnDestroy()
-    {
-        if (uiInputChannel != null)
-        {
-            uiInputChannel.MouseMoveEvent -= OnMouseMove;
-        }
-    }
-
     public void Populate(Rect renderTextureUV, RelicTypes relicTypes)
     {
         rawImage.uvRect = renderTextureUV;
         _relicType = relicTypes;
     }
 
-    public void OnMouseMove(UIInputChannel.UIInputChannelCallbackArgs args)
+    private void Update()
     {
-        bool isPointerOver = RectTransformUtils.IsMouseOverRectTransform(rectTransform);
-        Debug.LogError($"ispointerover: {isPointerOver}");
-        if (isPointerOver && !_pointerOver && _currentRelicIndex == -1)
+        bool isPointerOver = UIMouseData.Instance.IsMouseOverRectTransform(rectTransform);
+        
+        if (isPointerOver && _currentRelicIndex == -1)
         {
-            _pointerOver = true;
-            
             Vector2 worldPosition = rectTransform.TransformPoint(rectTransform.rect.center);
             _currentRelicIndex =
-                TooltipManager.Instance.ShowTooltip(worldPosition, relicVisuals.GetDescriptionForRelic(_relicType));
+                TooltipManager.Instance.ShowTooltip(worldPosition, relicVisuals.GetDescriptionForRelic(_relicType),
+                    () =>
+                    {
+                        _currentRelicIndex = -1;
+                    });
         }
-        else if (_pointerOver && !isPointerOver && _currentRelicIndex != -1)
+        else if (!isPointerOver && _currentRelicIndex != -1)
         {
-            _pointerOver = false;
-            
-            TryHideTooltip();
-        }
-    }
-
-    private void TryHideTooltip()
-    {
-        if (TooltipManager.Instance.HideTooltipIfMouseOff(_currentRelicIndex))
-        {
-            _currentRelicIndex = -1;
+            TooltipManager.Instance.HideTooltipIfMouseOff(_currentRelicIndex);
         }
     }
 }

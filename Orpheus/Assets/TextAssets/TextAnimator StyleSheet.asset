@@ -14,20 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   styles:
   - styleTag: stone
-    openingTag: <shake a=0.2 d=0.2><color=#aaaaaa>
-    closingTag: </color></shake>
+    openingTag: <shake a=0.2 d=0.2><color=#aaaaaa><link="stone">stone</color></shake>
+    closingTag: 
   - styleTag: wood
-    openingTag: <slide a=0.2 f=1><color=#4d0100>
-    closingTag: </color></slide><?ended>
+    openingTag: <slide a=0.2 f=1><color=#4d0100><link="wood">wood</link></color></slide>
+    closingTag: 
   - styleTag: corn
-    openingTag: <pend a=1 w=0.2 f=0.7><color=#fff0a6>
-    closingTag: </color></pend><?ended>
+    openingTag: <pend a=1 w=0.2 f=0.7><color=#fff0a6><link="corn">corn</link></color></pend>
+    closingTag: 
   - styleTag: wheat
-    openingTag: <wave a=0.15 w=0.2 f=0.5><color=#eab676>
-    closingTag: </color></wave><?ended>
+    openingTag: <wave a=0.15 w=0.2 f=0.5><color=#eab676><link="wheat">wheat</link></color></wave>
+    closingTag: 
   - styleTag: fish
-    openingTag: <incr a=0.5 w=0.5 f=0.5><color="blue">
-    closingTag: </color></incr><?ended>
+    openingTag: <incr a=0.5 w=0.5 f=0.5><color="blue"><link="fish">fish</link></color></incr>
+    closingTag: 
   - styleTag: bread
-    openingTag: <incr a=0.5 w=0 f=0.5><color=#873e23>
-    closingTag: </color></incr><?ended>
+    openingTag: <incr a=0.5 w=0 f=0.5><color=#873e23><link="bread">bread</link></color></incr>
+    closingTag: 
+  - styleTag: gold
+    openingTag: <bounce a=0.5 w=0 f=0.5><color=#f2eb63><link="gold">gold</link></color></bounce>
+    closingTag: 
