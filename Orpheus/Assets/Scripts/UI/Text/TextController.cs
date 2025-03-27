@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(TMP_Text))]
-public class TextController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class TextController : MonoBehaviour
 {
     [SerializeField] private bool adjustTextSize = true;
 
@@ -15,25 +15,13 @@ public class TextController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     [SerializeField] private RectTransform textRectTransform;
 
-    [SerializeField] private Camera overrideCamera;
-    
     private TMP_Text _textMesh;
-
-    private bool _mouseCurrentlyInText;
-
-    private Camera _camera;
     
     private int _currentlyDisplayingTooltipId = -1;
     
     void Awake()
     {
         _textMesh = GetComponent<TMP_Text>();
-
-        if (overrideCamera != null)
-        {
-            _camera = overrideCamera;
-        }
-        else _camera = Camera.main;
         
         if (adjustTextSize)
         {
@@ -51,39 +39,43 @@ public class TextController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        _mouseCurrentlyInText = true;
-    }
-    
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        _mouseCurrentlyInText = false;
-    }
-
     private void Update()
     {
-        Debug.LogError($"currently in text: {_mouseCurrentlyInText}");
-        if (_mouseCurrentlyInText && UIMouseData.Instance.IsMouseOverRectTransform(textRectTransform))
+        if (createTooltips)
         {
-            Debug.LogError($"2");
-            int linkIndex = TMP_TextUtilities.FindIntersectingLink(_textMesh, Input.mousePosition, _camera);
-            if (_currentlyDisplayingTooltipId == -1)
+            if (UIMouseData.Instance.IsMouseOverRectTransform(textRectTransform))
             {
-                Debug.LogError($"3");
-                if (linkIndex != -1)
+                int linkIndex = TMP_TextUtilities.FindIntersectingLink(_textMesh, Input.mousePosition, null);
+                if (_currentlyDisplayingTooltipId == -1)
                 {
-                    TMP_LinkInfo linkInfo = _textMesh.textInfo.linkInfo[linkIndex];
-                    Debug.LogError($"link: {linkInfo.GetLinkID()}");
+                    if (linkIndex != -1)
+                    {
+                        TMP_LinkInfo linkInfo = _textMesh.textInfo.linkInfo[linkIndex];
 
-                    _currentlyDisplayingTooltipId = TooltipManager.Instance.ShowTooltipById(
-                        Input.mousePosition,
-                        linkInfo.GetLinkID(),
-                        () => { _currentlyDisplayingTooltipId = -1; },
-                        isTextTooltip);
+                        if (isTextTooltip)
+                        {
+                            _currentlyDisplayingTooltipId = TooltipManager.Instance.ShowTooltipChildByTooltipId(
+                                Input.mousePosition,
+                                linkInfo.GetLinkID(),
+                                () =>
+                                {
+                                    _currentlyDisplayingTooltipId = -1;
+                                });
+                        }
+                        else
+                        {
+                            _currentlyDisplayingTooltipId = TooltipManager.Instance.ShowTooltipById(
+                                Input.mousePosition,
+                                linkInfo.GetLinkID(),
+                                () =>
+                                {
+                                    _currentlyDisplayingTooltipId = -1;
+                                });
+                        }
+                    }
                 }
             }
-            else if (linkIndex == -1)
+            else if (_currentlyDisplayingTooltipId != -1)
             {
                 TooltipManager.Instance.HideTooltipIfMouseOff(_currentlyDisplayingTooltipId);
             }

@@ -6,18 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules/General/RectTransformUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules/General/RectTransformUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/Relics/RelicIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/Relics/RelicIcon.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Tooltip/UITooltip.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Tooltip/UITooltip.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/UITooltip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/UITooltip.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Relics/RelicIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Relics/RelicIcon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/TextSizeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/TextController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/TextSizeController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/TextController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/TextController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/TextController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextAssets/Prompt-Medium SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextAssets/Prompt-Medium SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextAssets/TextAnimator StyleSheet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextAssets/TextAnimator StyleSheet.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,10 +147,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="8308">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="10496">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="8308" />
+      <option name="pid" value="10496" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -195,6 +188,7 @@
       <workItem from="1742252245544" duration="1161000" />
       <workItem from="1742660002041" duration="4536000" />
       <workItem from="1742993404643" duration="11399000" />
+      <workItem from="1743080567607" duration="7769000" />
     </task>
     <servers />
   </component>
@@ -304,30 +298,17 @@
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Relics/RelicIcon.cs</url>
-          <line>33</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Relics\RelicIcon.cs" containingFunctionPresentation="Method 'Update'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipManager.cs</url>
+          <line>139</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Tooltip\TooltipManager.cs" containingFunctionPresentation="Method 'HideTooltip'">
             <startOffsets>
-              <option value="870" />
+              <option value="4425" />
             </startOffsets>
             <endOffsets>
-              <option value="950" />
+              <option value="4468" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Text/TextController.cs</url>
-          <line>69</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Text\TextController.cs" containingFunctionPresentation="Method 'Update'">
-            <startOffsets>
-              <option value="1844" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1940" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="44" />
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

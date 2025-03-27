@@ -1,10 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TooltipManager : Singleton<TooltipManager>
 {
+    private class TooltipState
+    {
+        public UITooltip instantiatedTooltip;
+        public int child;
+        public bool inUse;
+        public string currentText;
+        public Action onHideCallback;
+        public bool isHiding;
+    }
+    
     [SerializeField] private UITooltip tooltipPrefab;
 
     [SerializeField] private Transform tooltipParent;
@@ -13,15 +24,9 @@ public class TooltipManager : Singleton<TooltipManager>
     
     [SerializeField] private TooltipDataSO tooltipDataSO;
 
-    private List<UITooltip> _instantiatedTooltips = new();
+    private List<TooltipState> _tooltips = new List<TooltipState>();
 
-    private List<int> _tooltipChildren = new(); 
-
-    private List<bool> _tooltipsInUse = new();
-
-    private List<string> _tooltipTexts = new();
-    
-    private List<Action> _tooltipHideCallbacks = new();
+    private int _lastRootTooltipIndexOpened = -1;
 
     public int ShowTooltipById(Vector2 tooltipWorldPosition, string tooltipId, Action onTooltipHide = null, bool isChild = false)
     {
@@ -36,10 +41,25 @@ public class TooltipManager : Singleton<TooltipManager>
             return -1;
         }
     }
+
+    public int ShowTooltipChildByTooltipId(Vector2 tooltipWorldPosition, string tooltipId, Action onTooltipHide = null,
+        bool isChild = false)
+    {
+        string tooltipText;
+        if (tooltipDataSO.GetTooltipTextFromId(tooltipId, out tooltipText))
+        {
+            return ShowTooltipChild(tooltipWorldPosition, tooltipText, onTooltipHide);
+        }
+        else
+        {
+            Debug.LogError("Can't find tooltip with id: " + tooltipId);
+            return -1;
+        }
+    }
     
     public int ShowTooltip(Vector2 tooltipWorldPos, string text, Action onTooltipHide = null, bool isChild = false)
     {
-        if (_tooltipTexts.Contains(text))
+        if (_tooltips.FirstOrDefault((TooltipState state) => { return state.currentText == text; }) != null)
         {
             return -1;
         }
@@ -48,46 +68,58 @@ public class TooltipManager : Singleton<TooltipManager>
         
         if (!isChild)
         {
+            _lastRootTooltipIndexOpened = index;
             //hide existing non-child tooltips
-            for (int i = 0; i < _tooltipsInUse.Count; i++)
+            for (int i = 0; i < _tooltips.Count; i++)
             {
-                if (i != index && _tooltipsInUse[i] && !_tooltipChildren.Contains(i))
+                if (i != index && _tooltips[i].inUse && (_tooltips.FirstOrDefault((TooltipState state) => { return state.child == i; }) == null))
                 {
                     HideTooltip(i);
                 }
             }
         }
 
-        UITooltip newTooltip = _instantiatedTooltips[index];
+        UITooltip newTooltip = _tooltips[index].instantiatedTooltip;
         
         newTooltip.Populate(tooltipParent.InverseTransformPoint(tooltipWorldPos), text);
         
         return index;
     }
 
-    public int ShowTooltipChild(Vector2 tooltipWorldPos, string text, int parentIndex)
+    public int ShowTooltipChild(Vector2 tooltipWorldPos, string text, Action onTooltipHide = null)
     {
-        if (_tooltipChildren[parentIndex] != -1)
+        //tooltip children are always of the last opened tooltip
+        int parentIndex = _lastRootTooltipIndexOpened;
+        
+        if (parentIndex == -1)
+        {
+            return ShowTooltip(tooltipWorldPos, text, onTooltipHide);
+        }
+        
+        if (_tooltips[parentIndex].child != -1)
         {
             Debug.LogError("tried to create a child tooltip in a parent that already has a child!");
             return -1;
         }
         
-        int childIndex = ShowTooltip(tooltipWorldPos, text, isChild: true);
+        int childIndex = ShowTooltip(tooltipWorldPos, text, onTooltipHide, isChild: true);
         
-        _tooltipChildren[parentIndex] = childIndex;
+        _tooltips[parentIndex].child = childIndex;
         
         return childIndex;
     }
 
     public bool HideTooltipIfMouseOff(int tooltipIndex)
     {
-        if (tooltipIndex >= 0 && tooltipIndex < _instantiatedTooltips.Count)
+        if (tooltipIndex >= 0 && tooltipIndex < _tooltips.Count)
         {
-            if (_tooltipsInUse[tooltipIndex] && !_instantiatedTooltips[tooltipIndex].IsMouseOnTooltip())
+            if (_tooltips[tooltipIndex].inUse && !_tooltips[tooltipIndex].isHiding && !_tooltips[tooltipIndex].instantiatedTooltip.IsMouseOnTooltip())
             {
-                HideTooltip(tooltipIndex);
-                return true;
+                if (_tooltips[tooltipIndex].child == -1 || !_tooltips[_tooltips[tooltipIndex].child].instantiatedTooltip.IsMouseOnTooltip())
+                {
+                    HideTooltip(tooltipIndex);
+                    return true;
+                }
             }
         }
 
@@ -96,53 +128,69 @@ public class TooltipManager : Singleton<TooltipManager>
 
     public void HideTooltip(int tooltipIndex)
     {
-        if (_tooltipChildren[tooltipIndex] != -1)
+        if (_tooltips[tooltipIndex].isHiding)
+        {
+            return;
+        }
+        
+        
+        if (_tooltips[tooltipIndex].child != -1)
         {
             //the child will set it's parent's reference to -1
-            HideTooltip(_tooltipChildren[tooltipIndex]);
+            HideTooltip(_tooltips[tooltipIndex].child);
         }
         
-        int indexOfMe = _tooltipChildren.FindIndex((int idx) => idx == tooltipIndex);
+        int indexOfMe = _tooltips.FindIndex((TooltipState tooltipState) => tooltipState.child == tooltipIndex);
         if (indexOfMe != -1)
         {
-            _tooltipChildren[indexOfMe] = -1;
+            _tooltips[indexOfMe].child = -1;
         }
         
-        _instantiatedTooltips[tooltipIndex].TearDown();
+        _tooltips[tooltipIndex].instantiatedTooltip.TearDown();
+        
+        _tooltips[tooltipIndex].isHiding = true;
         
         AsyncUtils.InvokeCallbackAfterSeconds(tooltipTearDownTime, () =>
         {
-            _tooltipsInUse[tooltipIndex] = false;
-            _tooltipTexts[tooltipIndex] = string.Empty;
-            _tooltipHideCallbacks[tooltipIndex]?.Invoke();
-            _tooltipHideCallbacks[tooltipIndex] = null;
-            _instantiatedTooltips[tooltipIndex].gameObject.SetActive(false);
+            _tooltips[tooltipIndex].inUse = false;
+            _tooltips[tooltipIndex].currentText = string.Empty;
+            _tooltips[tooltipIndex].onHideCallback?.Invoke();
+            _tooltips[tooltipIndex].onHideCallback = null;
+            _tooltips[tooltipIndex].isHiding = false;
+            _tooltips[tooltipIndex].child = -1;
+            _tooltips[tooltipIndex].instantiatedTooltip.gameObject.SetActive(false);
         });
     }
 
     private int CreateTooltip(string text, Action onTooltipHide)
     {
-        int indexOfUnused = _tooltipsInUse.FindIndex((bool x) =>
+        int indexOfUnused = _tooltips.FindIndex((TooltipState state) =>
         {
-            return !x;
+            return !state.inUse;
         });
         
         if (indexOfUnused != -1)
         {
-            _tooltipsInUse[indexOfUnused] = true;
-            _tooltipTexts[indexOfUnused] = text;
-            _instantiatedTooltips[indexOfUnused].gameObject.SetActive(true);
-            _tooltipHideCallbacks[indexOfUnused] = onTooltipHide;
+            _tooltips[indexOfUnused].inUse = true;
+            _tooltips[indexOfUnused].currentText = text;
+            _tooltips[indexOfUnused].instantiatedTooltip.gameObject.SetActive(true);
+            _tooltips[indexOfUnused].child = -1;
+            _tooltips[indexOfUnused].onHideCallback = onTooltipHide;
+            _tooltips[indexOfUnused].isHiding = false;
+            
             return indexOfUnused;
         }
         else
         {
-            _instantiatedTooltips.Add(Instantiate(tooltipPrefab, tooltipParent));
-            _tooltipsInUse.Add(true);
-            _tooltipTexts.Add(text);
-            _tooltipChildren.Add(-1);
-            _tooltipHideCallbacks.Add(onTooltipHide);
-            return _instantiatedTooltips.Count - 1;
+            _tooltips.Add(new TooltipState());
+            _tooltips[^1].instantiatedTooltip = Instantiate(tooltipPrefab, tooltipParent); 
+            _tooltips[^1].inUse = true;
+            _tooltips[^1].currentText = text;
+            _tooltips[^1].child = -1;
+            _tooltips[^1].onHideCallback = onTooltipHide;
+            _tooltips[^1].isHiding = false;
+            
+            return _tooltips.Count - 1;
         }
     }
 }
