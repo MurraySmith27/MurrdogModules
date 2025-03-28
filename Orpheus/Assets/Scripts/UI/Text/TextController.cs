@@ -74,6 +74,10 @@ public class TextController : MonoBehaviour
                         }
                     }
                 }
+                else if (linkIndex == -1)
+                {
+                    TooltipManager.Instance.HideTooltipIfMouseOff(_currentlyDisplayingTooltipId);
+                }
             }
             else if (_currentlyDisplayingTooltipId != -1)
             {

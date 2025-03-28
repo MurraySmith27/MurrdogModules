@@ -61,12 +61,12 @@ MonoBehaviour:
   textElement: {fileID: 4226307588547569708}
   animator: {fileID: 7442095326561080267}
   rectTransform: {fileID: 3410687946897967429}
-  textBoxRectTransform: {fileID: 445864346969521924}
+  textBoxRectTransform: {fileID: 4435242227609314303}
   animatorExpandUpTrigger: Up
   animatorExpandDownTrigger: Down
   animatorExitTrigger: Exit
   layoutGroup: {fileID: 3799952045468057605}
-  verticalPaddingForMouse: 30
+  verticalPaddingForMouse: 0
   defaultVerticalPadding: 10
 --- !u!1 &5667337504404750277
 GameObject:

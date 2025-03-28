@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MEC;
 using UnityEngine;
 
 public class TooltipManager : Singleton<TooltipManager>
@@ -14,6 +15,7 @@ public class TooltipManager : Singleton<TooltipManager>
         public string currentText;
         public Action onHideCallback;
         public bool isHiding;
+        public CoroutineHandle tooltipAttemptHideCoroutine;
     }
     
     [SerializeField] private UITooltip tooltipPrefab;
@@ -21,6 +23,8 @@ public class TooltipManager : Singleton<TooltipManager>
     [SerializeField] private Transform tooltipParent;
 
     [SerializeField] private float tooltipTearDownTime = 0.2f;
+
+    [SerializeField] private float tooltipMouseOffHideTime = 0.2f;
     
     [SerializeField] private TooltipDataSO tooltipDataSO;
 
@@ -109,21 +113,41 @@ public class TooltipManager : Singleton<TooltipManager>
         return childIndex;
     }
 
-    public bool HideTooltipIfMouseOff(int tooltipIndex)
+    public void HideTooltipIfMouseOff(int tooltipIndex)
     {
         if (tooltipIndex >= 0 && tooltipIndex < _tooltips.Count)
         {
-            if (_tooltips[tooltipIndex].inUse && !_tooltips[tooltipIndex].isHiding && !_tooltips[tooltipIndex].instantiatedTooltip.IsMouseOnTooltip())
+            if (_tooltips[tooltipIndex].inUse && 
+                !_tooltips[tooltipIndex].isHiding && 
+                !_tooltips[tooltipIndex].tooltipAttemptHideCoroutine.IsRunning && 
+                !_tooltips[tooltipIndex].instantiatedTooltip.IsMouseOnTooltip())
             {
                 if (_tooltips[tooltipIndex].child == -1 || !_tooltips[_tooltips[tooltipIndex].child].instantiatedTooltip.IsMouseOnTooltip())
                 {
-                    HideTooltip(tooltipIndex);
-                    return true;
+                    Timing.RunCoroutineSingleton(TryHideTooltipIfMouseOff(tooltipIndex), _tooltips[tooltipIndex].tooltipAttemptHideCoroutine, SingletonBehavior.Overwrite);
                 }
             }
         }
+    }
 
-        return false;
+    private IEnumerator<float> TryHideTooltipIfMouseOff(int tooltipIndex)
+    {
+        for (float t = 0; t < tooltipMouseOffHideTime; t += Time.deltaTime)
+        {
+            //if player re-entered tooltip area or that of a child with pointer, stop the hiding.
+            if (!_tooltips[tooltipIndex].inUse ||
+                _tooltips[tooltipIndex].isHiding || 
+                _tooltips[tooltipIndex].instantiatedTooltip.IsMouseOnTooltip() ||
+                (_tooltips[tooltipIndex].child != -1 &&
+                 _tooltips[_tooltips[tooltipIndex].child].instantiatedTooltip.IsMouseOnTooltip()))
+            {
+                yield break;
+            }
+            
+            yield return Timing.WaitForOneFrame;
+        }
+        
+        HideTooltip(tooltipIndex);
     }
 
     public void HideTooltip(int tooltipIndex)
@@ -132,7 +156,6 @@ public class TooltipManager : Singleton<TooltipManager>
         {
             return;
         }
-        
         
         if (_tooltips[tooltipIndex].child != -1)
         {
@@ -159,6 +182,8 @@ public class TooltipManager : Singleton<TooltipManager>
             _tooltips[tooltipIndex].isHiding = false;
             _tooltips[tooltipIndex].child = -1;
             _tooltips[tooltipIndex].instantiatedTooltip.gameObject.SetActive(false);
+            Timing.KillCoroutines(_tooltips[tooltipIndex].tooltipAttemptHideCoroutine);
+            _tooltips[tooltipIndex].tooltipAttemptHideCoroutine = new();
         });
     }
 
@@ -177,6 +202,8 @@ public class TooltipManager : Singleton<TooltipManager>
             _tooltips[indexOfUnused].child = -1;
             _tooltips[indexOfUnused].onHideCallback = onTooltipHide;
             _tooltips[indexOfUnused].isHiding = false;
+            Timing.KillCoroutines(_tooltips[indexOfUnused].tooltipAttemptHideCoroutine);
+            _tooltips[indexOfUnused].tooltipAttemptHideCoroutine = new();
             
             return indexOfUnused;
         }
@@ -189,6 +216,8 @@ public class TooltipManager : Singleton<TooltipManager>
             _tooltips[^1].child = -1;
             _tooltips[^1].onHideCallback = onTooltipHide;
             _tooltips[^1].isHiding = false;
+            Timing.KillCoroutines(_tooltips[^1].tooltipAttemptHideCoroutine);
+            _tooltips[^1].tooltipAttemptHideCoroutine = new();
             
             return _tooltips.Count - 1;
         }
