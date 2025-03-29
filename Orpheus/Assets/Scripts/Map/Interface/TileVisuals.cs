@@ -12,10 +12,13 @@ public class TileVisuals : MonoBehaviour
     private const string TILE_START_HARVEST_TRIGGER = "Start";
     private const string TILE_END_HARVEST_TRIGGER = "End";
     private const string TILE_SHAKE_ANIMATION_TRIGGER = "Shake";
+    private const string TILE_APPEAR_ANIMATION_TRIGGER = "Appear";
 
     [SerializeField] private Animator animator;
 
     [SerializeField] private Transform buildingsRoot = new RectTransform();
+    
+    [SerializeField] private ShadowOverlayVisuals shadowOverlayVisuals;
 
     private List<ResourceIcon> _instantiatedResourceIcons = new List<ResourceIcon>();
 
@@ -80,10 +83,20 @@ public class TileVisuals : MonoBehaviour
         {
             renderer.enabled = enabled;
         }
+
+        if (enabled)
+        {
+            animator.SetTrigger(TILE_APPEAR_ANIMATION_TRIGGER);
+        }
     }
 
     private void OnGameSpeedChanged(float gameSpeed)
     {
         animator.speed = gameSpeed;
+    }
+
+    public void OnTileAppear()
+    {
+        shadowOverlayVisuals.OnDisappear();
     }
 }
