@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class HarvestAnimationController : Singleton<HarvestAnimationController>
 {
+    public event Action<Vector2Int> OnTileHarvestAnimationTriggered;
+    
     private void Start()
     {
         BloomingHarvestController.Instance.OnHarvestStart -= OnHarvestStart;
@@ -78,6 +80,7 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
                 if (tileInstanceAtPosition != null)
                 {
                     tileInstanceAtPosition.TriggerTileHarvestAnimation(resourcesChange);
+                    OnTileHarvestAnimationTriggered?.Invoke(position);
                 }
                 
                 break;

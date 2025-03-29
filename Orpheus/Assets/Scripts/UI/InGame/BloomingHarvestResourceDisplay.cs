@@ -6,8 +6,11 @@ using MEC;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BloomingHarvestResourceDisplay : MonoBehaviour
+public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceDisplay>
 {
+    public event Action<ResourceType> OnResourceIncrementAnimationTriggered;
+    public event Action<ResourceType> OnResourceDecrementAnimationTriggered;
+    
     [SerializeField] private RectTransform rootTransform;
     [SerializeField] private RectTransform listParentTransform;
     [SerializeField] private BloomingHarvestResourceListItem bloomingHarvestResourceListItemPrefab;
@@ -81,6 +84,7 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
         ResetAnimatorState();
         
         animator.SetTrigger(animatorActivateTriggerName);
+        
     }
 
     private void ResetAnimatorState()
@@ -126,6 +130,7 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
                     OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeIncrementAnim, () =>
                     {
                         animator.SetTrigger(animatorIncrementResourceTriggerName);
+                        OnResourceIncrementAnimationTriggered?.Invoke(resourceType);   
                     });
 
                     timeToWait += waitBeforeIncrementAnim;
@@ -135,6 +140,7 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
                     OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeDecrementAnim, () =>
                     {
                         animator.SetTrigger(animatorDecrementResourceTriggerName);
+                        OnResourceDecrementAnimationTriggered?.Invoke(resourceType);
                     });
                     
                     timeToWait += waitBeforeDecrementAnim;
@@ -148,6 +154,7 @@ public class BloomingHarvestResourceDisplay : MonoBehaviour
                 OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeCreateListItemAnim, () =>
                 {
                     animator.SetTrigger(animatorIncrementResourceTriggerName);
+                    OnResourceIncrementAnimationTriggered?.Invoke(resourceType);
                 });
                 
                 timeToWait += waitBeforeCreateListItemAnim;
