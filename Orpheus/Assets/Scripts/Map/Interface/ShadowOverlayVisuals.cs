@@ -34,7 +34,6 @@ public class ShadowOverlayVisuals : MonoBehaviour
         
         shadowRenderer.GetPropertyBlock(block);
         
-        
         for (float t = 0; t < disintegrateTime; t += Time.deltaTime)
         {
             block.SetFloat("_DisintegrateProgress", t / disintegrateTime);

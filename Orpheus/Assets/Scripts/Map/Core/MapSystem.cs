@@ -28,6 +28,9 @@ public class MapSystem : Singleton<MapSystem>
     [SerializeField] private float stoneProbabilityOnGrassTile = 0.4f;
     [SerializeField] private float woodProbabilityOnWaterTile = 0.6f;
     [SerializeField] private float stoneProbabilityOnWaterTile = 0.4f;
+
+    [Header("Resources Settings")] 
+    [SerializeField] private bool resourcesGeneratedAtStart = false;
     
     private MapGenerator _mapGenerator;
     private MapResourcesGenerator _mapResourcesGenerator;
@@ -64,6 +67,12 @@ public class MapSystem : Singleton<MapSystem>
         List<Vector2Int> cityOwnedTiles);
     
     public event OnCityOwnedTilesChangedDelegate OnCityOwnedTilesChanged;
+
+    public delegate void OnTileAddedOrRemovedFromCityDelegate(Vector2Int cityCapitalLocation, Vector2Int tilePosition);
+    
+    public event OnTileAddedOrRemovedFromCityDelegate OnTileAddedToCity;
+    
+    public event OnTileAddedOrRemovedFromCityDelegate OnTileRemovedFromCity;
     
     public delegate void OnTileResourcesChangedDelegate(Vector2Int position, ResourceType resourceType, int difference);
     public event OnTileResourcesChangedDelegate OnTileResourcesChanged;
@@ -108,10 +117,15 @@ public class MapSystem : Singleton<MapSystem>
                 return offset + position;
             }).ToList();
             
-            CityTileData newCity = new CityTileData(position, initialTileLocations);
+            CityTileData newCity = new CityTileData(position, new());
             
             _cities.Add(newCity);
-            
+
+            foreach (Vector2Int tileLocation in initialTileLocations)
+            {
+                AddTileToCity(newCity.CityGuid, tileLocation);
+            }
+
             OnBuildingConstructed?.Invoke(position.x, position.y, buildingType);
             OnCityOwnedTilesChanged?.Invoke(position, initialTileLocations);
         }
@@ -208,6 +222,11 @@ public class MapSystem : Singleton<MapSystem>
             extremumTiles.Add(ownedCityTile + new Vector2Int(-1, 0));
         }
         
+        foreach (Vector2Int ownedCityTile in ownedCityTiles)
+        {
+            extremumTiles.Remove(ownedCityTile);
+        }
+        
         Dictionary<int, List<Vector2Int>> taxicabDistancePositions = new Dictionary<int, List<Vector2Int>>();
 
         int minDistance = int.MaxValue;
@@ -228,12 +247,46 @@ public class MapSystem : Singleton<MapSystem>
                 minDistance = taxicabDistance;
             }
         }
-        
+
         Vector2Int newTile = taxicabDistancePositions[minDistance][UnityEngine.Random.Range(0, taxicabDistancePositions[minDistance].Count)];
+
+        if (AddTileToCity(cityGuid, newTile))
+        {
+            OnCityOwnedTilesChanged?.Invoke(cityCenterPosition, ownedCityTiles);
+            return newTile;
+        }
+        else return new Vector2Int(-1, -1);
+    }
+
+    private bool AddTileToCity(Guid cityGuid, Vector2Int newTilePosition)
+    {
+        CityTileData city = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
+
+        if (city == null)
+        {
+            Debug.LogError($"Cannot find city with guid: {cityGuid}");
+            return false;
+        }
         
-        city.AddTileToCity(newTile);
+        Vector2Int cityCenterPosition = city.GetCapitalLocation();
         
-        return newTile;
+        city.AddTileToCity(newTilePosition);
+        
+        if (!resourcesGeneratedAtStart)
+        {
+            TileType type = _tiles[newTilePosition.x, newTilePosition.y].Type;  
+            List<ResourceItem> resources = _mapResourcesGenerator.GenerateResourcesOnTile(type);
+
+            for (int i = 0; i < resources.Count; i++)
+            {
+                _tiles.AddResourceToTile(newTilePosition.x, newTilePosition.y, resources[i].Type, resources[i].Quantity);
+                OnTileResourcesChanged?.Invoke(newTilePosition, resources[i].Type, resources[i].Quantity);
+            }
+        }
+        
+        OnTileAddedToCity?.Invoke(cityCenterPosition, newTilePosition);
+        
+        return true;
     }
 
     public bool GetUnoccupiedTileInCity(Guid cityGuid, out Vector2Int location)
@@ -314,15 +367,32 @@ public class MapSystem : Singleton<MapSystem>
                 $"Provided dimensions: ({width}, {height}), generated chunk dimensions: ({chunk.GetLength(0)}, {chunk.GetLength(1)})");
             return;
         }
-        
-        List<ResourceItem>[,] resources = _mapResourcesGenerator.GenerateResourceOnChunk(chunk, seed);
 
-        if (resources.GetLength(0) != width || resources.GetLength(1) != height)
+        List<ResourceItem>[,] resources;
+        if (resourcesGeneratedAtStart)
         {
-            Debug.LogError("Resources generated dimensions is not equal to the chunk dimensions! something has gone wrong." +
-                           $"resources list dimensions: ({resources.GetLength(0)}, {resources.GetLength(1)})," +
-                           $" generated chunk dimensions: ({chunk.GetLength(0)}, {chunk.GetLength(1)})");
-            return;
+            resources = _mapResourcesGenerator.GenerateResourcesOnChunk(chunk, seed);
+
+            if (resources.GetLength(0) != width || resources.GetLength(1) != height)
+            {
+                Debug.LogError(
+                    "Resources generated dimensions is not equal to the chunk dimensions! something has gone wrong." +
+                    $"resources list dimensions: ({resources.GetLength(0)}, {resources.GetLength(1)})," +
+                    $" generated chunk dimensions: ({chunk.GetLength(0)}, {chunk.GetLength(1)})");
+                return;
+            }
+        }
+        else
+        {
+            resources = new List<ResourceItem>[width, height];
+
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    resources[i, j] = new List<ResourceItem>();
+                }
+            }
         }
 
         TileInformation[,] newTiles = new TileInformation[width, height];

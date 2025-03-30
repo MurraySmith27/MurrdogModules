@@ -37,6 +37,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
         MapSystem.Instance.OnCityOwnedTilesChanged -= OnCityOwnedTilesChanged;
         MapSystem.Instance.OnCityOwnedTilesChanged += OnCityOwnedTilesChanged;
+        
+        MapSystem.Instance.OnTileAddedToCity -= OnTileAddedToCity;
+        MapSystem.Instance.OnTileAddedToCity += OnTileAddedToCity;
 
         TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnCullingUpdated;
         TileFrustrumCulling.Instance.OnTileCullingUpdated += OnCullingUpdated;
@@ -49,6 +52,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
             MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
             MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
             MapSystem.Instance.OnCityOwnedTilesChanged -= OnCityOwnedTilesChanged;
+            MapSystem.Instance.OnTileAddedToCity -= OnTileAddedToCity;
         }
 
         if (TileFrustrumCulling.IsAvailable)
@@ -153,6 +157,16 @@ public class MapVisualsController : Singleton<MapVisualsController>
         }
         
         _instantiatedCityBorderVisuals[cityCapitalPosition].PopulateCityOwnedTiles(cityOwnedTiles);
+
+        foreach (Vector2Int cityOwnedTile in cityOwnedTiles)
+        {
+            InstantiatedMapTiles[cityOwnedTile.x, cityOwnedTile.y].OnTileAppear();
+        }
+    }
+
+    private void OnTileAddedToCity(Vector2Int cityCapitalPosition, Vector2Int tilePosition)
+    {
+        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(tilePosition));
     }
 
     private void ReallocateMapTilesArray(int requiredWidth, int requiredHeight)
@@ -176,6 +190,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
     private void OnCullingUpdated(int row, int col, int width, int height)
     {
         if (InstantiatedMapTiles.GetLength(0) == 0) return;
+
+        RectInt newCullingRect = new RectInt(row, col, width, height);
         
         if (_lastCullingRect.x >= 0)
         {
@@ -183,7 +199,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
             {
                 for (int j = _lastCullingRect.y; j < _lastCullingRect.y + _lastCullingRect.height; j++)
                 {
-                    if (i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
+                    Vector2Int position = new Vector2Int(i, j);
+                    if (!newCullingRect.Contains(position) && i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
                         InstantiatedMapTiles[i, j].ToggleVisuals(false);
                 }
             }
@@ -193,14 +210,15 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             for (int j = col; j < height + col; j++)
             {
-                if (i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
+                Vector2Int position = new Vector2Int(i, j);
+                if (!_lastCullingRect.Contains(position) && i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
                 {
                     InstantiatedMapTiles[i, j].ToggleVisuals(true);
                     InstantiatedMapTiles[i, j].ToggleShadow(!MapSystem.Instance.IsTileOwnedByCity(new Vector2Int(i, j)));
                 }
             }
         }
-        
-        _lastCullingRect = new RectInt(row, col, width, height);
+
+        _lastCullingRect = newCullingRect;
     }
 }

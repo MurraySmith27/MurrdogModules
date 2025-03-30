@@ -31,7 +31,7 @@ public class MapResourcesGenerator
         _stoneProbabbilityOnWaterTile = stoneProbabbilityOnWaterTile;
     }
 
-    public List<ResourceItem>[,] GenerateResourceOnChunk(TileType[,] tileTypeMap, int seed)
+    public List<ResourceItem>[,] GenerateResourcesOnChunk(TileType[,] tileTypeMap, int seed)
     {
         Random.InitState(seed);
         
@@ -47,7 +47,7 @@ public class MapResourcesGenerator
             {
                 TileType type = tileTypeMap[i, j];
 
-                resourcesOnChunk[i, j] = GenerateResourceOnTile(type);
+                resourcesOnChunk[i, j] = GenerateResourcesOnTile(type);
                 totalResourcesOnChunk += resourcesOnChunk[i, j].Count;
             }
         }
@@ -59,7 +59,7 @@ public class MapResourcesGenerator
     }
 
 
-    private List<ResourceItem> GenerateResourceOnTile(TileType type)
+    public List<ResourceItem> GenerateResourcesOnTile(TileType type)
     {
         List<ResourceType> resourceTypes = new List<ResourceType>();
         switch (type)

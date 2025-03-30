@@ -99,3 +99,4 @@ MonoBehaviour:
   shadowDisintegrateMaterial: {fileID: 2100000, guid: 72fb244ae3a0c7543972609e838b9a9f,
     type: 2}
   shadowRenderer: {fileID: 5465000500494066971}
+  disintegrateTime: 2

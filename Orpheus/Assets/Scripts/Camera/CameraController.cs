@@ -292,13 +292,13 @@ public class CameraController : Singleton<CameraController>
         }
     }
 
-    public void FocusPosition(Vector3 worldPosition)
+    public void FocusPosition(Vector3 worldPosition, Action onFocusCompleteCallback = null)
     {
-        Timing.RunCoroutineSingleton(_MoveAnimationCoroutine(worldPosition), _moveCoroutineHandle,
+        Timing.RunCoroutineSingleton(_MoveAnimationCoroutine(worldPosition, onFocusCompleteCallback), _moveCoroutineHandle,
             SingletonBehavior.Overwrite);
     }
 
-    private IEnumerator<float> _MoveAnimationCoroutine(Vector3 targetPosition)
+    private IEnumerator<float> _MoveAnimationCoroutine(Vector3 targetPosition, Action onFocusCompleteCallback = null)
     {
         _focusingPosition = true;
         Vector3 initialPos = cameraFollowRoot.position;
@@ -307,6 +307,10 @@ public class CameraController : Singleton<CameraController>
             SetCameraPosition(Vector3.Lerp(initialPos, targetPosition, cameraMoveAnimCurve.Evaluate(t / cameraMoveAnimTime)));
             yield return 0;
         }
+        
+        SetCameraPosition(targetPosition);
+        
+        onFocusCompleteCallback?.Invoke();
         
         _focusingPosition = false;
     }

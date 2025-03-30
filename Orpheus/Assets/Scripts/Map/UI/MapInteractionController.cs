@@ -18,8 +18,8 @@ public class MapInteractionController : Singleton<MapInteractionController>
     private Vector2Int _currentlyHoveredOverTilePosition = new Vector2Int(-1, -1);
     private TileVisuals _currentlyHoveredOverTile = null;
 
-    public event Action<TileVisuals> OnTileHoveredOver;
-    public event Action<TileVisuals> OnTileSelected;
+    public event Action<TileVisuals, Vector2Int> OnTileHoveredOver;
+    public event Action<TileVisuals, Vector2Int> OnTileSelected;
     
     public MapInteractionMode CurrentMode { get; private set; } = MapInteractionMode.Default;
 
@@ -44,7 +44,7 @@ public class MapInteractionController : Singleton<MapInteractionController>
                 case MapInteractionMode.Default:
                     if (_currentlySelectedTilePosition != tilePosition)
                     {
-                        OnTileSelected?.Invoke(_currentlySelectedTile);
+                        OnTileSelected?.Invoke(_currentlySelectedTile, tilePosition);
                     }
                     break;
                 case MapInteractionMode.PlaceBuilding:
@@ -62,7 +62,7 @@ public class MapInteractionController : Singleton<MapInteractionController>
         {
             if (_currentlySelectedTilePosition != tilePosition)
             {
-                OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile);
+                OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile, tilePosition);
             }
         }
     }

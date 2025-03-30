@@ -26,6 +26,8 @@ public class TileVisuals : MonoBehaviour
 
     private List<BuildingBehaviour> _attachedBuildings = new();
 
+    private bool _playedAppearAnimation = false;
+
     private void Awake()
     {
         CollectRenderers();
@@ -98,5 +100,11 @@ public class TileVisuals : MonoBehaviour
     public void OnTileAppear()
     {
         shadowOverlayVisuals.OnDisappear();
+
+        if (!_playedAppearAnimation)
+        {
+            _playedAppearAnimation = true;
+            animator.SetTrigger(TILE_APPEAR_ANIMATION_TRIGGER);
+        }
     }
 }
