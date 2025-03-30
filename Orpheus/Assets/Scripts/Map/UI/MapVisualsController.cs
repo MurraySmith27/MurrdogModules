@@ -194,7 +194,10 @@ public class MapVisualsController : Singleton<MapVisualsController>
             for (int j = col; j < height + col; j++)
             {
                 if (i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
+                {
                     InstantiatedMapTiles[i, j].ToggleVisuals(true);
+                    InstantiatedMapTiles[i, j].ToggleShadow(!MapSystem.Instance.IsTileOwnedByCity(new Vector2Int(i, j)));
+                }
             }
         }
         

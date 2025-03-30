@@ -83,11 +83,11 @@ public class TileVisuals : MonoBehaviour
         {
             renderer.enabled = enabled;
         }
+    }
 
-        if (enabled)
-        {
-            animator.SetTrigger(TILE_APPEAR_ANIMATION_TRIGGER);
-        }
+    public void ToggleShadow(bool enabled)
+    {
+        shadowOverlayVisuals.gameObject.SetActive(enabled);
     }
 
     private void OnGameSpeedChanged(float gameSpeed)
