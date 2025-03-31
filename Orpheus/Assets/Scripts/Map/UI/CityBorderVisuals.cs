@@ -17,7 +17,17 @@ public class CityBorderVisuals : MonoBehaviour
     public void PopulateCityOwnedTiles(List<Vector2Int> ownedTiles)
     {
         List<Vector3> outskirtsLinePoints = GenerateMesh(ownedTiles);
+        
+        Vector2Int centerPosition = Vector2Int.zero;
 
+        foreach (Vector2Int position in ownedTiles)
+        {
+            centerPosition += position;
+        }
+
+        centerPosition /= ownedTiles.Count;
+        
+        Vector3 centerPositionWorldSpace = MapUtils.GetTileWorldPositionFromGridPosition(centerPosition);
         
         Vector3 yOffset = new Vector3(0, borderLineYOffset, 0);
         //need to convert to world space
@@ -28,6 +38,8 @@ public class CityBorderVisuals : MonoBehaviour
         
         cityBorderOutskirtsLineRenderer.positionCount = outskirtsLinePoints.Count;
         cityBorderOutskirtsLineRenderer.SetPositions(outskirtsLinePoints.ToArray());
+
+        transform.position = centerPositionWorldSpace;
     }
 
     private List<Vector3> GenerateMesh(List<Vector2Int> ownedTiles)
@@ -44,6 +56,8 @@ public class CityBorderVisuals : MonoBehaviour
         int minY = Int32.MaxValue;
         int maxY = Int32.MinValue;
 
+        Vector2 averageTilePosition = Vector2.zero;
+
         foreach (Vector2Int tile in ownedTiles)
         {
             if (tile.x < minX) minX = tile.x;
@@ -51,7 +65,11 @@ public class CityBorderVisuals : MonoBehaviour
             
             if (tile.y < minY) minY = tile.y;
             if (tile.y > maxY) maxY = tile.y;
+
+            averageTilePosition += tile;
         }
+
+        averageTilePosition /= (float)ownedTiles.Count;
         
         bool[,] isOwned = new bool[1 + maxX - minX, 1 + maxY - minY];
 
@@ -108,15 +126,21 @@ public class CityBorderVisuals : MonoBehaviour
         }
         
         cornerOfOutside.IntersectWith(cornerOfInside);
-        // cornerOfOutside.UnionWith(innerVertices);
         
         List<Vector3> verticesWorldSpace = cornerOfOutside.ToList();
         
         float width = 1 + maxX - minX;
         float height = 1 + maxY - minY;
-
-        Vector3 centerPointWorldSpace =
-            MapUtils.GetWorldPostiionFromPlanePosition(new Vector3(width / 2f + minX, 0, height / 2f + minY));
+        
+        Debug.LogError($"width: {width}");
+        Debug.LogError($"height: {height}");
+        
+        Debug.LogError($"maxX: {maxX}, minX: {minX}");
+        
+        Debug.LogError($"maxY: {maxY}, minY: {minY}");
+        
+        Vector3 centerPointWorldSpace = 
+            MapUtils.GetWorldPostiionFromPlanePosition(new Vector3(averageTilePosition.x, 0, averageTilePosition.y));
         
         //convert the vertices to polar coordinates in order to sort them by angle
         List<Vector3> verticesPolarCoordinates = new List<Vector3>();

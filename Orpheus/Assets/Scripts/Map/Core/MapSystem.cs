@@ -123,7 +123,7 @@ public class MapSystem : Singleton<MapSystem>
 
             foreach (Vector2Int tileLocation in initialTileLocations)
             {
-                AddTileToCity(newCity.CityGuid, tileLocation);
+                TryAddTileToCity(newCity.CityGuid, tileLocation);
             }
 
             OnBuildingConstructed?.Invoke(position.x, position.y, buildingType);
@@ -250,15 +250,35 @@ public class MapSystem : Singleton<MapSystem>
 
         Vector2Int newTile = taxicabDistancePositions[minDistance][UnityEngine.Random.Range(0, taxicabDistancePositions[minDistance].Count)];
 
-        if (AddTileToCity(cityGuid, newTile))
+        if (TryAddTileToCity(cityGuid, newTile))
         {
-            OnCityOwnedTilesChanged?.Invoke(cityCenterPosition, ownedCityTiles);
+            OnCityOwnedTilesChanged?.Invoke(cityCenterPosition, city.GetTilesInOrder());
             return newTile;
         }
         else return new Vector2Int(-1, -1);
     }
 
-    private bool AddTileToCity(Guid cityGuid, Vector2Int newTilePosition)
+    public void AddTileToCity(Guid cityGuid, Vector2Int tilePosition)
+    {
+        if (!TryAddTileToCity(cityGuid, tilePosition))
+        {
+            Debug.LogError($"Failed to add tile: {tilePosition} to city with guid: {cityGuid}.");
+            return;
+        }
+        else
+        {
+            CityTileData cityData = _cities.FirstOrDefault((CityTileData data) =>
+            {
+                return data.CityGuid == cityGuid;
+            });
+            
+            Vector2Int cityCapitalLocation = cityData!.GetCapitalLocation();
+            
+            OnCityOwnedTilesChanged?.Invoke(cityCapitalLocation, cityData!.GetTilesInOrder());
+        }
+    }
+
+    private bool TryAddTileToCity(Guid cityGuid, Vector2Int newTilePosition)
     {
         CityTileData city = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
 
@@ -267,6 +287,8 @@ public class MapSystem : Singleton<MapSystem>
             Debug.LogError($"Cannot find city with guid: {cityGuid}");
             return false;
         }
+        
+        Debug.LogError($"position: {newTilePosition}");
         
         Vector2Int cityCenterPosition = city.GetCapitalLocation();
         

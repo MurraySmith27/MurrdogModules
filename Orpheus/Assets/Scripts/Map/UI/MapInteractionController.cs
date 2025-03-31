@@ -44,6 +44,7 @@ public class MapInteractionController : Singleton<MapInteractionController>
                 case MapInteractionMode.Default:
                     if (_currentlySelectedTilePosition != tilePosition)
                     {
+                        _currentlySelectedTilePosition = tilePosition;
                         OnTileSelected?.Invoke(_currentlySelectedTile, tilePosition);
                     }
                     break;
@@ -129,5 +130,10 @@ public class MapInteractionController : Singleton<MapInteractionController>
         }
 
         return MapVisualsController.Instance.GetTileInstanceAtPosition(position);
+    }
+
+    public Vector2Int GetCurrentlySelectedTile()
+    {
+        return _currentlySelectedTilePosition;
     }
 }

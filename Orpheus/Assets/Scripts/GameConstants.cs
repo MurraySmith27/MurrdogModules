@@ -28,7 +28,7 @@ public static class GameConstants
     public static readonly long STARTING_STONE = 100;
 
     public static readonly long STARTING_GOLD = 1000;
-
+    
     public static readonly Vector2Int[] INITIAL_CITY_TILES = new Vector2Int[]
     {
         new Vector2Int(1, 1), new Vector2Int(1, 0), new Vector2Int(1, -1),
