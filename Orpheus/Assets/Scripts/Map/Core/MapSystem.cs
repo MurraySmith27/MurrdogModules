@@ -288,8 +288,6 @@ public class MapSystem : Singleton<MapSystem>
             return false;
         }
         
-        Debug.LogError($"position: {newTilePosition}");
-        
         Vector2Int cityCenterPosition = city.GetCapitalLocation();
         
         city.AddTileToCity(newTilePosition);
