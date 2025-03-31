@@ -18,7 +18,7 @@ public class CityBorderVisuals : MonoBehaviour
     {
         List<Vector3> outskirtsLinePoints = GenerateMesh(ownedTiles);
         
-        Vector2Int centerPosition = Vector2Int.zero;
+        Vector2 centerPosition = Vector2Int.zero;
 
         foreach (Vector2Int position in ownedTiles)
         {
@@ -27,7 +27,7 @@ public class CityBorderVisuals : MonoBehaviour
 
         centerPosition /= ownedTiles.Count;
         
-        Vector3 centerPositionWorldSpace = MapUtils.GetTileWorldPositionFromGridPosition(centerPosition);
+        Vector3 centerPositionWorldSpace = MapUtils.GetWorldPostiionFromPlanePosition(new Vector3(centerPosition.x, 0, centerPosition.y));
         
         Vector3 yOffset = new Vector3(0, borderLineYOffset, 0);
         //need to convert to world space
@@ -140,7 +140,7 @@ public class CityBorderVisuals : MonoBehaviour
         Debug.LogError($"maxY: {maxY}, minY: {minY}");
         
         Vector3 centerPointWorldSpace = 
-            MapUtils.GetWorldPostiionFromPlanePosition(new Vector3(averageTilePosition.x, 0, averageTilePosition.y));
+            MapUtils.GetWorldPostiionFromPlanePosition(new Vector3(averageTilePosition.x + 0.5f, 0, averageTilePosition.y + 0.5f));
         
         //convert the vertices to polar coordinates in order to sort them by angle
         List<Vector3> verticesPolarCoordinates = new List<Vector3>();
