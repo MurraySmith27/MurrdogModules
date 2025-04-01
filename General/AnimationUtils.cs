@@ -4,8 +4,13 @@ using UnityEngine;
 
 public static class AnimationUtils
 {
-    public static void ResetAnimator(Animator animator, string defaultStateName)
+    public static void ResetAnimator(Animator animator, string defaultStateName = "")
     {
+        if (string.IsNullOrEmpty(defaultStateName))
+        {
+            defaultStateName = "None";
+        }
+        
         foreach (var param in animator.parameters)
         {
             if (param.type == AnimatorControllerParameterType.Trigger)
@@ -14,6 +19,6 @@ public static class AnimationUtils
             }
         }
         
-        animator.Play(defaultStateName);
+        animator.Play(defaultStateName, -1, 0f);
     }
 }

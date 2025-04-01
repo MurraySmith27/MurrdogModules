@@ -83,6 +83,8 @@ public class UIPopupComponent : MonoBehaviour
     {
         _showPopupCRRunning = true;
         
+        AnimationUtils.ResetAnimator(_animatorComponent);
+        
         _animatorComponent.SetTrigger(_introAnimatorTrigger);
         IsActive = true;
 

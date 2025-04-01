@@ -9,6 +9,8 @@ public class UIPopup
     public string id;
     [Tooltip("The popup prefab, must have a UIPopupComponent attached to the prefab root")]
     public GameObject prefab;
+    [Tooltip("(optional), if prefab is null, The instance of the object in the scene, must have a UIPopupComponent attached to the prefab root")]
+    public GameObject gameObjectInstance;
     [Tooltip("The name of the inputs that show this popup")]
     public List<UIInputType> showPopupInputs;
     [Tooltip("The name of the inputs that hide this popup")]

@@ -127,8 +127,15 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
 
          if (!_popupInstancePool.ContainsKey(popupId))
          {
-            uiPopup.prefab.SetActive(false);
-            _popupInstancePool.Add(popupId, Instantiate(uiPopup.prefab, transform).GetComponent<UIPopupComponent>());
+            if (uiPopup.prefab != null)
+            {
+               uiPopup.prefab.SetActive(false);
+               _popupInstancePool.Add(popupId, Instantiate(uiPopup.prefab, transform).GetComponent<UIPopupComponent>());
+            } 
+            else if (uiPopup.gameObjectInstance != null)
+            {
+               _popupInstancePool.Add(popupId, uiPopup.gameObjectInstance.GetComponent<UIPopupComponent>());
+            }
          }
          
          UIPopupComponent newPopup = _popupInstancePool[popupId];
