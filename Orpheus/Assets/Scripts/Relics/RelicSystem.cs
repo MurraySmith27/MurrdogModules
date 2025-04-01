@@ -76,6 +76,11 @@ public class RelicSystem : Singleton<RelicSystem>
     {
         return relics.Contains(relic);
     }
+
+    public List<RelicTypes> GetOwnedRelics()
+    {
+        return relics;
+    }
     
     public Dictionary<ResourceType, int> OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position)
     {

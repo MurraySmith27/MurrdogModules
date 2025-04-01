@@ -58,5 +58,10 @@ public static class GameConstants
     };
 
     public static readonly long GOLD_PER_LEFTOVER_FOOD_SCORE = 10;
+    
+    
+    //shop settings
+    public static readonly long SHOP_REFRESH_GOLD_INITIAL_COST = 50;
+    public static readonly long SHOP_REFRESH_GOLD_INCREASE = 10;
 
 }

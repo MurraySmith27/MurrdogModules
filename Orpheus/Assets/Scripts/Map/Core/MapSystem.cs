@@ -14,9 +14,6 @@ public class MapSystem : Singleton<MapSystem>
     [SerializeField] private float noiseDensity = 0.5f;
     [SerializeField] private int cellularAutomataIterations = 5;
     [SerializeField] private int numAdjacentCellsToMakeLand = 4;
-
-    [SerializeField] private bool useRandomSeed = true;
-    [SerializeField] private int mapSeed = 0;
     
     [Space(10)]
     
@@ -372,13 +369,9 @@ public class MapSystem : Singleton<MapSystem>
             Debug.LogError($"Attempting to generate a chunk with width: {width} and height {height}. This is not allowed");
             return;
         }
-        
-        int seed = mapSeed;
-        if (useRandomSeed)
-            seed = UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue);
 
         //TODO: eventually, generate the chunk based on the surrounding map data, add padding so inital map is generated far out from the origin.
-        TileType[,] chunk = _mapGenerator.GenerateMap(width, height, seed);
+        TileType[,] chunk = _mapGenerator.GenerateMap(width, height, RandomChanceSystem.Instance.GetCurrentSeed());
 
         if (chunk.GetLength(0) != width || chunk.GetLength(1) != height)
         {
@@ -391,7 +384,7 @@ public class MapSystem : Singleton<MapSystem>
         List<ResourceItem>[,] resources;
         if (resourcesGeneratedAtStart)
         {
-            resources = _mapResourcesGenerator.GenerateResourcesOnChunk(chunk, seed);
+            resources = _mapResourcesGenerator.GenerateResourcesOnChunk(chunk, RandomChanceSystem.Instance.GetCurrentSeed());
 
             if (resources.GetLength(0) != width || resources.GetLength(1) != height)
             {

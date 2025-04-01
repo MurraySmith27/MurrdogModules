@@ -33,7 +33,7 @@ public class CityBorderVisuals : MonoBehaviour
         //need to convert to world space
         for (int i = 0; i < outskirtsLinePoints.Count; i++)
         {
-            outskirtsLinePoints[i] = (Vector3)(cityBorderMeshFilter.transform.localToWorldMatrix * outskirtsLinePoints[i]) + cityBorderMeshFilter.transform.position + yOffset;
+            outskirtsLinePoints[i] = (Vector3)(cityBorderMeshFilter.transform.localToWorldMatrix * outskirtsLinePoints[i]) + centerPositionWorldSpace + yOffset;
         }
         
         cityBorderOutskirtsLineRenderer.positionCount = outskirtsLinePoints.Count;
@@ -131,13 +131,6 @@ public class CityBorderVisuals : MonoBehaviour
         
         float width = 1 + maxX - minX;
         float height = 1 + maxY - minY;
-        
-        Debug.LogError($"width: {width}");
-        Debug.LogError($"height: {height}");
-        
-        Debug.LogError($"maxX: {maxX}, minX: {minX}");
-        
-        Debug.LogError($"maxY: {maxY}, minY: {minY}");
         
         Vector3 centerPointWorldSpace = 
             MapUtils.GetWorldPostiionFromPlanePosition(new Vector3(averageTilePosition.x + 0.5f, 0, averageTilePosition.y + 0.5f));
