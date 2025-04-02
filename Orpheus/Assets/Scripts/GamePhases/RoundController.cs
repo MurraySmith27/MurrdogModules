@@ -64,10 +64,8 @@ public class RoundController : Singleton<RoundController>
 
     public void GoToNextPhase()
     {
-        Debug.LogError("GoToNextPhase Called");
         if (!_inPhaseEnterTransition && !_inPhaseExitTransition && !_inPhaseTransition)
         {
-            Debug.LogError($"GoToNextPhase, current: {PhaseStateMachine.Instance.CurrentPhase}");
             _inPhaseEnterTransition = true;
             _inPhaseExitTransition = true;
             _inPhaseTransition = true;
@@ -85,7 +83,6 @@ public class RoundController : Singleton<RoundController>
 
     private void OnPhaseEnterComplete(GamePhases gamePhase)
     {
-        Debug.LogError("on phase enter complete");
         _inPhaseEnterTransition = false;
 
         if (!interactablePhases.Contains(PhaseStateMachine.Instance.CurrentPhase))
@@ -96,8 +93,6 @@ public class RoundController : Singleton<RoundController>
     
     private void OnPhaseExitComplete(GamePhases gamePhase)
     {
-        
-        Debug.LogError("On phase exit complete");
         _inPhaseExitTransition = false;
         
         if (!interactablePhases.Contains(PhaseStateMachine.Instance.CurrentPhase))

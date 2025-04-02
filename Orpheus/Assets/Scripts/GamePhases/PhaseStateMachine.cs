@@ -81,9 +81,7 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     }
 
     public void ChangePhase(GamePhases nextPhase)
-    {
-        Debug.LogError($"Changing phase to {nextPhase}");
-        
+    {   
         currentPhase.StateExit(this, () => { OnPhaseExitComplete?.Invoke(currentPhaseState); });
 
         currentPhaseState = nextPhase;
