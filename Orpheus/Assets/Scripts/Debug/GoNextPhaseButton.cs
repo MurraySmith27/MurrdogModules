@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class GoNextPhaseButton : MonoBehaviour
 {
     [SerializeField] private Button goNextPhaseButton;
-
-
+    
     private void Awake()
     {
         if (goNextPhaseButton == null)
@@ -34,11 +33,11 @@ public class GoNextPhaseButton : MonoBehaviour
     public void OnClick()
     {
         goNextPhaseButton.interactable = false;
-        PhaseStateMachine.Instance.ChangePhase((GamePhases)(((int)PhaseStateMachine.Instance.CurrentPhase + 1) % Enum.GetNames(typeof(GamePhases)).Length));
+        RoundController.Instance.GoToNextPhase();
     }
 
     private void OnPhaseEnterComplete(GamePhases phase)
     {
-        goNextPhaseButton.interactable = true;
+        goNextPhaseButton.interactable = RoundController.Instance.IsInInteractableRound();
     }
 }

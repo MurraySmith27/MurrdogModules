@@ -19026,7 +19026,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.85
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -27830,10 +27830,10 @@ RectTransform:
   - {fileID: 1864251560}
   m_Father: {fileID: 2122576649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.6, y: 0}
+  m_AnchorMin: {x: 0.100000024, y: 0}
   m_AnchorMax: {x: 0.9, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5.5}
-  m_SizeDelta: {x: 0, y: -11}
+  m_AnchoredPosition: {x: 0, y: 27}
+  m_SizeDelta: {x: 0, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &702516545
 MonoBehaviour:
@@ -27904,7 +27904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.18212414, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -27941,7 +27941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6954a1131974340a49e2c4202f24fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goNextPhaseButton: {fileID: 0}
+  goNextPhaseButton: {fileID: 702516545}
 --- !u!1 &704133609
 GameObject:
   m_ObjectHideFlags: 0
@@ -74562,7 +74562,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15.85
+  m_fontSize: 63.5
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -80212,6 +80212,7 @@ GameObject:
   - component: {fileID: 2000435923}
   - component: {fileID: 2000435922}
   - component: {fileID: 2000435924}
+  - component: {fileID: 2000435925}
   m_Layer: 0
   m_Name: RoundController
   m_TagString: Untagged
@@ -80263,6 +80264,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
+--- !u!114 &2000435925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000435921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1255621ecaa244daf9f702da2992ecfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DDOL: 1
+  numHarvestsBeforeWinter: 2
+  interactablePhases: 02000000070000000b000000
 --- !u!1001 &2002969465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83768,8 +83784,8 @@ RectTransform:
   - {fileID: 523811901}
   m_Father: {fileID: 1145492242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.4, y: 0}
-  m_AnchorMax: {x: 0.6, y: 0.1}
+  m_AnchorMin: {x: 0.7, y: 0}
+  m_AnchorMax: {x: 1.0000001, y: 0.3}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
