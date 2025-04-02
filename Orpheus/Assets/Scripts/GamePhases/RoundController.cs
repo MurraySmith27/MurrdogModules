@@ -16,6 +16,8 @@ public class RoundController : Singleton<RoundController>
     private bool _inPhaseEnterTransition = true;
 
     private bool _inPhaseExitTransition = false;
+
+    private bool _inPhaseTransition = true;
     
     private void Start()
     {
@@ -51,14 +53,24 @@ public class RoundController : Singleton<RoundController>
         {
             _currentHarvestInRound = 0;
         }
+
+        _inPhaseTransition = false;
+        
+        if (!interactablePhases.Contains(PhaseStateMachine.Instance.CurrentPhase))
+        {
+            GoToNextPhase();
+        }
     }
 
     public void GoToNextPhase()
     {
-        Debug.LogError("TRY GO NEXT");
-        if (!_inPhaseEnterTransition && !_inPhaseExitTransition)
+        Debug.LogError("GoToNextPhase Called");
+        if (!_inPhaseEnterTransition && !_inPhaseExitTransition && !_inPhaseTransition)
         {
-            Debug.LogError("SUCCESS");
+            Debug.LogError($"GoToNextPhase, current: {PhaseStateMachine.Instance.CurrentPhase}");
+            _inPhaseEnterTransition = true;
+            _inPhaseExitTransition = true;
+            _inPhaseTransition = true;
             if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingEndStep && _currentHarvestInRound <= numHarvestsBeforeWinter)
             {
                 PhaseStateMachine.Instance.ChangePhase(GamePhases.BuddingUpkeep);
@@ -68,18 +80,15 @@ public class RoundController : Singleton<RoundController>
                 PhaseStateMachine.Instance.ChangePhase((GamePhases)(((int)PhaseStateMachine.Instance.CurrentPhase + 1) %
                                                                 Enum.GetNames(typeof(GamePhases)).Length));
             }
-            
-            _inPhaseEnterTransition = true;
-            _inPhaseExitTransition = true;
         }
     }
 
     private void OnPhaseEnterComplete(GamePhases gamePhase)
     {
-        Debug.LogError("PHASE ENTER COMPLETE");
+        Debug.LogError("on phase enter complete");
         _inPhaseEnterTransition = false;
 
-        if (!interactablePhases.Contains(gamePhase))
+        if (!interactablePhases.Contains(PhaseStateMachine.Instance.CurrentPhase))
         {
             GoToNextPhase();
         }
@@ -87,10 +96,11 @@ public class RoundController : Singleton<RoundController>
     
     private void OnPhaseExitComplete(GamePhases gamePhase)
     {
-        Debug.LogError("PHASE EXIT COMPLETE");
+        
+        Debug.LogError("On phase exit complete");
         _inPhaseExitTransition = false;
         
-        if (!interactablePhases.Contains(gamePhase))
+        if (!interactablePhases.Contains(PhaseStateMachine.Instance.CurrentPhase))
         {
             GoToNextPhase();
         }

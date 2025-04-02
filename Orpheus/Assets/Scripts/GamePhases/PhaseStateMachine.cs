@@ -51,7 +51,21 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     private WiltingExtraResourceConversionPhase _wiltingExtraResourceConversionPhase = new();
     private WiltingEndStepPhase _wiltingEndStepPhase = new();
 
-    void Start()
+    private void Start()
+    {
+        GameStartController.Instance.OnGameStart -= OnGameStart;
+        GameStartController.Instance.OnGameStart += OnGameStart;
+    }
+
+    private void OnDestroy()
+    {
+        if (GameStartController.IsAvailable)
+        {
+            GameStartController.Instance.OnGameStart -= OnGameStart;
+        }
+    }
+    
+    public void OnGameStart()
     {
         currentPhaseState = GamePhases.BuddingUpkeep;
         currentPhase = _buddingUpkeepPhase;
@@ -68,6 +82,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
 
     public void ChangePhase(GamePhases nextPhase)
     {
+        Debug.LogError($"Changing phase to {nextPhase}");
+        
         currentPhase.StateExit(this, () => { OnPhaseExitComplete?.Invoke(currentPhaseState); });
 
         currentPhaseState = nextPhase;
