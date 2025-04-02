@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +15,14 @@ public class ShopPopup : MonoBehaviour
 
     [Header("UI Elements")] 
     [SerializeField] private Button refreshButton;
+    [SerializeField] private TMP_Text refreshButtonCostText;
+    [SerializeField] private List<TMP_Text> shopRelicCostTexts;
+    [SerializeField] private List<Button> shopRelicCostButtons;
+    [SerializeField] private List<Image> soldOutBanners;
     
     private int _numRelicRefreshes = 0;
+
+    private List<RelicTypes> _currentRelics = new();
 
     private List<Relic3DVisual> _instantiatedRelicVisuals = new();
 
@@ -26,6 +33,15 @@ public class ShopPopup : MonoBehaviour
 
         RoundState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
         RoundState.Instance.OnGoldValueChanged += OnGoldValueChanged;
+
+        for (int i = 0; i < shopRelicCostButtons.Count; i++)
+        {
+            int temp = i;
+            shopRelicCostButtons[i].onClick.AddListener(() =>
+            {
+                OnRelicPurchaseButtonClicked(temp);
+            });
+        }
     }
     
     private void OnDestroy()
@@ -52,6 +68,7 @@ public class ShopPopup : MonoBehaviour
         long refreshGoldCost = GameConstants.SHOP_REFRESH_GOLD_INITIAL_COST +
                                GameConstants.SHOP_REFRESH_GOLD_INCREASE * _numRelicRefreshes;
         refreshButton.interactable = (newValue >= refreshGoldCost);
+        refreshButtonCostText.SetText($"<sprite index=0>{refreshGoldCost}");
     }
 
     public void OnRefreshButtonClicked()
@@ -62,6 +79,7 @@ public class ShopPopup : MonoBehaviour
         {
             RoundState.Instance.ChangeCurrentGold(-refreshGoldCost);
             _numRelicRefreshes++;
+            _currentRelics.Clear();
             PopulateShop();
         }
     }
@@ -70,17 +88,55 @@ public class ShopPopup : MonoBehaviour
     {
         Clear();
         
-        List<RelicTypes> currentRelicTypes = RandomChanceSystem.Instance.GenerateRelicTypesInShop(relicIcons.Count, _numRelicRefreshes);
-
-        for (int i = 0; i < currentRelicTypes.Count; i++)
+        if (_currentRelics.Count == 0)
         {
-            GameObject prefab = relicVisuals.GetVisualsPrefabForRelic(currentRelicTypes[i]);
+            _currentRelics = RandomChanceSystem.Instance.GenerateRelicTypesInShop(relicIcons.Count, _numRelicRefreshes);
+        }
 
+        for (int i = 0; i < _currentRelics.Count; i++)
+        {
+            GameObject prefab = relicVisuals.GetVisualsPrefabForRelic(_currentRelics[i]);
+            
             GameObject instance = Instantiate(prefab, relicPreviewTransforms[i]);
             
-            _instantiatedRelicVisuals.Add(instance.GetComponentInChildren<Relic3DVisual>());
-            
-            relicIcons[i].Populate(relicRenderTextureUVs[i], currentRelicTypes[i]);
+            _instantiatedRelicVisuals.Add(instance.GetComponent<Relic3DVisual>());
+
+            relicIcons[i].Populate(relicRenderTextureUVs[i], _currentRelics[i]);
+
+            bool ownsRelic = RelicSystem.Instance.HasRelic(_currentRelics[i]);
+            soldOutBanners[i].gameObject.SetActive(ownsRelic);
+
+            if (!ownsRelic)
+            {
+                shopRelicCostTexts[i].SetText($"<sprite index=0>{GameConstants.SHOP_RELIC_COST}");
+                shopRelicCostButtons[i].interactable = true;
+            }
+            else
+            {
+                shopRelicCostTexts[i].SetText($"SOLD");
+                shopRelicCostButtons[i].interactable = false;
+            }
+        }
+
+        for (int i = _currentRelics.Count; i < relicIcons.Count; i++)
+        {
+            soldOutBanners[i].gameObject.SetActive(true);
+        }
+
+        OnGoldValueChanged(RoundState.Instance.CurrentGold);
+    }
+
+    public void OnRelicPurchaseButtonClicked(int relicIndex)
+    {
+        long relicGoldCost = GameConstants.SHOP_RELIC_COST;
+
+        if (RoundState.Instance.CurrentGold >= relicGoldCost && !RelicSystem.Instance.HasRelic(_currentRelics[relicIndex]))
+        {
+            RelicSystem.Instance.AddRelic(_currentRelics[relicIndex]);
+            RoundState.Instance.ChangeCurrentGold(-relicGoldCost);
+            shopRelicCostTexts[relicIndex].SetText($"SOLD");
+            shopRelicCostButtons[relicIndex].interactable = false;
+            soldOutBanners[relicIndex].gameObject.SetActive(true);
         }
     }
 
@@ -88,7 +144,7 @@ public class ShopPopup : MonoBehaviour
     {
         foreach (Relic3DVisual visual in _instantiatedRelicVisuals)
         {
-            Destroy(visual);
+            Destroy(visual.gameObject);
         }
         
         _instantiatedRelicVisuals.Clear();

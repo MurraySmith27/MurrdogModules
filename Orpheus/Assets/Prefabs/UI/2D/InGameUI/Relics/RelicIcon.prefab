@@ -59,15 +59,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+  m_Color: {r: 0.4764151, g: 0.7256037, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: f67ac209bcf6243c3a24b4d82b8d7ec7, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 1209951735091335970}
   - component: {fileID: 7488131842924204258}
   - component: {fileID: 7296859419920313309}
+  - component: {fileID: 6550007430407395145}
   m_Layer: 5
   m_Name: IconImage
   m_TagString: Untagged
@@ -111,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.05, y: 0.05}
   m_AnchorMax: {x: 0.95, y: 0.95}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0.000001013279}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7488131842924204258
 CanvasRenderer:
@@ -148,6 +149,20 @@ MonoBehaviour:
     y: 0
     width: 0.1
     height: 0.1
+--- !u!114 &6550007430407395145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361666961753188826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 1
 --- !u!1 &8095672014661227663
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +176,7 @@ GameObject:
   - component: {fileID: -6990154653388764066}
   - component: {fileID: 8684845547624493}
   - component: {fileID: 3590179233019161170}
-  - component: {fileID: 6755513021404450732}
+  - component: {fileID: 1478908529718944915}
   m_Layer: 0
   m_Name: RelicIcon
   m_TagString: Untagged
@@ -187,7 +202,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2953126211976651260
 MonoBehaviour:
@@ -245,7 +260,7 @@ MonoBehaviour:
   rectTransform: {fileID: 4783009046827722137}
   uiInputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
   relicVisuals: {fileID: 11400000, guid: 96f24972ca8dd0b43ba5a9ff59eef60f, type: 2}
---- !u!114 &6755513021404450732
+--- !u!114 &1478908529718944915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

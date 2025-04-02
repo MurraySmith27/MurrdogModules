@@ -15,6 +15,7 @@ public class UITooltip : MonoBehaviour
 
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private RectTransform textBoxRectTransform;
+    [SerializeField] private RectTransform textBoxParentRectTransform;
 
     [SerializeField] private string animatorExpandUpTrigger = "Up";
     [SerializeField] private string animatorExpandDownTrigger = "Down";
@@ -54,7 +55,7 @@ public class UITooltip : MonoBehaviour
             
             textBoxOffset = new Vector2(0, -offsetAmount / 2f);
 
-            textBoxPivot = new Vector2(0, 1);
+            textBoxPivot = new Vector2(0, 0);
             
             _isExpandUp = true;
         }
@@ -68,7 +69,7 @@ public class UITooltip : MonoBehaviour
             
             textBoxOffset = new Vector2(0, offsetAmount / 2f);
             
-            textBoxPivot = new Vector2(0, 0);
+            textBoxPivot = new Vector2(0, 1);
 
             _isExpandUp = false;
         }
@@ -87,6 +88,7 @@ public class UITooltip : MonoBehaviour
         }
 
         textBoxRectTransform.pivot = textBoxPivot;
+        textBoxParentRectTransform.pivot = textBoxPivot;
         textBoxRectTransform.anchoredPosition = textBoxOffset;
     }
 

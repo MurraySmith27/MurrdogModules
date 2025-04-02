@@ -64,4 +64,5 @@ public static class GameConstants
     public static readonly long SHOP_REFRESH_GOLD_INITIAL_COST = 50;
     public static readonly long SHOP_REFRESH_GOLD_INCREASE = 10;
 
+    public static readonly long SHOP_RELIC_COST = 200;
 }

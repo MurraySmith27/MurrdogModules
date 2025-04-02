@@ -43,8 +43,9 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         List<RelicTypes> unownedRelicTypes = new List<RelicTypes>();
 
         List<RelicTypes> ownedRelicTypes = RelicSystem.Instance.GetOwnedRelics();
-        foreach (RelicTypes relicType in Enum.GetValues(typeof(RelicTypes)))
+        for (int i = 1; i < Enum.GetValues(typeof(RelicTypes)).Length; i++)
         {
+            RelicTypes relicType = (RelicTypes)i;
             if (!ownedRelicTypes.Contains(relicType))
             {
                 unownedRelicTypes.Add(relicType);
@@ -58,21 +59,28 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         for (int i = 0; i < numRelics; i++)
         {
             int newRelic = Random.Range(1, maxRelicValue);
+            bool foundNewRelic = false;
 
-            if (selectedRelics.Contains((RelicTypes)newRelic)) 
+            if (selectedRelics.Contains((RelicTypes)newRelic) || ownedRelicTypes.Contains((RelicTypes)newRelic))
             {
                 for (int j = 0; j < maxRelicValue - 1; j++)
                 {
-                    int tryRelic = (newRelic + j) % (maxRelicValue - 1) + 1;
-                    if (!selectedRelics.Contains((RelicTypes) tryRelic))
+                    int tryRelic = (newRelic + j - 1) % (maxRelicValue - 1) + 1;
+                    if (!selectedRelics.Contains((RelicTypes)tryRelic) &&
+                        !ownedRelicTypes.Contains((RelicTypes)tryRelic))
                     {
+                        foundNewRelic = true;
                         newRelic = tryRelic;
                         break;
                     }
                 }
             }
-            
-            selectedRelics.Add((RelicTypes)newRelic);
+            else foundNewRelic = true;
+
+            if (foundNewRelic)
+            {
+                selectedRelics.Add((RelicTypes)newRelic);
+            }
         }
         
         //reset the seed
