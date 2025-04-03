@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PhaseStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PhaseStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +20,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Unity/Hub/Editor/2022.3.55f1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
@@ -132,7 +135,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.55f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.55f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\murra\Desktop\dev\Orpheus\Orpheus -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\murra\Desktop\dev\Orpheus\Orpheus" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -140,7 +143,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.55f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.55f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\murra\Desktop\dev\Orpheus\Orpheus -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\murra\Desktop\dev\Orpheus\Orpheus" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -157,10 +160,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="524">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="524" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -201,7 +204,7 @@
       <workItem from="1743080567607" duration="9802000" />
       <workItem from="1743201624909" duration="6770000" />
       <workItem from="1743275658377" duration="4992000" />
-      <workItem from="1743472129981" duration="21300000" />
+      <workItem from="1743472129981" duration="34943000" />
     </task>
     <servers />
   </component>
@@ -254,14 +257,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Debug/CurrentPhaseText.cs</url>
           <line>25</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Debug\CurrentPhaseText.cs" containingFunctionPresentation="Method 'OnPhaseChanged'">
-            <startOffsets>
-              <option value="632" />
-            </startOffsets>
-            <endOffsets>
-              <option value="714" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Debug\CurrentPhaseText.cs" containingFunctionPresentation="Method 'OnPhaseChanged'" />
           <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>

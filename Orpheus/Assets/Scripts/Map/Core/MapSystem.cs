@@ -195,6 +195,19 @@ public class MapSystem : Singleton<MapSystem>
         }) != null;
     }
 
+    public bool IsTileAdjacentToCity(Vector2Int position)
+    {
+        return _cities.FirstOrDefault((CityTileData city) =>
+        {
+            return !city.IsLocationInCity(position) && (
+                city.IsLocationInCity(position + new Vector2Int(1, 0)) || 
+                city.IsLocationInCity(position + new Vector2Int(-1, 0)) ||
+                city.IsLocationInCity(position + new Vector2Int(0, 1)) ||
+                city.IsLocationInCity(position + new Vector2Int(0, -1))
+                );
+        }) != null;
+    }
+
     public Vector2Int AddRandomTileToCity(Guid cityGuid)
     {
         HashSet<Vector2Int> extremumTiles = new HashSet<Vector2Int>();

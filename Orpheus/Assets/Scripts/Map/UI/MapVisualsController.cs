@@ -158,15 +158,30 @@ public class MapVisualsController : Singleton<MapVisualsController>
         
         _instantiatedCityBorderVisuals[cityCapitalPosition].PopulateCityOwnedTiles(cityOwnedTiles);
 
+        HashSet<Vector2Int> cityAdjacentTiles = new();
+        
         foreach (Vector2Int cityOwnedTile in cityOwnedTiles)
         {
             InstantiatedMapTiles[cityOwnedTile.x, cityOwnedTile.y].OnTileAppear();
+            
+            //also make adjacent tiles to the border appear
+            cityAdjacentTiles.Add(cityOwnedTile + new Vector2Int(1, 0));
+            cityAdjacentTiles.Add(cityOwnedTile + new Vector2Int(-1, 0));
+            cityAdjacentTiles.Add(cityOwnedTile + new Vector2Int(0, 1));
+            cityAdjacentTiles.Add(cityOwnedTile + new Vector2Int(0, -1));
+        }
+
+        cityAdjacentTiles.IntersectWith(cityOwnedTiles.ToHashSet());
+
+        foreach (Vector2Int adjacentTile in cityAdjacentTiles)
+        {
+            InstantiatedMapTiles[adjacentTile.x, adjacentTile.y].OnTileAppear();
         }
     }
 
     private void OnTileAddedToCity(Vector2Int cityCapitalPosition, Vector2Int tilePosition)
     {
-        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(tilePosition));
+        // CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(tilePosition));
     }
 
     private void ReallocateMapTilesArray(int requiredWidth, int requiredHeight)
@@ -214,7 +229,10 @@ public class MapVisualsController : Singleton<MapVisualsController>
                 if (!_lastCullingRect.Contains(position) && i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
                 {
                     InstantiatedMapTiles[i, j].ToggleVisuals(true);
-                    InstantiatedMapTiles[i, j].ToggleShadow(!MapSystem.Instance.IsTileOwnedByCity(new Vector2Int(i, j)));
+                    InstantiatedMapTiles[i, j].ToggleShadow(
+                        !MapSystem.Instance.IsTileOwnedByCity(new Vector2Int(i, j)) && 
+                        !MapSystem.Instance.IsTileAdjacentToCity(new Vector2Int(i, j))
+                    );
                 }
             }
         }

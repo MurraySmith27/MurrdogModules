@@ -2398,6 +2398,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 47561918}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &52741285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1553854197503531574, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+    type: 3}
+  m_PrefabInstance: {fileID: 602115670}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &60847489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14411,8 +14417,8 @@ RectTransform:
   - {fileID: 1829054034}
   m_Father: {fileID: 1145492242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.42092744, y: 0.000001214475}
+  m_AnchorMax: {x: 0.5790726, y: 0.14214163}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -31799,7 +31805,7 @@ MonoBehaviour:
   uiPopups:
   - id: ShopPopup
     prefab: {fileID: 0}
-    gameObjectInstance: {fileID: 0}
+    gameObjectInstance: {fileID: 52741285}
     showPopupInputs: 
     hidePopupInputs: 
     excludedSceneNames: []
