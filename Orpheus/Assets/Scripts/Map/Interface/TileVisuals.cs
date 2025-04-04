@@ -18,6 +18,8 @@ public class TileVisuals : MonoBehaviour
 
     [SerializeField] private Transform buildingsRoot = new RectTransform();
     
+    [SerializeField] private Transform citizensRoot = new RectTransform();
+    
     [SerializeField] private ShadowOverlayVisuals shadowOverlayVisuals;
 
     private List<ResourceIcon> _instantiatedResourceIcons = new List<ResourceIcon>();
@@ -25,6 +27,8 @@ public class TileVisuals : MonoBehaviour
     private Renderer[] _tileRenderers;
 
     private List<BuildingBehaviour> _attachedBuildings = new();
+
+    private List<CitizenBehaviour> _attachedCitizens = new();
 
     private bool _playedAppearAnimation = false;
 
@@ -77,6 +81,23 @@ public class TileVisuals : MonoBehaviour
         _attachedBuildings.Add(building);
         
         building.transform.SetParent(buildingsRoot);
+    }
+
+    public void AttachCitizen(CitizenBehaviour citizen)
+    {
+        _attachedCitizens.Add(citizen);
+        
+        citizen.transform.SetParent(citizensRoot);
+    }
+
+    public void DetachAllCitizens()
+    {
+        foreach (CitizenBehaviour citizen in _attachedCitizens)
+        {
+            citizen.transform.SetParent(null);
+        }
+        
+        _attachedCitizens.Clear();
     }
 
     public void ToggleVisuals(bool enabled)

@@ -25,13 +25,13 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
         switch (resourceType)
         {
             case PersistentResourceType.Wood:
-                RoundState.Instance.ChangeCurrentWood(diff);
+                PersistentState.Instance.ChangeCurrentWood(diff);
                 break;
             case PersistentResourceType.Stone:
-                RoundState.Instance.ChangeCurrentStone(diff);
+                PersistentState.Instance.ChangeCurrentStone(diff);
                 break;
             case PersistentResourceType.Gold:
-                RoundState.Instance.ChangeCurrentGold(diff);
+                PersistentState.Instance.ChangeCurrentGold(diff);
                 break;
         }
     }
@@ -41,11 +41,11 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
         switch (resourceType)
         {
             case PersistentResourceType.Wood:
-                return RoundState.Instance.CurrentWood >= quantity;
+                return PersistentState.Instance.CurrentWood >= quantity;
             case PersistentResourceType.Stone:
-                return RoundState.Instance.CurrentStone >= quantity;
+                return PersistentState.Instance.CurrentStone >= quantity;
             case PersistentResourceType.Gold:
-                return RoundState.Instance.CurrentGold >= quantity;
+                return PersistentState.Instance.CurrentGold >= quantity;
         }
 
         return false;

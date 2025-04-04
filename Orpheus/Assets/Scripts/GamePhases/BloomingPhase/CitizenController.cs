@@ -1,0 +1,302 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Random = System.Random;
+
+public class CitizenController : Singleton<CitizenController>
+{
+    public delegate void OnHandUsedDelegate(Dictionary<Guid, List<CitizenPlacement>> citizenPlacementsPerCity);
+
+    public event OnHandUsedDelegate OnHandUsed;
+    
+    public delegate void OnDiscardUsedDelegate(Guid cityGuid, List<CitizenPlacement> citizenPlacementsBefore, List<CitizenPlacement> citizenPlacementsAfter);
+
+    public event OnDiscardUsedDelegate OnDiscardUsed;
+
+    public delegate void CitizenOnTileDelegate(Guid cityGuid, Vector2Int placedTile);
+    
+    public event CitizenOnTileDelegate OnBonusCitizenUsed;
+
+    public event CitizenOnTileDelegate OnCitizenAddedToTile;
+    
+    public event CitizenOnTileDelegate OnCitizenRemovedFromTile;
+
+    public event Action<Vector2Int> OnCitizenLocked;
+    
+    public event Action<Vector2Int> OnCitizenUnlocked;
+    
+    public class CitizenPlacement
+    {
+        public CitizenPlacement(Vector2Int _position, bool _isLocked)
+        {
+            Position = _position;
+            IsLocked = _isLocked;
+        }
+        
+        public Vector2Int Position;
+        public bool IsLocked;
+    }
+    
+    private Dictionary<Guid, List<CitizenPlacement>> _citizenPlacements = new();
+
+    private void Start()
+    {
+        HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
+        HarvestState.Instance.OnHarvestStart += OnHarvestStart;
+
+        HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnd;
+        HarvestState.Instance.OnFoodGoalReached += OnHarvestEnd;
+        
+    }
+
+    private void OnDestroy()
+    {
+        if (HarvestState.IsAvailable)
+        {
+            HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
+            HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnd;
+
+        }
+    }
+    
+    private void OnHarvestStart()
+    {
+        List<Guid> allCityGuids = MapSystem.Instance.GetAllCityGuids();
+
+        if (allCityGuids.Count > 0)
+        {
+            TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumRemainingCitizens,
+                out List<Vector2Int> chosenTiles);
+        }
+    }
+
+    private void OnHarvestEnd()
+    {
+        Reset();
+    }
+    
+    public bool TryPlaceBonusCitizenOnRandomTile(Guid cityGuid)
+    {
+        if (PersistentState.Instance.CurrentBonusCitizens > 0)
+        {
+            if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, 1, out List<Vector2Int> chosenTiles))
+            {
+                //use the bonus citizen
+                PersistentState.Instance.ChangeCurrentBonusCitizens(-1);
+                
+                OnBonusCitizenUsed?.Invoke(cityGuid, chosenTiles[0]);
+                return true;
+            }
+            else
+            {
+                Debug.LogError("Tried to place a bonus citizen and couldn't!");
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    private bool TryPlaceCitizensOnUnoccupiedTiles(Guid cityGuid, int numCitizensToPlace, out List<Vector2Int> chosenTiles)
+    {
+        chosenTiles = new();
+        
+        List<Vector2Int> allOwnedCityTiles = MapSystem.Instance.GetOwnedTilesOfCity(cityGuid);
+        
+        List<Vector2Int> unoccupiedCityTiles;
+        if (_citizenPlacements.ContainsKey(cityGuid))
+        {
+            unoccupiedCityTiles = allOwnedCityTiles.Where((Vector2Int position) =>
+            {
+                return _citizenPlacements[cityGuid].FirstOrDefault((CitizenPlacement citizenPlacement) =>
+                {
+                    return citizenPlacement.Position == position;
+                }) == null;
+            }).ToList();
+        }
+        else
+        {
+            unoccupiedCityTiles = allOwnedCityTiles;
+        }
+        
+        for (int i = 0; i < numCitizensToPlace; i++)
+        {
+            if (unoccupiedCityTiles.Count >= 0)
+            {
+                Vector2Int tile =
+                    RandomChanceSystem.Instance.GetNextCitizenTile(HarvestState.Instance.NumDiscardsUsed, HarvestState.Instance.NumDiscardsUsed,
+                        unoccupiedCityTiles);
+                
+                unoccupiedCityTiles.Remove(tile);
+                
+                chosenTiles.Add(tile);
+            }
+            else return false;
+        }
+
+        if (!_citizenPlacements.ContainsKey(cityGuid))
+        {
+            _citizenPlacements.Add(cityGuid, new List<CitizenPlacement>());
+        }
+        
+        foreach (Vector2Int tile in chosenTiles)
+        {
+            _citizenPlacements[cityGuid].Add(new CitizenPlacement(tile, false));
+            
+            OnCitizenAddedToTile?.Invoke(cityGuid, tile);
+        }
+        
+        return true;
+    }
+    
+    public void UseHand()
+    { 
+        HarvestState.Instance.UseHand();
+        
+        OnHandUsed?.Invoke(_citizenPlacements);
+
+        Reset();
+    }
+    
+    public void UseDiscard(Guid cityGuid)
+    {
+        if (HarvestState.Instance.NumRemainingDiscards > 0)
+        {
+            List<CitizenPlacement> citizenPlacementsBefore = new(); 
+            int removedCitizens = 0;
+            if (_citizenPlacements.ContainsKey(cityGuid))
+            {
+                foreach (CitizenPlacement placement in _citizenPlacements[cityGuid])
+                {
+                    citizenPlacementsBefore.Add(placement);
+                }
+                
+                _citizenPlacements[cityGuid].Clear();
+
+                foreach (CitizenPlacement placement in citizenPlacementsBefore)
+                {
+                    if (placement.IsLocked)
+                    {
+                        _citizenPlacements[cityGuid].Add(placement);
+                    }
+                    else
+                    {
+                        removedCitizens++;
+                        OnCitizenRemovedFromTile?.Invoke(cityGuid, placement.Position);
+                    }
+                }
+            }
+
+            if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, removedCitizens, out List<Vector2Int> chosenTiles))
+            {
+                HarvestState.Instance.UseDiscard();
+                
+                OnDiscardUsed?.Invoke(cityGuid, citizenPlacementsBefore, _citizenPlacements[cityGuid]);
+            }
+            else
+            {
+                Debug.LogError("Could not find placements for all citizens in discard! something is bugged.");
+                return;
+            }
+        }
+    }
+
+    public void ToggleCitizenAtTileLock(Vector2Int position, bool locked)
+    {
+        
+        CitizenPlacement placement;
+
+        foreach (Guid cityGuid in _citizenPlacements.Keys)
+        {
+            placement = _citizenPlacements[cityGuid].FirstOrDefault((CitizenPlacement citizenPlacement) =>
+                {
+                    return citizenPlacement.Position == position;
+                });
+
+            if (placement != null)
+            {
+                placement.IsLocked = locked;
+
+                if (locked)
+                {
+                    OnCitizenLocked?.Invoke(position);
+                }
+                else
+                {
+                    OnCitizenUnlocked?.Invoke(position);
+                }
+
+                return;
+            }
+        }
+        
+        Debug.LogError($"Attempted to lock tile with no citizen. tile: {position}");
+        return;
+    }
+
+    public bool IsCitizenAtTileLocked(Vector2Int position)
+    {
+        CitizenPlacement placement;
+
+        foreach (Guid cityGuid in _citizenPlacements.Keys)
+        {
+            placement = _citizenPlacements[cityGuid].FirstOrDefault((CitizenPlacement citizenPlacement) =>
+            {
+                return citizenPlacement.Position == position;
+            });
+
+            if (placement != null)
+            {
+                return placement.IsLocked;
+            }
+        }
+
+        return false;
+    }
+
+    private void Reset()
+    {
+        List<Guid> allCityGuids = MapSystem.Instance.GetAllCityGuids();
+
+        foreach (Guid cityGuid in allCityGuids)
+        {
+            if (_citizenPlacements.ContainsKey(cityGuid))
+            {
+                List<Vector2Int> positions = new();
+                foreach (CitizenPlacement placement in _citizenPlacements[cityGuid])
+                {
+                    positions.Add(placement.Position);
+                }
+                
+                _citizenPlacements[cityGuid].Clear();
+
+                foreach (Vector2Int position in positions)
+                {
+                    OnCitizenRemovedFromTile?.Invoke(cityGuid, position);
+                }
+            }
+        }
+        
+        _citizenPlacements.Clear();
+    }
+    
+    public bool IsCitizenOnTile(Vector2Int tilePosition)
+    {
+        CitizenPlacement placement;
+
+        foreach (Guid cityGuid in _citizenPlacements.Keys)
+        {
+            if (_citizenPlacements[cityGuid].FirstOrDefault((CitizenPlacement citizenPlacement) =>
+                {
+                    return citizenPlacement.Position == tilePosition;
+                }) != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}

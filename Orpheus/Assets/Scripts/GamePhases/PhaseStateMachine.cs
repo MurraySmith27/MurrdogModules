@@ -10,6 +10,7 @@ public enum GamePhases
     BuddingBuilding,
     BuddingEndStep,
     BloomingUpkeep,
+    BloomingHarvestTurn,
     BloomingHarvest,
     BloomingResourceConversion,
     BloomingEndStep,
@@ -17,6 +18,9 @@ public enum GamePhases
     WiltingChallenge,
     WiltingExtraResourceConversion,
     WiltingEndStep,
+    WiltingRoundUpdatePhase,
+    GameWon,
+    GameOver
 }
 
 public class PhaseStateMachine : Singleton<PhaseStateMachine>
@@ -30,7 +34,6 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     }
 
     public event Action<GamePhases> OnPhaseEnterComplete;
-
     public event Action<GamePhases> OnPhaseExitComplete;
     
     private PhaseStateBase currentPhase;
@@ -44,12 +47,16 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     private BuddingEndStepPhase _buddingEndStepPhase = new();
     private BloomingUpkeepPhase _bloomingUpkeepPhase = new();
     private BloomingHarvestPhase _bloomingHarvestPhase = new();
+    private BloomingHarvestTurnPhase _bloomingHarvestTurnPhase = new();
     private BloomingResourceConversionPhase _bloomingResourceConversionPhase = new();
     private BloomingEndStepPhase _bloomingEndStepPhase = new();
     private WiltingUpkeepPhase _wiltingUpkeepPhase = new();
     private WiltingChallengePhase _wiltingChallengePhase = new();
     private WiltingExtraResourceConversionPhase _wiltingExtraResourceConversionPhase = new();
     private WiltingEndStepPhase _wiltingEndStepPhase = new();
+    private WiltingRoundUpdatePhase _wiltingRoundUpdatePhase = new();
+    private GameWonPhase _gameWonPhase = new();
+    private GameOverPhase _gameOverPhase = new();
 
     private void Start()
     {
@@ -112,6 +119,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
                 return _buddingEndStepPhase;
             case GamePhases.BloomingUpkeep:
                 return _bloomingUpkeepPhase;
+            case GamePhases.BloomingHarvestTurn:
+                return _bloomingHarvestTurnPhase;
             case GamePhases.BloomingHarvest:
                 return _bloomingHarvestPhase;
             case GamePhases.BloomingResourceConversion:
@@ -126,6 +135,12 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
                 return _wiltingExtraResourceConversionPhase;
             case GamePhases.WiltingEndStep:
                 return _wiltingEndStepPhase;
+            case GamePhases.WiltingRoundUpdatePhase:
+                return _wiltingRoundUpdatePhase;
+            case GamePhases.GameWon:
+                return _gameWonPhase;
+            case GamePhases.GameOver:
+                return _gameOverPhase;
             default:
                 return null;
         }

@@ -21,6 +21,11 @@ public class CurrentPhaseText : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        OnPhaseChanged(PhaseStateMachine.Instance.CurrentPhase);
+    }
+    
     private void OnPhaseChanged(GamePhases newPhase)
     {
         phaseText.SetText($"Current Phase: {Enum.GetName(typeof(GamePhases), newPhase)}");

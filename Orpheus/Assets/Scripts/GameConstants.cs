@@ -6,7 +6,7 @@ public static class GameConstants
 {
     public static readonly int TILE_SIZE = 10;
 
-    public static readonly long[] FOOD_GOALS_PER_ROUND =
+    public static readonly long[] FOOD_GOALS_PER_HARVEST =
     {
         3,
         8,
@@ -65,4 +65,10 @@ public static class GameConstants
     public static readonly long SHOP_REFRESH_GOLD_INCREASE = 10;
 
     public static readonly long SHOP_RELIC_COST = 200;
+    
+    
+    //harvest settings
+    public static readonly int STARTING_CITIZENS_PER_HARVEST_ROUND = 3;
+    public static readonly int STARTING_DISCARDS_PER_HARVEST_ROUND = 3;
+    public static readonly int STARTING_HANDS_PER_HARVEST_ROUND = 3;
 }

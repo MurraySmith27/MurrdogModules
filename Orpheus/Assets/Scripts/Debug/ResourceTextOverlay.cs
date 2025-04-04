@@ -14,37 +14,37 @@ public class ResourceTextOverlay : MonoBehaviour
     
     private void Start()
     {
-        RoundState.Instance.OnFoodGoalChanged -= OnGoalUpdated;
-        RoundState.Instance.OnFoodGoalChanged += OnGoalUpdated;
+        HarvestState.Instance.OnFoodGoalChanged -= OnGoalUpdated;
+        HarvestState.Instance.OnFoodGoalChanged += OnGoalUpdated;
         
-        RoundState.Instance.OnWoodValueChanged -= OnWoodUpdated;
-        RoundState.Instance.OnWoodValueChanged += OnWoodUpdated;
+        PersistentState.Instance.OnWoodValueChanged -= OnWoodUpdated;
+        PersistentState.Instance.OnWoodValueChanged += OnWoodUpdated;
         
-        RoundState.Instance.OnStoneValueChanged -= OnStoneUpdated;
-        RoundState.Instance.OnStoneValueChanged += OnStoneUpdated;
+        PersistentState.Instance.OnStoneValueChanged -= OnStoneUpdated;
+        PersistentState.Instance.OnStoneValueChanged += OnStoneUpdated;
         
-        RoundState.Instance.OnGoldValueChanged -= OnGoldUpdated;
-        RoundState.Instance.OnGoldValueChanged += OnGoldUpdated;
+        PersistentState.Instance.OnGoldValueChanged -= OnGoldUpdated;
+        PersistentState.Instance.OnGoldValueChanged += OnGoldUpdated;
         
-        RoundState.Instance.OnCurrentFoodScoreChanged -= OnFoodScoreUpdated;
-        RoundState.Instance.OnCurrentFoodScoreChanged += OnFoodScoreUpdated;
+        HarvestState.Instance.OnCurrentFoodScoreChanged -= OnFoodScoreUpdated;
+        HarvestState.Instance.OnCurrentFoodScoreChanged += OnFoodScoreUpdated;
         
-        OnGoalUpdated(RoundState.Instance.CurrentFoodGoal);
-        OnWoodUpdated(RoundState.Instance.CurrentWood);
-        OnStoneUpdated(RoundState.Instance.CurrentStone);
-        OnGoldUpdated(RoundState.Instance.CurrentGold);
-        OnFoodScoreUpdated(RoundState.Instance.CurrentFoodScore);
+        OnGoalUpdated(HarvestState.Instance.CurrentFoodGoal);
+        OnWoodUpdated(PersistentState.Instance.CurrentWood);
+        OnStoneUpdated(PersistentState.Instance.CurrentStone);
+        OnGoldUpdated(PersistentState.Instance.CurrentGold);
+        OnFoodScoreUpdated(HarvestState.Instance.CurrentFoodScore);
     }
 
     private void OnDestroy()
     {
-        if (RoundState.IsAvailable)
+        if (PersistentState.IsAvailable)
         {
-            RoundState.Instance.OnFoodGoalChanged -= OnGoalUpdated;
-            RoundState.Instance.OnWoodValueChanged -= OnWoodUpdated;
-            RoundState.Instance.OnStoneValueChanged -= OnStoneUpdated;
-            RoundState.Instance.OnGoldValueChanged -= OnGoldUpdated;
-            RoundState.Instance.OnCurrentFoodScoreChanged -= OnFoodScoreUpdated;
+            HarvestState.Instance.OnFoodGoalChanged -= OnGoalUpdated;
+            PersistentState.Instance.OnWoodValueChanged -= OnWoodUpdated;
+            PersistentState.Instance.OnStoneValueChanged -= OnStoneUpdated;
+            PersistentState.Instance.OnGoldValueChanged -= OnGoldUpdated;
+            HarvestState.Instance.OnCurrentFoodScoreChanged -= OnFoodScoreUpdated;
         }
     }
 

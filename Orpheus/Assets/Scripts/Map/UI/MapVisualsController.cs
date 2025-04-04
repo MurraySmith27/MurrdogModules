@@ -15,15 +15,24 @@ public class MapVisualsController : Singleton<MapVisualsController>
     [Header("Building Spawning")] 
     [SerializeField] private BuildingsVisualsSO buildingsVisualsData;
 
+    [Space(10)] 
+    [Header("Citizen Visualization")] 
+    [SerializeField] private CitizenVisualsSO citizenVisualsData;
+    
+    
+    [Space(10)]
     [Header("City Visualization")] 
     [SerializeField] private Transform cityBorderVisualsParent;
     [SerializeField] private CityBorderVisuals cityBorderVisualsPrefab;
+
 
     private Dictionary<Vector2Int, CityBorderVisuals> _instantiatedCityBorderVisuals = new();
 
     public TileVisuals[,] InstantiatedMapTiles = new TileVisuals[0, 0];
     
     public List<(Vector2Int, BuildingBehaviour)> InstantiatedBuildings = new List<(Vector2Int, BuildingBehaviour)>();
+    
+    public List<(Vector2Int, CitizenBehaviour)> InstantiatedCitizens = new List<(Vector2Int, CitizenBehaviour)>();
 
     private RectInt _lastCullingRect = new RectInt(new Vector2Int(-1,-1), new Vector2Int(1,1));
     
@@ -43,6 +52,12 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
         TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnCullingUpdated;
         TileFrustrumCulling.Instance.OnTileCullingUpdated += OnCullingUpdated;
+        
+        CitizenController.Instance.OnCitizenAddedToTile -= OnCitizenAddedToTile;
+        CitizenController.Instance.OnCitizenAddedToTile += OnCitizenAddedToTile;
+        
+        CitizenController.Instance.OnCitizenRemovedFromTile -= OnCitizenRemovedFromTile;
+        CitizenController.Instance.OnCitizenRemovedFromTile += OnCitizenRemovedFromTile;
     }
 
     private void OnDestroy()
@@ -58,6 +73,12 @@ public class MapVisualsController : Singleton<MapVisualsController>
         if (TileFrustrumCulling.IsAvailable)
         {
             TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnCullingUpdated;
+        }
+
+        if (CitizenController.IsAvailable)
+        {
+            CitizenController.Instance.OnCitizenAddedToTile -= OnCitizenAddedToTile;
+            CitizenController.Instance.OnCitizenRemovedFromTile -= OnCitizenRemovedFromTile;
         }
     }
 
@@ -144,6 +165,55 @@ public class MapVisualsController : Singleton<MapVisualsController>
         else
         {
             tile.AttachBuilding(newBuilding);
+        }
+    }
+
+    private void OnCitizenAddedToTile(Guid cityGuid, Vector2Int tilePosition)
+    {
+        CitizenVisualsData visualData = citizenVisualsData.CitizenVisualsData[0];
+        
+        CitizenBehaviour buildingPrefab = visualData.Prefab;
+        
+        CitizenBehaviour newCitizen = Instantiate(buildingPrefab,
+            new Vector3(GameConstants.TILE_SIZE * tilePosition.x, 0, GameConstants.TILE_SIZE * tilePosition.y), Quaternion.identity,
+            tileParent);
+        
+        InstantiatedCitizens.Add((tilePosition, newCitizen));
+        
+        TileVisuals tile = GetTileInstanceAtPosition(tilePosition);
+
+        if (tile == null)
+        {
+            Debug.LogError($"Error when instantiating citizen: no such tile at position ({tilePosition.x}, {tilePosition.y})");
+        }
+        else
+        {
+            tile.AttachCitizen(newCitizen);
+        }
+    }
+
+    private void OnCitizenRemovedFromTile(Guid cityGuid, Vector2Int tilePosition)
+    {
+        TileVisuals tile = GetTileInstanceAtPosition(tilePosition);
+
+        if (tile == null)
+        {
+            Debug.LogError($"Error when detaching citizens: no such tile at position ({tilePosition.x}, {tilePosition.y})");
+        }
+        else
+        {
+            for (int i = 0; i < InstantiatedCitizens.Count; i++)
+            {
+                if (InstantiatedCitizens[i].Item1 == tilePosition)
+                {
+                    Destroy(InstantiatedCitizens[i].Item2.gameObject);
+                    InstantiatedCitizens.RemoveAt(i);
+                    break;
+                }
+                
+            }
+            
+            tile.DetachAllCitizens();
         }
     }
 

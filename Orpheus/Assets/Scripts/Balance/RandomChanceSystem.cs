@@ -36,7 +36,7 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
     {
         //create a random seed based on the current global seed, the current turn number, and number of refreshes
 
-        int seed = _currentSeed + 3605 * RoundState.Instance.RoundNumber + 2821 *  numRefreshes;
+        int seed = _currentSeed + 3605 * PersistentState.Instance.RoundNumber + 2821 *  numRefreshes;
         
         Random.InitState(seed);
         
@@ -87,5 +87,17 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         Random.InitState((int)DateTime.Now.Ticks);
 
         return selectedRelics;
+    }
+
+    public Vector2Int GetNextCitizenTile(int numCitizensDiscarded, int numDiscardsUsed, List<Vector2Int> possibleTiles)
+    {
+        int seed = _currentSeed + 3605 * PersistentState.Instance.HarvestNumber + 2821 * numCitizensDiscarded + 31 * numDiscardsUsed;   
+        Random.InitState(seed);
+        
+        Vector2Int tile = possibleTiles[Random.Range(0, possibleTiles.Count)];
+        
+        Random.InitState((int)DateTime.Now.Ticks);
+        
+        return tile;
     }
 }

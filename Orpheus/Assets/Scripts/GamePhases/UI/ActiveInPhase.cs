@@ -22,6 +22,11 @@ public class ActiveInPhase : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        OnGamePhaseChanged(PhaseStateMachine.Instance.CurrentPhase);
+    }
+
     private void OnGamePhaseChanged(GamePhases gamePhase)
     {
         gameObjectToSetActive.SetActive(activeInPhases.Contains(gamePhase));

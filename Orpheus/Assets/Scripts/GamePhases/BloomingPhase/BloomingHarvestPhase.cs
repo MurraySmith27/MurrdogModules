@@ -20,6 +20,8 @@ public class BloomingHarvestPhase : PhaseStateBase
 
     private void OnHarvestComplete()
     {
+        BloomingResourceConversionController.Instance.DoResourceConversion();
+        
         _onPhaseEnterComplete?.Invoke();
         BloomingHarvestController.Instance.OnHarvestEnd -= OnHarvestComplete;
     }

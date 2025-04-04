@@ -11,17 +11,6 @@ public class WiltingChallengePhaseController : Singleton<WiltingChallengePhaseCo
     
     public void StartChallengePhase()
     {
-        long currentFoodGoal = RoundState.Instance.CurrentFoodGoal;
-
-        if (RoundState.Instance.CurrentFoodScore >= RoundState.Instance.CurrentFoodGoal)
-        {
-            OnWiltingChallengePassed?.Invoke();
-        }
-        else
-        {
-            OnWiltingChallengeFailed?.Invoke();
-        }
         
-        RoundState.Instance.SetCurrentFoodScore(RoundState.Instance.CurrentFoodScore - RoundState.Instance.CurrentFoodGoal);
     }
 }

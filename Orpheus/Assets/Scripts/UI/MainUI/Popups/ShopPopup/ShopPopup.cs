@@ -28,11 +28,11 @@ public class ShopPopup : MonoBehaviour
 
     private void Start()
     {
-        RoundState.Instance.OnRoundEnd -= OnRoundEnd;
-        RoundState.Instance.OnRoundEnd += OnRoundEnd;
+        PersistentState.Instance.OnRoundEnd -= OnRoundEnd;
+        PersistentState.Instance.OnRoundEnd += OnRoundEnd;
 
-        RoundState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
-        RoundState.Instance.OnGoldValueChanged += OnGoldValueChanged;
+        PersistentState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
+        PersistentState.Instance.OnGoldValueChanged += OnGoldValueChanged;
 
         for (int i = 0; i < shopRelicCostButtons.Count; i++)
         {
@@ -46,10 +46,10 @@ public class ShopPopup : MonoBehaviour
     
     private void OnDestroy()
     {
-        if (RoundState.IsAvailable)
+        if (PersistentState.IsAvailable)
         {
-            RoundState.Instance.OnRoundEnd -= OnRoundEnd;
-            RoundState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
+            PersistentState.Instance.OnRoundEnd -= OnRoundEnd;
+            PersistentState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
         }
     }
     
@@ -75,9 +75,9 @@ public class ShopPopup : MonoBehaviour
     {
         long refreshGoldCost = GameConstants.SHOP_REFRESH_GOLD_INITIAL_COST +
                                GameConstants.SHOP_REFRESH_GOLD_INCREASE * _numRelicRefreshes;
-        if (RoundState.Instance.CurrentGold >= refreshGoldCost)
+        if (PersistentState.Instance.CurrentGold >= refreshGoldCost)
         {
-            RoundState.Instance.ChangeCurrentGold(-refreshGoldCost);
+            PersistentState.Instance.ChangeCurrentGold(-refreshGoldCost);
             _numRelicRefreshes++;
             _currentRelics.Clear();
             PopulateShop();
@@ -123,17 +123,17 @@ public class ShopPopup : MonoBehaviour
             soldOutBanners[i].gameObject.SetActive(true);
         }
 
-        OnGoldValueChanged(RoundState.Instance.CurrentGold);
+        OnGoldValueChanged(PersistentState.Instance.CurrentGold);
     }
 
     public void OnRelicPurchaseButtonClicked(int relicIndex)
     {
         long relicGoldCost = GameConstants.SHOP_RELIC_COST;
 
-        if (RoundState.Instance.CurrentGold >= relicGoldCost && !RelicSystem.Instance.HasRelic(_currentRelics[relicIndex]))
+        if (PersistentState.Instance.CurrentGold >= relicGoldCost && !RelicSystem.Instance.HasRelic(_currentRelics[relicIndex]))
         {
             RelicSystem.Instance.AddRelic(_currentRelics[relicIndex]);
-            RoundState.Instance.ChangeCurrentGold(-relicGoldCost);
+            PersistentState.Instance.ChangeCurrentGold(-relicGoldCost);
             shopRelicCostTexts[relicIndex].SetText($"SOLD");
             shopRelicCostButtons[relicIndex].interactable = false;
             soldOutBanners[relicIndex].gameObject.SetActive(true);

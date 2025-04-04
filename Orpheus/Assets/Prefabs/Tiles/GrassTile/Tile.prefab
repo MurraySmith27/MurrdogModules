@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1200432658152802708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3274471077614038502}
+  m_Layer: 0
+  m_Name: CitizensRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3274471077614038502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200432658152802708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5778311996417597433}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2415558354284311733
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +312,7 @@ Transform:
   - {fileID: 5329058386311086718}
   - {fileID: 3051010376113826759}
   - {fileID: 7086275296297451929}
+  - {fileID: 3274471077614038502}
   m_Father: {fileID: 5113006845622499140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5778452424726784705
@@ -440,6 +472,7 @@ MonoBehaviour:
   resourceVisualData: {fileID: 11400000, guid: 95c15ae972909994fbe10b5dbb441c00, type: 2}
   animator: {fileID: 2662955987064634540}
   buildingsRoot: {fileID: 7086275296297451929}
+  citizensRoot: {fileID: 3274471077614038502}
   shadowOverlayVisuals: {fileID: 7891869183462520675}
 --- !u!95 &2662955987064634540
 Animator:

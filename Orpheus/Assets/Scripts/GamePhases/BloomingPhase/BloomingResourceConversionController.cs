@@ -47,7 +47,7 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
             }
         }
         
-        RoundState.Instance.SetCurrentFoodScore(foodScore);
+        HarvestState.Instance.AddHarvestFoodScore(foodScore);
         
         //clear existing resources
         PlayerResourcesSystem.Instance.RegisterCurrentRoundResources(new Dictionary<ResourceType, int>());

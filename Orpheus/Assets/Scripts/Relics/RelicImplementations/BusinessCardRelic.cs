@@ -14,7 +14,7 @@ public class BusinessCardRelic : Relic
         convertedFoodScore = baseFoodScore;
         args = new();
         
-        long removedGold = (long)Math.Floor(RoundState.Instance.CurrentGold * BUSINESS_CARD_RELIC_GOLD_TO_FOOD_SCORE_RATE);
+        long removedGold = (long)Math.Floor(PersistentState.Instance.CurrentGold * BUSINESS_CARD_RELIC_GOLD_TO_FOOD_SCORE_RATE);
         
         long addedFoodScore = removedGold * BUSINESS_CARD_FOOD_SCORE_PER_GOLD;
         
