@@ -71,6 +71,6 @@ public class CityTileData
 
     public List<Vector2Int> GetTilesInOrder()
     {
-        return _ownedTiles; //they're already sorted
+        return new List<Vector2Int>(_ownedTiles); //they're already sorted
     }
 }

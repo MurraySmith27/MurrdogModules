@@ -78,7 +78,6 @@ public class RoundController : Singleton<RoundController>
 
     private void OnPhaseChanged(GamePhases gamePhase)
     {
-        Debug.LogError($"phase changed to: {Enum.GetName(typeof(GamePhases), gamePhase)}");
         if (gamePhase == GamePhases.BuddingUpkeep)
         {
             _currentHarvestInRound++;
@@ -98,10 +97,8 @@ public class RoundController : Singleton<RoundController>
 
     public void GoToNextPhase()
     {
-        Debug.LogError("go to next phase");
         if (!_inPhaseEnterTransition && !_inPhaseExitTransition && !_inPhaseTransition)
         {
-            Debug.LogError("success");
             _inPhaseEnterTransition = true;
             _inPhaseExitTransition = true;
             _inPhaseTransition = true;
@@ -163,13 +160,11 @@ public class RoundController : Singleton<RoundController>
     
     private void OnHarvestGoalReached()
     {
-        Debug.LogError("Harvest goal reached");
         _isInHarvest = false;
     }
 
     private void OnHarvestFailed()
     {
-        Debug.LogError("Harvest failed");
         _isInHarvest = false;
         _hasLostGame = true;
     }

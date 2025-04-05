@@ -224,6 +224,10 @@ MonoBehaviour:
   buildingsRoot: {fileID: 2380567583608505567}
   citizensRoot: {fileID: 1348930496771940409}
   shadowOverlayVisuals: {fileID: 4393590322340282344}
+  bonusTickParticleSystemStartDelay: 0.15
+  bonusTickParticleSystemPrefab: {fileID: 6810055551816051034, guid: f7b274fb098a52246be32218d4a07e73,
+    type: 3}
+  bonusTickParticleSystemDuration: 3
 --- !u!95 &5546447236460372722
 Animator:
   serializedVersion: 5

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HarvestAnimationController : Singleton<HarvestAnimationController>
@@ -21,11 +22,20 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
         BloomingHarvestController.Instance.OnTileHarvestStart += OnTileHarvestStart;
         
-        BloomingHarvestController.Instance.OnTileProcessStart -= TryAnimateTile;
-        BloomingHarvestController.Instance.OnTileProcessStart += TryAnimateTile;
+        BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
+        BloomingHarvestController.Instance.OnTileProcessStart += OnTileProcessStart;
 
+        BloomingHarvestController.Instance.OnTileResourceChangeStart -= OnTileResourceChangeStart;
+        BloomingHarvestController.Instance.OnTileResourceChangeStart += OnTileResourceChangeStart;
+        
         BloomingHarvestController.Instance.OnTileResourceChangeEnd -= OnTileResourceChangeEnd;
         BloomingHarvestController.Instance.OnTileResourceChangeEnd += OnTileResourceChangeEnd;
+
+        BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
+        BloomingHarvestController.Instance.OnTileBonusTickStart += OnTileBonusTickStart;
+        
+        BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
+        BloomingHarvestController.Instance.OnTileBonusTickEnd += OnTileBonusTickEnd;
     }
 
     private void OnDestroy()
@@ -35,8 +45,11 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
             BloomingHarvestController.Instance.OnHarvestStart -= OnHarvestStart;
             BloomingHarvestController.Instance.OnHarvestEnd -= OnHarvestEnd;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
-            BloomingHarvestController.Instance.OnTileProcessStart -= TryAnimateTile;
+            BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
+            BloomingHarvestController.Instance.OnTileResourceChangeStart -= OnTileResourceChangeStart;
             BloomingHarvestController.Instance.OnTileResourceChangeEnd -= OnTileResourceChangeEnd;
+            BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
+            BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
         }
     }
 
@@ -57,37 +70,16 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(cityPostiion));
     }
 
-    private void OnTileHarvestStart(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
+    private void OnTileResourceChangeStart(Vector2Int tilePosition)
     {
-        TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
+        TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(tilePosition);
 
         if (tileInstanceAtPosition != null)
         {
-            tileInstanceAtPosition.StartTileHarvestAnimation(resourcesChange);
-            
-            TryAnimateTile(position, resourcesChange);
+            tileInstanceAtPosition.StartTileHarvestAnimation();
         }
     }
 
-    private void TryAnimateTile(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
-    {
-        foreach (ResourceType resourceType in resourcesChange.Keys)
-        {
-            if (resourcesChange[resourceType] != 0)
-            {
-                TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
-
-                if (tileInstanceAtPosition != null)
-                {
-                    tileInstanceAtPosition.TriggerTileHarvestAnimation(resourcesChange);
-                    OnTileHarvestAnimationTriggered?.Invoke(position);
-                }
-                
-                break;
-            }
-        }
-    }
-    
     private void OnTileResourceChangeEnd(Vector2Int position)
     {
         TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
@@ -97,4 +89,49 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
             tileInstanceAtPosition.EndTileHarvestAnimation();
         }
     }
+    
+    private void OnTileHarvestStart(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
+    {
+        TryAnimateTile(position, resourcesChange);
+    }
+
+    private void OnTileProcessStart(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
+    {
+        if (resourcesChange.Values.ToList().FindIndex((int value) => { return value != 0;}) != -1)
+        {
+            TryAnimateTile(position, resourcesChange);
+        }
+    }
+
+    private void TryAnimateTile(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
+    {
+        TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
+        
+        tileInstanceAtPosition.TriggerTileHarvestAnimation();
+        foreach (ResourceType resourceType in resourcesChange.Keys)
+        {
+            if (resourcesChange[resourceType] != 0)
+            {
+                if (tileInstanceAtPosition != null)
+                {
+                    OnTileHarvestAnimationTriggered?.Invoke(position);
+                }
+                
+                break;
+            }
+        }
+    }
+
+    private void OnTileBonusTickStart(Vector2Int position)
+    {
+        TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
+        
+        tileInstanceAtPosition.TriggerBonusTickAnimation();
+    }
+
+    private void OnTileBonusTickEnd(Vector2Int position)
+    {
+        
+    }
+    
 }

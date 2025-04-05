@@ -22,6 +22,12 @@ public class TileVisuals : MonoBehaviour
     
     [SerializeField] private ShadowOverlayVisuals shadowOverlayVisuals;
 
+    [SerializeField] private float bonusTickParticleSystemStartDelay = 0.15f;
+    
+    [SerializeField] private GameObject bonusTickParticleSystemPrefab;
+
+    [SerializeField] private float bonusTickParticleSystemDuration = 3f;
+
     private List<ResourceIcon> _instantiatedResourceIcons = new List<ResourceIcon>();
 
     private Renderer[] _tileRenderers;
@@ -60,15 +66,29 @@ public class TileVisuals : MonoBehaviour
 
     }
 
-    public void StartTileHarvestAnimation(Dictionary<ResourceType, int> harvestChange)
+    public void StartTileHarvestAnimation()
     {
         AnimationUtils.ResetAnimator(animator, TILE_DEFAULT_STATE_NAME);
         animator.SetTrigger(TILE_START_HARVEST_TRIGGER);
     }
 
-    public void TriggerTileHarvestAnimation(Dictionary<ResourceType, int> harvestChange)
+    public void TriggerTileHarvestAnimation()
     {
         animator.SetTrigger(TILE_SHAKE_ANIMATION_TRIGGER);
+    }
+
+    public void TriggerBonusTickAnimation()
+    {
+        OrpheusTiming.InvokeCallbackAfterSecondsGameTime(bonusTickParticleSystemStartDelay, () =>
+        {
+            GameObject particleSystem = Instantiate(bonusTickParticleSystemPrefab, transform.position,
+                Quaternion.identity, null);
+
+            AsyncUtils.InvokeCallbackAfterSeconds(bonusTickParticleSystemDuration, () =>
+            {
+                Destroy(particleSystem);
+            });
+        });
     }
     
     public void EndTileHarvestAnimation()

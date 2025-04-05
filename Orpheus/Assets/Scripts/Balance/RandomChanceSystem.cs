@@ -89,9 +89,9 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         return selectedRelics;
     }
 
-    public Vector2Int GetNextCitizenTile(int numCitizensDiscarded, int numDiscardsUsed, List<Vector2Int> possibleTiles)
+    public Vector2Int GetNextCitizenTile(List<Vector2Int> possibleTiles)
     {
-        int seed = _currentSeed + 3605 * PersistentState.Instance.HarvestNumber + 2821 * numCitizensDiscarded + 31 * numDiscardsUsed;   
+        int seed = _currentSeed + 3605 * PersistentState.Instance.HarvestNumber + 2821 * HarvestState.Instance.NumHandsUsed + 31 * HarvestState.Instance.NumDiscardsUsed + 7471 * HarvestState.Instance.NumCitizensUsedThisHarvest;   
         Random.InitState(seed);
         
         Vector2Int tile = possibleTiles[Random.Range(0, possibleTiles.Count)];

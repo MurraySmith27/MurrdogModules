@@ -46,7 +46,7 @@ public class HarvestRoundControlsButtons : MonoBehaviour
         List<CitizenController.CitizenPlacement> citizenPositionsAfter
         )
     {
-        playHandButton.interactable = HarvestState.Instance.NumRemainingDiscards > 0;
+        discardButton.interactable = HarvestState.Instance.NumRemainingDiscards > 0;
     }
 
     private void OnHarvestStart()

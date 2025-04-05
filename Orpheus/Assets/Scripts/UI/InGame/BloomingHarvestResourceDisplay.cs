@@ -31,6 +31,11 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
     [SerializeField] private float waitBeforeDecrementAnim = 0.05f;
     [SerializeField] private float waitBeforeCreateListItemAnim = 0.5f;
     [SerializeField] private float verticalOffset = 1f;
+
+    [Header("Bonus Tick Animation Params")] 
+    [SerializeField] private Animator bonusTickHeaderAnimator;
+    [SerializeField] private string bonusTickHeaderAnimatorActivateTriggerName = "Activate";
+    [SerializeField] private string bonusTickHeaderAnimatorDeactivateTriggerName = "Deactivate";
     
     private Dictionary<ResourceType, (int, BloomingHarvestResourceListItem)> _instantiatedListItemsPerResourceType = new();
 
@@ -50,6 +55,12 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
         BloomingHarvestController.Instance.OnTileProcessStart += OnTileResourceChanged;
 
+        BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
+        BloomingHarvestController.Instance.OnTileBonusTickStart += OnTileBonusTickStart;
+        
+        BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
+        BloomingHarvestController.Instance.OnTileBonusTickEnd += OnTileBonusTickEnd;
+
         GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
         GlobalSettings.OnGameSpeedChanged += SetGameSpeed;
 
@@ -66,6 +77,8 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
             BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileResourceChanged;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
+            BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
+            BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
         }
         
         GlobalSettings.OnGameSpeedChanged -= SetGameSpeed;
@@ -169,6 +182,15 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
     }
 
 
+    private void OnTileBonusTickStart(Vector2Int position)
+    {
+        bonusTickHeaderAnimator.SetTrigger(bonusTickHeaderAnimatorActivateTriggerName);
+    }
+    
+    private void OnTileBonusTickEnd(Vector2Int position)
+    {
+        bonusTickHeaderAnimator.SetTrigger(bonusTickHeaderAnimatorDeactivateTriggerName);
+    }
 
     private void AnimatePositionToTile(Vector2Int tilePosition)
     {
@@ -216,5 +238,6 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
     private void SetGameSpeed(float gameSpeed)
     {
         animator.speed = gameSpeed;
+        bonusTickHeaderAnimator.speed = gameSpeed;
     }
 }

@@ -22,13 +22,13 @@ public class HarvestState : Singleton<HarvestState>
         get;
         private set;
     }
-    
-    public int NumCitizensUsed
+
+    public int NumCitizensUsedThisHarvest
     {
         get;
         private set;
     }
-
+    
     public int NumDiscardsUsed
     {
         get;
@@ -57,24 +57,25 @@ public class HarvestState : Singleton<HarvestState>
     
     private void Start()
     {
-        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
-        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseEnterComplete -= OnPhaseEnterComplete;
+        PhaseStateMachine.Instance.OnPhaseEnterComplete += OnPhaseEnterComplete;
     }
     
     private void OnDestroy()
     {
         if (PhaseStateMachine.IsAvailable)
         {
-            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+            PhaseStateMachine.Instance.OnPhaseEnterComplete -= OnPhaseEnterComplete;
         }    
     }
 
-    private void OnPhaseChanged(GamePhases phase)
+    private void OnPhaseEnterComplete(GamePhases phase)
     {
         if (phase == GamePhases.BloomingUpkeep)
         {
+            Debug.LogError("on phase change harvest state blooming upkeep");
             NumRemainingCitizens = GameConstants.STARTING_CITIZENS_PER_HARVEST_ROUND;
-            NumCitizensUsed = 0;
+            NumCitizensUsedThisHarvest = 0;
             NumRemainingDiscards = GameConstants.STARTING_DISCARDS_PER_HARVEST_ROUND;
             NumDiscardsUsed = 0;
             NumRemainingHands = GameConstants.STARTING_HANDS_PER_HARVEST_ROUND;
@@ -114,11 +115,10 @@ public class HarvestState : Singleton<HarvestState>
     {
         CurrentFoodScore = 0;
     }
-
+    
     public void UseCitizens(int numCitizensUsed)
     {
-        NumRemainingCitizens -= numCitizensUsed;
-        NumCitizensUsed += numCitizensUsed;
+        NumCitizensUsedThisHarvest += numCitizensUsed;
     }
     
     public void UseDiscard()

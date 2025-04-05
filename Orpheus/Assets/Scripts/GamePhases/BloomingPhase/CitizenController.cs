@@ -48,7 +48,12 @@ public class CitizenController : Singleton<CitizenController>
 
         HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnd;
         HarvestState.Instance.OnFoodGoalReached += OnHarvestEnd;
-        
+
+        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+
+        BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
+        BloomingHarvestController.Instance.OnTileBonusTickEnd += OnTileBonusTickEnd;
     }
 
     private void OnDestroy()
@@ -59,16 +64,55 @@ public class CitizenController : Singleton<CitizenController>
             HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnd;
 
         }
+
+        if (PhaseStateMachine.IsAvailable)
+        {
+            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        }
+
+        if (BloomingHarvestController.IsAvailable)
+        {
+            BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
+        }
+    }
+
+    private void OnPhaseChanged(GamePhases gamePhases)
+    {
+        if (gamePhases == GamePhases.BloomingHarvestTurn)
+        {
+            Reset();
+            
+            List<Guid> allCityGuids = MapSystem.Instance.GetAllCityGuids();
+
+            if (allCityGuids.Count > 0)
+            {
+                TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumRemainingCitizens,
+                    out List<Vector2Int> chosenTiles);
+            }            
+        }
     }
     
     private void OnHarvestStart()
     {
-        List<Guid> allCityGuids = MapSystem.Instance.GetAllCityGuids();
+    }
 
-        if (allCityGuids.Count > 0)
+    private void OnTileBonusTickEnd(Vector2Int position)
+    {
+        CitizenPlacement placement;
+
+        foreach (Guid cityGuid in _citizenPlacements.Keys)
         {
-            TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumRemainingCitizens,
-                out List<Vector2Int> chosenTiles);
+            placement = _citizenPlacements[cityGuid].FirstOrDefault((CitizenPlacement citizenPlacement) =>
+            {
+                return citizenPlacement.Position == position;
+            });
+
+            if (placement != null)
+            {
+                _citizenPlacements[cityGuid].Remove(placement);
+                OnCitizenRemovedFromTile?.Invoke(cityGuid, placement.Position);
+                break;
+            }
         }
     }
 
@@ -85,6 +129,8 @@ public class CitizenController : Singleton<CitizenController>
             {
                 //use the bonus citizen
                 PersistentState.Instance.ChangeCurrentBonusCitizens(-1);
+
+                HarvestState.Instance.UseCitizens(1);
                 
                 OnBonusCitizenUsed?.Invoke(cityGuid, chosenTiles[0]);
                 return true;
@@ -126,8 +172,7 @@ public class CitizenController : Singleton<CitizenController>
             if (unoccupiedCityTiles.Count >= 0)
             {
                 Vector2Int tile =
-                    RandomChanceSystem.Instance.GetNextCitizenTile(HarvestState.Instance.NumDiscardsUsed, HarvestState.Instance.NumDiscardsUsed,
-                        unoccupiedCityTiles);
+                    RandomChanceSystem.Instance.GetNextCitizenTile(unoccupiedCityTiles);
                 
                 unoccupiedCityTiles.Remove(tile);
                 
@@ -145,8 +190,11 @@ public class CitizenController : Singleton<CitizenController>
         {
             _citizenPlacements[cityGuid].Add(new CitizenPlacement(tile, false));
             
+            
             OnCitizenAddedToTile?.Invoke(cityGuid, tile);
         }
+        
+        HarvestState.Instance.UseCitizens(chosenTiles.Count);
         
         return true;
     }
@@ -156,8 +204,6 @@ public class CitizenController : Singleton<CitizenController>
         HarvestState.Instance.UseHand();
         
         OnHandUsed?.Invoke(_citizenPlacements);
-
-        Reset();
     }
     
     public void UseDiscard(Guid cityGuid)

@@ -89,6 +89,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
 
     public void ChangePhase(GamePhases nextPhase)
     {   
+        Debug.LogError($"Transitioning to {Enum.GetName(typeof(GamePhases), nextPhase)}");
+        
         currentPhase.StateExit(this, () => { OnPhaseExitComplete?.Invoke(currentPhaseState); });
 
         currentPhaseState = nextPhase;
@@ -101,7 +103,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
         });
         
         RelicSystem.Instance.OnPhaseChanged(nextPhase);
-
+        
+        
         OnPhaseChanged?.Invoke(nextPhase);
     }
 
