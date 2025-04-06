@@ -73,7 +73,6 @@ public class HarvestState : Singleton<HarvestState>
     {
         if (phase == GamePhases.BloomingUpkeep)
         {
-            Debug.LogError("on phase change harvest state blooming upkeep");
             NumRemainingCitizens = GameConstants.STARTING_CITIZENS_PER_HARVEST_ROUND;
             NumCitizensUsedThisHarvest = 0;
             NumRemainingDiscards = GameConstants.STARTING_DISCARDS_PER_HARVEST_ROUND;

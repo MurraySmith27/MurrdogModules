@@ -52,6 +52,7 @@ public class HarvestRoundControlsButtons : MonoBehaviour
     private void OnHarvestStart()
     {
         playHandButton.interactable = true;
+        discardButton.interactable = true;
     }
     
     public void OnPlayHandClick()

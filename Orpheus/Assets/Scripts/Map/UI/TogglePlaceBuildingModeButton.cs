@@ -28,19 +28,32 @@ public class TogglePlaceBuildingModeButton : MonoBehaviour
 
     private void OnPhaseChanged(GamePhases phase)
     {
-        SwitchToDefaultMode();
+        SetButtonText();
     }
+
+    private void SetButtonText()
+    {
+        switch (MapInteractionController.Instance.CurrentMode)
+        {
+            case (MapInteractionMode.Default):
+                buttonText.SetText($"Place {Enum.GetName(typeof(BuildingType), buildingType)}");
+                break;
+            case (MapInteractionMode.PlaceBuilding):
+                buttonText.SetText("Tile Select Mode");
+                break;
+        }
+    } 
     
     private void SwitchToPlaceBuildingMode()
     {
         MapInteractionController.Instance.SwitchToPlaceBuildingMode(buildingType);
-        buttonText.SetText("Tile Select Mode");
+        SetButtonText();
     }
 
     private void SwitchToDefaultMode()
     {
         MapInteractionController.Instance.SwitchMapInteractionMode(MapInteractionMode.Default);
-        buttonText.SetText($"Place {Enum.GetName(typeof(BuildingType), buildingType)}");
+        SetButtonText();
     }
 
     public void OnClick()

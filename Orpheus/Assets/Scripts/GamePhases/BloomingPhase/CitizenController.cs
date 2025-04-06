@@ -249,7 +249,7 @@ public class CitizenController : Singleton<CitizenController>
         }
     }
 
-    public void ToggleCitizenAtTileLock(Vector2Int position, bool locked)
+    public void ToggleCitizenAtTileLock(Vector2Int position)
     {
         
         CitizenPlacement placement;
@@ -263,9 +263,9 @@ public class CitizenController : Singleton<CitizenController>
 
             if (placement != null)
             {
-                placement.IsLocked = locked;
+                placement.IsLocked = !placement.IsLocked;
 
-                if (locked)
+                if (placement.IsLocked)
                 {
                     OnCitizenLocked?.Invoke(position);
                 }

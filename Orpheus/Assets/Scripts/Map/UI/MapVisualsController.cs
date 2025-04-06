@@ -58,6 +58,12 @@ public class MapVisualsController : Singleton<MapVisualsController>
         
         CitizenController.Instance.OnCitizenRemovedFromTile -= OnCitizenRemovedFromTile;
         CitizenController.Instance.OnCitizenRemovedFromTile += OnCitizenRemovedFromTile;
+
+        CitizenController.Instance.OnCitizenLocked -= OnCitizenLocked;
+        CitizenController.Instance.OnCitizenLocked += OnCitizenLocked;
+        
+        CitizenController.Instance.OnCitizenUnlocked -= OnCitizenUnlocked;
+        CitizenController.Instance.OnCitizenUnlocked += OnCitizenUnlocked;
     }
 
     private void OnDestroy()
@@ -79,6 +85,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             CitizenController.Instance.OnCitizenAddedToTile -= OnCitizenAddedToTile;
             CitizenController.Instance.OnCitizenRemovedFromTile -= OnCitizenRemovedFromTile;
+            CitizenController.Instance.OnCitizenLocked -= OnCitizenLocked;
+            CitizenController.Instance.OnCitizenUnlocked -= OnCitizenUnlocked;
         }
     }
 
@@ -214,6 +222,26 @@ public class MapVisualsController : Singleton<MapVisualsController>
             }
             
             tile.DetachAllCitizens();
+        }
+    }
+
+    private void OnCitizenLocked(Vector2Int tilePosition)
+    {
+        TileVisuals tile = GetTileInstanceAtPosition(tilePosition);
+
+        if (tile != null)
+        {
+            tile.SetCitizenLocked(true);
+        }
+    }
+
+    private void OnCitizenUnlocked(Vector2Int tilePosition)
+    {
+        TileVisuals tile = GetTileInstanceAtPosition(tilePosition);
+
+        if (tile != null)
+        {
+            tile.SetCitizenLocked(false);
         }
     }
 

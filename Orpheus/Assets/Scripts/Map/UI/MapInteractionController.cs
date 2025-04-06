@@ -8,6 +8,7 @@ public enum MapInteractionMode
 {
     Default,
     PlaceBuilding,
+    LockCitizens,
 }
 
 public class MapInteractionController : Singleton<MapInteractionController>
@@ -33,6 +34,32 @@ public class MapInteractionController : Singleton<MapInteractionController>
 
     public event Action<BuildingType> OnPlacingBuildingTypeChanged;
 
+    private void Start()
+    {
+        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+    }
+
+    private void OnDestroy()
+    {
+        if (PhaseStateMachine.IsAvailable)
+        {
+            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        }
+    }
+
+    private void OnPhaseChanged(GamePhases gamePhase)
+    {
+        if (gamePhase == GamePhases.BloomingHarvestTurn)
+        {
+            SwitchMapInteractionMode(MapInteractionMode.LockCitizens);
+        }
+        else
+        {
+            SwitchMapInteractionMode(MapInteractionMode.Default);
+        }
+    }
+
     public void SelectTile(Vector2Int tilePosition)
     {
         _currentlySelectedTile = GetTileFromPosition(tilePosition);
@@ -50,6 +77,12 @@ public class MapInteractionController : Singleton<MapInteractionController>
                     break;
                 case MapInteractionMode.PlaceBuilding:
                     TryPlaceBuilding(tilePosition, CurrentlyPlacingBuildingType);
+                    break;
+                case MapInteractionMode.LockCitizens:
+                    if (CitizenController.Instance.IsCitizenOnTile(tilePosition))
+                    {
+                        CitizenController.Instance.ToggleCitizenAtTileLock(tilePosition);
+                    }
                     break;
             }
         }
