@@ -5,4 +5,8 @@ using UnityEngine;
 
 public class BloomingResourceConversionPhase : PhaseStateBase
 {
+    public virtual void StateEnter(PhaseStateMachine context, Action onEnterComplete)
+    {
+        onEnterComplete?.Invoke();
+    }
 }

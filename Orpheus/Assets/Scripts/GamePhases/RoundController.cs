@@ -114,7 +114,7 @@ public class RoundController : Singleton<RoundController>
                 _isInHarvest = true;
                 PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingHarvest);
             }
-            else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingHarvest && _isInHarvest)
+            else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingResourceConversion && _isInHarvest)
             {
                 _isInHarvest = false;
                 PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingHarvestTurn);
