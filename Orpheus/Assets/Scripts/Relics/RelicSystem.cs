@@ -18,7 +18,8 @@ public enum RelicTypes
     TATTERED_MAP,
     THE_MOLLUSK,
     STONE_ROSE,
-    EXTRA_HAND
+    EXTRA_HAND,
+    EXTRA_DISCARD
 }
 
 public struct AdditionalRelicTriggeredArgs

@@ -43,6 +43,9 @@ public class RelicFactory
             case RelicTypes.EXTRA_HAND:
                 return new ExtraHandRelic();
                 break;
+            case RelicTypes.EXTRA_DISCARD:
+                return new ExtraDiscardRelic();
+                break;
         }
 
         return null;

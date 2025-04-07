@@ -76,3 +76,8 @@ MonoBehaviour:
     visualsPrefab: {fileID: 3255521675241447148, guid: 81c5c7d27198c4319888d2ebae9e5907,
       type: 3}
     description: <b>Extra Hand</b><br> +1 Hands
+  - relicType: 12
+    sprite: {fileID: 21300000, guid: 5dba5dc5a0a8e0d4bba24467b7ef5dd8, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 95d513052aeae4474b9cc44a6ce2814d,
+      type: 3}
+    description: <b>Extra Discard</b><br> +1 Discards

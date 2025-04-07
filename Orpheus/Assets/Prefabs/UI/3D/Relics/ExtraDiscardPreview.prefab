@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -8036754925907550445}
   - component: {fileID: -4106786537628388002}
   m_Layer: 7
-  m_Name: ExtraHandPreview
+  m_Name: ExtraDiscardPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c89faab8b4640cf478fb90bbdc370d7c, type: 2}
+  - {fileID: 2100000, guid: 3cc70ac6deba426409fda320f97fc850, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
