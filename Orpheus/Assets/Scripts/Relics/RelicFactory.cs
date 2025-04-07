@@ -40,6 +40,9 @@ public class RelicFactory
             case RelicTypes.STONE_ROSE:
                 return new StoneRoseRelic();
                 break;
+            case RelicTypes.EXTRA_HAND:
+                return new ExtraHandRelic();
+                break;
         }
 
         return null;

@@ -14,6 +14,9 @@ public class DiscardsText : MonoBehaviour
         HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
         HarvestState.Instance.OnHarvestStart += OnHarvestStart;
 
+        HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnd;
+        HarvestState.Instance.OnFoodGoalReached += OnHarvestEnd;
+
         CitizenController.Instance.OnDiscardUsed -= SetDiscardsText;
         CitizenController.Instance.OnDiscardUsed += SetDiscardsText;
         
@@ -25,6 +28,7 @@ public class DiscardsText : MonoBehaviour
         if (HarvestState.IsAvailable)
         {
             HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
+            HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnd;
         }
 
         if (CitizenController.IsAvailable)
@@ -36,6 +40,11 @@ public class DiscardsText : MonoBehaviour
     private void OnHarvestStart()
     {
         SetDiscardsText(new(), new(), new());
+    }
+
+    private void OnHarvestEnd()
+    {
+        discardsText.SetText($"<bounce a=0.1 f=0.5>{GameConstants.STARTING_DISCARDS_PER_HARVEST_ROUND}</bounce>");
     }
 
     private void SetDiscardsText(Guid cityGuid, List<CitizenController.CitizenPlacement> citizensBefore, [ItemCanBeNull] List<CitizenController.CitizenPlacement> citizensAfter)

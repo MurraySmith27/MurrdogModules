@@ -64035,9 +64035,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hands
-
-'
+  m_text: Coins
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af836d4eeaf8f4d33a32fc422c8c87f8, type: 2}
   m_sharedMaterial: {fileID: 2193892464167414562, guid: af836d4eeaf8f4d33a32fc422c8c87f8,

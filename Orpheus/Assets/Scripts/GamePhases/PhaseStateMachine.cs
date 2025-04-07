@@ -101,8 +101,6 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
 
     public void ChangePhase(GamePhases nextPhase)
     {
-        Debug.LogError($"change phase enqueued: {nextPhase}");
-        
         bool currentlyTransitioning = phaseTransitionQueue.Count > 0;
 
         phaseTransitionQueue.Enqueue(nextPhase);

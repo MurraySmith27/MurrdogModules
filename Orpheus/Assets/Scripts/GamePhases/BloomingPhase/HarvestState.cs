@@ -80,6 +80,8 @@ public class HarvestState : Singleton<HarvestState>
             NumRemainingHands = GameConstants.STARTING_HANDS_PER_HARVEST_ROUND;
             NumHandsUsed = 0;
 
+            RelicSystem.Instance.OnHarvestStart();
+            
             OnHarvestStart?.Invoke();
         }
     }
@@ -131,7 +133,17 @@ public class HarvestState : Singleton<HarvestState>
         NumRemainingHands--;
         NumHandsUsed++;
     }
+
+    public void AddExtraHands(int numExtraHands)
+    {
+        NumRemainingHands += numExtraHands;
+    }
     
+    public void AddExtraDiscards(int numExtraDiscards)
+    {
+        NumRemainingDiscards += numExtraDiscards;
+    }
+
     public void SetFoodGoalForHarvest(int currentHarvest)
     {
         if (currentHarvest < GameConstants.FOOD_GOALS_PER_HARVEST.Length)

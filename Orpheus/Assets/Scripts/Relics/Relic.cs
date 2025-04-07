@@ -62,6 +62,13 @@ public abstract class Relic
         args = new();
         return false;
     }
+    
+    public virtual bool OnHarvestStart(out AdditionalRelicTriggeredArgs args)
+    {
+        args = new();
+        
+        return false;
+    }
 
     public abstract void SerializeRelic();
 }

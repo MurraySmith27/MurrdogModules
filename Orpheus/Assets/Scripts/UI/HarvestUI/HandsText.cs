@@ -13,6 +13,9 @@ public class HandsText : MonoBehaviour
         HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
         HarvestState.Instance.OnHarvestStart += OnHarvestStart;
 
+        HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnded;
+        HarvestState.Instance.OnFoodGoalReached += OnHarvestEnded;
+
         CitizenController.Instance.OnHandUsed -= SetHandsText;
         CitizenController.Instance.OnHandUsed += SetHandsText;
         
@@ -24,6 +27,7 @@ public class HandsText : MonoBehaviour
         if (HarvestState.IsAvailable)
         {
             HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
+            HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnded;
         }
 
         if (CitizenController.IsAvailable)
@@ -35,6 +39,11 @@ public class HandsText : MonoBehaviour
     private void OnHarvestStart()
     {
         SetHandsText(new());
+    }
+
+    private void OnHarvestEnded()
+    {
+        handsText.SetText($"<bounce a=0.1 f=0.5>{GameConstants.STARTING_HANDS_PER_HARVEST_ROUND}</bounce>");
     }
 
     private void SetHandsText(Dictionary<Guid, List<CitizenController.CitizenPlacement>> citizenPlacements)

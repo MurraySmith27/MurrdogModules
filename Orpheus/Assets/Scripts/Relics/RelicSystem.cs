@@ -17,7 +17,8 @@ public enum RelicTypes
     JELLY_DONUT,
     TATTERED_MAP,
     THE_MOLLUSK,
-    STONE_ROSE
+    STONE_ROSE,
+    EXTRA_HAND
 }
 
 public struct AdditionalRelicTriggeredArgs
@@ -183,6 +184,18 @@ public class RelicSystem : Singleton<RelicSystem>
         {
             AdditionalRelicTriggeredArgs args;
             if (_relicInstances[relic].OnBuildingConstructed(position, buildingType, out args))
+            {
+                OnRelicTriggered?.Invoke(relic, args);
+            }
+        }
+    }
+
+    public void OnHarvestStart()
+    {
+        foreach (RelicTypes relic in relics)
+        {
+            AdditionalRelicTriggeredArgs args;
+            if (_relicInstances[relic].OnHarvestStart(out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
             }
