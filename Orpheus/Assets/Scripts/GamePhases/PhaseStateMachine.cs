@@ -20,7 +20,8 @@ public enum GamePhases
     WiltingEndStep,
     WiltingRoundUpdatePhase,
     GameWon,
-    GameOver
+    GameOver,
+    MainMenu
 }
 
 public class PhaseStateMachine : Singleton<PhaseStateMachine>
@@ -33,6 +34,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
         }
     }
 
+    public event Action<GamePhases> OnPhaseTransitionStarted;
+    
     public event Action<GamePhases> OnPhaseEnterComplete;
     public event Action<GamePhases> OnPhaseExitComplete;
     
@@ -41,6 +44,7 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
 
     public Action<GamePhases> OnPhaseChanged;
 
+    private MainMenuPhase _mainMenuPhase = new();
     private BuddingGoalsUpdatePhase _buddingGoalsUpdatePhase = new();
     private BuddingUpkeepPhase _buddingUpkeepPhase = new();
     private BuddingBuildingPhase _buddingBuildingPhase = new();
@@ -58,6 +62,14 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     private GameWonPhase _gameWonPhase = new();
     private GameOverPhase _gameOverPhase = new();
 
+    private Queue<GamePhases> phaseTransitionQueue = new();
+    
+    private void Awake()
+    {
+        currentPhaseState = GamePhases.MainMenu;
+        currentPhase = _mainMenuPhase;
+    }
+    
     private void Start()
     {
         GameStartController.Instance.OnGameStart -= OnGameStart;
@@ -88,28 +100,57 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     }
 
     public void ChangePhase(GamePhases nextPhase)
-    {   
-        currentPhase.StateExit(this, () => { OnPhaseExitComplete?.Invoke(currentPhaseState); });
-
-        currentPhaseState = nextPhase;
+    {
+        Debug.LogError($"change phase enqueued: {nextPhase}");
         
-        currentPhase = GetPhaseFromEnumValue(nextPhase);
+        bool currentlyTransitioning = phaseTransitionQueue.Count > 0;
 
-        currentPhase.StateEnter(this, () =>
+        phaseTransitionQueue.Enqueue(nextPhase);
+
+        if (!currentlyTransitioning)
         {
-            OnPhaseEnterComplete?.Invoke(nextPhase);
+            DoChangePhase();
+        }
+    }
+
+    private void DoChangePhase()
+    {
+        GamePhases nextPhase = phaseTransitionQueue.Peek();
+        
+        OnPhaseTransitionStarted?.Invoke(nextPhase);
+        
+        currentPhase.StateExit(this, () =>
+        {
+            OnPhaseExitComplete?.Invoke(currentPhaseState);
+
+            currentPhaseState = nextPhase;
+
+            currentPhase = GetPhaseFromEnumValue(nextPhase);
+
+            currentPhase.StateEnter(this, () =>
+            {
+                OnPhaseEnterComplete?.Invoke(nextPhase);
+
+                RelicSystem.Instance.OnPhaseChanged(nextPhase);
+                
+                OnPhaseChanged?.Invoke(nextPhase);
+                
+                phaseTransitionQueue.Dequeue();
+
+                if (phaseTransitionQueue.Count > 0)
+                {
+                    DoChangePhase();
+                }
+            });
         });
-        
-        RelicSystem.Instance.OnPhaseChanged(nextPhase);
-        
-        
-        OnPhaseChanged?.Invoke(nextPhase);
     }
 
     private PhaseStateBase GetPhaseFromEnumValue(GamePhases phase)
     {
         switch (phase)
         {
+            case GamePhases.MainMenu:
+                return _mainMenuPhase;
             case GamePhases.BuddingGoalsUpdate:
                 return _buddingGoalsUpdatePhase;
             case GamePhases.BuddingUpkeep:

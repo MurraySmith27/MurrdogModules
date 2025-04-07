@@ -6,16 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/ShadowOverlay.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/ShadowOverlay.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/CurrentPhaseText.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/CurrentPhaseText.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/GoNextPhaseButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/GoNextPhaseButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingResourceConversionPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingResourceConversionPhase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/CitizenController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/CitizenController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/HarvestState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/HarvestState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PhaseStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PhaseStateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/UI/ActiveInPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/UI/ActiveInPhase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/TogglePlaceBuildingModeButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/TogglePlaceBuildingModeButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/HarvestRoundControlsButtons.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/HarvestRoundControlsButtons.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextAssets/AllIcons.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextAssets/AllIcons.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/TMP Settings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/TMP Settings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/coins.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/coins.png.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +71,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePhases/BuddingPhase/BuddingEndStepPhase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePhases/GameStartController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/murra/Desktop/dev/Orpheus/Orpheus/Assets/Scripts/GamePhases/RoundController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/murra/Desktop/dev/Orpheus/Orpheus/Assets/Scripts/GamePhases/RoundController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePhases/UI/ActiveInPhase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/WiltingChallengePhaseController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/WiltingRoundUpdatePhase.cs" root0="FORCE_HIGHLIGHTING" />
@@ -105,7 +113,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/BuildingPlacementModeText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/EnableOnInteractionModeChange.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/GoalText.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/GoldText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/HarvestRoundControlsButtons.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/ScoreText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/RelicTooltip.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipBase.cs" root0="FORCE_HIGHLIGHTING" />
@@ -170,10 +181,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="35140">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="28340">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="35140" />
+      <option name="pid" value="28340" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -220,6 +231,7 @@
       <workItem from="1743794852841" duration="1115000" />
       <workItem from="1743802371477" duration="9478000" />
       <workItem from="1743874754108" duration="7121000" />
+      <workItem from="1743980684530" duration="8533000" />
     </task>
     <servers />
   </component>
@@ -278,45 +290,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
-          <line>54</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'OnPhaseChanged'">
-            <startOffsets>
-              <option value="1538" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1596" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
-          <line>123</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'SwitchMapInteractionMode'">
-            <startOffsets>
-              <option value="3833" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3855" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
-          <line>81</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'SelectTile'">
-            <startOffsets>
-              <option value="2536" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2597" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
           <line>71</line>
           <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'SelectTile'">
             <startOffsets>
@@ -327,6 +300,45 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/HarvestState.cs</url>
+          <line>101</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\BloomingPhase\HarvestState.cs" containingFunctionPresentation="Method 'AddHarvestFoodScore'">
+            <startOffsets>
+              <option value="2299" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2327" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs</url>
+          <line>162</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'OnHarvestGoalReached'">
+            <startOffsets>
+              <option value="5277" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5298" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs</url>
+          <line>123</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'GoToNextPhase'">
+            <startOffsets>
+              <option value="4165" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4230" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="80" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

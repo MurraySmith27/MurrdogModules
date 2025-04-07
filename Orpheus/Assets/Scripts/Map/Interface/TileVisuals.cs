@@ -50,8 +50,8 @@ public class TileVisuals : MonoBehaviour
         GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
         GlobalSettings.OnGameSpeedChanged += OnGameSpeedChanged;
 
-        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
-        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
+        PhaseStateMachine.Instance.OnPhaseTransitionStarted += OnPhaseTransitionStarted;
         
         OnGameSpeedChanged(GlobalSettings.GameSpeed);
     }
@@ -62,11 +62,11 @@ public class TileVisuals : MonoBehaviour
 
         if (PhaseStateMachine.IsAvailable)
         {
-            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+            PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
         }
     }
 
-    private void OnPhaseChanged(GamePhases gamePhases)
+    private void OnPhaseTransitionStarted(GamePhases gamePhases)
     {
         if (gamePhases == GamePhases.BloomingHarvest)
         {

@@ -134,9 +134,9 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
             yield return Timing.WaitForSeconds(cityEndAnimationTime);
         }
         
-        OnHarvestEnd?.Invoke();
-        
         PlayerResourcesSystem.Instance.RegisterCurrentRoundResources(resources);
+        
+        OnHarvestEnd?.Invoke();
     }
     
 }

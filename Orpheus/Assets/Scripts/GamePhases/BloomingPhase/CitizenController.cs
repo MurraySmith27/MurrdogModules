@@ -49,8 +49,8 @@ public class CitizenController : Singleton<CitizenController>
         HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnd;
         HarvestState.Instance.OnFoodGoalReached += OnHarvestEnd;
 
-        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
-        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
+        PhaseStateMachine.Instance.OnPhaseTransitionStarted += OnPhaseTransitionStarted;
 
         BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
         BloomingHarvestController.Instance.OnTileBonusTickEnd += OnTileBonusTickEnd;
@@ -67,7 +67,7 @@ public class CitizenController : Singleton<CitizenController>
 
         if (PhaseStateMachine.IsAvailable)
         {
-            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+            PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
         }
 
         if (BloomingHarvestController.IsAvailable)
@@ -76,7 +76,7 @@ public class CitizenController : Singleton<CitizenController>
         }
     }
 
-    private void OnPhaseChanged(GamePhases gamePhases)
+    private void OnPhaseTransitionStarted(GamePhases gamePhases)
     {
         if (gamePhases == GamePhases.BloomingHarvestTurn)
         {

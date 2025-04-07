@@ -18,15 +18,15 @@ public class GoNextPhaseButton : MonoBehaviour
     }
     private void Start()
     {
-        PhaseStateMachine.Instance.OnPhaseEnterComplete -= OnPhaseEnterComplete;
-        PhaseStateMachine.Instance.OnPhaseEnterComplete += OnPhaseEnterComplete;
+        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
     }
 
     private void OnDestroy()
     {
         if (PhaseStateMachine.IsAvailable)
         {
-            PhaseStateMachine.Instance.OnPhaseEnterComplete -= OnPhaseEnterComplete;
+            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         }
     }
     
@@ -36,7 +36,7 @@ public class GoNextPhaseButton : MonoBehaviour
         RoundController.Instance.GoToNextPhase();
     }
 
-    private void OnPhaseEnterComplete(GamePhases phase)
+    private void OnPhaseChanged(GamePhases phase)
     {
         goNextPhaseButton.interactable = RoundController.Instance.IsInInteractableRound();
     }

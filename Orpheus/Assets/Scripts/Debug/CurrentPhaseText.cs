@@ -28,6 +28,6 @@ public class CurrentPhaseText : MonoBehaviour
     
     private void OnPhaseChanged(GamePhases newPhase)
     {
-        phaseText.SetText($"Current Phase: {Enum.GetName(typeof(GamePhases), newPhase)}");
+        phaseText.SetText($"{Enum.GetName(typeof(GamePhases), newPhase)}");
     }
 }

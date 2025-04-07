@@ -12,6 +12,7 @@ public class ActiveInPhase : MonoBehaviour
     {
         PhaseStateMachine.Instance.OnPhaseChanged -= OnGamePhaseChanged;
         PhaseStateMachine.Instance.OnPhaseChanged += OnGamePhaseChanged;
+        OnGamePhaseChanged(PhaseStateMachine.Instance.CurrentPhase);
     }
     
     private void OnDestroy()

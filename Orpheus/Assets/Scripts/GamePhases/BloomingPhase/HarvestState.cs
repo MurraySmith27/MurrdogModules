@@ -57,19 +57,19 @@ public class HarvestState : Singleton<HarvestState>
     
     private void Start()
     {
-        PhaseStateMachine.Instance.OnPhaseEnterComplete -= OnPhaseEnterComplete;
-        PhaseStateMachine.Instance.OnPhaseEnterComplete += OnPhaseEnterComplete;
+        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
     }
     
     private void OnDestroy()
     {
         if (PhaseStateMachine.IsAvailable)
         {
-            PhaseStateMachine.Instance.OnPhaseEnterComplete -= OnPhaseEnterComplete;
+            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         }    
     }
 
-    private void OnPhaseEnterComplete(GamePhases phase)
+    private void OnPhaseChanged(GamePhases phase)
     {
         if (phase == GamePhases.BloomingUpkeep)
         {
@@ -97,7 +97,7 @@ public class HarvestState : Singleton<HarvestState>
 
         OnCurrentFoodScoreChanged?.Invoke(foodScore);
         
-        if (foodScore >= CurrentFoodGoal)
+        if (CurrentFoodScore >= CurrentFoodGoal)
         {
             OnFoodGoalReached?.Invoke();
         }
