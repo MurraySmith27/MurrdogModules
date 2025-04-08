@@ -9,7 +9,7 @@ public class BakersDozenRelic : Relic
     private const float BAKERS_DOZEN_RELIC_PROBABILITY = 0.5f;
     
     public override bool OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position,
-        out Dictionary<ResourceType, int> outResourceDiff, out AdditionalRelicTriggeredArgs args)
+        out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
     {
         args = new();
 

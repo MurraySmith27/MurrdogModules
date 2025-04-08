@@ -11,8 +11,11 @@ public class ItemsList : MonoBehaviour
     [SerializeField] private Transform itemListParent;
     
     [SerializeField] private Vector2Int itemImageDimensions = new Vector2Int(50, 50);
+
+    [SerializeField] private Vector2Int itemImageOffset = new Vector2Int(200, 0);
+    [SerializeField] private Vector2Int itemImageSize = new Vector2Int(200, 200);
     
-    [SerializeField] private RenderTexture itemBatchRenderTexture;
+    [SerializeField] private RenderTexture itemImageRenderTexture;
     
     [SerializeField] private List<Transform> itemScenePositions;
     
@@ -92,16 +95,16 @@ public class ItemsList : MonoBehaviour
         instantiateedItemVisuals.transform.localPosition = Vector3.zero;
 
         int rectMinX = itemImageDimensions.x *
-                       (unoccupiedSlotIndex % Mathf.FloorToInt(itemBatchRenderTexture.width / (float)itemImageDimensions.x));
+                       (unoccupiedSlotIndex % Mathf.FloorToInt(itemImageSize.x / (float)itemImageDimensions.x));
         
-        int rectMinY = itemBatchRenderTexture.height - itemImageDimensions.y *
-                       Mathf.FloorToInt(unoccupiedSlotIndex / (itemBatchRenderTexture.height / (float)itemImageDimensions.y)) - itemImageDimensions.y;
+        int rectMinY = itemImageSize.y - itemImageDimensions.y *
+                       Mathf.FloorToInt(unoccupiedSlotIndex / (itemImageSize.y / (float)itemImageDimensions.y)) - itemImageDimensions.y;
 
         itemIcon.Populate(new Rect(
-            rectMinX / (float)itemBatchRenderTexture.width,
-            rectMinY / (float)itemBatchRenderTexture.height,
-            itemImageDimensions.x / (float)itemBatchRenderTexture.width,
-            itemImageDimensions.y / (float)itemBatchRenderTexture.height
+            (itemImageOffset.x + rectMinX) / (float)itemImageRenderTexture.width,
+            (itemImageOffset.y + rectMinY) / (float)itemImageRenderTexture.height,
+            itemImageDimensions.x / (float)itemImageRenderTexture.width,
+            itemImageDimensions.y / (float)itemImageRenderTexture.height
         ), itemType);
         
         _instantiatedItemVisuals[itemType] = (unoccupiedSlotIndex, instantiateedItemVisuals);

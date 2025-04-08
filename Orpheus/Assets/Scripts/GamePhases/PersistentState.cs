@@ -9,8 +9,6 @@ public class PersistentState : Singleton<PersistentState>
     public int RoundNumber { get; private set; }
     
     public int HarvestNumber { get; private set; }
-    
-    public int CurrentBonusCitizens { get; private set; }
 
     public long CurrentGold { get; private set; } = GameConstants.STARTING_GOLD;
 
@@ -18,15 +16,17 @@ public class PersistentState : Singleton<PersistentState>
     
     public long CurrentStone { get; private set; } = GameConstants.STARTING_STONE;
 
+    public int CurrentItemCapacity { get; private set; } = GameConstants.STARTING_ITEM_CAPACITY;
+
     public event Action<int> OnRoundEnd;
-    
-    public event Action<int> OnBonusCitizensValueChanged;
     
     public event Action<long> OnGoldValueChanged;
     
     public event Action<long> OnWoodValueChanged;
     
     public event Action<long> OnStoneValueChanged;
+
+    public event Action<int> OnItemCapacityChanged;
     
     public void IncrementRoundNumber()
     {
@@ -37,12 +37,6 @@ public class PersistentState : Singleton<PersistentState>
     public void IncrementHarvestNumber()
     {
         HarvestNumber++;
-    }
-    
-    public void ChangeCurrentBonusCitizens(int difference)
-    {
-        CurrentBonusCitizens += difference;
-        OnBonusCitizensValueChanged?.Invoke(CurrentBonusCitizens);
     }
     
     public void ChangeCurrentGold(long difference)
@@ -64,5 +58,12 @@ public class PersistentState : Singleton<PersistentState>
         CurrentStone += difference;
 
         OnStoneValueChanged?.Invoke(CurrentStone);
+    }
+
+    public void ChangeItemCapacity(int newCapacity)
+    {
+        CurrentItemCapacity = newCapacity;
+
+        OnItemCapacityChanged?.Invoke(newCapacity);
     }
 }

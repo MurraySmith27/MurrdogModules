@@ -121,28 +121,22 @@ public class CitizenController : Singleton<CitizenController>
         Reset();
     }
     
+    //this method assumes there is a bonus citizen item being used.
     public bool TryPlaceBonusCitizenOnRandomTile(Guid cityGuid)
     {
-        if (PersistentState.Instance.CurrentBonusCitizens > 0)
+        if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, 1, out List<Vector2Int> chosenTiles))
         {
-            if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, 1, out List<Vector2Int> chosenTiles))
-            {
-                //use the bonus citizen
-                PersistentState.Instance.ChangeCurrentBonusCitizens(-1);
-
-                HarvestState.Instance.UseCitizens(1);
-                
-                OnBonusCitizenUsed?.Invoke(cityGuid, chosenTiles[0]);
-                return true;
-            }
-            else
-            {
-                Debug.LogError("Tried to place a bonus citizen and couldn't!");
-                return false;
-            }
+            HarvestState.Instance.UseCitizens(1);
+            
+            OnBonusCitizenUsed?.Invoke(cityGuid, chosenTiles[0]);
+            return true;
         }
-
-        return false;
+        else
+        {
+            Debug.LogError("Tried to place a bonus citizen and couldn't!");
+            return false;
+        }
+    
     }
 
     private bool TryPlaceCitizensOnUnoccupiedTiles(Guid cityGuid, int numCitizensToPlace, out List<Vector2Int> chosenTiles)

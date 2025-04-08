@@ -6,7 +6,7 @@ public class JellyDonutRelic : Relic
 {
     private const int JELLY_DONUT_RELIC_GOLD_PER_WHEAT = 10;
     
-    public override bool OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalRelicTriggeredArgs args)
+    public override bool OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalTriggeredArgs args)
     {
         convertedFoodScore = baseFoodScore;
         args = new();

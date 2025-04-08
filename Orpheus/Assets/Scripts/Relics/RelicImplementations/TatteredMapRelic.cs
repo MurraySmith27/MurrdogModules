@@ -7,7 +7,7 @@ public class TatteredMapRelic : Relic
 {
     private const double TATTERED_MAP_RELIC_FOOD_SCORE_PER_TILE = 1d;
     
-    public override bool OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalRelicTriggeredArgs args)
+    public override bool OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalTriggeredArgs args)
     {
         convertedFoodScore = baseFoodScore;
         args = new();

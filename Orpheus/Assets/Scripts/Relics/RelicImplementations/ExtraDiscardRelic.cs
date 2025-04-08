@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExtraDiscardRelic : Relic
 {
-    public override bool OnHarvestStart(out AdditionalRelicTriggeredArgs args)
+    public override bool OnHarvestStart(out AdditionalTriggeredArgs args)
     {
         args = new();
         

@@ -6,7 +6,7 @@ public class LuckyCoinRelic : Relic
 {
     private const long LUCKY_COIN_INTEREST_CAP_INCREASE = 50;
     
-    public override bool OnGoldInterestAdded(long coinTotalBefore, long interest, out long newInterest, out AdditionalRelicTriggeredArgs args)
+    public override bool OnGoldInterestAdded(long coinTotalBefore, long interest, out long newInterest, out AdditionalTriggeredArgs args)
     {
         newInterest = interest;
         args = new();

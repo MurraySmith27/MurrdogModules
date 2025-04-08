@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558c5482459acfb488f788d2b9988d8c, type: 3}
+  m_Name: ItemVisualsData
+  m_EditorClassIdentifier: 
+  itemTypes:
+  - itemType: 1
+    sprite: {fileID: 0}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 2aaef6878524dce44b11b9b0b9aafac2,
+      type: 3}
+    description: <b>Bonus Citizen</b><br>Use during harvest to add an additional
+      citizen this round.

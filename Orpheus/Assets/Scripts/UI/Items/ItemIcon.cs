@@ -11,7 +11,7 @@ public class ItemIcon : MonoBehaviour
     
     private ItemTypes _itemType;
 
-    public void Populate(Rect renderTextureUV, RelicTypes itemType)
+    public void Populate(Rect renderTextureUV, ItemTypes itemType)
     {
         rawImage.uvRect = renderTextureUV;
         _itemType = itemType;

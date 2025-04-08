@@ -404,19 +404,19 @@ MonoBehaviour:
   - {fileID: 0}
   relicRenderTextureUVs:
   - serializedVersion: 2
+    x: 0.125
+    y: 0
+    width: 0.125
+    height: 0.25
+  - serializedVersion: 2
     x: 0.25
     y: 0
-    width: 0.25
+    width: 0.125
     height: 0.25
   - serializedVersion: 2
-    x: 0.5
+    x: 0.375
     y: 0
-    width: 0.25
-    height: 0.25
-  - serializedVersion: 2
-    x: 0.75
-    y: 0
-    width: 0.25
+    width: 0.125
     height: 0.25
   relicVisuals: {fileID: 11400000, guid: 96f24972ca8dd0b43ba5a9ff59eef60f, type: 2}
   refreshButton: {fileID: 8266709620982938979}
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
+  m_fontSize: 104.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1588,7 +1588,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.5
+  m_fontSize: 40.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.75
+  m_fontSize: 28.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1900,7 +1900,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.35
+  m_fontSize: 31.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1953,7 +1953,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.25
+      value: 39.3
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
@@ -2135,7 +2135,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.25
+      value: 39.3
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
@@ -2342,7 +2342,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.25
+      value: 39.3
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}

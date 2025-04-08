@@ -22,7 +22,7 @@ public enum RelicTypes
     EXTRA_DISCARD
 }
 
-public struct AdditionalRelicTriggeredArgs
+public struct AdditionalTriggeredArgs
 {
     public int IntArg;
     public long LongArg;
@@ -44,7 +44,7 @@ public class RelicSystem : Singleton<RelicSystem>
     
     public event Action<RelicTypes> OnRelicAdded;
     public event Action<RelicTypes> OnRelicRemoved;
-    public event Action<RelicTypes, AdditionalRelicTriggeredArgs> OnRelicTriggered;
+    public event Action<RelicTypes, AdditionalTriggeredArgs> OnRelicTriggered;
     
     private void Awake()
     {
@@ -91,7 +91,7 @@ public class RelicSystem : Singleton<RelicSystem>
         
         foreach (RelicTypes relic in relics)
         {
-            AdditionalRelicTriggeredArgs args;
+            AdditionalTriggeredArgs args;
             if (_relicInstances[relic].OnResourcesProcessed(modifiedResourceDiff, position, out modifiedResourceDiff, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
@@ -108,7 +108,7 @@ public class RelicSystem : Singleton<RelicSystem>
         
         foreach (RelicTypes relic in relics)
         {
-            AdditionalRelicTriggeredArgs args;
+            AdditionalTriggeredArgs args;
             if (_relicInstances[relic].OnResourcesHarvested(modifiedResources, position, out modifiedResources, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
@@ -122,7 +122,7 @@ public class RelicSystem : Singleton<RelicSystem>
     {
         foreach (RelicTypes relic in relics)
         {
-            AdditionalRelicTriggeredArgs args;
+            AdditionalTriggeredArgs args;
             if (_relicInstances[relic].OnPhaseChanged(phase, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
@@ -135,7 +135,7 @@ public class RelicSystem : Singleton<RelicSystem>
         long currentInterest = interest;
         foreach (RelicTypes relic in relics)
         {
-            AdditionalRelicTriggeredArgs args;
+            AdditionalTriggeredArgs args;
             if (_relicInstances[relic].OnGoldInterestAdded(coinTotalBefore, currentInterest, out currentInterest, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
@@ -151,7 +151,7 @@ public class RelicSystem : Singleton<RelicSystem>
 
         foreach (RelicTypes relic in relics)
         {
-            AdditionalRelicTriggeredArgs args;
+            AdditionalTriggeredArgs args;
 
             if (_relicInstances[relic].OnConvertResourceToFoodScore(currentFoodScore, resourceType, resourceQuantity, out long foodScoreDifference, out args))
             {
@@ -169,7 +169,7 @@ public class RelicSystem : Singleton<RelicSystem>
         
         foreach (RelicTypes relic in relics)
         {
-            AdditionalRelicTriggeredArgs args;
+            AdditionalTriggeredArgs args;
             if (_relicInstances[relic].OnFoodScoreConversionComplete(currentFoodScore, resourcesToConvert, out currentFoodScore, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
@@ -183,7 +183,7 @@ public class RelicSystem : Singleton<RelicSystem>
     {
         foreach (RelicTypes relic in relics)
         {
-            AdditionalRelicTriggeredArgs args;
+            AdditionalTriggeredArgs args;
             if (_relicInstances[relic].OnBuildingConstructed(position, buildingType, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
@@ -195,7 +195,7 @@ public class RelicSystem : Singleton<RelicSystem>
     {
         foreach (RelicTypes relic in relics)
         {
-            AdditionalRelicTriggeredArgs args;
+            AdditionalTriggeredArgs args;
             if (_relicInstances[relic].OnHarvestStart(out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);

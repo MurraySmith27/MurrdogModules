@@ -66,7 +66,12 @@ public static class GameConstants
 
     public static readonly long SHOP_RELIC_COST = 200;
     public static readonly long SHOP_EXTRA_CITIZEN_COST = 400;
+
+    public static readonly float SELL_VALUE_PERCENTAGE = 0.4f;
     
+    
+    //item settings
+    public static readonly int STARTING_ITEM_CAPACITY = 2;
     
     //harvest settings
     public static readonly int STARTING_CITIZENS_PER_HARVEST_ROUND = 3;

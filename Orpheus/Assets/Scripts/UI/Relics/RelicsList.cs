@@ -11,7 +11,10 @@ public class RelicsList : MonoBehaviour
     
     [SerializeField] private Vector2Int relicImageDimensions = new Vector2Int(50, 50);
     
-    [SerializeField] private RenderTexture relicBatchRenderTexture;
+    [SerializeField] private Vector2Int relicImageOffset = new Vector2Int(0, 0);
+    [SerializeField] private Vector2Int relicImageSize = new Vector2Int(200, 200);
+
+    [SerializeField] private RenderTexture relicImageRenderTexture;
     
     [SerializeField] private List<Transform> relicScenePositions;
     
@@ -91,16 +94,16 @@ public class RelicsList : MonoBehaviour
         instantiateedRelicVisuals.transform.localPosition = Vector3.zero;
 
         int rectMinX = relicImageDimensions.x *
-                       (unoccupiedSlotIndex % Mathf.FloorToInt(relicBatchRenderTexture.width / (float)relicImageDimensions.x));
+                       (unoccupiedSlotIndex % Mathf.FloorToInt(relicImageSize.x / (float)relicImageDimensions.x));
         
-        int rectMinY = relicBatchRenderTexture.height - relicImageDimensions.y *
-                       Mathf.FloorToInt(unoccupiedSlotIndex / (relicBatchRenderTexture.height / (float)relicImageDimensions.y)) - relicImageDimensions.y;
+        int rectMinY = relicImageSize.y - relicImageDimensions.y *
+                       Mathf.FloorToInt(unoccupiedSlotIndex / (relicImageSize.y / (float)relicImageDimensions.y)) - relicImageDimensions.y;
 
         relicIcon.Populate(new Rect(
-            rectMinX / (float)relicBatchRenderTexture.width,
-            rectMinY / (float)relicBatchRenderTexture.height,
-            relicImageDimensions.x / (float)relicBatchRenderTexture.width,
-            relicImageDimensions.y / (float)relicBatchRenderTexture.height
+            (relicImageOffset.x + rectMinX) / (float)relicImageRenderTexture.width,
+            (relicImageOffset.y + rectMinY) / (float)relicImageRenderTexture.height,
+            relicImageDimensions.x / (float)relicImageRenderTexture.width,
+            relicImageDimensions.y / (float)relicImageRenderTexture.height
         ), relicType);
         
         _instantiatedRelicVisuals[relicType] = (unoccupiedSlotIndex, instantiateedRelicVisuals);

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class RustyPlowshareRelic : Relic
 {
-    public override bool OnPhaseChanged(GamePhases phase, out AdditionalRelicTriggeredArgs args)
+    public override bool OnPhaseChanged(GamePhases phase, out AdditionalTriggeredArgs args)
     {
         args = new();
         

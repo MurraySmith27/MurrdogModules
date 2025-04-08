@@ -19,11 +19,13 @@ MonoBehaviour:
     Text: <b>Wheat</b><br>A resource that you can harvest.
   - Id: fish
     Text: <b>Fish</b>A resource that you can harvest.
+  - Id: bread
+    Text: <b>Bread</b><br>Produced from wheat.
   - Id: wood
-    Text: <b>Wood</b><br>A resource that you can harvest.<br>Used to construct
-      buildings.
+    Text: <b>Wood</b><br>A resource that you can harvest.<br>Used to construct buildings.
   - Id: stone
-    Text: <b>Stone</b><br>A resource that you can harvest.<br>Used to construct
-      buildings.
+    Text: <b>Stone</b><br>A resource that you can harvest.<br>Used to construct buildings.
   - Id: gold
     Text: <b>Gold</b><br>Used to purchase various things.
+  - Id: citizen
+    Text: <b>Citizen</b><br>Triggers a tile an additional time during harvest.

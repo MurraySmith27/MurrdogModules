@@ -25,7 +25,7 @@ public class ShopPopup : MonoBehaviour
 
     private List<RelicTypes> _currentRelics = new();
 
-    private List<Relic3DVisual> _instantiatedRelicVisuals = new();
+    private List<Icon3DVisual> _instantiatedRelicVisuals = new();
 
     private void Start()
     {
@@ -100,7 +100,7 @@ public class ShopPopup : MonoBehaviour
             
             GameObject instance = Instantiate(prefab, relicPreviewTransforms[i]);
             
-            _instantiatedRelicVisuals.Add(instance.GetComponent<Relic3DVisual>());
+            _instantiatedRelicVisuals.Add(instance.GetComponent<Icon3DVisual>());
 
             relicIcons[i].Populate(relicRenderTextureUVs[i], _currentRelics[i]);
 
@@ -149,14 +149,14 @@ public class ShopPopup : MonoBehaviour
 
         if (PersistentState.Instance.CurrentGold >= bonusCitizenCost)
         {
-            PersistentState.Instance.ChangeCurrentBonusCitizens(1);
+            ItemSystem.Instance.AddItem(ItemTypes.BONUS_CITIZEN);
             PersistentState.Instance.ChangeCurrentGold(-bonusCitizenCost);
         }
     }
 
     private void Clear()
     {
-        foreach (Relic3DVisual visual in _instantiatedRelicVisuals)
+        foreach (Icon3DVisual visual in _instantiatedRelicVisuals)
         {
             Destroy(visual.gameObject);
         }
