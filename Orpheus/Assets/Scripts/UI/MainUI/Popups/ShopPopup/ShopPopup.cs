@@ -11,14 +11,15 @@ public class ShopPopup : MonoBehaviour
     [SerializeField] private List<Rect> relicRenderTextureUVs;
 
     [SerializeField] private RelicVisualsSO relicVisuals;
-
-
+    
     [Header("UI Elements")] 
     [SerializeField] private Button refreshButton;
     [SerializeField] private TMP_Text refreshButtonCostText;
     [SerializeField] private List<TMP_Text> shopRelicCostTexts;
     [SerializeField] private List<Button> shopRelicCostButtons;
     [SerializeField] private List<Image> soldOutBanners;
+
+    [SerializeField] private TMP_Text citizenCostText;
     
     private int _numRelicRefreshes = 0;
 
@@ -117,6 +118,8 @@ public class ShopPopup : MonoBehaviour
                 shopRelicCostButtons[i].interactable = false;
             }
         }
+        
+        citizenCostText.SetText($"<sprite index=0>{GameConstants.SHOP_EXTRA_CITIZEN_COST}");
 
         for (int i = _currentRelics.Count; i < relicIcons.Count; i++)
         {
@@ -137,6 +140,17 @@ public class ShopPopup : MonoBehaviour
             shopRelicCostTexts[relicIndex].SetText($"SOLD");
             shopRelicCostButtons[relicIndex].interactable = false;
             soldOutBanners[relicIndex].gameObject.SetActive(true);
+        }
+    }
+
+    public void OnBonusCitizenPurchaseButtonClicked()
+    {
+        long bonusCitizenCost = GameConstants.SHOP_EXTRA_CITIZEN_COST;
+
+        if (PersistentState.Instance.CurrentGold >= bonusCitizenCost)
+        {
+            PersistentState.Instance.ChangeCurrentBonusCitizens(1);
+            PersistentState.Instance.ChangeCurrentGold(-bonusCitizenCost);
         }
     }
 
