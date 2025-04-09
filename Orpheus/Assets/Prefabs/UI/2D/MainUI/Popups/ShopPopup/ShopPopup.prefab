@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 2455879846774017190}
   - component: {fileID: 258577662767004106}
   - component: {fileID: 2052143004873160415}
+  - component: {fileID: 3262897748245560101}
   m_Layer: 6
   m_Name: BonusCitizen
   m_TagString: Untagged
@@ -131,6 +132,19 @@ MonoBehaviour:
   uiInputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
   tooltipTextData: {fileID: 11400000, guid: cd6e5fab884f9c14eb259cd48e5c26ce, type: 2}
   tooltipType: 1
+--- !u!114 &3262897748245560101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754451593894314384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27fd318b1fa10c4e937fe8933159bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawImage: {fileID: 419891177808888671}
 --- !u!1 &822486266182216322
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3418018908921308001
 RectTransform:
   m_ObjectHideFlags: 0
@@ -419,6 +433,17 @@ MonoBehaviour:
     width: 0.125
     height: 0.25
   relicVisuals: {fileID: 11400000, guid: 96f24972ca8dd0b43ba5a9ff59eef60f, type: 2}
+  itemIcons:
+  - {fileID: 3262897748245560101}
+  itemPreviewTransforms:
+  - {fileID: 0}
+  itemRenderTextureUVs:
+  - serializedVersion: 2
+    x: 0.625
+    y: 0
+    width: 0.125
+    height: 0.25
+  itemVisuals: {fileID: 11400000, guid: 1cc8fb88203f3e94e98e298f13cf2245, type: 2}
   refreshButton: {fileID: 8266709620982938979}
   refreshButtonCostText: {fileID: 6543737377772133264}
   shopRelicCostTexts:
@@ -528,7 +553,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 104.7
+  m_fontSize: 120
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -984,7 +1009,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 95f572020ae669a40bd0ae717e7d4683, type: 3}
+  m_Texture: {fileID: 8400000, guid: caff089c2f28a6b4cb3f5a0d64c2a5b7, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1588,7 +1613,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.85
+  m_fontSize: 47.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1763,7 +1788,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.15
+  m_fontSize: 32.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1900,7 +1925,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.25
+  m_fontSize: 36.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1953,7 +1978,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 39.3
+      value: 47.25
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
@@ -2135,7 +2160,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 39.3
+      value: 47.25
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
@@ -2342,7 +2367,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 39.3
+      value: 47.25
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}

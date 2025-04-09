@@ -6,11 +6,17 @@ using UnityEngine.UI;
 
 public class ShopPopup : MonoBehaviour
 {
+    [Header("Relic Icons")]
     [SerializeField] private List<RelicIcon> relicIcons;
     [SerializeField] private List<Transform> relicPreviewTransforms;
     [SerializeField] private List<Rect> relicRenderTextureUVs;
-
     [SerializeField] private RelicVisualsSO relicVisuals;
+    
+    [Header("Item Icons")]
+    [SerializeField] private List<ItemIcon> itemIcons;
+    [SerializeField] private List<Transform> itemPreviewTransforms;
+    [SerializeField] private List<Rect> itemRenderTextureUVs;
+    [SerializeField] private ItemVisualsSO itemVisuals; 
     
     [Header("UI Elements")] 
     [SerializeField] private Button refreshButton;
@@ -26,6 +32,8 @@ public class ShopPopup : MonoBehaviour
     private List<RelicTypes> _currentRelics = new();
 
     private List<Icon3DVisual> _instantiatedRelicVisuals = new();
+
+    private List<Icon3DVisual> _instantiatedItemVisuals = new();
 
     private void Start()
     {
@@ -118,8 +126,18 @@ public class ShopPopup : MonoBehaviour
                 shopRelicCostButtons[i].interactable = false;
             }
         }
+
+        GameObject itemPrefabs = itemVisuals.GetVisualsPrefabForItem(ItemTypes.BONUS_CITIZEN);
+        
+        GameObject itemInstance = Instantiate(itemPrefabs, itemPreviewTransforms[0]);
+        
+        _instantiatedItemVisuals.Add(itemInstance.GetComponent<Icon3DVisual>());
+
+        itemIcons[0].Populate(itemRenderTextureUVs[0], ItemTypes.BONUS_CITIZEN);
         
         citizenCostText.SetText($"<sprite index=0>{GameConstants.SHOP_EXTRA_CITIZEN_COST}");
+        
+        shopRelicCostButtons[0].interactable = true;
 
         for (int i = _currentRelics.Count; i < relicIcons.Count; i++)
         {

@@ -24502,11 +24502,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopPopup
       objectReference: {fileID: 0}
-    - target: {fileID: 1553854197503531574, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3418018908921308001, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
         type: 3}
       propertyPath: m_Pivot.x
@@ -24607,6 +24602,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7133293719071578863, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: itemPreviewTransforms.Array.data[0]
+      value: 
+      objectReference: {fileID: 1294092517}
     - target: {fileID: 7133293719071578863, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
         type: 3}
       propertyPath: relicPreviewTransforms.Array.data[0]
@@ -34157,7 +34157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
-  inputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
+  inputChannel: {fileID: 0}
   uiPopups:
   - id: ShopPopup
     prefab: {fileID: 0}
