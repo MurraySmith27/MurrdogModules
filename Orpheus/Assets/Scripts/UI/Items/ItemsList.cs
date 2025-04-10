@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ItemsList : MonoBehaviour
 {
-
     [SerializeField] private ItemIcon itemIconPrefab;
 
     [SerializeField] private Transform itemListParent;

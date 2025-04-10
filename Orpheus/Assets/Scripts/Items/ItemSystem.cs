@@ -60,6 +60,21 @@ public class ItemSystem : Singleton<ItemSystem>
             OnItemUsed?.Invoke(item, args);
         }
     }
+
+    public void SellItem(ItemTypes item)
+    {
+        if (items.Contains(item))
+        {
+            RemoveItem(item);
+            
+            PersistentState.Instance.ChangeCurrentGold(GetSellPriceOfItem(item));
+        }
+    }
+
+    public int GetSellPriceOfItem(ItemTypes item)
+    {
+        return Mathf.FloorToInt(ShopUtils.GetCostOfItem(item) * GameConstants.SELL_VALUE_PERCENTAGE);
+    }
     
     public void DiscardItem(ItemTypes item)
     {
