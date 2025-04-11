@@ -45,7 +45,7 @@ public class UISubmenu : MonoBehaviour
         }
     }
     
-    public void Show()
+    public virtual void Show()
     {
         if (!_isShowing)
         {

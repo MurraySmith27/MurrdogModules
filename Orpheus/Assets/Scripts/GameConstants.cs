@@ -65,7 +65,7 @@ public static class GameConstants
     public static readonly long SHOP_REFRESH_GOLD_INCREASE = 10;
 
     public static readonly long SHOP_RELIC_COST = 200;
-    public static readonly long SHOP_EXTRA_CITIZEN_COST = 400;
+    
 
     public static readonly float SELL_VALUE_PERCENTAGE = 0.4f;
     

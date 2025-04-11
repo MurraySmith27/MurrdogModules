@@ -10,8 +10,8 @@ using UnityEngine.UI;
 public class ItemIcon : MonoBehaviour
 {
     [SerializeField] private RawImage rawImage;
-
-    [SerializeField] private TMP_Text sellButtonText;
+    
+    [SerializeField] private UIItemSubmenu itemSubmenu;
     
     private ItemTypes _itemType;
 
@@ -20,9 +20,9 @@ public class ItemIcon : MonoBehaviour
         rawImage.uvRect = renderTextureUV;
         _itemType = itemType;
 
-        if (sellButtonText != null)
+        if (itemSubmenu != null)
         {
-            sellButtonText.SetText($"SELL<sprite=0>{ItemSystem.Instance.GetSellPriceOfItem(_itemType)}");
+            itemSubmenu.SetItemType(itemType);
         }
     }
 

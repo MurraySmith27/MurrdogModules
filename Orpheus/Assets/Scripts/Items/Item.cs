@@ -11,4 +11,9 @@ public abstract class Item
         args = new();
         return false;
     }
+
+    public virtual bool IsItemUsable()
+    {
+        return false;
+    }
 }

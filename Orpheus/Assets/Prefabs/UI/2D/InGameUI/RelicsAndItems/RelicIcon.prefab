@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2184645882983332542}
   - component: {fileID: 2488550560085008991}
   - component: {fileID: 4498475187074727520}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7488131842924204258}
   - component: {fileID: 7296859419920313309}
   - component: {fileID: 6550007430407395145}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: IconImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 8684845547624493}
   - component: {fileID: 3590179233019161170}
   - component: {fileID: 1478908529718944915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RelicIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

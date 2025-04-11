@@ -30,6 +30,13 @@ public class OpenShopButton : MonoBehaviour
 
     public void OnOpenShopButtonClicked()
     {
-        UIPopupSystem.Instance.ShowPopup(shopPopupName);
+        if (UIPopupSystem.Instance.IsPopupShowing(shopPopupName))
+        {
+            UIPopupSystem.Instance.HidePopup(shopPopupName);
+        }
+        else
+        {
+            UIPopupSystem.Instance.ShowPopup(shopPopupName);
+        }
     }
 }

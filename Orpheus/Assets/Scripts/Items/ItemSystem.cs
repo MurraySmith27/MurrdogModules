@@ -12,24 +12,24 @@ public enum ItemTypes
 public class ItemSystem : Singleton<ItemSystem>
 {
     private Dictionary<ItemTypes, Item> _itemInstances = new Dictionary<ItemTypes, Item>();
-    
+
     private List<ItemTypes> items = new List<ItemTypes>();
-    
+
     public event Action<ItemTypes> OnItemAdded;
     public event Action<ItemTypes> OnItemRemoved;
     public event Action<ItemTypes, AdditionalTriggeredArgs> OnItemUsed;
     public event Action<ItemTypes> OnItemDiscarded;
-    
+
     private void Awake()
     {
         ItemFactory itemFactory = new ItemFactory();
-        
+
         for (int i = 0; i < Enum.GetValues(typeof(ItemTypes)).Length; i++)
         {
             _itemInstances.Add((ItemTypes)i, itemFactory.CreateItem((ItemTypes)i));
         }
     }
-    
+
     public void AddItem(ItemTypes item)
     {
         if (!items.Contains(item))
@@ -48,7 +48,12 @@ public class ItemSystem : Singleton<ItemSystem>
         }
     }
 
-    public void UseItem(ItemTypes item)
+    public bool CanItemBeUsed(ItemTypes item)
+    {
+        return _itemInstances[item].IsItemUsable();
+    }
+
+public void UseItem(ItemTypes item)
     {
         if (items.Contains(item))
         {

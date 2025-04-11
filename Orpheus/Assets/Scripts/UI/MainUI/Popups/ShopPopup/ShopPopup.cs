@@ -16,7 +16,8 @@ public class ShopPopup : MonoBehaviour
     [SerializeField] private List<ItemIcon> itemIcons;
     [SerializeField] private List<Transform> itemPreviewTransforms;
     [SerializeField] private List<Rect> itemRenderTextureUVs;
-    [SerializeField] private ItemVisualsSO itemVisuals; 
+    [SerializeField] private ItemVisualsSO itemVisuals;
+    [SerializeField] private List<Image> itemSoldOutBanners;
     
     [Header("UI Elements")] 
     [SerializeField] private Button refreshButton;
@@ -135,7 +136,7 @@ public class ShopPopup : MonoBehaviour
 
         itemIcons[0].Populate(itemRenderTextureUVs[0], ItemTypes.BONUS_CITIZEN);
         
-        citizenCostText.SetText($"<sprite index=0>{GameConstants.SHOP_EXTRA_CITIZEN_COST}");
+        citizenCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfItem(ItemTypes.BONUS_CITIZEN)}");
         
         shopRelicCostButtons[0].interactable = true;
 
@@ -163,12 +164,17 @@ public class ShopPopup : MonoBehaviour
 
     public void OnBonusCitizenPurchaseButtonClicked()
     {
-        long bonusCitizenCost = GameConstants.SHOP_EXTRA_CITIZEN_COST;
-
-        if (PersistentState.Instance.CurrentGold >= bonusCitizenCost)
+        if (!ItemSystem.Instance.HasItem(ItemTypes.BONUS_CITIZEN))
         {
-            ItemSystem.Instance.AddItem(ItemTypes.BONUS_CITIZEN);
-            PersistentState.Instance.ChangeCurrentGold(-bonusCitizenCost);
+            long bonusCitizenCost = ShopUtils.GetCostOfItem(ItemTypes.BONUS_CITIZEN);
+
+            if (PersistentState.Instance.CurrentGold >= bonusCitizenCost)
+            {
+                ItemSystem.Instance.AddItem(ItemTypes.BONUS_CITIZEN);
+                PersistentState.Instance.ChangeCurrentGold(-bonusCitizenCost);
+
+                itemSoldOutBanners[0].gameObject.SetActive(true);
+            }
         }
     }
 
@@ -180,6 +186,13 @@ public class ShopPopup : MonoBehaviour
         }
         
         _instantiatedRelicVisuals.Clear();
+
+        foreach (Icon3DVisual visual in _instantiatedItemVisuals)
+        {
+            Destroy(visual.gameObject);
+        }
+        
+        _instantiatedItemVisuals.Clear();
     }
 
     public void OnBackButtonClicked()

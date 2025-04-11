@@ -199,6 +199,7 @@ public class TooltipManager : Singleton<TooltipManager>
             _tooltips[indexOfUnused].inUse = true;
             _tooltips[indexOfUnused].currentText = text;
             _tooltips[indexOfUnused].instantiatedTooltip.gameObject.SetActive(true);
+            _tooltips[indexOfUnused].instantiatedTooltip.transform.SetAsLastSibling();
             _tooltips[indexOfUnused].child = -1;
             _tooltips[indexOfUnused].onHideCallback = onTooltipHide;
             _tooltips[indexOfUnused].isHiding = false;
@@ -210,7 +211,8 @@ public class TooltipManager : Singleton<TooltipManager>
         else
         {
             _tooltips.Add(new TooltipState());
-            _tooltips[^1].instantiatedTooltip = Instantiate(tooltipPrefab, tooltipParent); 
+            _tooltips[^1].instantiatedTooltip = Instantiate(tooltipPrefab, tooltipParent);
+            _tooltips[^1].instantiatedTooltip.transform.SetAsLastSibling();
             _tooltips[^1].inUse = true;
             _tooltips[^1].currentText = text;
             _tooltips[^1].child = -1;

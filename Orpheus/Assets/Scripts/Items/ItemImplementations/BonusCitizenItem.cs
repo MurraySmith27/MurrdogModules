@@ -28,6 +28,11 @@ public class BonusCitizenItem : Item
         return false;
     }
 
+    public override bool IsItemUsable()
+    {
+        return PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingHarvestTurn && MapSystem.Instance.GetAllCityGuids().Count > 0;
+    } 
+
     public override void SerializeItem()
     {
         

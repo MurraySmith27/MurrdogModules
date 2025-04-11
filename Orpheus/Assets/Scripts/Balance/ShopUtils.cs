@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ShopUtils
 {
-    public static readonly int BONUS_CITIZEN_COST = 40;
+    public static readonly int BONUS_CITIZEN_COST = 100;
     
     public static long GetCostOfItem(ItemTypes itemTypes)
     {
