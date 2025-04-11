@@ -222,6 +222,11 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       return _activePopup.Item2 != null;
    }
    
+   public bool IsPopupShowing(string popupName)
+   {
+      return _activePopup.Item1 == popupName;
+   }
+   
    private void RegisterCallbackToInput(UnityAction<UIInputChannel.UIInputChannelCallbackArgs> callback, UIInputType inputType)
    {
       switch (inputType)
