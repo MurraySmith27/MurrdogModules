@@ -15,8 +15,6 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
     
     public void DoResourceConversion()
     {
-        Dictionary<ResourceType, int> resourcesToConvert = PlayerResourcesSystem.Instance.GetCurrentRoundResources();
-        
         long foodScore = 0;
 
         Dictionary<ResourceType, int> currentResources = PlayerResourcesSystem.Instance.GetCurrentRoundResources();
@@ -52,6 +50,6 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
         //clear existing resources
         PlayerResourcesSystem.Instance.RegisterCurrentRoundResources(new Dictionary<ResourceType, int>());
         
-        RelicSystem.Instance.OnFoodScoreConversionComplete(foodScore, resourcesToConvert);
+        RelicSystem.Instance.OnFoodScoreConversionComplete(foodScore, currentResources);
     }
 }

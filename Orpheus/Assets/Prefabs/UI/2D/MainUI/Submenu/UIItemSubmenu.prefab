@@ -119,10 +119,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3875105855216058722, guid: 9477962a441e14d5fab20d48ef075825,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 30.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875105855216058722, guid: 9477962a441e14d5fab20d48ef075825,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4038980694119100863, guid: 9477962a441e14d5fab20d48ef075825,
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049188527086000282, guid: 9477962a441e14d5fab20d48ef075825,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 39.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049188527086000282, guid: 9477962a441e14d5fab20d48ef075825,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6883503689113993563, guid: 9477962a441e14d5fab20d48ef075825,
         type: 3}

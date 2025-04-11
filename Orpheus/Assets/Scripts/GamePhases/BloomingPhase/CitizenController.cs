@@ -86,7 +86,7 @@ public class CitizenController : Singleton<CitizenController>
 
             if (allCityGuids.Count > 0)
             {
-                TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumRemainingCitizens,
+                TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumCitizensUsedThisHarvest,
                     out List<Vector2Int> chosenTiles);
             }            
         }

@@ -5,30 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Citizens/Citizen.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Citizens/Citizen.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Citizens/CitizenPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Citizens/CitizenPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/RelicsAndItems/ItemIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/RelicsAndItems/ItemIcon.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/RelicsAndItems/RelicIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/RelicsAndItems/RelicIcon.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/ShopPopup/ShopPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/ShopPopup/ShopPopup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Submenu/UISubmenu.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Submenu/UISubmenu.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/3D/Items/BonusCitizenItemPreview.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/3D/Items/BonusCitizenItemPreview.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/ShopUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/ShopUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/OpenShopButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/OpenShopButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Items/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Items/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Items/ItemImplementations/BonusCitizenItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Items/ItemImplementations/BonusCitizenItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Items/ItemSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Items/ItemSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Items/ItemIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Items/ItemIcon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Submenu/UISubmenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Submenu/UISubmenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/button_rectangle_depth_flat.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/button_rectangle_depth_flat.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/button_rectangle_flat.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/button_rectangle_flat.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Submenu/UIItemSubmenu.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Submenu/UIItemSubmenu.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingResourceConversionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingResourceConversionController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,20 +119,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "XThreadsFramesViewSplitterKey": "0.49515504",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.49515504&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../../Personal_Stuff/OrpheusBuild/Orpheus.app/Contents/MacOS/Orpheus" />
@@ -189,10 +168,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="5608">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="5608" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -277,14 +256,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Camera/TileFrustrumCulling.cs</url>
           <line>25</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Camera\TileFrustrumCulling.cs" containingFunctionPresentation="Method 'UpdateTileCulling'">
-            <startOffsets>
-              <option value="773" />
-            </startOffsets>
-            <endOffsets>
-              <option value="842" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Camera\TileFrustrumCulling.cs" containingFunctionPresentation="Method 'UpdateTileCulling'" />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
@@ -296,66 +268,31 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
           <line>71</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'SelectTile'">
-            <startOffsets>
-              <option value="2018" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2069" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'SelectTile'" />
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs</url>
           <line>162</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'OnHarvestGoalReached'">
-            <startOffsets>
-              <option value="5277" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5298" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'OnHarvestGoalReached'" />
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs</url>
           <line>123</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'GoToNextPhase'">
-            <startOffsets>
-              <option value="4165" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4230" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'GoToNextPhase'" />
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Submenu/UIItemSubmenu.cs</url>
           <line>21</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Submenu\UIItemSubmenu.cs" containingFunctionPresentation="Method 'Show'">
-            <startOffsets>
-              <option value="462" />
-            </startOffsets>
-            <endOffsets>
-              <option value="536" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Submenu\UIItemSubmenu.cs" containingFunctionPresentation="Method 'Show'" />
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Items/ItemIcon.cs</url>
           <line>40</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Items\ItemIcon.cs" containingFunctionPresentation="Method 'OnItemSellButtonClick'">
-            <startOffsets>
-              <option value="862" />
-            </startOffsets>
-            <endOffsets>
-              <option value="902" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Items\ItemIcon.cs" containingFunctionPresentation="Method 'OnItemSellButtonClick'" />
           <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>
