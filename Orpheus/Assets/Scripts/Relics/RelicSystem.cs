@@ -144,23 +144,80 @@ public class RelicSystem : Singleton<RelicSystem>
         
         return currentInterest;
     }
-
-    public long OnConvertResourceToFoodScore(long foodScoreSoFar, ResourceType resourceType, int resourceQuantity)
+    
+    public List<(RelicTypes, long)> OnFoodHarvestedQuantityCalculated(long quantitySoFar, ResourceType resourceType, out long changeInQuantity)
     {
-        long currentFoodScore = foodScoreSoFar;
+        List<(RelicTypes, long)> relicsTriggered = new();
+        
+        long currentQuantity = quantitySoFar;
 
         foreach (RelicTypes relic in relics)
         {
             AdditionalTriggeredArgs args;
 
-            if (_relicInstances[relic].OnConvertResourceToFoodScore(currentFoodScore, resourceType, resourceQuantity, out long foodScoreDifference, out args))
+            if (_relicInstances[relic].OnFoodHarvestedQuantityCalculated(currentQuantity, resourceType, out long quantityDifference, out args))
             {
-                currentFoodScore += foodScoreDifference;
+                relicsTriggered.Add((relic, quantityDifference));
+                
+                currentQuantity += quantityDifference;
+                OnRelicTriggered?.Invoke(relic, args);
+            }
+        }
+        
+        changeInQuantity = currentQuantity - quantitySoFar;
+
+        return relicsTriggered;
+    }
+    
+    public List<(RelicTypes, double)> OnFoodHarvestedMultCalculated(double multSoFar, ResourceType resourceType, out double changeInMult)
+    {
+        List<(RelicTypes, double)> relicsTriggered = new();
+        
+        double currentMult = multSoFar;
+
+        foreach (RelicTypes relic in relics)
+        {
+            AdditionalTriggeredArgs args;
+
+            if (_relicInstances[relic].OnFoodHarvestedMultCalculated(currentMult, resourceType, out double multDifference, out args))
+            {
+                relicsTriggered.Add((relic, multDifference));
+                
+                currentMult += multDifference;
+                OnRelicTriggered?.Invoke(relic, args);
+            }
+        }
+        
+        changeInMult = currentMult - multSoFar;
+
+        return relicsTriggered;
+    }
+
+    public List<(RelicTypes, long, double)> OnConvertResourceToFoodScore(ResourceType resourceType, long quantitySoFar, double multSoFar, out long quantityChange, out double multChange)
+    {
+        List<(RelicTypes, long, double)> relicsTriggered = new();
+        
+        long currentQuantity = quantitySoFar;
+        double currentMult = multSoFar; 
+
+        foreach (RelicTypes relic in relics)
+        {
+            AdditionalTriggeredArgs args;
+
+            if (_relicInstances[relic].OnConvertResourceToFoodScore(resourceType, currentQuantity, currentMult, out long quantityDifference, out double multDifference, out args))
+            {
+                relicsTriggered.Add((relic, quantityDifference, multDifference));
+                
+                currentQuantity += quantityDifference;
+                currentMult += multDifference;
                 OnRelicTriggered?.Invoke(relic, args);
             }
         }
 
-        return currentFoodScore - foodScoreSoFar;
+        quantityChange = currentQuantity - quantitySoFar;
+        multChange = currentMult - multSoFar;
+
+        return relicsTriggered;
     }
     
     public long OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert)

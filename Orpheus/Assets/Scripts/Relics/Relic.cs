@@ -35,10 +35,26 @@ public abstract class Relic
         return false;
     }
 
-    public virtual bool OnConvertResourceToFoodScore(long foodScoreSoFar, ResourceType resourceType, 
-        int resourceQuantity, out long foodScoreChange, out AdditionalTriggeredArgs args)
+    public virtual bool OnConvertResourceToFoodScore(ResourceType resourceType, long quantitySoFar, double multSoFar, out long quantityChange, out double multChange, out AdditionalTriggeredArgs args)
     {
-        foodScoreChange = 0;
+        quantityChange = 0;
+        multChange = 0d;
+        args = new();
+        return false;
+    }
+
+    public virtual bool OnFoodHarvestedQuantityCalculated(long quantitySoFar, ResourceType resourceType,
+        out long foodQuantityDifference, out AdditionalTriggeredArgs args)
+    {
+        foodQuantityDifference = 0;
+        args = new();
+        return false;
+    }
+    
+    public virtual bool OnFoodHarvestedMultCalculated(double multSoFar, ResourceType resourceType,
+        out double multDifference, out AdditionalTriggeredArgs args)
+    {
+        multDifference = 0;
         args = new();
         return false;
     }
