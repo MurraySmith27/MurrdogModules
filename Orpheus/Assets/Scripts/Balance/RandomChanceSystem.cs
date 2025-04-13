@@ -91,7 +91,7 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
 
     public Vector2Int GetNextCitizenTile(List<Vector2Int> possibleTiles)
     {
-        int seed = _currentSeed + 3605 * PersistentState.Instance.HarvestNumber + 2821 * HarvestState.Instance.NumHandsUsed + 31 * HarvestState.Instance.NumDiscardsUsed + 7471 * HarvestState.Instance.NumCitizensUsedThisHarvest;   
+        int seed = _currentSeed + 3605 * PersistentState.Instance.HarvestNumber + 2821 * HarvestState.Instance.NumHandsUsed + 31 * HarvestState.Instance.NumDiscardsUsed + 7471 * HarvestState.Instance.NumCitizensUsedThisHarvest;
         Random.InitState(seed);
         
         Vector2Int tile = possibleTiles[Random.Range(0, possibleTiles.Count)];
@@ -99,5 +99,43 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         Random.InitState((int)DateTime.Now.Ticks);
         
         return tile;
+    }
+
+    public List<TileInformation> GetTileBoosterPackOfferings(int numTiles)
+    {
+        int seed = _currentSeed + PersistentState.Instance.HarvestNumber;
+        
+        Random.InitState(seed);
+
+        List<TileInformation> tiles = new();
+
+        for (int i = 0; i < numTiles; i++)
+        {
+            TileInformation newTile = new();
+
+            newTile.Type = (TileType)Random.Range(0, Enum.GetNames(typeof(TileType)).Length - 2) + 1;
+
+            newTile.Resources = MapSystem.Instance.GenerateResourcesOnTile(newTile.Type);
+            
+            int randomBuildingType = Random.Range(0, Enum.GetNames(typeof(BuildingType)).Length - 1);
+            
+            newTile.Buildings = new();
+            
+            if (BuildingsController.Instance.CanConstructBuildingOnTileType(newTile.Type,
+                    (BuildingType)randomBuildingType))
+            {
+                TileBuilding building = new TileBuilding();
+                
+                building.Type = (BuildingType)randomBuildingType;
+                
+                newTile.Buildings.Add(building);
+            }
+            
+            tiles.Add(newTile);
+        }
+        
+        Random.InitState((int)DateTime.Now.Ticks);
+
+        return tiles;
     }
 }

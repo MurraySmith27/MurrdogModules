@@ -18,7 +18,6 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
     
     private void Start()
     {
-        Debug.LogError("start!");
         BloomingResourceConversionController.Instance.OnResourceConversionStart -= OnConversionStart;
         BloomingResourceConversionController.Instance.OnResourceConversionStart += OnConversionStart;
         
@@ -66,7 +65,6 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
     {
         Clear();
         
-        Debug.LogError("On conversion Start");
         AnimationUtils.ResetAnimator(animator);
         
         animator.SetTrigger(enterAnimatorTriggerName);

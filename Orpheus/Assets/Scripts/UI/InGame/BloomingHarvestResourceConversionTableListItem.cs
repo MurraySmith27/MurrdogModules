@@ -90,7 +90,7 @@ public class BloomingHarvestResourceConversionTableListItem : MonoBehaviour
     public void SetFoodScore(long foodScore)
     {
         foodScoreParent.SetActive(true);
-        foodScoreText.SetText($"{foodScore}");
+        foodScoreText.SetText($"<sprite index=5>{foodScore}");
         
         if (!_hasShownFoodScoreExtension)
         {

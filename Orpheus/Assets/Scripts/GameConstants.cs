@@ -69,6 +69,9 @@ public static class GameConstants
 
     public static readonly float SELL_VALUE_PERCENTAGE = 0.4f;
     
+    //booster pack settings
+    public static readonly int NUM_TILES_PER_BASIC_BOOSTER = 3; 
+    
     
     //item settings
     public static readonly int STARTING_ITEM_CAPACITY = 2;

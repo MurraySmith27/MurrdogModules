@@ -19,6 +19,11 @@ public class ShopPopup : MonoBehaviour
     [SerializeField] private ItemVisualsSO itemVisuals;
     [SerializeField] private List<Image> itemSoldOutBanners;
     
+    //TODO: Generate 3d previews for booster packs
+    [Header("Booster Pack Icons")]
+    [SerializeField] private List<Image> boosterPackSoldOutBanners;
+
+    
     [Header("UI Elements")] 
     [SerializeField] private Button refreshButton;
     [SerializeField] private TMP_Text refreshButtonCostText;
@@ -27,6 +32,7 @@ public class ShopPopup : MonoBehaviour
     [SerializeField] private List<Image> soldOutBanners;
 
     [SerializeField] private TMP_Text citizenCostText;
+    [SerializeField] private TMP_Text boosterPackCostText;
     
     private int _numRelicRefreshes = 0;
 
@@ -138,6 +144,8 @@ public class ShopPopup : MonoBehaviour
         
         citizenCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfItem(ItemTypes.BONUS_CITIZEN)}");
         
+        citizenCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfBoosterPack(BoosterPackTypes.BASIC_TILE_BOOSTER)}");
+        
         shopRelicCostButtons[0].interactable = true;
 
         for (int i = _currentRelics.Count; i < relicIcons.Count; i++)
@@ -176,6 +184,11 @@ public class ShopPopup : MonoBehaviour
                 itemSoldOutBanners[0].gameObject.SetActive(true);
             }
         }
+    }
+
+    public void OnBoosterPackPurchaseButtonClicked()
+    {
+        //TODO:
     }
 
     private void Clear()

@@ -304,8 +304,8 @@ public class MapSystem : Singleton<MapSystem>
         
         if (!resourcesGeneratedAtStart)
         {
-            TileType type = _tiles[newTilePosition.x, newTilePosition.y].Type;  
-            List<ResourceItem> resources = _mapResourcesGenerator.GenerateResourcesOnTile(type);
+            TileType type = _tiles[newTilePosition.x, newTilePosition.y].Type;
+            List<ResourceItem> resources = GenerateResourcesOnTile(type);
 
             for (int i = 0; i < resources.Count; i++)
             {
@@ -317,6 +317,11 @@ public class MapSystem : Singleton<MapSystem>
         OnTileAddedToCity?.Invoke(cityCenterPosition, newTilePosition);
         
         return true;
+    }
+
+    public List<ResourceItem> GenerateResourcesOnTile(TileType type)
+    {
+        return _mapResourcesGenerator.GenerateResourcesOnTile(type);
     }
 
     public bool GetUnoccupiedTileInCity(Guid cityGuid, out Vector2Int location)

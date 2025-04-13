@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class BuildingsController : Singleton<BuildingsController>
 {
-
     [SerializeField] private BuildingsDataSO buildingsData;
-    
     
     public bool TryPlaceBuilding(Vector2Int position, BuildingType type)
     {
@@ -54,8 +52,13 @@ public class BuildingsController : Singleton<BuildingsController>
     public bool CanConstructBuildingOnTileType(Vector2Int position, BuildingType type)
     {
         TileType tileType = MapSystem.Instance.GetTileType(position.x ,position.y);
-        
-        BuildingData buildingData = buildingsData.Buildings.FirstOrDefault(data => data.Type == type);
+
+        return CanConstructBuildingOnTileType(tileType, type);
+    }
+
+    public bool CanConstructBuildingOnTileType(TileType tileType, BuildingType buildingType)
+    {
+        BuildingData buildingData = buildingsData.Buildings.FirstOrDefault(data => data.Type == buildingType);
 
         return buildingData != null && buildingData.CanBuildOnTiles.Contains(tileType);
     }
