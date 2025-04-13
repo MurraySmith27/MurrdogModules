@@ -18,6 +18,7 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
     
     private void Start()
     {
+        Debug.LogError("start!");
         BloomingResourceConversionController.Instance.OnResourceConversionStart -= OnConversionStart;
         BloomingResourceConversionController.Instance.OnResourceConversionStart += OnConversionStart;
         
@@ -35,6 +36,14 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
         
         BloomingResourceConversionController.Instance.OnResourceConversionFoodScoreProcessed -= OnFoodScoreProcessed;
         BloomingResourceConversionController.Instance.OnResourceConversionFoodScoreProcessed += OnFoodScoreProcessed;
+
+        BloomingResourceConversionController.Instance.OnResourceConversionFoodScoreAddedStart -= OnFoodScoreAddedStart;
+        BloomingResourceConversionController.Instance.OnResourceConversionFoodScoreAddedStart += OnFoodScoreAddedStart;
+
+        GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
+        GlobalSettings.OnGameSpeedChanged += OnGameSpeedChanged;
+        
+        OnGameSpeedChanged(GlobalSettings.GameSpeed);
     }
 
     private void OnDestroy()
@@ -47,15 +56,19 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
             BloomingResourceConversionController.Instance.OnResourceConversionQuantityProcessed -= OnQuantityProcessed;
             BloomingResourceConversionController.Instance.OnResourceConversionMultProcessed -= OnMultProcessed;
             BloomingResourceConversionController.Instance.OnResourceConversionFoodScoreProcessed -= OnFoodScoreProcessed;
+            BloomingResourceConversionController.Instance.OnResourceConversionFoodScoreAddedStart -= OnFoodScoreAddedStart;
         }
+        
+        GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
     }
 
     private void OnConversionStart()
     {
         Clear();
         
+        Debug.LogError("On conversion Start");
         AnimationUtils.ResetAnimator(animator);
-
+        
         animator.SetTrigger(enterAnimatorTriggerName);
     }
 
@@ -94,6 +107,11 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
         animator.SetTrigger(tickAnimatorTriggerName);
     }
 
+    private void OnFoodScoreAddedStart(ResourceType type, long score)
+    {
+        _listItems[type].OnScored();
+    }
+
     private void Clear()
     {
         foreach (BloomingHarvestResourceConversionTableListItem listItem in _listItems.Values)
@@ -102,5 +120,10 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
         }
 
         _listItems.Clear();
+    }
+
+    private void OnGameSpeedChanged(float gameSpeed)
+    {
+        animator.speed = gameSpeed;
     }
 }

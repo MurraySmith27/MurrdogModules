@@ -7,19 +7,25 @@ using UnityEngine;
 public class BloomingResourceConversionController : Singleton<BloomingResourceConversionController>
 {
     [SerializeField] private float startAnimationTime = 1f;
-    [SerializeField] private float resourceConversionStartTime = 0.25f;
-    [SerializeField] private float resourceQuantityProcessTime = 0.1f;
-    [SerializeField] private float resourceMultProcessTime = 0.1f;
-    [SerializeField] private float resourceFoodScoreProcessTime = 0.1f;
+    [SerializeField] private float endAnimationTime = 1f;
+    [SerializeField] private float resourceConversionStartTime = 0.6f;
+    [SerializeField] private float resourceQuantityProcessTime = 0.3f;
+    [SerializeField] private float resourceMultProcessTime = 0.3f;
+    [SerializeField] private float resourceFoodScoreProcessTime = 0.3f;
     [SerializeField] private float resourceConversionEndTime = 0.25f;
+    [SerializeField] private float resourceConversionResourceFoodScoreAddedTime = 1f;
 
     public event Action OnResourceConversionStart;
     public event Action OnResourceConversionEnd;
+    public event Action OnResourceConversionEndFinal;
     public event Action<ResourceType> OnResourceConversionResourceStart;
     public event Action<ResourceType, long> OnResourceConversionQuantityProcessed;
     public event Action<ResourceType, double> OnResourceConversionMultProcessed;
     public event Action<ResourceType, long> OnResourceConversionFoodScoreProcessed;
     public event Action<ResourceType> OnResourceConversionResourceEnd;
+    public event Action<ResourceType, long> OnResourceConversionFoodScoreAddedStart;
+    public event Action<ResourceType, long> OnResourceConversionFoodScoreAddedEnd;
+    
     
     public void DoResourceConversion()
     {
@@ -42,7 +48,7 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
 
     private IEnumerator<float> ResourceConversionCoroutine(Dictionary<ResourceType, int> resources)
     {
-        long foodScore = 0;
+        List<(ResourceType, long)> resourceFoodScores = new();
         
         OnResourceConversionStart?.Invoke();
 
@@ -50,6 +56,10 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
         
         foreach (ResourceType key in resources.Keys)
         {
+            if (resources[key] == 0)
+            {
+                continue;
+            }
             
             if (key != ResourceType.Wood && key != ResourceType.Stone)
             {
@@ -119,24 +129,45 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
 
                 long resourceFoodScore = (long)Math.Round(currentQuantity * currentMult);
                 
-                
                 OnResourceConversionFoodScoreProcessed?.Invoke(key, resourceFoodScore);
                 
                 yield return OrpheusTiming.WaitForSecondsGameTime(resourceFoodScoreProcessTime);
                 
-                foodScore += resourceFoodScore;
+                resourceFoodScores.Add((key, resourceFoodScore));
                 
                 OnResourceConversionResourceEnd?.Invoke(key);
 
                 yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionEndTime);
             }
         }
+
+        long foodScoreTotal = 0;
         
-        HarvestState.Instance.AddHarvestFoodScore(foodScore);
+        foreach ((ResourceType, long) pair in resourceFoodScores)
+        {
+            foodScoreTotal += pair.Item2;
+            
+            OnResourceConversionFoodScoreAddedStart?.Invoke(pair.Item1, pair.Item2);
+
+            if (pair.Item2 > 0)
+            {
+                HarvestState.Instance.AddHarvestFoodScore(pair.Item2);
+            }
+
+            yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionResourceFoodScoreAddedTime);
+            
+            OnResourceConversionFoodScoreAddedEnd?.Invoke(pair.Item1, pair.Item2);
+        }
         
         //clear existing resources
         PlayerResourcesSystem.Instance.RegisterCurrentRoundResources(new Dictionary<ResourceType, int>());
         
-        RelicSystem.Instance.OnFoodScoreConversionComplete(foodScore, resources);
+        RelicSystem.Instance.OnFoodScoreConversionComplete(foodScoreTotal, resources);
+        
+        OnResourceConversionEnd?.Invoke();
+        
+        yield return OrpheusTiming.WaitForSecondsGameTime(endAnimationTime);
+        
+        OnResourceConversionEndFinal?.Invoke();
     }
 }

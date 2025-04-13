@@ -14,7 +14,7 @@ public static class GlobalSettings
     
     public static float GameSpeed
     {
-        get { return PlayerPrefs.GetFloat(nameof(GameSpeed), 1f); }
+        get { return PlayerPrefs.GetFloat(nameof(GameSpeed), 2f); }
         set
         {
             PlayerPrefs.SetFloat(nameof(GameSpeed), value);

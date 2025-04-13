@@ -28,6 +28,12 @@ public class HarvestState : Singleton<HarvestState>
         get;
         private set;
     }
+
+    public int NumBonusCitizensUsedThisHarvest
+    {
+        get;
+        private set;
+    }
     
     public int NumDiscardsUsed
     {
@@ -80,6 +86,8 @@ public class HarvestState : Singleton<HarvestState>
             NumRemainingHands = GameConstants.STARTING_HANDS_PER_HARVEST_ROUND;
             NumHandsUsed = 0;
 
+            NumBonusCitizensUsedThisHarvest = 0;
+
             RelicSystem.Instance.OnHarvestStart();
             
             OnHarvestStart?.Invoke();
@@ -97,7 +105,7 @@ public class HarvestState : Singleton<HarvestState>
     {
         CurrentFoodScore += foodScore;
 
-        OnCurrentFoodScoreChanged?.Invoke(foodScore);
+        OnCurrentFoodScoreChanged?.Invoke(CurrentFoodScore);
         
         if (CurrentFoodScore >= CurrentFoodGoal)
         {
@@ -120,6 +128,13 @@ public class HarvestState : Singleton<HarvestState>
     public void UseCitizens(int numCitizensUsed)
     {
         NumCitizensUsedThisHarvest += numCitizensUsed;
+    }
+
+    public void UseBonusCitizens(int numBonusCitizensUsed)
+    {
+        UseCitizens(numBonusCitizensUsed);
+
+        NumBonusCitizensUsedThisHarvest += numBonusCitizensUsed;
     }
     
     public void UseDiscard()

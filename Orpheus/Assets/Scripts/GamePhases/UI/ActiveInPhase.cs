@@ -10,8 +10,8 @@ public class ActiveInPhase : MonoBehaviour
     
     private void Start()
     {
-        PhaseStateMachine.Instance.OnPhaseChanged -= OnGamePhaseChanged;
-        PhaseStateMachine.Instance.OnPhaseChanged += OnGamePhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnGamePhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseTransitionStarted += OnGamePhaseChanged;
         OnGamePhaseChanged(PhaseStateMachine.Instance.CurrentPhase);
     }
     
@@ -19,7 +19,7 @@ public class ActiveInPhase : MonoBehaviour
     {
         if (PhaseStateMachine.IsAvailable)
         {
-            PhaseStateMachine.Instance.OnPhaseChanged -= OnGamePhaseChanged;
+            PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnGamePhaseChanged;
         }
     }
 

@@ -62,7 +62,6 @@ public class CitizenController : Singleton<CitizenController>
         {
             HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
             HarvestState.Instance.OnFoodGoalReached -= OnHarvestEnd;
-
         }
 
         if (PhaseStateMachine.IsAvailable)
@@ -86,7 +85,7 @@ public class CitizenController : Singleton<CitizenController>
 
             if (allCityGuids.Count > 0)
             {
-                TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumCitizensUsedThisHarvest,
+                TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumRemainingCitizens + HarvestState.Instance.NumBonusCitizensUsedThisHarvest,
                     out List<Vector2Int> chosenTiles);
             }            
         }
@@ -126,7 +125,7 @@ public class CitizenController : Singleton<CitizenController>
     {
         if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, 1, out List<Vector2Int> chosenTiles))
         {
-            HarvestState.Instance.UseCitizens(1);
+            HarvestState.Instance.UseBonusCitizens(1);
             
             OnBonusCitizenUsed?.Invoke(cityGuid, chosenTiles[0]);
             return true;
