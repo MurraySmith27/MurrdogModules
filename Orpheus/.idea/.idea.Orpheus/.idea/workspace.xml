@@ -6,26 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTable.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTable.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableIn.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableIn.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemScore.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemScore.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableOut.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableOut.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/ShopPopup/ShopPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/ShopPopup/ShopPopup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/ResourceVisualData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/ResourceVisualData.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/ShopUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/ShopUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/ResourceVisualDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/ResourceVisualDataSO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PhaseStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PhaseStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTableListItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTableListItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Balanced.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-Balanced.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-Performant.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-Performant.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +236,7 @@
       <workItem from="1744319229581" duration="5060000" />
       <workItem from="1744328830009" duration="4044000" />
       <workItem from="1744496566504" duration="1933000" />
-      <workItem from="1744499603490" duration="8185000" />
+      <workItem from="1744499603490" duration="10371000" />
     </task>
     <servers />
   </component>
@@ -324,19 +308,6 @@
           <line>40</line>
           <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Items\ItemIcon.cs" containingFunctionPresentation="Method 'OnItemSellButtonClick'" />
           <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTable.cs</url>
-          <line>74</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTable.cs" containingFunctionPresentation="Method 'OnConversionEnd'">
-            <startOffsets>
-              <option value="3801" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3846" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="83" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

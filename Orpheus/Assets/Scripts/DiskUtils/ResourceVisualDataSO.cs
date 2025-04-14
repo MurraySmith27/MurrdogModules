@@ -11,6 +11,7 @@ public class ResourceVisualDataSO : ScriptableObject
     [SerializeField] private Sprite fishIcon;
     [SerializeField] private Sprite woodIcon;
     [SerializeField] private Sprite stoneIcon;
+    [SerializeField] private Sprite breadIcon;
 
 
     public Sprite GetSpriteForResourceItem(ResourceType type)
@@ -27,6 +28,8 @@ public class ResourceVisualDataSO : ScriptableObject
                 return woodIcon;
             case ResourceType.Stone:
                 return stoneIcon;
+            case ResourceType.Bread:
+                return breadIcon;
         }
 
         return null;

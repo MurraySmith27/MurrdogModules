@@ -24752,6 +24752,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 803789169}
     m_Modifications:
+    - target: {fileID: 1275882518962260231, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1553854197503531574, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
         type: 3}
       propertyPath: m_Name
@@ -63380,7 +63385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1424331028
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66139,7 +66144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1496242318
 RectTransform:
   m_ObjectHideFlags: 0
@@ -70866,13 +70871,13 @@ MonoBehaviour:
   noiseDensity: 0.5
   cellularAutomataIterations: 2
   numAdjacentCellsToMakeLand: 4
-  cornProbabilityOnGrassTile: 0.05
-  wheatProbabilityOnGrassTile: 0.05
-  fishProbabilityOnWaterTile: 0.1
-  woodProbabilityOnGrassTile: 0.03
-  stoneProbabilityOnGrassTile: 0.05
-  woodProbabilityOnWaterTile: 0.06
-  stoneProbabilityOnWaterTile: 0.1
+  cornProbabilityOnGrassTile: 0.15
+  wheatProbabilityOnGrassTile: 0.15
+  fishProbabilityOnWaterTile: 0.3
+  woodProbabilityOnGrassTile: 0.09
+  stoneProbabilityOnGrassTile: 0.15
+  woodProbabilityOnWaterTile: 0.09
+  stoneProbabilityOnWaterTile: 0.3
   resourcesGeneratedAtStart: 0
 --- !u!4 &1619368044
 Transform:
@@ -91231,6 +91236,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 624523836}
     m_Modifications:
+    - target: {fileID: 7200669275347296330, guid: 54514ca7895ebc84488cbb393e67b9f4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8236316443822104846, guid: 54514ca7895ebc84488cbb393e67b9f4,
         type: 3}
       propertyPath: m_Pivot.x

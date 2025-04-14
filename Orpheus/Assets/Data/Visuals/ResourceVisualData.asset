@@ -17,3 +17,4 @@ MonoBehaviour:
   fishIcon: {fileID: 21300000, guid: 1f2c879d7e572614c8c58b25519b14dc, type: 3}
   woodIcon: {fileID: 21300000, guid: 181fe66d882f43e428eda2a6e56cf3df, type: 3}
   stoneIcon: {fileID: 21300000, guid: 9ab0cd1dcbcabc24581bc8d4ce197c4a, type: 3}
+  breadIcon: {fileID: 21300000, guid: 65ef76159dcdf0e4c82b816a09446f71, type: 3}
