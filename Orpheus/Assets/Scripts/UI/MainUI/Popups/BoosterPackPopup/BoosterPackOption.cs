@@ -15,19 +15,31 @@ public class BoosterPackOption : MonoBehaviour
     [SerializeField] private RawImage itemPreviewImage;
 
     [SerializeField] private TileIcon3DVisual tile3DVisualPrefab;
+
+    [Space(10)] 
+    [Header("Animation")] 
+    [SerializeField] private Animator animator;
+    [SerializeField] private string animatorEnterTrigger = "Enter";
+    [SerializeField] private string animatorExitTrigger = "Exit";
+    [SerializeField] private string animatorOnSelectedTrigger = "Selected";
+    [SerializeField] private string animatorOnDeselectedTrigger = "Deselected";
     
     private List<Preview3DController.PreviewTransform> _previewTransforms = new List<Preview3DController.PreviewTransform>();
     
     private TileIcon3DVisual _tile3DVisualInstance;
+
+    private Action _onSelectedCallback;
     
     private void OnDisable()
     {
         Clear();
     }
     
-    public void Populate(TileInformation tile)
+    public void Populate(TileInformation tile, Action onSelectedCallback)
     {
         Clear();
+
+        _onSelectedCallback = onSelectedCallback;
         
         titleText.SetText("");
         cardTypeText.SetText($"Tile - {Enum.GetName(typeof(TileType), tile.Type)}");
@@ -45,11 +57,16 @@ public class BoosterPackOption : MonoBehaviour
         _tile3DVisualInstance = Instantiate(tile3DVisualPrefab, previewTransform.Transform);
         
         itemPreviewImage.uvRect = previewTransform.UVRect;
+        
+        AnimationUtils.ResetAnimator(animator);
+        animator.SetTrigger(animatorEnterTrigger);
     }
 
 
-    public void Populate(RelicTypes tile)
+    public void Populate(RelicTypes relic, Action onSelectedCallback)
     {
+        Clear();
+        _onSelectedCallback = onSelectedCallback;
         //TODO
     }
     
@@ -83,5 +100,22 @@ public class BoosterPackOption : MonoBehaviour
         {
             Destroy(_tile3DVisualInstance.gameObject);
         }
+    }
+
+    public void ToggleSelected(bool selected)
+    {
+        if (selected)
+        {
+            animator.SetTrigger(animatorOnSelectedTrigger);
+        }
+        else
+        {
+            animator.SetTrigger(animatorOnDeselectedTrigger);
+        }
+    }
+
+    public void OnClick()
+    {
+        _onSelectedCallback?.Invoke();
     }
 }

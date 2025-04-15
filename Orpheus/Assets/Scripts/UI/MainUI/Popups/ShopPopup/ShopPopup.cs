@@ -211,7 +211,7 @@ public class ShopPopup : MonoBehaviour
             BoosterPackSystem.Instance.OpenBoosterPack(BoosterPackTypes.BASIC_TILE_BOOSTER);
             PersistentState.Instance.ChangeCurrentGold(-boosterPackCost);
             
-            itemSoldOutBanners[1].gameObject.SetActive(true);
+            boosterPackSoldOutBanners[0].gameObject.SetActive(true);
         }
         
     }

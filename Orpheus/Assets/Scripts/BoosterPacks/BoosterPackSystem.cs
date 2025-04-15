@@ -47,4 +47,9 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
     {
         return _currentOfferings;
     }
+
+    public void RemoveCurrentOfferings()
+    {
+        _currentOfferings = null;
+    }
 }

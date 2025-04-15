@@ -491,40 +491,14 @@ MonoBehaviour:
   - {fileID: 3320014153274365901}
   - {fileID: 8450978992023666143}
   - {fileID: 3642158826828311054}
-  relicPreviewTransforms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  relicRenderTextureUVs:
-  - serializedVersion: 2
-    x: 0.125
-    y: 0
-    width: 0.125
-    height: 0.25
-  - serializedVersion: 2
-    x: 0.25
-    y: 0
-    width: 0.125
-    height: 0.25
-  - serializedVersion: 2
-    x: 0.375
-    y: 0
-    width: 0.125
-    height: 0.25
   relicVisuals: {fileID: 11400000, guid: 96f24972ca8dd0b43ba5a9ff59eef60f, type: 2}
   itemIcons:
   - {fileID: 3262897748245560101}
-  itemPreviewTransforms:
-  - {fileID: 0}
-  itemRenderTextureUVs:
-  - serializedVersion: 2
-    x: 0.625
-    y: 0
-    width: 0.125
-    height: 0.25
   itemVisuals: {fileID: 11400000, guid: 1cc8fb88203f3e94e98e298f13cf2245, type: 2}
   itemSoldOutBanners:
   - {fileID: 8068969162731594342}
+  boosterPackSoldOutBanners:
+  - {fileID: 7188897653809980344}
   refreshButton: {fileID: 8266709620982938979}
   refreshButtonCostText: {fileID: 6543737377772133264}
   shopRelicCostTexts:
@@ -540,6 +514,7 @@ MonoBehaviour:
   - {fileID: 9157749641736563081}
   - {fileID: 4096789663540805208}
   citizenCostText: {fileID: 5206005998186105605}
+  boosterPackCostText: {fileID: 5436584426472440764}
 --- !u!1 &1614375858057610368
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +609,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
+  m_fontSize: 104.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1925,7 +1900,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.5
+  m_fontSize: 40.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2090,7 +2065,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7133293719071578863}
         m_TargetAssemblyTypeName: ShopPopup, Assembly-CSharp
-        m_MethodName: OnBonusCitizenPurchaseButtonClicked
+        m_MethodName: OnBoosterPackPurchaseButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2380,7 +2355,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.5
+  m_fontSize: 40.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2434,7 +2409,6 @@ GameObject:
   - component: {fileID: 7393591618783609409}
   - component: {fileID: 8167793274123580152}
   - component: {fileID: 167061073287932456}
-  - component: {fileID: 494531479119838675}
   m_Layer: 6
   m_Name: BoosterPack
   m_TagString: Untagged
@@ -2518,20 +2492,6 @@ MonoBehaviour:
   uiInputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
   tooltipTextData: {fileID: 11400000, guid: cd6e5fab884f9c14eb259cd48e5c26ce, type: 2}
   tooltipType: 1
---- !u!114 &494531479119838675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922462833736963890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e27fd318b1fa10c4e937fe8933159bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rawImage: {fileID: 8825320743953415736}
-  itemSubmenu: {fileID: 0}
 --- !u!1 &8252248868125355029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2665,7 +2625,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.75
+  m_fontSize: 28.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2802,7 +2762,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.35
+  m_fontSize: 31.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2855,7 +2815,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.25
+      value: 39.3
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
@@ -3037,7 +2997,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.25
+      value: 39.3
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
@@ -3244,7 +3204,7 @@ PrefabInstance:
     - target: {fileID: 1469501785416687515, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.25
+      value: 39.3
       objectReference: {fileID: 0}
     - target: {fileID: 4353412592113184582, guid: 75d367af8b19b4f9a9d22584bcf409b6,
         type: 3}
