@@ -6,10 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/ResourceVisualData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/ResourceVisualData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackPopup.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/ResourceVisualDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/ResourceVisualDataSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOption.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOption.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Relics/Icon3DVisual.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Relics/Icon3DVisual.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Relics/RelicsList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Relics/RelicsList.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +96,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/TheMolluskRelic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/3D/Icon3DVisual.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/3D/Preview3DController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/3D/TileIcon3DVisual.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/BuildingPlacementModeText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/EnableOnInteractionModeChange.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/GoalText.cs" root0="FORCE_HIGHLIGHTING" />
@@ -98,6 +107,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/HarvestRoundControlsButtons.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/ScoreText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOption.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackPopupListener.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Submenu/UIItemSubmenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Submenu/UISubmenu.cs" root0="FORCE_HIGHLIGHTING" />
@@ -124,27 +135,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.43151695&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/murraysmith/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/murraysmith/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
-      &quot;/Users/murraysmith/Library/Application Support/Symbols/src&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.43151695",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../OrpheusBuild\Orpheus.exe" />
@@ -270,7 +274,14 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Camera/TileFrustrumCulling.cs</url>
           <line>25</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Camera\TileFrustrumCulling.cs" containingFunctionPresentation="Method 'UpdateTileCulling'" />
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Camera\TileFrustrumCulling.cs" containingFunctionPresentation="Method 'UpdateTileCulling'">
+            <startOffsets>
+              <option value="773" />
+            </startOffsets>
+            <endOffsets>
+              <option value="842" />
+            </endOffsets>
+          </properties>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
@@ -282,31 +293,66 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
           <line>71</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'SelectTile'" />
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'SelectTile'">
+            <startOffsets>
+              <option value="2018" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2069" />
+            </endOffsets>
+          </properties>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs</url>
           <line>162</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'OnHarvestGoalReached'" />
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'OnHarvestGoalReached'">
+            <startOffsets>
+              <option value="5277" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5298" />
+            </endOffsets>
+          </properties>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs</url>
           <line>123</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'GoToNextPhase'" />
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'GoToNextPhase'">
+            <startOffsets>
+              <option value="4165" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4230" />
+            </endOffsets>
+          </properties>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Submenu/UIItemSubmenu.cs</url>
           <line>21</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Submenu\UIItemSubmenu.cs" containingFunctionPresentation="Method 'Show'" />
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Submenu\UIItemSubmenu.cs" containingFunctionPresentation="Method 'Show'">
+            <startOffsets>
+              <option value="462" />
+            </startOffsets>
+            <endOffsets>
+              <option value="536" />
+            </endOffsets>
+          </properties>
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Items/ItemIcon.cs</url>
           <line>40</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Items\ItemIcon.cs" containingFunctionPresentation="Method 'OnItemSellButtonClick'" />
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Items\ItemIcon.cs" containingFunctionPresentation="Method 'OnItemSellButtonClick'">
+            <startOffsets>
+              <option value="862" />
+            </startOffsets>
+            <endOffsets>
+              <option value="902" />
+            </endOffsets>
+          </properties>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>

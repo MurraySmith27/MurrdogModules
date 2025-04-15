@@ -8,14 +8,10 @@ public class ShopPopup : MonoBehaviour
 {
     [Header("Relic Icons")]
     [SerializeField] private List<RelicIcon> relicIcons;
-    [SerializeField] private List<Transform> relicPreviewTransforms;
-    [SerializeField] private List<Rect> relicRenderTextureUVs;
     [SerializeField] private RelicVisualsSO relicVisuals;
     
     [Header("Item Icons")]
     [SerializeField] private List<ItemIcon> itemIcons;
-    [SerializeField] private List<Transform> itemPreviewTransforms;
-    [SerializeField] private List<Rect> itemRenderTextureUVs;
     [SerializeField] private ItemVisualsSO itemVisuals;
     [SerializeField] private List<Image> itemSoldOutBanners;
     
@@ -37,6 +33,8 @@ public class ShopPopup : MonoBehaviour
     private int _numRelicRefreshes = 0;
 
     private List<RelicTypes> _currentRelics = new();
+
+    private List<Preview3DController.PreviewTransform> _currentPreviewTransforms = new();
 
     private List<Icon3DVisual> _instantiatedRelicVisuals = new();
 
@@ -112,12 +110,21 @@ public class ShopPopup : MonoBehaviour
         for (int i = 0; i < _currentRelics.Count; i++)
         {
             GameObject prefab = relicVisuals.GetVisualsPrefabForRelic(_currentRelics[i]);
+
+            Preview3DController.PreviewTransform previewTransform;
+            if (!Preview3DController.Instance.GetPreviewTransform(out previewTransform))
+            {
+                Debug.LogError("Tried to request a 3d preview transform, but none are available!");
+                return;
+            }
             
-            GameObject instance = Instantiate(prefab, relicPreviewTransforms[i]);
+            _currentPreviewTransforms.Add(previewTransform);
+            
+            GameObject instance = Instantiate(prefab, previewTransform.Transform);
             
             _instantiatedRelicVisuals.Add(instance.GetComponent<Icon3DVisual>());
 
-            relicIcons[i].Populate(relicRenderTextureUVs[i], _currentRelics[i]);
+            relicIcons[i].Populate(previewTransform.UVRect, _currentRelics[i]);
 
             bool ownsRelic = RelicSystem.Instance.HasRelic(_currentRelics[i]);
             soldOutBanners[i].gameObject.SetActive(ownsRelic);
@@ -136,11 +143,20 @@ public class ShopPopup : MonoBehaviour
 
         GameObject itemPrefabs = itemVisuals.GetVisualsPrefabForItem(ItemTypes.BONUS_CITIZEN);
         
-        GameObject itemInstance = Instantiate(itemPrefabs, itemPreviewTransforms[0]);
+        Preview3DController.PreviewTransform bonusCitizenPreviewTransform;
+        if (!Preview3DController.Instance.GetPreviewTransform(out bonusCitizenPreviewTransform))
+        {
+            Debug.LogError("Tried to request a 3d preview transform, but none are available!");
+            return;
+        }
+        
+        _currentPreviewTransforms.Add(bonusCitizenPreviewTransform);
+        
+        GameObject itemInstance = Instantiate(itemPrefabs, bonusCitizenPreviewTransform.Transform);
         
         _instantiatedItemVisuals.Add(itemInstance.GetComponent<Icon3DVisual>());
 
-        itemIcons[0].Populate(itemRenderTextureUVs[0], ItemTypes.BONUS_CITIZEN);
+        itemIcons[0].Populate(bonusCitizenPreviewTransform.UVRect, ItemTypes.BONUS_CITIZEN);
         
         citizenCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfItem(ItemTypes.BONUS_CITIZEN)}");
         
@@ -188,7 +204,16 @@ public class ShopPopup : MonoBehaviour
 
     public void OnBoosterPackPurchaseButtonClicked()
     {
-        //TODO:
+        long boosterPackCost = ShopUtils.GetCostOfBoosterPack(BoosterPackTypes.BASIC_TILE_BOOSTER);
+        
+        if (PersistentState.Instance.CurrentGold >= boosterPackCost)
+        {
+            BoosterPackSystem.Instance.OpenBoosterPack(BoosterPackTypes.BASIC_TILE_BOOSTER);
+            PersistentState.Instance.ChangeCurrentGold(-boosterPackCost);
+            
+            itemSoldOutBanners[1].gameObject.SetActive(true);
+        }
+        
     }
 
     private void Clear()
@@ -206,6 +231,13 @@ public class ShopPopup : MonoBehaviour
         }
         
         _instantiatedItemVisuals.Clear();
+
+        foreach (Preview3DController.PreviewTransform previewTransform in _currentPreviewTransforms)
+        {
+            Preview3DController.Instance.FreePreviewTransform(previewTransform);
+        }
+        
+        _currentPreviewTransforms.Clear();
     }
 
     public void OnBackButtonClicked()

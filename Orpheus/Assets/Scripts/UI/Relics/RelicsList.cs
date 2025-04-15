@@ -16,20 +16,11 @@ public class RelicsList : MonoBehaviour
 
     [SerializeField] private RenderTexture relicImageRenderTexture;
     
-    [SerializeField] private List<Transform> relicScenePositions;
-    
     [SerializeField] private RelicVisualsSO relicVisuals;
     
-    private bool[] _occupiedRelicSlots;
-
     private Dictionary<RelicTypes, RelicIcon> _instantiatedRelicIcons = new Dictionary<RelicTypes, RelicIcon>();
     
-    private Dictionary<RelicTypes, (int, GameObject)> _instantiatedRelicVisuals = new();
-
-    private void Awake()
-    {
-        _occupiedRelicSlots = new bool[relicScenePositions.Count];
-    }
+    private Dictionary<RelicTypes, (Preview3DController.PreviewTransform, GameObject)> _instantiatedRelicVisuals = new();
     
     private void Start()
     {
@@ -66,21 +57,6 @@ public class RelicsList : MonoBehaviour
     
     private void CreateRelicVisuals(RelicTypes relicType, RelicIcon relicIcon)
     {
-        int unoccupiedSlotIndex = 0;
-        for (unoccupiedSlotIndex = 0; unoccupiedSlotIndex < _occupiedRelicSlots.Length; unoccupiedSlotIndex++)
-        {
-            if (!_occupiedRelicSlots[unoccupiedSlotIndex])
-            {
-                break;
-            }
-        }
-
-        if (unoccupiedSlotIndex >= _occupiedRelicSlots.Length)
-        {
-            Debug.LogWarning("Could not find unoccupied relic slot, this is fine as long as relics are maxed out.");
-            return;
-        }
-        
         GameObject prefab = relicVisuals.GetVisualsPrefabForRelic(relicType);
 
         if (prefab == null)
@@ -88,26 +64,22 @@ public class RelicsList : MonoBehaviour
             Debug.LogError($"RelicVisuals prefab is null. type: {relicType}");
             return;
         }
-        
-        GameObject instantiateedRelicVisuals = Instantiate(prefab, relicScenePositions[unoccupiedSlotIndex]);
-        
-        instantiateedRelicVisuals.transform.localPosition = Vector3.zero;
 
-        int rectMinX = relicImageDimensions.x *
-                       (unoccupiedSlotIndex % Mathf.FloorToInt(relicImageSize.x / (float)relicImageDimensions.x));
-        
-        int rectMinY = relicImageSize.y - relicImageDimensions.y *
-                       Mathf.FloorToInt(unoccupiedSlotIndex / (relicImageSize.y / (float)relicImageDimensions.y)) - relicImageDimensions.y;
 
-        relicIcon.Populate(new Rect(
-            (relicImageOffset.x + rectMinX) / (float)relicImageRenderTexture.width,
-            (relicImageOffset.y + rectMinY) / (float)relicImageRenderTexture.height,
-            relicImageDimensions.x / (float)relicImageRenderTexture.width,
-            relicImageDimensions.y / (float)relicImageRenderTexture.height
-        ), relicType);
+        if (!Preview3DController.Instance.GetPreviewTransform(
+                out Preview3DController.PreviewTransform previewTransform))
+        {
+            Debug.LogError("No 3d preview transforms ara available. Something went wrong.");
+            return;
+        }
         
-        _instantiatedRelicVisuals[relicType] = (unoccupiedSlotIndex, instantiateedRelicVisuals);
-        _occupiedRelicSlots[unoccupiedSlotIndex] = true;
+        GameObject instantiatedRelicVisuals = Instantiate(prefab, previewTransform.Transform);
+        
+        instantiatedRelicVisuals.transform.localPosition = Vector3.zero;
+
+        relicIcon.Populate(previewTransform.UVRect, relicType);
+        
+        _instantiatedRelicVisuals[relicType] = (previewTransform, instantiatedRelicVisuals);
     }
     
     private void OnRelicRemoved(RelicTypes relicType)
@@ -122,9 +94,9 @@ public class RelicsList : MonoBehaviour
             _instantiatedRelicIcons.Remove(relicType);
             
             Destroy(_instantiatedRelicVisuals[relicType].Item2);
-        
-            _occupiedRelicSlots[_instantiatedRelicVisuals[relicType].Item1] = false;
-        
+            
+            Preview3DController.Instance.FreePreviewTransform(_instantiatedRelicVisuals[relicType].Item1);
+            
             _instantiatedRelicVisuals.Remove(relicType);
         }
     }

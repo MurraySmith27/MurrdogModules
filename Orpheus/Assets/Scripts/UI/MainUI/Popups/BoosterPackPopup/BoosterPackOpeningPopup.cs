@@ -6,6 +6,8 @@ public class BoosterPackOpeningPopup : MonoBehaviour
 {
     [SerializeField] private BoosterPackOption boosterPackOptionPrefab;
 
+    [SerializeField] private Transform boosterPackOptionParent;
+
     private List<BoosterPackOption> _instantiatedOptions = new();
 
     private int _currentlySelectedOptionIndex = -1;
@@ -19,7 +21,21 @@ public class BoosterPackOpeningPopup : MonoBehaviour
 
     private void PopulateBoosterPackContents()
     {
+        BoosterPackSystem.BoosterPackOfferings currentOfferings = BoosterPackSystem.Instance.GetCurrentOfferings();
+
+        foreach (TileInformation tile in currentOfferings.tiles)
+        {
+            _instantiatedOptions.Add(Instantiate(boosterPackOptionPrefab, boosterPackOptionParent));
+
+            _instantiatedOptions[^1].Populate(tile);
+        }
         
+        foreach (RelicTypes relic in currentOfferings.relics)
+        {
+            _instantiatedOptions.Add(Instantiate(boosterPackOptionPrefab, boosterPackOptionParent));
+
+            _instantiatedOptions[^1].Populate(relic);
+        }
     }
 
     private void Reset()

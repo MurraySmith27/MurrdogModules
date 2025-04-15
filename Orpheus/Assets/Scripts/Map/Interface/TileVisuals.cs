@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TileVisuals : MonoBehaviour
 {
-
     [Header("Tile Resource VisualData")] [SerializeField]
     private ResourceVisualDataSO resourceVisualData;
 

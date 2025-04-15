@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,9 @@ public enum BoosterPackTypes
     BASIC_TILE_BOOSTER,
 }
 
-public class BoosterPackSystem : Singleton<BoosterPackSystem>
+public class BoosterPackSystem : Singleton<BoosterPackSystem> 
 {
+    public event Action<BoosterPackTypes> OnBoosterPackOpened;
 
     public class BoosterPackOfferings
     {
@@ -29,6 +31,8 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
             default:
                 break;
         }
+
+        OnBoosterPackOpened?.Invoke(type);
     }
 
     private void OpenBasicBoosterPack(int numTiles)
@@ -37,8 +41,6 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
 
         _currentOfferings = new();
         _currentOfferings.tiles = tiles;
-        
-        UIPopupSystem.Instance.ShowPopup("BoosterPackOpeningPopup");
     }
 
     public BoosterPackOfferings GetCurrentOfferings()
