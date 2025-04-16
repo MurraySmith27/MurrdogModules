@@ -242,6 +242,11 @@ public class ShopPopup : MonoBehaviour
 
     public void OnBackButtonClicked()
     {
+        Close();
+    }
+
+    public void Close()
+    {
         UIPopupSystem.Instance.HidePopup("ShopPopup");
     }
 }

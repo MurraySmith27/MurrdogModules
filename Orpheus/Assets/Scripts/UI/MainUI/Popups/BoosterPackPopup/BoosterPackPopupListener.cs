@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BoosterPackPopupListener : MonoBehaviour
 {
+    [SerializeField] private BoosterPackOpeningPopup popup;
+    
     private void Start()
     {
         BoosterPackSystem.Instance.OnBoosterPackOpened -= OnBoosterPackOpened;
@@ -21,6 +23,8 @@ public class BoosterPackPopupListener : MonoBehaviour
 
     private void OnBoosterPackOpened(BoosterPackTypes type)
     {
-        UIPopupSystem.Instance.ShowPopup("BoosterPackOpeningPopup");
+        UIPopupSystem.Instance.ShowPopup("BoosterPackOpeningPopup", PanelShowBehaviour.HIDE_PREVIOUS);
+
+        popup.PopulateBoosterPackContents();
     }
 }

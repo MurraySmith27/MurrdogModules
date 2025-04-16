@@ -6,17 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOption.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOption.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackPopup.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackPopup.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOption.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOption.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/ShopPopup/ShopPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/ShopPopup/ShopPopup.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/TileHoveredOverIndicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/TileHoveredOverIndicator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOption.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOption.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackPopupListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackPopupListener.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Yellow/Default/button_rectangle_depth_flat.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Yellow/Default/button_rectangle_depth_flat.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Yellow/Default/button_rectangle_flat.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Yellow/Default/button_rectangle_flat.png.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +26,7 @@
     <option name="autoShow" value="false" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Assets/MurrdogModules" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -126,6 +125,8 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/Runtime/PostProcessing/Shaders/ffx/ffx_cas.hlsl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/ShaderLibrary/Filtering.hlsl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/Tests/Editor/Debugging/PanelNameAndOrderTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/677dc143c1b641c1814cb5d7f438b4e8176600/05/debb84c7/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/677dc143c1b641c1814cb5d7f438b4e8176600/d1/df045571/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -136,20 +137,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.43151695&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.43151695",
+    "git-widget-placeholder": "ed110272",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../OrpheusBuild\Orpheus.exe" />
@@ -285,12 +286,6 @@
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs</url>
-          <line>71</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapInteractionController.cs" containingFunctionPresentation="Method 'SelectTile'" />
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs</url>
           <line>162</line>
           <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'OnHarvestGoalReached'" />
@@ -315,30 +310,56 @@
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs</url>
-          <line>39</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" containingFunctionPresentation="Method 'OpenBasicBoosterPack'">
+          <url>file://$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupComponent.cs</url>
+          <line>152</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupComponent.cs" containingFunctionPresentation="Method 'OnPopupHideCR'">
             <startOffsets>
-              <option value="909" />
+              <option value="3940" />
             </startOffsets>
             <endOffsets>
-              <option value="1005" />
+              <option value="3973" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="84" />
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs</url>
-          <line>42</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" containingFunctionPresentation="Method 'PopulateBoosterPackContents'">
+          <url>file://$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupComponent.cs</url>
+          <line>147</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupComponent.cs" containingFunctionPresentation="Lambda expression inside Method 'OnPopupHideCR'">
             <startOffsets>
-              <option value="959" />
+              <option value="3780" />
             </startOffsets>
             <endOffsets>
-              <option value="1066" />
+              <option value="3862" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="86" />
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupComponent.cs</url>
+          <line>132</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupComponent.cs" containingFunctionPresentation="Method 'OnPopupHideCR'">
+            <startOffsets>
+              <option value="3266" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3293" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupComponent.cs</url>
+          <line>139</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupComponent.cs" containingFunctionPresentation="Lambda expression inside Method 'OnPopupHideCR'">
+            <startOffsets>
+              <option value="3455" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3499" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="95" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

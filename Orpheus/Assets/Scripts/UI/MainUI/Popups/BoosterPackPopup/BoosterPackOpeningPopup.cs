@@ -30,41 +30,42 @@ public class BoosterPackOpeningPopup : MonoBehaviour
     private List<(BoosterPackOption, BoosterPackOptionData)> _instantiatedOptions = new();
 
     private int _currentlySelectedOptionIndex = -1;
-    
-    private void OnEnable()
+
+    public void PopulateBoosterPackContents()
     {
         Reset();
         
-        PopulateBoosterPackContents();
-    }
-
-    private void PopulateBoosterPackContents()
-    {
         BoosterPackSystem.BoosterPackOfferings currentOfferings = BoosterPackSystem.Instance.GetCurrentOfferings();
 
         int optionNum = 0;
-        foreach (TileInformation tile in currentOfferings.tiles)
-        {
-            BoosterPackOptionData data = new();
-            data.Type = BoosterPackOptionTypes.Tile;
-            data.Tile = tile;
-            _instantiatedOptions.Add((Instantiate(boosterPackOptionPrefab, boosterPackOptionParent), data));
 
-            int temp = optionNum;
-            _instantiatedOptions[^1].Item1.Populate(tile, () => {OnOptionSelected(temp);});
-            optionNum++;
+        if (currentOfferings.tiles != null)
+        {
+            foreach (TileInformation tile in currentOfferings.tiles)
+            {
+                BoosterPackOptionData data = new();
+                data.Type = BoosterPackOptionTypes.Tile;
+                data.Tile = tile;
+                _instantiatedOptions.Add((Instantiate(boosterPackOptionPrefab, boosterPackOptionParent), data));
+
+                int temp = optionNum;
+                _instantiatedOptions[^1].Item1.Populate(tile, () => { OnOptionSelected(temp); });
+                optionNum++;
+            }
         }
-        
-        foreach (RelicTypes relic in currentOfferings.relics)
-        {
-            BoosterPackOptionData data = new();
-            data.Type = BoosterPackOptionTypes.Relic;
-            data.Relic = relic;
-            _instantiatedOptions.Add((Instantiate(boosterPackOptionPrefab, boosterPackOptionParent), data));
 
-            int temp = optionNum;
-            _instantiatedOptions[^1].Item1.Populate(relic, () => {OnOptionSelected(temp);});
-            optionNum++;
+        if (currentOfferings.relics != null) {
+            foreach (RelicTypes relic in currentOfferings.relics)
+            {
+                BoosterPackOptionData data = new();
+                data.Type = BoosterPackOptionTypes.Relic;
+                data.Relic = relic;
+                _instantiatedOptions.Add((Instantiate(boosterPackOptionPrefab, boosterPackOptionParent), data));
+
+                int temp = optionNum;
+                _instantiatedOptions[^1].Item1.Populate(relic, () => {OnOptionSelected(temp);});
+                optionNum++;
+            }
         }
     }
 

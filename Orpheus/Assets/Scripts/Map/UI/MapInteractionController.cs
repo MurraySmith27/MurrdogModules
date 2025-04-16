@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public enum MapInteractionMode
 {
+    None,
     Default,
     PlaceBuilding,
     LockCitizens,
@@ -34,10 +35,18 @@ public class MapInteractionController : Singleton<MapInteractionController>
 
     public event Action<BuildingType> OnPlacingBuildingTypeChanged;
 
+    private MapInteractionMode _lastModeBeforePopup = MapInteractionMode.Default;
+
     private void Start()
     {
         PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+
+        UIPopupSystem.Instance.OnPopupShown -= OnPopupShown;
+        UIPopupSystem.Instance.OnPopupShown += OnPopupShown;
+
+        UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
+        UIPopupSystem.Instance.OnPopupHidden += OnPopupHidden;
     }
 
     private void OnDestroy()
@@ -45,6 +54,12 @@ public class MapInteractionController : Singleton<MapInteractionController>
         if (PhaseStateMachine.IsAvailable)
         {
             PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        }
+
+        if (UIPopupSystem.IsAvailable)
+        {
+            UIPopupSystem.Instance.OnPopupShown -= OnPopupShown;
+            UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
         }
     }
 
@@ -60,6 +75,20 @@ public class MapInteractionController : Singleton<MapInteractionController>
         }
     }
 
+    private void OnPopupShown(string popupId)
+    {
+        if (CurrentMode != MapInteractionMode.None)
+        {
+            _lastModeBeforePopup = CurrentMode;
+        }
+        SwitchMapInteractionMode(MapInteractionMode.None);
+    }
+    
+    private void OnPopupHidden(string popupId)
+    {
+        SwitchMapInteractionMode(_lastModeBeforePopup);
+    }
+
     public void SelectTile(Vector2Int tilePosition)
     {
         _currentlySelectedTile = GetTileFromPosition(tilePosition);
@@ -68,6 +97,8 @@ public class MapInteractionController : Singleton<MapInteractionController>
         {
             switch (CurrentMode)
             {
+                case MapInteractionMode.None:
+                    break;
                 case MapInteractionMode.Default:
                     if (_currentlySelectedTilePosition != tilePosition)
                     {
@@ -94,9 +125,16 @@ public class MapInteractionController : Singleton<MapInteractionController>
         
         if (_currentlyHoveredOverTile != null)
         {
-            if (_currentlySelectedTilePosition != tilePosition)
+            switch (CurrentMode)
             {
-                OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile, tilePosition);
+                case MapInteractionMode.None:
+                    break;
+                default:
+                    if (_currentlySelectedTilePosition != tilePosition)
+                    {
+                        OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile, tilePosition);
+                    }
+                    break;
             }
         }
     }
