@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8850910127255019554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gimbal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8901188209572744317}
   - component: {fileID: 291031766877636646}
   - component: {fileID: 2717449905942008209}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TileIcon3DVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,14 +57,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8498389049906203182}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.22343546, y: -0.34328574, z: 0.09254995, w: 0.90756047}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8850910127255019554}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -20, y: -45, z: 20}
 --- !u!114 &291031766877636646
 MonoBehaviour:
   m_ObjectHideFlags: 0

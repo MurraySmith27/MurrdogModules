@@ -5,6 +5,9 @@ using UnityEngine;
 public class Icon3DVisual : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    
+    [SerializeField] protected string icon3dVisualLayerName = "Relic3DPreview";
+    
     private void Start()
     {
         animator.Play("Enter");

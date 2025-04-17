@@ -74,6 +74,10 @@ public class MapSystem : Singleton<MapSystem>
     public delegate void OnTileResourcesChangedDelegate(Vector2Int position, ResourceType resourceType, int difference);
     public event OnTileResourcesChangedDelegate OnTileResourcesChanged;
     
+    public delegate void OnTilePlacedDelegate(Vector2Int tilePosition, TileInformation tile);
+
+    public event OnTilePlacedDelegate OnTilePlaced;
+    
     private void Start()
     {
         List<TileDescriptor> tileDesriptors = AssetManager.GetTileData();
@@ -130,6 +134,13 @@ public class MapSystem : Singleton<MapSystem>
         {
             OnBuildingConstructed?.Invoke(position.x, position.y, buildingType);
         }
+    }
+
+    public void PlaceTile(Vector2Int position, TileInformation tileInformation)
+    {
+        _tiles.SwapOutTile(position.x, position.y, tileInformation);
+        
+        OnTilePlaced?.Invoke(position, tileInformation);
     }
 
     public List<Vector2Int> GetAllOwnedCityTiles()

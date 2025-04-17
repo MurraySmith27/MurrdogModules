@@ -7,14 +7,19 @@ using UnityEngine.UI;
 
 public class BoosterPackOption : MonoBehaviour
 {
+    [SerializeField] private TileIcon3DVisual tile3DVisualPrefab;
+
+    [SerializeField] private OrpheusUIInputChannel inputChannel;
+    [SerializeField] private RectTransform hoverOverRectTransform;
+    
+    [Space(10)]
+    
+    [Header("UI")]
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text cardTypeText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private TMP_Text versionText;
-
     [SerializeField] private RawImage itemPreviewImage;
-
-    [SerializeField] private TileIcon3DVisual tile3DVisualPrefab;
 
     [Space(10)] 
     [Header("Animation")] 
@@ -23,12 +28,30 @@ public class BoosterPackOption : MonoBehaviour
     [SerializeField] private string animatorExitTrigger = "Exit";
     [SerializeField] private string animatorOnSelectedTrigger = "Selected";
     [SerializeField] private string animatorOnDeselectedTrigger = "Deselected";
+    [SerializeField] private string animatorOnHoveredStartTrigger = "HoverStart";
+    [SerializeField] private string animatorOnHoveredEndTrigger = "HoverEnd";
     
     private List<Preview3DController.PreviewTransform> _previewTransforms = new List<Preview3DController.PreviewTransform>();
     
     private TileIcon3DVisual _tile3DVisualInstance;
 
     private Action _onSelectedCallback;
+
+    private bool _isHoveredOver;
+
+    private void Start()
+    {
+        inputChannel.MouseMoveEvent -= OnMouseMove;
+        inputChannel.MouseMoveEvent += OnMouseMove;
+    }
+
+    private void OnDestroy()
+    {
+        if (inputChannel != null)
+        {
+            inputChannel.MouseMoveEvent -= OnMouseMove;
+        }
+    }
     
     private void OnDisable()
     {
@@ -55,6 +78,8 @@ public class BoosterPackOption : MonoBehaviour
         _previewTransforms.Add(previewTransform);
         
         _tile3DVisualInstance = Instantiate(tile3DVisualPrefab, previewTransform.Transform);
+        
+        _tile3DVisualInstance.Populate(tile);
         
         itemPreviewImage.uvRect = previewTransform.UVRect;
         
@@ -89,6 +114,8 @@ public class BoosterPackOption : MonoBehaviour
 
     private void Clear()
     {
+        _isHoveredOver = false;
+        
         foreach (Preview3DController.PreviewTransform previewTransform in _previewTransforms)
         {
             Preview3DController.Instance.FreePreviewTransform(previewTransform);
@@ -104,6 +131,7 @@ public class BoosterPackOption : MonoBehaviour
 
     public void ToggleSelected(bool selected)
     {
+        ResetAnimatorTriggers();
         if (selected)
         {
             animator.SetTrigger(animatorOnSelectedTrigger);
@@ -112,6 +140,36 @@ public class BoosterPackOption : MonoBehaviour
         {
             animator.SetTrigger(animatorOnDeselectedTrigger);
         }
+    }
+
+    private void OnMouseMove(UIInputChannel.UIInputChannelCallbackArgs args)
+    {
+        if (RectTransformUtils.IsMouseOverRectTransform(hoverOverRectTransform))
+        {
+            if (!_isHoveredOver)
+            {
+                ResetAnimatorTriggers();
+                _isHoveredOver = true;
+                animator.SetTrigger(animatorOnHoveredStartTrigger);
+            }
+        }
+        else
+        {
+            if (_isHoveredOver)
+            {
+                ResetAnimatorTriggers();
+                _isHoveredOver = false;
+                animator.SetTrigger(animatorOnHoveredEndTrigger);
+            }
+        }
+    }
+
+    private void ResetAnimatorTriggers()
+    {
+        animator.ResetTrigger(animatorOnHoveredEndTrigger);
+        animator.ResetTrigger(animatorOnHoveredStartTrigger);
+        animator.ResetTrigger(animatorOnSelectedTrigger);
+        animator.ResetTrigger(animatorOnDeselectedTrigger);
     }
 
     public void OnClick()

@@ -32,17 +32,17 @@ public static class LocalizationUtils
         switch (resourceType)
         {
             case ResourceType.Wood:
-                return "<wood/>";
+                return "<wood>";
             case ResourceType.Stone:
-                return "<stone/>";
+                return "<stone>";
             case ResourceType.Corn:
-                return "<corn/>";
+                return "<corn>";
             case ResourceType.Wheat:
-                return "<wheat/>";
+                return "<wheat>";
             case ResourceType.Fish:
-                return "<fish/>";
+                return "<fish>";
             case ResourceType.Bread:
-                return "<bread/>";
+                return "<bread>";
             default:
                 return "";
         }
@@ -53,15 +53,15 @@ public static class LocalizationUtils
         switch (buildingType)
         {
             case BuildingType.CityCapital:
-                return "<citycapital/>";
+                return "<citycapital>";
             case BuildingType.CornFarm:
-                return "<cornfarm/>";
+                return "<cornfarm>";
             case BuildingType.FishFarm:
-                return "<fishfarm/>";
+                return "<fishfarm>";
             case BuildingType.WheatFarm:
-                return "<wheatfarm/>";
+                return "<wheatfarm>";
             case BuildingType.Bakery:
-                return "<bakery/>";
+                return "<bakery>";
             default:
                 return "";
         }

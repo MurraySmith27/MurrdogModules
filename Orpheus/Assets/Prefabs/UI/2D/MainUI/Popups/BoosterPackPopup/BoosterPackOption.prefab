@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 826263178754233511}
   - component: {fileID: 2039228507718835361}
   - component: {fileID: 3667695596712684513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 8951353791481082790}
   - component: {fileID: 2830674371236703855}
   - component: {fileID: 7246876073418277395}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OptionIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 4617660281508798999}
   - component: {fileID: 9072743305171636653}
   - component: {fileID: 1891378811303484872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CardTypeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 8520149345525945974}
   - component: {fileID: 2252608621872895107}
   - component: {fileID: 5702806736707380599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: VersionNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,8 @@ GameObject:
   - component: {fileID: 8503427601988152378}
   - component: {fileID: 4095283900540260227}
   - component: {fileID: 7278689386143484232}
-  m_Layer: 0
+  - component: {fileID: 3607354808590253230}
+  m_Layer: 6
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,6 +573,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3607354808590253230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997877400072262839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typewriterStartsAutomatically: 0
+  animationLoop: 0
+  timeScale: 0
+  _text: 
+  useDynamicScaling: 1
+  referenceFontSize: 10
+  isResettingTimeOnNewText: 1
+  useDefaultDatabases: 1
+  databaseBehaviors: {fileID: 0}
+  databaseAppearances: {fileID: 0}
+  useDefaultStyleSheet: 1
+  styleSheet: {fileID: 0}
+  databaseActions: {fileID: 0}
+  defaultAppearancesTags:
+  - size
+  defaultDisappearancesTags:
+  - fade
+  defaultBehaviorsTags: []
+  defaultTagsMode: 0
 --- !u!1 &4394820212058514937
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +615,7 @@ GameObject:
   - component: {fileID: 5842826240544996341}
   - component: {fileID: 640453832759619094}
   - component: {fileID: 7123383933135279119}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DescriptionBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +692,7 @@ GameObject:
   - component: {fileID: 7292992082950635233}
   - component: {fileID: 8681489564803453467}
   - component: {fileID: 8497172030928378267}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OptionIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +778,7 @@ GameObject:
   - component: {fileID: 4889761811708559976}
   - component: {fileID: 7872203637374491951}
   - component: {fileID: 4727225695611706208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TitleBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,7 +854,7 @@ GameObject:
   - component: {fileID: 2854687948654326657}
   - component: {fileID: 2486201793711926882}
   - component: {fileID: 3092443339314299698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +934,7 @@ GameObject:
   - component: {fileID: 2677191239223360383}
   - component: {fileID: 3629778878765946180}
   - component: {fileID: 3886199151465013640}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OptionIconBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +1011,7 @@ GameObject:
   - component: {fileID: 180155908423803312}
   - component: {fileID: 8080781772049846408}
   - component: {fileID: 8253488237957020983}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BoosterPackOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,6 +1032,7 @@ RectTransform:
   m_Children:
   - {fileID: 826263178754233511}
   - {fileID: 5421422143200466566}
+  - {fileID: 6507322578309987916}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1039,18 +1072,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aace60ae8303ac849860104b6fbee199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tile3DVisualPrefab: {fileID: 291031766877636646, guid: 742045cd070948f4d9f1414da8eaf27b,
+    type: 3}
+  inputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
+  hoverOverRectTransform: {fileID: 6507322578309987916}
   titleText: {fileID: 1077234300077209049}
   cardTypeText: {fileID: 1891378811303484872}
   descriptionText: {fileID: 7278689386143484232}
   versionText: {fileID: 5702806736707380599}
   itemPreviewImage: {fileID: 8497172030928378267}
-  tile3DVisualPrefab: {fileID: 291031766877636646, guid: 742045cd070948f4d9f1414da8eaf27b,
-    type: 3}
   animator: {fileID: 8253488237957020983}
   animatorEnterTrigger: Enter
   animatorExitTrigger: Exit
   animatorOnSelectedTrigger: Selected
   animatorOnDeselectedTrigger: Deselected
+  animatorOnHoveredStartTrigger: HoverStart
+  animatorOnHoveredEndTrigger: HoverEnd
 --- !u!95 &8253488237957020983
 Animator:
   serializedVersion: 5
@@ -1083,7 +1120,7 @@ GameObject:
   - component: {fileID: 5421422143200466566}
   - component: {fileID: 8012603708165534658}
   - component: {fileID: 1885731619337376143}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BorderBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1148,6 +1185,138 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.6
+--- !u!1 &7078059471996201391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6507322578309987916}
+  - component: {fileID: 8038330338564546517}
+  - component: {fileID: 1024596912185224995}
+  - component: {fileID: 5618891758811233110}
+  m_Layer: 6
+  m_Name: HoverOverTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6507322578309987916
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078059471996201391}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 665043797997718237}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 40, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8038330338564546517
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078059471996201391}
+  m_CullTransparentMesh: 1
+--- !u!114 &1024596912185224995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078059471996201391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5618891758811233110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078059471996201391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1024596912185224995}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8080781772049846408}
+        m_TargetAssemblyTypeName: BoosterPackOption, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8673023901101652104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1328,7 @@ GameObject:
   - component: {fileID: 4899652200084672371}
   - component: {fileID: 8352762339141499226}
   - component: {fileID: 1077234300077209049}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}

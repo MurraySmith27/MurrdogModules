@@ -44,6 +44,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
         MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
         MapSystem.Instance.OnBuildingConstructed += OnBuildingConstructed;
 
+        MapSystem.Instance.OnTilePlaced -= OnTilePlaced;
+        MapSystem.Instance.OnTilePlaced += OnTilePlaced;
+
         MapSystem.Instance.OnCityOwnedTilesChanged -= OnCityOwnedTilesChanged;
         MapSystem.Instance.OnCityOwnedTilesChanged += OnCityOwnedTilesChanged;
         
@@ -72,6 +75,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
             MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
+            MapSystem.Instance.OnTilePlaced -= OnTilePlaced;
             MapSystem.Instance.OnCityOwnedTilesChanged -= OnCityOwnedTilesChanged;
             MapSystem.Instance.OnTileAddedToCity -= OnTileAddedToCity;
         }
@@ -111,35 +115,45 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             for (int j = col; j < col + height; j++)
             {
-                TileType tileType = MapSystem.Instance.GetTileType(i, j);
-
-                TileVisualsData tileVisualsData = tilesVisuals.TilesVisualsData.FirstOrDefault(((TileVisualsData data) =>
-                {
-                    return data.Type == tileType;
-                }));
-
-                if (tileVisualsData == null)
-                {
-                    Debug.LogError($"Unable to find tile of type {tileType} in tile visuals data SO");
-                    return;
-                }
-                
-                TileVisuals tilePrefab = tileVisualsData.Prefab;
-
-                InstantiatedMapTiles[i, j] = Instantiate(tilePrefab,
-                    new Vector3(GameConstants.TILE_SIZE * i, 0, GameConstants.TILE_SIZE * j), Quaternion.identity,
-                    tileParent);
-                
-                List<ResourceItem> resourceItems = MapSystem.Instance.GetAllResourcesOnTile(new Vector2Int(i, j));
-
-                InstantiatedMapTiles[i, j].PopulateResourceVisuals(resourceItems);
-
-                //start with visuals disabled, change this in camera frustrum culling
-                InstantiatedMapTiles[i, j].ToggleVisuals(false);
+                InstantiateTileVisuals(i, j);
             }
         }
         
         TileFrustrumCulling.Instance.UpdateTileCulling();
+    }
+
+    private void InstantiateTileVisuals(int col, int row)
+    {
+        TileType tileType = MapSystem.Instance.GetTileType(col, row);
+
+        TileVisualsData tileVisualsData = tilesVisuals.TilesVisualsData.FirstOrDefault(((TileVisualsData data) =>
+        {
+            return data.Type == tileType;
+        }));
+
+        if (tileVisualsData == null)
+        {
+            Debug.LogError($"Unable to find tile of type {tileType} in tile visuals data SO");
+            return;
+        }
+                
+        TileVisuals tilePrefab = tileVisualsData.Prefab;
+
+        InstantiatedMapTiles[col, row] = Instantiate(tilePrefab,
+            new Vector3(GameConstants.TILE_SIZE * col, 0, GameConstants.TILE_SIZE * row), Quaternion.identity,
+            tileParent);
+                
+        List<ResourceItem> resourceItems = MapSystem.Instance.GetAllResourcesOnTile(new Vector2Int(col, row));
+
+        InstantiatedMapTiles[col, row].PopulateResourceVisuals(resourceItems);
+
+        //start with visuals disabled, change this in camera frustrum culling
+        InstantiatedMapTiles[col, row].ToggleVisuals(false);
+
+        // foreach (Building building in MapSystem.Instance.GetBuildingsOnTile(new Vector2Int(row, col)))
+        // {
+        //     
+        // }
     }
 
     private void OnBuildingConstructed(int row, int col, BuildingType buildingType)
@@ -174,6 +188,12 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             tile.AttachBuilding(newBuilding);
         }
+    }
+
+    private void OnTilePlaced(Vector2Int position, TileInformation tileInformation)
+    {
+        Destroy(InstantiatedMapTiles[position.x, position.y]);
+        // InstantiatedMapTiles[position.x, position.y] = 
     }
 
     private void OnCitizenAddedToTile(Guid cityGuid, Vector2Int tilePosition)

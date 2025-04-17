@@ -10,6 +10,7 @@ public enum MapInteractionMode
     Default,
     PlaceBuilding,
     LockCitizens,
+    PlaceTile,
 }
 
 public class MapInteractionController : Singleton<MapInteractionController>
@@ -26,6 +27,12 @@ public class MapInteractionController : Singleton<MapInteractionController>
     public MapInteractionMode CurrentMode { get; private set; } = MapInteractionMode.Default;
 
     public BuildingType CurrentlyPlacingBuildingType
+    {
+        get;
+        private set;
+    }
+
+    public TileInformation CurrentlyPlacingTile
     {
         get;
         private set;
@@ -109,6 +116,9 @@ public class MapInteractionController : Singleton<MapInteractionController>
                 case MapInteractionMode.PlaceBuilding:
                     TryPlaceBuilding(tilePosition, CurrentlyPlacingBuildingType);
                     break;
+                case MapInteractionMode.PlaceTile:
+                    TryPlaceTile(tilePosition, CurrentlyPlacingTile);
+                    break;
                 case MapInteractionMode.LockCitizens:
                     if (CitizenController.Instance.IsCitizenOnTile(tilePosition))
                     {
@@ -156,6 +166,16 @@ public class MapInteractionController : Singleton<MapInteractionController>
             OnPlacingBuildingTypeChanged?.Invoke(buildingType);
         }
     }
+
+    public void SwitchToPlaceTileMode(TileInformation tile)
+    {
+        CurrentlyPlacingTile = tile;
+        
+        if (CurrentMode != MapInteractionMode.PlaceTile)
+        {
+            SwitchMapInteractionMode(MapInteractionMode.PlaceTile);
+        }
+    }
     
     public void SwitchMapInteractionMode(MapInteractionMode newMode)
     {
@@ -189,6 +209,24 @@ public class MapInteractionController : Singleton<MapInteractionController>
         else
         {
             BuildingsController.Instance.TryPlaceBuilding(tilePosition, buildingType);
+        }
+    }
+    
+    private void TryPlaceTile(Vector2Int tilePosition, TileInformation tile)
+    {
+        List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();
+        if (cityGuids.Count == 0)
+        {
+            Debug.LogError("BUILD A CITY BEFORE PLACING TILES");
+        }
+        else if (MapSystem.Instance.IsTileOwnedByCity(tilePosition))
+        {
+            Debug.LogError("CANNOT PLACE TILE ON TILE ALREADY OWNED BY CITY");
+        }
+        else
+        {
+            MapSystem.Instance.PlaceTile(tilePosition, tile);
+            MapSystem.Instance.AddTileToCity(cityGuids[0], tilePosition);
         }
     }
 

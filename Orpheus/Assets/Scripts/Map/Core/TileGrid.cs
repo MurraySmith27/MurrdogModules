@@ -146,6 +146,14 @@ public class TileGrid
         return col < Tiles.GetLength(0) && row < Tiles.GetLength(1) && row >= 0 && col >= 0;
     }
 
+    public void SwapOutTile(int col, int row, TileInformation tileInformation)
+    {
+        if (ValidPosition(col, row))
+        {
+            Tiles[col, row] = tileInformation;
+        }
+    }
+
     public void AddChunk(int col, int row, TileInformation[,] chunk)
     {
         int width = chunk.GetLength(0);

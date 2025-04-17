@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using SRF;
 using UnityEngine;
 
 public class TileIcon3DVisual : Icon3DVisual
@@ -25,6 +26,10 @@ public class TileIcon3DVisual : Icon3DVisual
             TileVisuals prefab = tileVisuals.Prefab;
             
             _tileVisualsInstance = Instantiate(prefab, tileVisualsParent);
+            
+            _tileVisualsInstance.gameObject.SetLayerRecursive(LayerMask.NameToLayer(icon3dVisualLayerName));
+            
+            _tileVisualsInstance.ToggleShadow(false);
 
             if (tileInformation.Buildings.Count > 0)
             {
@@ -38,7 +43,13 @@ public class TileIcon3DVisual : Icon3DVisual
 
                     BuildingBehaviour buildingInstance = Instantiate(buildingPrefab, null);
                     
+                    buildingInstance.gameObject.SetLayerRecursive(LayerMask.NameToLayer(icon3dVisualLayerName));
+                    
                     _tileVisualsInstance.AttachBuilding(buildingInstance);
+
+                    buildingInstance.transform.localPosition = new Vector3(0, 0, 0);
+                    buildingInstance.transform.localScale = new Vector3(1, 1, 1);
+                    buildingInstance.transform.localRotation = Quaternion.identity;
                 }
             }
 

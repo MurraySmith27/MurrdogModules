@@ -107,13 +107,14 @@ public class BoosterPackOpeningPopup : MonoBehaviour
     public void OnChooseButtonClicked()
     {
         UIPopupSystem.Instance.HidePopup("BoosterPackOpeningPopup");
+        UIPopupSystem.Instance.HidePopup("ShopPopup");
 
         BoosterPackOptionData chosenOption = _instantiatedOptions[_currentlySelectedOptionIndex].Item2;
 
         switch (chosenOption.Type)
         {
             case BoosterPackOptionTypes.Tile:
-                //TODO: place Tile mode
+                MapInteractionController.Instance.SwitchToPlaceTileMode(chosenOption.Tile);
                 break;
             case BoosterPackOptionTypes.Relic:
                 RelicSystem.Instance.AddRelic(chosenOption.Relic);
