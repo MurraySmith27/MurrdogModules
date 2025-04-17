@@ -30,6 +30,9 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
    
    private List<(UIInputType, UnityAction<UIInputChannel.UIInputChannelCallbackArgs>)> _hidePopupActions = new();
 
+   public event Action<string> OnPopupShown;
+   public event Action<string> OnPopupHidden;
+
    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
    {
       SetUpShowAndHideCallbacks();
@@ -145,6 +148,7 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
             _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
          
             newPopup.OnPopupShow();
+            OnPopupShown?.Invoke(popupId);
          }
          else if (_activePopup.Item1 != popupId)
          {
@@ -153,6 +157,7 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
                if (_activePopup.Item2 != null)
                {
                   _activePopup.Item2.OnPopupHide();
+                  OnPopupHidden?.Invoke(_activePopup.Item1);
 
                   _popupQueue.AddFirst(_activePopup);
 
@@ -162,6 +167,7 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
                _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
          
                newPopup.OnPopupShow();
+               OnPopupShown?.Invoke(popupId);
             }
             else
             {
@@ -192,12 +198,14 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          _popupQueue.Remove(uiPopup);
          
          uiPopup.Item2.OnPopupHide();
+         OnPopupHidden?.Invoke(popupId);
          
          ShowNextQueuedPopup();
       }
       else if (_activePopup.Item1 == popupId)
       {
          _activePopup.Item2.OnPopupHide();
+         OnPopupHidden?.Invoke(popupId);
          
          _activePopup = ("", null);
 

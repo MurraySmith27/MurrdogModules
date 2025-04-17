@@ -32,8 +32,6 @@ public class UIPopupComponent : MonoBehaviour
     [SerializeField] private PopupHideStartEvent onPopupHideStart;
     [SerializeField] private PopupHideFinishedEvent onPopupHideFinished;
     
-    private bool _popupActionTriggeredThisFrame;
-    
     private Coroutine _hidePopupCR;
 
     private bool _hidePopupCRRunning;
@@ -48,19 +46,12 @@ public class UIPopupComponent : MonoBehaviour
         private set;
     }
 
-    void Update()
-    {
-        _popupActionTriggeredThisFrame = false;
-    }
-
     public void OnPopupShow()
     {
-        if (IsActive || _popupActionTriggeredThisFrame)
+        if (IsActive)
         {
             return;
         }
-        
-        _popupActionTriggeredThisFrame = true;
         
         this.gameObject.SetActive(true);
         
@@ -104,12 +95,10 @@ public class UIPopupComponent : MonoBehaviour
 
     public void OnPopupHide()
     {
-        if (!IsActive || _popupActionTriggeredThisFrame)
+        if (!IsActive)
         {
             return;
         }
-
-        _popupActionTriggeredThisFrame = true;
         
         this.gameObject.SetActive(true);
         
@@ -135,19 +124,22 @@ public class UIPopupComponent : MonoBehaviour
         _animatorComponent.SetTrigger(_outroAnimatorTrigger);
         IsActive = false;
 
+        float timeOut = 0.1f;
+        float timeWaiting = 0f;
         yield return new WaitUntil(() =>
         {
-            return _animatorComponent.IsInTransition(0);
+            timeWaiting += Time.deltaTime;
+            return _animatorComponent.IsInTransition(0) || timeWaiting >= timeOut;
         });
         
         int beforeStateHash = _animatorComponent.GetCurrentAnimatorStateInfo(0).fullPathHash;
-        
+
         yield return new WaitUntil(() =>
         {
             AnimatorStateInfo stateInfo = _animatorComponent.GetCurrentAnimatorStateInfo(0);
             return stateInfo.normalizedTime >= 1 && stateInfo.fullPathHash != beforeStateHash;
         });
-        
+
         onPopupHideFinished?.Invoke();
         
         this.gameObject.SetActive(false);
