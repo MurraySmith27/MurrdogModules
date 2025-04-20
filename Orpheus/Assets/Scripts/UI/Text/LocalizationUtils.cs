@@ -27,6 +27,25 @@ public static class LocalizationUtils
         }
     }
 
+    public static string GetNameOfBuilding(BuildingType buildingType)
+    {
+        switch (buildingType)
+        {
+            case BuildingType.CityCapital:
+                return "Castle";
+            case BuildingType.CornFarm:
+                return "Corn Farm";
+            case BuildingType.WheatFarm:
+                return "Wheat Farm";
+            case BuildingType.Bakery:
+                return "Bakery";
+            case BuildingType.FishFarm:
+                return "Fish Farm";
+            default:
+                return "";
+        }
+    }
+
     public static string GetTagForResource(ResourceType resourceType)
     {
         switch (resourceType)

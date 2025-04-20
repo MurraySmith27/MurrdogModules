@@ -259,4 +259,18 @@ public class RelicSystem : Singleton<RelicSystem>
             }
         }
     }
+
+    public List<BuildingType> GetUnlockedBuildingTypes(List<BuildingType> currentBuildingTypes)
+    {
+        foreach (RelicTypes relic in relics)
+        {
+            AdditionalTriggeredArgs args;
+            if (_relicInstances[relic].GetUnlockedBuildingTypes(currentBuildingTypes, out currentBuildingTypes, out args))
+            {
+                OnRelicTriggered.Invoke(relic, args);
+            }
+        }
+
+        return currentBuildingTypes;
+    }
 }

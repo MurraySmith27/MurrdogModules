@@ -81,5 +81,14 @@ public abstract class Relic
         return false;
     }
 
+    public virtual bool GetUnlockedBuildingTypes(List<BuildingType> buildingTypes,
+        out List<BuildingType> newBuildingTypes, out AdditionalTriggeredArgs args)
+    {
+        args = new();
+        newBuildingTypes = new();
+
+        return false;
+    }
+
     public abstract void SerializeRelic();
 }

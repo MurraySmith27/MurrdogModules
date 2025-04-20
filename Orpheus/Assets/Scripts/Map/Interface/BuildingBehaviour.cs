@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class BuildingBehaviour : MonoBehaviour
 {
-    
+    public void Populate()
+    {
+        
+    }
 }

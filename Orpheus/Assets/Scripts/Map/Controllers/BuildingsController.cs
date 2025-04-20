@@ -95,4 +95,18 @@ public class BuildingsController : Singleton<BuildingsController>
 
         return true;
     }
+
+    public List<BuildingType> GetAvailableBuildingTypes()
+    {
+        List<BuildingType> buildingTypes = new List<BuildingType>();
+        
+        buildingTypes.Add(BuildingType.CornFarm);
+        buildingTypes.Add(BuildingType.FishFarm);
+        buildingTypes.Add(BuildingType.WheatFarm);
+        buildingTypes.Add(BuildingType.Bakery);
+        
+        buildingTypes = RelicSystem.Instance.GetUnlockedBuildingTypes(buildingTypes);
+        
+        return buildingTypes;
+    }
 }
