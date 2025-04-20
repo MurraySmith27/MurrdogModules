@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipTextData:
   - tooltipType: 1
-    text: A bonus <citizen> for your next harvest.
+    text: <b>Mercenary</b><br>A temporary bonus <citizen> during the harvest.
+  - tooltipType: 2
+    text: <b>Tile Booster Pack</b><br>Choose 1 of 3 tiles to add to your empire.

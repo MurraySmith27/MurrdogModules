@@ -30,6 +30,9 @@ public class ResourceIconsOverlayController : MonoBehaviour
 
         MapSystem.Instance.OnTileResourcesChanged -= OnTileResourcesChanged;
         MapSystem.Instance.OnTileResourcesChanged += OnTileResourcesChanged;
+
+        MapSystem.Instance.OnTilePlaced -= OnTilePlaced;
+        MapSystem.Instance.OnTilePlaced += OnTilePlaced;
     }
 
     private void OnDestroy()
@@ -42,6 +45,7 @@ public class ResourceIconsOverlayController : MonoBehaviour
         if (MapSystem.IsAvailable)
         {
             MapSystem.Instance.OnTileResourcesChanged -= OnTileResourcesChanged;
+            MapSystem.Instance.OnTilePlaced -= OnTilePlaced;
         }
     }
 
@@ -68,6 +72,19 @@ public class ResourceIconsOverlayController : MonoBehaviour
     }
 
     private void OnTileResourcesChanged(Vector2Int position, ResourceType type, int difference)
+    {
+        if (_instantiatedIcons.ContainsKey(position))
+        {
+            foreach ((ResourceItem, RectTransform) icon in _instantiatedIcons[position])
+            {
+                resourceIconRetriever.ReturnResourceIcon(icon.Item1, icon.Item2);
+            }
+        }
+        
+        SpawnResourceIconsAtTile(position.x, position.y);
+    }
+
+    private void OnTilePlaced(Vector2Int position, TileInformation tile)
     {
         if (_instantiatedIcons.ContainsKey(position))
         {

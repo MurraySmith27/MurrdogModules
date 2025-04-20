@@ -146,14 +146,13 @@ public class MapVisualsController : Singleton<MapVisualsController>
         List<ResourceItem> resourceItems = MapSystem.Instance.GetAllResourcesOnTile(new Vector2Int(col, row));
 
         InstantiatedMapTiles[col, row].PopulateResourceVisuals(resourceItems);
-
-        //start with visuals disabled, change this in camera frustrum culling
+        
         InstantiatedMapTiles[col, row].ToggleVisuals(false);
 
-        // foreach (Building building in MapSystem.Instance.GetBuildingsOnTile(new Vector2Int(row, col)))
-        // {
-        //     
-        // }
+        foreach (TileBuilding building in MapSystem.Instance.GetBuildingsOnTile(new Vector2Int(col, row)))
+        {
+            OnBuildingConstructed(col, row, building.Type);
+        }
     }
 
     private void OnBuildingConstructed(int row, int col, BuildingType buildingType)
@@ -192,8 +191,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
     private void OnTilePlaced(Vector2Int position, TileInformation tileInformation)
     {
-        Destroy(InstantiatedMapTiles[position.x, position.y]);
-        // InstantiatedMapTiles[position.x, position.y] = 
+        Destroy(InstantiatedMapTiles[position.x, position.y].gameObject);
+        InstantiateTileVisuals(position.x, position.y);
+        InstantiatedMapTiles[position.x, position.y].ToggleVisuals(true);
     }
 
     private void OnCitizenAddedToTile(Guid cityGuid, Vector2Int tilePosition)

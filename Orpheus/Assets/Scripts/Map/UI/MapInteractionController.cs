@@ -117,7 +117,10 @@ public class MapInteractionController : Singleton<MapInteractionController>
                     TryPlaceBuilding(tilePosition, CurrentlyPlacingBuildingType);
                     break;
                 case MapInteractionMode.PlaceTile:
-                    TryPlaceTile(tilePosition, CurrentlyPlacingTile);
+                    if (TryPlaceTile(tilePosition, CurrentlyPlacingTile))
+                    {
+                        SwitchMapInteractionMode(MapInteractionMode.Default);
+                    }
                     break;
                 case MapInteractionMode.LockCitizens:
                     if (CitizenController.Instance.IsCitizenOnTile(tilePosition))
@@ -212,21 +215,24 @@ public class MapInteractionController : Singleton<MapInteractionController>
         }
     }
     
-    private void TryPlaceTile(Vector2Int tilePosition, TileInformation tile)
+    private bool TryPlaceTile(Vector2Int tilePosition, TileInformation tile)
     {
         List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();
         if (cityGuids.Count == 0)
         {
             Debug.LogError("BUILD A CITY BEFORE PLACING TILES");
+            return false;
         }
         else if (MapSystem.Instance.IsTileOwnedByCity(tilePosition))
         {
             Debug.LogError("CANNOT PLACE TILE ON TILE ALREADY OWNED BY CITY");
+            return false;
         }
         else
         {
             MapSystem.Instance.PlaceTile(tilePosition, tile);
             MapSystem.Instance.AddTileToCity(cityGuids[0], tilePosition);
+            return true;
         }
     }
 

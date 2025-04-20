@@ -113,7 +113,7 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         {
             TileInformation newTile = new();
 
-            newTile.Type = (TileType)Random.Range(0, Enum.GetNames(typeof(TileType)).Length - 2) + 1;
+            newTile.Type = (TileType)Random.Range(0, Enum.GetNames(typeof(TileType)).Length - 1) + 1;
 
             newTile.Resources = MapSystem.Instance.GenerateResourcesOnTile(newTile.Type);
             

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,18 +13,31 @@ public class TooltipBase : MonoBehaviour
     private void Update()
     {
         bool isPointerOver = UIMouseData.Instance.IsMouseOverRectTransform(rectTransform);
-        
+
         if (isPointerOver && _currentTooltipIndex == -1)
         {
             Vector2 worldPosition = rectTransform.TransformPoint(rectTransform.rect.center);
             _currentTooltipIndex =
                 TooltipManager.Instance.ShowTooltip(worldPosition, GetTooltipText(),
-                    () =>
-                    {
-                        _currentTooltipIndex = -1;
-                    });
+                    () => { _currentTooltipIndex = -1; });
         }
         else if (!isPointerOver && _currentTooltipIndex != -1)
+        {
+            TooltipManager.Instance.HideTooltipIfMouseOff(_currentTooltipIndex);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_currentTooltipIndex != -1)
+        {
+            TooltipManager.Instance.HideTooltipIfMouseOff(_currentTooltipIndex);
+        }
+    }
+    
+    private void OnDestroy()
+    {
+        if (_currentTooltipIndex != -1)
         {
             TooltipManager.Instance.HideTooltipIfMouseOff(_currentTooltipIndex);
         }

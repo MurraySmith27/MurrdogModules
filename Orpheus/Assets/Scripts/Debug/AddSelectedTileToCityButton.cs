@@ -39,7 +39,7 @@ public class AddSelectedTileToCityButton : MonoBehaviour
 
             if (cityGuids.Count != 0)
             {
-                MapSystem.Instance.AddTileToCity(cityGuids[0], currentlySelectedTile);
+                MapSystem.Instance.AddTileToCity(cityGuids[0], currentlySelectedTile, true);
             }
         }
     }

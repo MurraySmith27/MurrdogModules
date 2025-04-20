@@ -11,4 +11,10 @@ public partial class SROptions
     {
         CameraController.Instance.FocusPosition(new Vector3(0, 0, 0));
     }
+
+    [Category("Game Speed")]
+    public void DoubleGameSpeed()
+    {
+        GlobalSettings.GameSpeed *= 2;
+    }
 }

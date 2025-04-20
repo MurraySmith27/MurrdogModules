@@ -124,7 +124,7 @@ public class MapSystem : Singleton<MapSystem>
 
             foreach (Vector2Int tileLocation in initialTileLocations)
             {
-                TryAddTileToCity(newCity.CityGuid, tileLocation);
+                TryAddTileToCity(newCity.CityGuid, tileLocation, true);
             }
 
             OnBuildingConstructed?.Invoke(position.x, position.y, buildingType);
@@ -271,7 +271,7 @@ public class MapSystem : Singleton<MapSystem>
 
         Vector2Int newTile = taxicabDistancePositions[minDistance][UnityEngine.Random.Range(0, taxicabDistancePositions[minDistance].Count)];
 
-        if (TryAddTileToCity(cityGuid, newTile))
+        if (TryAddTileToCity(cityGuid, newTile, true))
         {
             OnCityOwnedTilesChanged?.Invoke(cityCenterPosition, city.GetTilesInOrder());
             return newTile;
@@ -279,9 +279,9 @@ public class MapSystem : Singleton<MapSystem>
         else return new Vector2Int(-1, -1);
     }
 
-    public void AddTileToCity(Guid cityGuid, Vector2Int tilePosition)
+    public void AddTileToCity(Guid cityGuid, Vector2Int tilePosition, bool generateResources = false)
     {
-        if (!TryAddTileToCity(cityGuid, tilePosition))
+        if (!TryAddTileToCity(cityGuid, tilePosition, generateResources))
         {
             Debug.LogError($"Failed to add tile: {tilePosition} to city with guid: {cityGuid}.");
             return;
@@ -299,7 +299,7 @@ public class MapSystem : Singleton<MapSystem>
         }
     }
 
-    private bool TryAddTileToCity(Guid cityGuid, Vector2Int newTilePosition)
+    private bool TryAddTileToCity(Guid cityGuid, Vector2Int newTilePosition, bool addResources = false)
     {
         CityTileData city = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
 
@@ -316,12 +316,16 @@ public class MapSystem : Singleton<MapSystem>
         if (!resourcesGeneratedAtStart)
         {
             TileType type = _tiles[newTilePosition.x, newTilePosition.y].Type;
-            List<ResourceItem> resources = GenerateResourcesOnTile(type);
-
-            for (int i = 0; i < resources.Count; i++)
+            if (addResources)
             {
-                _tiles.AddResourceToTile(newTilePosition.x, newTilePosition.y, resources[i].Type, resources[i].Quantity);
-                OnTileResourcesChanged?.Invoke(newTilePosition, resources[i].Type, resources[i].Quantity);
+                List<ResourceItem> resources = GenerateResourcesOnTile(type);
+
+                for (int i = 0; i < resources.Count; i++)
+                {
+                    _tiles.AddResourceToTile(newTilePosition.x, newTilePosition.y, resources[i].Type,
+                        resources[i].Quantity);
+                    OnTileResourcesChanged?.Invoke(newTilePosition, resources[i].Type, resources[i].Quantity);
+                }
             }
         }
         

@@ -2491,7 +2491,7 @@ MonoBehaviour:
   rectTransform: {fileID: 4217103998453144088}
   uiInputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
   tooltipTextData: {fileID: 11400000, guid: cd6e5fab884f9c14eb259cd48e5c26ce, type: 2}
-  tooltipType: 1
+  tooltipType: 2
 --- !u!1 &8252248868125355029
 GameObject:
   m_ObjectHideFlags: 0

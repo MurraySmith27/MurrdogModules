@@ -18,7 +18,6 @@ public class ShopPopup : MonoBehaviour
     //TODO: Generate 3d previews for booster packs
     [Header("Booster Pack Icons")]
     [SerializeField] private List<Image> boosterPackSoldOutBanners;
-
     
     [Header("UI Elements")] 
     [SerializeField] private Button refreshButton;
@@ -40,10 +39,12 @@ public class ShopPopup : MonoBehaviour
 
     private List<Icon3DVisual> _instantiatedItemVisuals = new();
 
+    private bool _hasPurchasedBoosterPack = false;
+
     private void Start()
     {
-        PersistentState.Instance.OnRoundEnd -= OnRoundEnd;
-        PersistentState.Instance.OnRoundEnd += OnRoundEnd;
+        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
 
         PersistentState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
         PersistentState.Instance.OnGoldValueChanged += OnGoldValueChanged;
@@ -60,9 +61,13 @@ public class ShopPopup : MonoBehaviour
     
     private void OnDestroy()
     {
+        if (PhaseStateMachine.IsAvailable)
+        {
+            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        }
+        
         if (PersistentState.IsAvailable)
         {
-            PersistentState.Instance.OnRoundEnd -= OnRoundEnd;
             PersistentState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
         }
     }
@@ -72,9 +77,13 @@ public class ShopPopup : MonoBehaviour
         PopulateShop();
     }
 
-    private void OnRoundEnd(int roundNum)
+    private void OnPhaseChanged(GamePhases gamePhase)
     {
-        _numRelicRefreshes = 0;
+        if (gamePhase == GamePhases.BuddingUpkeep)
+        {
+            _numRelicRefreshes = 0;
+            _hasPurchasedBoosterPack = false;
+        }
     }
 
     private void OnGoldValueChanged(long newValue)
@@ -163,6 +172,10 @@ public class ShopPopup : MonoBehaviour
         citizenCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfBoosterPack(BoosterPackTypes.BASIC_TILE_BOOSTER)}");
         
         shopRelicCostButtons[0].interactable = true;
+        
+        itemSoldOutBanners[0].gameObject.SetActive(ItemSystem.Instance.HasItem(ItemTypes.BONUS_CITIZEN));
+        
+        boosterPackSoldOutBanners[0].gameObject.SetActive(_hasPurchasedBoosterPack);
 
         for (int i = _currentRelics.Count; i < relicIcons.Count; i++)
         {
@@ -212,8 +225,9 @@ public class ShopPopup : MonoBehaviour
             PersistentState.Instance.ChangeCurrentGold(-boosterPackCost);
             
             boosterPackSoldOutBanners[0].gameObject.SetActive(true);
+
+            _hasPurchasedBoosterPack = true;
         }
-        
     }
 
     private void Clear()
