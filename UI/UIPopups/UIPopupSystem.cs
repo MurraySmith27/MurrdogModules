@@ -30,6 +30,8 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
    
    private List<(UIInputType, UnityAction<UIInputChannel.UIInputChannelCallbackArgs>)> _hidePopupActions = new();
 
+   private bool _isCurrentlyStashed = false;
+
    public event Action<string> OnPopupShown;
    public event Action<string> OnPopupHidden;
 
@@ -118,6 +120,12 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
 
    public void ShowPopup(string popupId, PanelShowBehaviour showBehaviour = PanelShowBehaviour.KEEP_PREVIOUS)
    {
+      if (_isCurrentlyStashed)
+      {
+         Debug.LogError($"Cannot show popup of type {popupId}. System is currently stashed");
+         return;
+      }
+
       UIPopup uiPopup = uiPopups.FirstOrDefault(popup => popup.id == popupId);
 
       if (uiPopup != null)
@@ -146,7 +154,7 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          if (_popupQueue.Count == 0 && _activePopup.Item2 == null)
          {
             _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
-         
+            
             newPopup.OnPopupShow();
             OnPopupShown?.Invoke(popupId);
          }
@@ -181,6 +189,33 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       }
    }
 
+   //stashing popups should be used when you want to keep the existing popup queue, but hide them all temporarily
+   public void StashAllPopups()
+   {
+      if (!_isCurrentlyStashed)
+      {
+         _isCurrentlyStashed = true;
+         string activePopupId = _activePopup.Item1;
+         if (!string.IsNullOrEmpty(activePopupId))
+         {
+            _activePopup.Item2.OnPopupHide();
+            OnPopupHidden?.Invoke(activePopupId);
+            _popupQueue.AddFirst((_activePopup.Item1, _activePopup.Item2));
+            _activePopup = ("", null);
+         }
+      }
+   }
+
+   public void UnstashAllPopups()
+   {
+      if (_isCurrentlyStashed)
+      {
+         _isCurrentlyStashed = false;
+         
+         ShowNextQueuedPopup();
+      }
+   }
+
    public void HideActivePopup()
    {
       if (_activePopup.Item2 != null)
@@ -199,8 +234,11 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          
          uiPopup.Item2.OnPopupHide();
          OnPopupHidden?.Invoke(popupId);
-         
-         ShowNextQueuedPopup();
+
+         if (!_isCurrentlyStashed)
+         {
+            ShowNextQueuedPopup();
+         }
       }
       else if (_activePopup.Item1 == popupId)
       {
@@ -209,7 +247,10 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          
          _activePopup = ("", null);
 
-         ShowNextQueuedPopup();
+         if (!_isCurrentlyStashed)
+         {
+            ShowNextQueuedPopup();
+         }
       }
    }
 
