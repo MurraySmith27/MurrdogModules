@@ -7,17 +7,20 @@ public abstract class Relic
     //ALL OF THESE METHODS RETURN TRUE IF THEY'RE OVERRIDDEN IN THE SUB CLASS, FALSE OTHERWISE
     
     //called when a tile is harvesting NEW resources. passed in are the resources that are harvested, returned are the modified resources
-    public virtual bool OnResourcesHarvested(Dictionary<ResourceType, int> resourcesToBeHarvested, Vector2Int position, out  Dictionary<ResourceType, int> outResourcesToBeHarvested, out AdditionalTriggeredArgs args)
+    public virtual bool OnResourcesHarvested(Dictionary<ResourceType, int> resourcesOnTile, Dictionary<ResourceType, int> resourcesToBeHarvested, 
+        Vector2Int position, out Dictionary<ResourceType, int> outResourcesOnTile, out Dictionary<ResourceType, int> outResourcesToBeHarvested, out AdditionalTriggeredArgs args)
     {
         outResourcesToBeHarvested = resourcesToBeHarvested;
+        outResourcesOnTile = resourcesOnTile;
         args = new();
         return false;
     }
     
     //called when a tile processes resources, passed in is the state of currently harvested resources, returned is the modified state
-    public virtual bool OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
+    public virtual bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
     {
-        outResourceDiff = resourceDiff;
+        outResourceDiff = totalResourceDiff;
         args = new();
         return false;
     }

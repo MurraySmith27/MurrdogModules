@@ -9,9 +9,10 @@ public class PrivateEyesRelic : Relic
     
     private Dictionary<Guid, int> _totalCornHarvestedPerCity = new Dictionary<Guid, int>();
     
-    public override bool OnResourcesHarvested(Dictionary<ResourceType, int> resourcesToBeHarvested, Vector2Int position, out  Dictionary<ResourceType, int> outResourcesToBeHarvested, out AdditionalTriggeredArgs args)
+    public override bool OnResourcesHarvested(Dictionary<ResourceType, int> resourcesOnTile, Dictionary<ResourceType, int> resourcesToBeHarvested, Vector2Int position, out Dictionary<ResourceType, int> outResourcesOnTile, out  Dictionary<ResourceType, int> outResourcesToBeHarvested, out AdditionalTriggeredArgs args)
     { 
         outResourcesToBeHarvested = resourcesToBeHarvested;
+        outResourcesOnTile = resourcesOnTile;
         args = new();
 
         Guid cityGuid;
@@ -23,9 +24,9 @@ public class PrivateEyesRelic : Relic
         }
         
         int cornCount = 0;
-        if (resourcesToBeHarvested.ContainsKey(ResourceType.Corn))
+        if (resourcesOnTile.ContainsKey(ResourceType.Corn))
         {
-            cornCount = resourcesToBeHarvested[ResourceType.Corn];
+            cornCount = resourcesOnTile[ResourceType.Corn];
         }
 
         if (cornCount > 0)

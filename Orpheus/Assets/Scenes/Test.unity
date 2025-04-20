@@ -51023,7 +51023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectToSetActive: {fileID: 555179479}
-  activeInPhases: 0000000001000000020000000300000004000000050000000600000007000000080000000e0000000f000000
+  activeInPhases: 04000000050000000600000007000000080000000e0000000f000000
 --- !u!1001 &1148435023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64468,6 +64468,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1437163607}
+  - component: {fileID: 1437163611}
+  - component: {fileID: 1437163610}
+  - component: {fileID: 1437163609}
+  - component: {fileID: 1437163608}
   m_Layer: 6
   m_Name: Root
   m_TagString: Untagged
@@ -64500,6 +64504,66 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1437163608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437163606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e6d87827a952647b7b8f19b61f6cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToEnable: {fileID: 408143499}
+  interactionModesToEnableFor: 01000000
+  buildingTypesToEnableForInPlaceBuilding: 
+--- !u!114 &1437163609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437163606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e6d87827a952647b7b8f19b61f6cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToEnable: {fileID: 520565244}
+  interactionModesToEnableFor: 01000000
+  buildingTypesToEnableForInPlaceBuilding: 
+--- !u!114 &1437163610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437163606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e6d87827a952647b7b8f19b61f6cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToEnable: {fileID: 907370676}
+  interactionModesToEnableFor: 01000000
+  buildingTypesToEnableForInPlaceBuilding: 
+--- !u!114 &1437163611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437163606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e6d87827a952647b7b8f19b61f6cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToEnable: {fileID: 2122576648}
+  interactionModesToEnableFor: 01000000
+  buildingTypesToEnableForInPlaceBuilding: 
 --- !u!1001 &1441206347
 PrefabInstance:
   m_ObjectHideFlags: 0

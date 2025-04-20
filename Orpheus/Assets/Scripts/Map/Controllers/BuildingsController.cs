@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,19 @@ public class BuildingsController : Singleton<BuildingsController>
             return true;
         }
         else return false;
+    }
+
+    public List<PersistentResourceItem> GetBuildingCost(BuildingType type)
+    {
+        BuildingData buildingData = buildingsData.Buildings.FirstOrDefault(data => data.Type == type);
+
+        if (buildingData == null)
+        {
+            Debug.LogError($"No such building with type {Enum.GetName(typeof(BuildingType), type)}");
+            return new();
+        }
+
+        return buildingData.Costs;
     }
 
     public bool HasBuildingCost(BuildingType type)

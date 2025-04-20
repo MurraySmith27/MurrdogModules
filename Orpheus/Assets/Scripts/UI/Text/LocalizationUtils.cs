@@ -46,6 +46,36 @@ public static class LocalizationUtils
         }
     }
 
+    public static string GetTagForPersistentResource(PersistentResourceType persistentResourceType)
+    {
+        switch (persistentResourceType)
+        {
+            case PersistentResourceType.Wood:
+                return "<wood>";
+            case PersistentResourceType.Stone:
+                return "<stone>";
+            case PersistentResourceType.Gold:
+                return "<gold>";
+            default:
+                return "";
+        }
+    }
+    
+    public static string GetIconTagForPersistentResource(PersistentResourceType persistentResourceType)
+    {
+        switch (persistentResourceType)
+        {
+            case PersistentResourceType.Wood:
+                return "<sprite index=1>";
+            case PersistentResourceType.Stone:
+                return "<sprite index=3>";
+            case PersistentResourceType.Gold:
+                return "<sprite index=0>";
+            default:
+                return "";
+        }
+    }
+    
     public static string GetTagForResource(ResourceType resourceType)
     {
         switch (resourceType)

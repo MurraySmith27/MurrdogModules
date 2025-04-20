@@ -101,21 +101,24 @@ public class RelicSystem : Singleton<RelicSystem>
         return modifiedResourceDiff;
     }
     
-    public Dictionary<ResourceType, int> OnResourcesHarvested(Dictionary<ResourceType, int> resourcesToBeHarvested, Vector2Int position)
+    public void OnResourcesHarvested(Dictionary<ResourceType, int> resourcesOnTile, Dictionary<ResourceType, int> totalResourcesSoFar, 
+        Vector2Int position, out Dictionary<ResourceType, int> outResourcesOnTile, out Dictionary<ResourceType, int> outTotalResourcesSoFar)
     {
         //make a copy
-        Dictionary<ResourceType, int> modifiedResources = resourcesToBeHarvested.ToDictionary(entry => entry.Key, entry => entry.Value);
+        Dictionary<ResourceType, int> modifiedTotalResources = totalResourcesSoFar.ToDictionary(entry => entry.Key, entry => entry.Value);
+        Dictionary<ResourceType, int> modifiedResourcesOnTile = resourcesOnTile.ToDictionary(entry => entry.Key, entry => entry.Value);
         
         foreach (RelicTypes relic in relics)
         {
             AdditionalTriggeredArgs args;
-            if (_relicInstances[relic].OnResourcesHarvested(modifiedResources, position, out modifiedResources, out args))
+            if (_relicInstances[relic].OnResourcesHarvested(modifiedResourcesOnTile, modifiedTotalResources, position, out modifiedResourcesOnTile, out modifiedTotalResources, out args))
             {
                 OnRelicTriggered?.Invoke(relic, args);
             }
         }
         
-        return modifiedResources;
+        outTotalResourcesSoFar = modifiedTotalResources;
+        outResourcesOnTile = modifiedResourcesOnTile;
     }
 
     public void OnPhaseChanged(GamePhases phase)

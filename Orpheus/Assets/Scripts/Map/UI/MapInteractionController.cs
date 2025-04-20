@@ -49,11 +49,11 @@ public class MapInteractionController : Singleton<MapInteractionController>
         PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
 
-        UIPopupSystem.Instance.OnPopupShown -= OnPopupShown;
-        UIPopupSystem.Instance.OnPopupShown += OnPopupShown;
-
-        UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
-        UIPopupSystem.Instance.OnPopupHidden += OnPopupHidden;
+        // UIPopupSystem.Instance.OnPopupShown -= OnPopupShown;
+        // UIPopupSystem.Instance.OnPopupShown += OnPopupShown;
+        //
+        // UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
+        // UIPopupSystem.Instance.OnPopupHidden += OnPopupHidden;
     }
 
     private void OnDestroy()
@@ -63,11 +63,11 @@ public class MapInteractionController : Singleton<MapInteractionController>
             PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         }
 
-        if (UIPopupSystem.IsAvailable)
-        {
-            UIPopupSystem.Instance.OnPopupShown -= OnPopupShown;
-            UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
-        }
+        // if (UIPopupSystem.IsAvailable)
+        // {
+        //     UIPopupSystem.Instance.OnPopupShown -= OnPopupShown;
+        //     UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
+        // }
     }
 
     private void OnPhaseChanged(GamePhases gamePhase)
@@ -82,19 +82,19 @@ public class MapInteractionController : Singleton<MapInteractionController>
         }
     }
 
-    private void OnPopupShown(string popupId)
-    {
-        if (CurrentMode != MapInteractionMode.None)
-        {
-            _lastModeBeforePopup = CurrentMode;
-        }
-        SwitchMapInteractionMode(MapInteractionMode.None);
-    }
-    
-    private void OnPopupHidden(string popupId)
-    {
-        SwitchMapInteractionMode(_lastModeBeforePopup);
-    }
+    // private void OnPopupShown(string popupId)
+    // {
+    //     if (CurrentMode != MapInteractionMode.None)
+    //     {
+    //         _lastModeBeforePopup = CurrentMode;
+    //     }
+    //     SwitchMapInteractionMode(MapInteractionMode.None);
+    // }
+    //
+    // private void OnPopupHidden(string popupId)
+    // {
+    //     SwitchMapInteractionMode(_lastModeBeforePopup);
+    // }
 
     public void SelectTile(Vector2Int tilePosition)
     {
@@ -182,6 +182,15 @@ public class MapInteractionController : Singleton<MapInteractionController>
     
     public void SwitchMapInteractionMode(MapInteractionMode newMode)
     {
+        if (newMode != MapInteractionMode.PlaceBuilding && newMode != MapInteractionMode.PlaceTile)
+        {
+            UIPopupSystem.Instance.UnstashAllPopups();
+        }
+        else
+        {
+            UIPopupSystem.Instance.StashAllPopups();
+        }
+        
         CurrentMode = newMode;
         
         OnMapInteractionModeChanged?.Invoke(CurrentMode);
@@ -212,6 +221,7 @@ public class MapInteractionController : Singleton<MapInteractionController>
         else
         {
             BuildingsController.Instance.TryPlaceBuilding(tilePosition, buildingType);
+            SwitchMapInteractionMode(MapInteractionMode.Default);
         }
     }
     

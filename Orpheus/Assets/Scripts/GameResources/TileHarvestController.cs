@@ -12,16 +12,19 @@ public class TileHarvestController : Singleton<TileHarvestController>
         List<ResourceItem> resourcesOnTile = MapSystem.Instance.GetAllResourcesOnTile(tilePosition);
         
         Dictionary<ResourceType, int> resourcesHarvested = new Dictionary<ResourceType, int>();
+        Dictionary<ResourceType, int> resourcesOnTileDictionary = new Dictionary<ResourceType, int>();
         
         //do harvest
         foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
         {
             resourcesHarvested[resourceType] = 0;
+            resourcesOnTileDictionary[resourceType] = 0;
         }
 
         foreach (ResourceItem resourceItem in resourcesOnTile)
         {
             resourcesHarvested[resourceItem.Type] += resourceItem.Quantity;
+            resourcesOnTileDictionary[resourceItem.Type] = resourceItem.Quantity;
         }
         
         List<TileBuilding> buildingsOnTile = MapSystem.Instance.GetBuildingsOnTile(tilePosition);
@@ -46,8 +49,7 @@ public class TileHarvestController : Singleton<TileHarvestController>
             }            
         }
 
-        resourcesHarvested = RelicSystem.Instance.OnResourcesHarvested(resourcesHarvested, tilePosition);
-        
+        RelicSystem.Instance.OnResourcesHarvested(resourcesOnTileDictionary, resourcesHarvested, tilePosition, out resourcesOnTileDictionary, out resourcesHarvested);
         
         return resourcesHarvested;
     }
