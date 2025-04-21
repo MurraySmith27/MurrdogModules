@@ -25,6 +25,8 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
     public event Action<ResourceType> OnResourceConversionResourceEnd;
     public event Action<ResourceType, long> OnResourceConversionFoodScoreAddedStart;
     public event Action<ResourceType, long> OnResourceConversionFoodScoreAddedEnd;
+
+    public event Action<long> OnResourceConversionBonusFoodScoreAdded;
     
     
     public void DoResourceConversion()
@@ -161,8 +163,14 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
         
         //clear existing resources
         PlayerResourcesSystem.Instance.RegisterCurrentRoundResources(new Dictionary<ResourceType, int>());
-        
-        RelicSystem.Instance.OnFoodScoreConversionComplete(foodScoreTotal, resources);
+
+        if (RelicSystem.Instance.OnFoodScoreConversionComplete(foodScoreTotal, resources, out long outFoodScore))
+        {
+            HarvestState.Instance.AddHarvestFoodScore(outFoodScore - foodScoreTotal);
+            OnResourceConversionBonusFoodScoreAdded?.Invoke(outFoodScore);
+            yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionResourceFoodScoreAddedTime);
+        }
+
         
         OnResourceConversionEnd?.Invoke();
         

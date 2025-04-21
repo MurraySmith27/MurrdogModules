@@ -223,7 +223,7 @@ public class RelicSystem : Singleton<RelicSystem>
         return relicsTriggered;
     }
     
-    public long OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert)
+    public bool OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long outFoodScore)
     {
         long currentFoodScore = baseFoodScore;
         
@@ -236,7 +236,9 @@ public class RelicSystem : Singleton<RelicSystem>
             }
         }
         
-        return currentFoodScore;
+        outFoodScore = currentFoodScore;
+
+        return outFoodScore != baseFoodScore;
     }
     
     public void OnBuildingConstructed(Vector2Int position, BuildingType buildingType)

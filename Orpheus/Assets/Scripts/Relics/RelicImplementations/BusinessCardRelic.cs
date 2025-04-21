@@ -18,6 +18,8 @@ public class BusinessCardRelic : Relic
         
         long addedFoodScore = removedGold * BUSINESS_CARD_FOOD_SCORE_PER_GOLD;
         
+        PersistentState.Instance.ChangeCurrentGold(-removedGold);
+        
         convertedFoodScore += addedFoodScore;
         
         args.LongListArgs = new();
