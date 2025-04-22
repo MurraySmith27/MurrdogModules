@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,5 +34,15 @@ public static class RectTransformUtils
         }
 
         return false;
-    } 
+    }
+
+    public static Vector2 GetPositionOutsideRectTransform(RectTransform rectTransform, Vector2 preferredDirection, Vector2 offset)
+    {
+        Vector2 topLeft = rectTransform.localToWorldMatrix * new Vector2(rectTransform.rect.xMin, rectTransform.rect.yMin);
+        Vector2 topRight = rectTransform.localToWorldMatrix * new Vector2(rectTransform.rect.xMax, rectTransform.rect.yMin);
+        Vector2 bottomLeft = rectTransform.localToWorldMatrix * new Vector2(rectTransform.rect.xMin, rectTransform.rect.yMax);
+        Vector2 bottomRight = rectTransform.localToWorldMatrix * new Vector2(rectTransform.rect.xMax, rectTransform.rect.yMax);
+        
+        Vector2 position = new Vector2(Mathf.Lerp(rectTransform.rect.xMin, rectTransform.rect.xMax, ))
+    }
 }
