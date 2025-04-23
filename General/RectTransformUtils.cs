@@ -38,11 +38,15 @@ public static class RectTransformUtils
 
     public static Vector2 GetPositionOutsideRectTransform(RectTransform rectTransform, Vector2 preferredDirection, Vector2 offset)
     {
-        Vector2 topLeft = rectTransform.localToWorldMatrix * new Vector2(rectTransform.rect.xMin, rectTransform.rect.yMin);
-        Vector2 topRight = rectTransform.localToWorldMatrix * new Vector2(rectTransform.rect.xMax, rectTransform.rect.yMin);
-        Vector2 bottomLeft = rectTransform.localToWorldMatrix * new Vector2(rectTransform.rect.xMin, rectTransform.rect.yMax);
-        Vector2 bottomRight = rectTransform.localToWorldMatrix * new Vector2(rectTransform.rect.xMax, rectTransform.rect.yMax);
+        var corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+        float xComponent = Mathf.Lerp(corners[0].x, corners[3].x,
+            (preferredDirection.normalized.x + 1f) / 2f);
+        float yComponent = Mathf.Lerp(corners[0].y, corners[1].y,
+            (preferredDirection.normalized.y + 1f) / 2f);
         
-        Vector2 position = new Vector2(Mathf.Lerp(rectTransform.rect.xMin, rectTransform.rect.xMax, ))
+        Vector4 worldPos = rectTransform.localToWorldMatrix * new Vector2(xComponent, yComponent);
+
+        return offset + new Vector2(worldPos.x, worldPos.y);
     }
 }
