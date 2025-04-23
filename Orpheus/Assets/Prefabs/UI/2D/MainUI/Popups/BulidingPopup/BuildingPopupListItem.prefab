@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5722650051322071733}
   - component: {fileID: 9043323604165620452}
   - component: {fileID: 3690400321512159388}
+  - component: {fileID: 2352746646050257963}
   m_Layer: 6
   m_Name: BuildingPopupListItem
   m_TagString: Untagged
@@ -173,6 +174,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2352746646050257963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206201515978053825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8508f588d7d3445b1a7d4d60723ba2b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 9103058753544619859}
+  uiInputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
+  buildingVisualsSO: {fileID: 11400000, guid: 38a281c52bdeba7479450cae7bbc5341, type: 2}
 --- !u!1 &3291743393726816418
 GameObject:
   m_ObjectHideFlags: 0

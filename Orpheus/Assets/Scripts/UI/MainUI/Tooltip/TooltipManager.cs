@@ -28,6 +28,8 @@ public class TooltipManager : Singleton<TooltipManager>
     
     [SerializeField] private TooltipDataSO tooltipDataSO;
 
+    [SerializeField] private bool spawnChildrenOutsideOfParent = true;
+
     private List<TooltipState> _tooltips = new List<TooltipState>();
 
     private int _lastRootTooltipIndexOpened = -1;
@@ -104,6 +106,26 @@ public class TooltipManager : Singleton<TooltipManager>
         {
             Debug.LogError("tried to create a child tooltip in a parent that already has a child!");
             return -1;
+        }
+
+        if (spawnChildrenOutsideOfParent)
+        {
+            int defaultTooltipPadding = _tooltips[parentIndex].instantiatedTooltip.GetDefaultVerticalPadding();
+            
+            Vector2 tooltipDirection = new Vector2(Screen.width / 2f, Screen.height / 2f) - tooltipWorldPos;
+            if (Mathf.Abs(tooltipDirection.x) > Mathf.Abs(tooltipDirection.y))
+            {
+                tooltipDirection = new Vector2(tooltipDirection.x, 0);
+            }
+            else
+            {
+                tooltipDirection = new Vector2(0, tooltipDirection.y);
+            }
+            
+            tooltipWorldPos = RectTransformUtils.GetPositionOutsideRectTransform(_tooltips[parentIndex].instantiatedTooltip.transform.GetChild(0).transform.GetChild(0).transform as RectTransform, 
+                tooltipDirection,
+                new Vector2(defaultTooltipPadding * Mathf.Sign(tooltipDirection.x) , defaultTooltipPadding * Mathf.Sign(tooltipDirection.y))
+                );
         }
         
         int childIndex = ShowTooltip(tooltipWorldPos, text, onTooltipHide, isChild: true);

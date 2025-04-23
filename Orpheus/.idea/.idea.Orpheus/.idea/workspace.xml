@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/BuildingTooltip.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/BuildingTooltip.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Textures/UI/Generic/WoodBottomRightCornerBackingInnerShadow.pdn.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/TooltipTextData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/TooltipTextData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/TooltipTextData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/TooltipTextData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules/General/RectTransformUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules/General/RectTransformUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BulidingPopup/BuildingPopupListItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BulidingPopup/BuildingPopupListItem.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingsVisualsSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingsVisualsSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/TooltipTextSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/TooltipTextSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/UITooltip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/UITooltip.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextAssets/TextAnimator StyleSheet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextAssets/TextAnimator StyleSheet.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,23 +143,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.43151695&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.43151695",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/murraysmith/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
+      "/Users/murraysmith/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
+      "/Users/murraysmith/Library/Application Support/Symbols/src"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../../OrpheusBuild\Orpheus.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../../Personal_Stuff/OrpheusBuild/Orpheus.app/Contents/MacOS/Orpheus" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../Personal_Stuff/OrpheusBuild/Orpheus.app/Contents/MacOS" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -154,7 +174,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.55f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.55f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\murra\Desktop\dev\Orpheus\Orpheus -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\murra\Desktop\dev\Orpheus\Orpheus" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -162,7 +182,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.55f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.55f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\murra\Desktop\dev\Orpheus\Orpheus -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\murra\Desktop\dev\Orpheus\Orpheus" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -179,10 +199,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="81533">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="81533" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -239,6 +259,7 @@
       <workItem from="1744923120538" duration="10104000" />
       <workItem from="1745202220616" duration="3928000" />
       <workItem from="1745273819809" duration="1158000" />
+      <workItem from="1745285949467" duration="7607000" />
     </task>
     <servers />
   </component>
@@ -272,27 +293,13 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/BusinessCardRelic.cs</url>
           <line>13</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Relics\RelicImplementations\BusinessCardRelic.cs" containingFunctionPresentation="Method 'OnFoodScoreConversionComplete'">
-            <startOffsets>
-              <option value="481" />
-            </startOffsets>
-            <endOffsets>
-              <option value="516" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Relics\RelicImplementations\BusinessCardRelic.cs" containingFunctionPresentation="Method 'OnFoodScoreConversionComplete'" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingResourceConversionController.cs</url>
           <line>166</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\BloomingPhase\BloomingResourceConversionController.cs" containingFunctionPresentation="Method 'ResourceConversionCoroutine'">
-            <startOffsets>
-              <option value="7403" />
-            </startOffsets>
-            <endOffsets>
-              <option value="7508" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\BloomingPhase\BloomingResourceConversionController.cs" containingFunctionPresentation="Method 'ResourceConversionCoroutine'" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

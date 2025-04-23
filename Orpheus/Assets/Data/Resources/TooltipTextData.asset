@@ -29,3 +29,7 @@ MonoBehaviour:
     Text: <b>Gold</b><br>Used to purchase various things.
   - Id: citizen
     Text: <b>Citizen</b><br>Triggers a tile an additional time during harvest.
+  - Id: grasstile
+    Text: <b>Grass Tile</b><br>A basic tile type.
+  - Id: watertile
+    Text: <b>Water Tile</b><br>A basic tile type.

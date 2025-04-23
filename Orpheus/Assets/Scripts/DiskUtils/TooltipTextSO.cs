@@ -8,7 +8,9 @@ public enum TooltipTextType
 {
     None,
     Citizen,
-    TileBoosterPack
+    TileBoosterPack,
+    GrassTile,
+    WaterTile,
 }
 
 [CreateAssetMenu(fileName = "TooltipTextData", menuName = "Orpheus/Tooltip Text Data", order = 1)]

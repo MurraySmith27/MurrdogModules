@@ -110,4 +110,9 @@ public class UITooltip : MonoBehaviour
     {
         return UIMouseData.Instance.IsMouseOverRectTransform(textBoxRectTransform);
     }
+
+    public int GetDefaultVerticalPadding()
+    {
+        return defaultVerticalPadding;
+    }
 }

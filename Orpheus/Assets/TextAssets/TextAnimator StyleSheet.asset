@@ -49,3 +49,9 @@ MonoBehaviour:
   - styleTag: bakery
     openingTag: <color=#873e23><link="bakery">bakery</link></color>
     closingTag: 
+  - styleTag: watertile
+    openingTag: <color=#3b81c5><link="watertile">water tile</link></color>
+    closingTag: 
+  - styleTag: grasstile
+    openingTag: <color=#06944e><link="grasstile">grass tile</link></color>
+    closingTag: 

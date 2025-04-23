@@ -17,3 +17,9 @@ MonoBehaviour:
     text: <b>Mercenary</b><br>A temporary bonus <citizen> during the harvest.
   - tooltipType: 2
     text: <b>Tile Booster Pack</b><br>Choose 1 of 3 tiles to add to your empire.
+  - tooltipType: 2
+    text: <b>Tile Booster Pack</b><br>Choose 1 of 3 tiles to add to your empire.
+  - tooltipType: 3
+    text: <b>Grass Tile</b><br>A basic tile type.
+  - tooltipType: 4
+    text: <b>Water Tile</b><br>A basic tile type.
