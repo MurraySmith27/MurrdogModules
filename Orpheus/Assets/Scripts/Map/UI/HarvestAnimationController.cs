@@ -13,11 +13,11 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         BloomingHarvestController.Instance.OnHarvestStart -= OnHarvestStart;
         BloomingHarvestController.Instance.OnHarvestStart += OnHarvestStart;
         
-        BloomingHarvestController.Instance.OnHarvestEnd -= OnHarvestEnd;
-        BloomingHarvestController.Instance.OnHarvestEnd += OnHarvestEnd;
-        
         BloomingHarvestController.Instance.OnCityHarvestStart -= OnCityHarvestStart;
         BloomingHarvestController.Instance.OnCityHarvestStart += OnCityHarvestStart;
+
+        BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
+        BloomingHarvestController.Instance.OnCityHarvestEnd += OnCityHarvestEnd;
         
         BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
         BloomingHarvestController.Instance.OnTileHarvestStart += OnTileHarvestStart;
@@ -36,6 +36,9 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         
         BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
         BloomingHarvestController.Instance.OnTileBonusTickEnd += OnTileBonusTickEnd;
+
+        PhaseStateMachine.Instance.OnPhaseExitComplete -= OnPhaseExitComplete;
+        PhaseStateMachine.Instance.OnPhaseExitComplete += OnPhaseExitComplete;
     }
 
     private void OnDestroy()
@@ -43,7 +46,6 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         if (BloomingHarvestController.IsAvailable)
         {
             BloomingHarvestController.Instance.OnHarvestStart -= OnHarvestStart;
-            BloomingHarvestController.Instance.OnHarvestEnd -= OnHarvestEnd;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
             BloomingHarvestController.Instance.OnTileResourceChangeStart -= OnTileResourceChangeStart;
@@ -58,20 +60,30 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         CameraController.Instance.SetCameraLock(true);
     }
 
-    private void OnHarvestEnd()
+    private void OnPhaseExitComplete(GamePhases phase)
     {
-        CameraController.Instance.SetCameraLock(false);
+        if (phase == GamePhases.BloomingResourceConversion)
+        {
+            CameraController.Instance.SetCameraLock(false);
+        }
     }
     
     private void OnCityHarvestStart(Guid cityGuid)
     {
-        Vector2Int cityPostiion = MapSystem.Instance.GetCityCenterPosition(cityGuid);
+        Vector2Int cityPosition = MapSystem.Instance.GetCityCenterPosition(cityGuid);
         
-        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(cityPostiion));
+        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(cityPosition));
+    }
+
+    private void OnCityHarvestEnd(Guid cityGuid)
+    {
+        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(MapSystem.Instance.GetCityCenterPosition(cityGuid)));
     }
 
     private void OnTileResourceChangeStart(Vector2Int tilePosition)
     {
+        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(tilePosition));
+        
         TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(tilePosition);
 
         if (tileInstanceAtPosition != null)

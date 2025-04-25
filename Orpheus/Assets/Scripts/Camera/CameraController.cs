@@ -302,7 +302,7 @@ public class CameraController : Singleton<CameraController>
     {
         _focusingPosition = true;
         Vector3 initialPos = cameraFollowRoot.position;
-        for (float t = 0f; t <= cameraMoveAnimTime; t += Time.deltaTime)
+        for (float t = 0f; t <= cameraMoveAnimTime; t += Time.deltaTime * GlobalSettings.GameSpeed)
         {
             SetCameraPosition(Vector3.Lerp(initialPos, targetPosition, cameraMoveAnimCurve.Evaluate(t / cameraMoveAnimTime)));
             yield return 0;

@@ -140,7 +140,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
         TileVisuals tilePrefab = tileVisualsData.Prefab;
 
         InstantiatedMapTiles[col, row] = Instantiate(tilePrefab,
-            new Vector3(GameConstants.TILE_SIZE * col, 0, GameConstants.TILE_SIZE * row), Quaternion.identity,
+            HexUtils.TileSpaceToWorldSpace(new Vector3(GameConstants.TILE_SIZE * col, 0, GameConstants.TILE_SIZE * row)), Quaternion.identity,
             tileParent);
                 
         List<ResourceItem> resourceItems = MapSystem.Instance.GetAllResourcesOnTile(new Vector2Int(col, row));
@@ -172,7 +172,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
         BuildingBehaviour buildingPrefab = visualData.Prefab;
         
         BuildingBehaviour newBuilding = Instantiate(buildingPrefab,
-            new Vector3(GameConstants.TILE_SIZE * row, 0, GameConstants.TILE_SIZE * col), Quaternion.identity,
+            HexUtils.TileSpaceToWorldSpace(new Vector3(GameConstants.TILE_SIZE * row, 0, GameConstants.TILE_SIZE * col)), Quaternion.identity,
             tileParent);
         
         InstantiatedBuildings.Add((new Vector2Int(row, col), newBuilding));
@@ -203,7 +203,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
         CitizenBehaviour buildingPrefab = visualData.Prefab;
         
         CitizenBehaviour newCitizen = Instantiate(buildingPrefab,
-            new Vector3(GameConstants.TILE_SIZE * tilePosition.x, 0, GameConstants.TILE_SIZE * tilePosition.y), Quaternion.identity,
+            HexUtils.TileSpaceToWorldSpace(new Vector3(GameConstants.TILE_SIZE * tilePosition.x, 0, GameConstants.TILE_SIZE * tilePosition.y)), Quaternion.identity,
             tileParent);
         
         InstantiatedCitizens.Add((tilePosition, newCitizen));

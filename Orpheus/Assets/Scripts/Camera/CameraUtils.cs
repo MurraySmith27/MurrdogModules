@@ -11,8 +11,9 @@ public static class CameraUtils
         if (CameraUtils.GetPointOnPlaneFromMousePosition(mousePos, camera, out pointOnGroundPlane))
         {
             tilePosition = new Vector2Int(
-            Mathf.RoundToInt(pointOnGroundPlane.x / GameConstants.TILE_SIZE),
-            Mathf.RoundToInt(pointOnGroundPlane.z / GameConstants.TILE_SIZE));
+                Mathf.RoundToInt(pointOnGroundPlane.x / HexUtils.gridOffset.x),
+                Mathf.RoundToInt(pointOnGroundPlane.z / HexUtils.gridOffset.y)
+            );
             return true;
         }
         else return false;

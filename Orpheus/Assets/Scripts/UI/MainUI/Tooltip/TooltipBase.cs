@@ -6,6 +6,8 @@ using UnityEngine;
 public class TooltipBase : MonoBehaviour
 {
     [SerializeField] private RectTransform rectTransform;
+
+    [SerializeField] private Vector2 tooltipDirectionOffParent;
     
     [SerializeField] private OrpheusUIInputChannel uiInputChannel;
     
@@ -17,8 +19,16 @@ public class TooltipBase : MonoBehaviour
         if (isPointerOver && _currentTooltipIndex == -1)
         {
             Vector2 worldPosition = rectTransform.TransformPoint(rectTransform.rect.center);
+
+
+            Vector2 tooltipPosition = RectTransformUtils.GetPositionOutsideRectTransform(
+                rectTransform,
+                tooltipDirectionOffParent,
+                new Vector2(0, 0)
+            );
+            
             _currentTooltipIndex =
-                TooltipManager.Instance.ShowTooltip(worldPosition, GetTooltipText(),
+                TooltipManager.Instance.ShowTooltip(tooltipPosition, GetTooltipText(),
                     () => { _currentTooltipIndex = -1; });
         }
         else if (!isPointerOver && _currentTooltipIndex != -1)
