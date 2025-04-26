@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class HexUtils
@@ -56,5 +57,21 @@ public static class HexUtils
     {
         float xPos = worldSpacePos.x / (gridOffset.x);
         return new Vector3(xPos, 0, (worldSpacePos.z - xPos * gridOffset.y) / w);
+    }
+
+    public static List<Vector3> GetCornersOfHexWorldSpace(Vector3 centerPositionWorldSpace)
+    {
+        List<Vector3> hexCorners = new List<Vector3>();
+
+        float length = (GameConstants.HEX_SIDE_LENGTH / 2f + c) * GameConstants.TILE_SIZE;
+
+        hexCorners.Add(centerPositionWorldSpace + new Vector3(-0.5f, 0, 0.866f) * length);
+        hexCorners.Add(centerPositionWorldSpace + new Vector3(0.5f, 0, 0.866f) * length);
+        hexCorners.Add(centerPositionWorldSpace + new Vector3(1f, 0, 0) * length);
+        hexCorners.Add(centerPositionWorldSpace + new Vector3(0.5f, 0, -0.866f) * length);
+        hexCorners.Add(centerPositionWorldSpace + new Vector3(-0.5f, 0, -0.866f) * length);
+        hexCorners.Add(centerPositionWorldSpace + new Vector3(-1f, 0, 0) * length);
+        
+        return hexCorners;
     }
 }

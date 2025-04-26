@@ -6,7 +6,7 @@ public static class GameConstants
 {
     public static readonly int TILE_SIZE = 10;
 
-    public static readonly float HEX_SIDE_LENGTH = 1f;
+    public static readonly float HEX_SIDE_LENGTH = 0.5f;
     
 
     public static readonly long[] FOOD_GOALS_PER_HARVEST =
@@ -34,9 +34,9 @@ public static class GameConstants
     
     public static readonly Vector2Int[] INITIAL_CITY_TILES = new Vector2Int[]
     {
-        new Vector2Int(1, 1), new Vector2Int(1, 0), new Vector2Int(1, -1),
+        // new Vector2Int(1, 1), new Vector2Int(1, 0), new Vector2Int(1, -1),
         new Vector2Int(0, 1), new Vector2Int(0, 0), new Vector2Int(0, -1),
-        new Vector2Int(-1, 1), new Vector2Int(-1, 0), new Vector2Int(-1, -1)
+        // new Vector2Int(-1, 1), new Vector2Int(-1, 0), new Vector2Int(-1, -1)
     };
     
     //interest
