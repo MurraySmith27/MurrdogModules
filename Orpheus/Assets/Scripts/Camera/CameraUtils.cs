@@ -10,10 +10,8 @@ public static class CameraUtils
         Vector3 pointOnGroundPlane;
         if (CameraUtils.GetPointOnPlaneFromMousePosition(mousePos, camera, out pointOnGroundPlane))
         {
-            tilePosition = new Vector2Int(
-                Mathf.RoundToInt(pointOnGroundPlane.x / HexUtils.gridOffset.x),
-                Mathf.RoundToInt(pointOnGroundPlane.z / HexUtils.gridOffset.y)
-            );
+            Vector3 tileSpacePos = HexUtils.WorldSpaceToTileSpace(pointOnGroundPlane);
+            tilePosition = new Vector2Int(Mathf.RoundToInt(tileSpacePos.x / GameConstants.TILE_SIZE), Mathf.RoundToInt(tileSpacePos.z / GameConstants.TILE_SIZE));
             return true;
         }
         else return false;

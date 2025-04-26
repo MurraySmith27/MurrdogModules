@@ -11,7 +11,7 @@ public static class HexUtils
         {
             if (c_cached == 0f)
             { 
-                c_cached =  (Mathf.Sqrt(Mathf.Pow(GameConstants.HEX_SIDE_LENGTH, 2f) + Mathf.Pow(w_cached, 2f)) - GameConstants.HEX_SIDE_LENGTH) * 0.5f;
+                c_cached =  (Mathf.Sqrt(Mathf.Pow(GameConstants.HEX_SIDE_LENGTH, 2f) + Mathf.Pow(w, 2f)) - GameConstants.HEX_SIDE_LENGTH) * 0.5f;
             }
             
             return c_cached;
@@ -40,7 +40,7 @@ public static class HexUtils
         {
             if (gridOffset_cached == Vector2.zero)
             {
-                gridOffset_cached = new Vector2(w / 2f, GameConstants.HEX_SIDE_LENGTH + c);
+                gridOffset_cached = new Vector2((GameConstants.HEX_SIDE_LENGTH + c), w / 2f);
             }
             
             return gridOffset_cached;
@@ -49,11 +49,12 @@ public static class HexUtils
 
     public static Vector3 TileSpaceToWorldSpace(Vector3 tileSpacePos)
     {
-          return new Vector3(tileSpacePos.x * gridOffset.x, 0, tileSpacePos.z * gridOffset.y);
+          return new Vector3((gridOffset.x) * tileSpacePos.x, 0, w * tileSpacePos.z + tileSpacePos.x * gridOffset.y);
     }
     
     public static Vector3 WorldSpaceToTileSpace(Vector3 worldSpacePos)
     {
-        return new Vector3(worldSpacePos.x / gridOffset.x, 0, worldSpacePos.z / gridOffset.y);
+        float xPos = worldSpacePos.x / (gridOffset.x);
+        return new Vector3(xPos, 0, (worldSpacePos.z - xPos * gridOffset.y) / w);
     }
 }
