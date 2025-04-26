@@ -6,6 +6,9 @@ public static class GameConstants
 {
     public static readonly int TILE_SIZE = 10;
 
+    public static readonly float HEX_SIDE_LENGTH = 1f;
+    
+
     public static readonly long[] FOOD_GOALS_PER_HARVEST =
     {
         3,
