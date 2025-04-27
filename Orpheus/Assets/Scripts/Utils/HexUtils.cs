@@ -6,7 +6,7 @@ using UnityEngine;
 public static class HexUtils
 {
     private static float c_cached = 0f;
-    private static float c
+    public static float c
     {
         get
         {
@@ -20,7 +20,7 @@ public static class HexUtils
     }
 
     private static float w_cached = 0f;
-    private static float w
+    public static float w
     {
         get
         {

@@ -274,7 +274,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
                 cityBorderVisualsParent);
         }
         
-        _instantiatedCityBorderVisuals[cityCapitalPosition].PopulateCityOwnedTiles(cityOwnedTiles);
+        _instantiatedCityBorderVisuals[cityCapitalPosition].PopulateCityOwnedTiles(cityOwnedTiles, MapUtils.GetTileWorldPositionFromGridPosition(cityCapitalPosition));
 
         foreach (Vector2Int cityOwnedTile in cityOwnedTiles)
         {
