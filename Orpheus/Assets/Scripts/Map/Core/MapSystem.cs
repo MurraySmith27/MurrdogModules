@@ -214,7 +214,9 @@ public class MapSystem : Singleton<MapSystem>
                 city.IsLocationInCity(position + new Vector2Int(1, 0)) || 
                 city.IsLocationInCity(position + new Vector2Int(-1, 0)) ||
                 city.IsLocationInCity(position + new Vector2Int(0, 1)) ||
-                city.IsLocationInCity(position + new Vector2Int(0, -1))
+                city.IsLocationInCity(position + new Vector2Int(-1, 1)) || 
+                city.IsLocationInCity(position + new Vector2Int(0, -1)) || 
+                city.IsLocationInCity(position + new Vector2Int(1, -1))
                 );
         }) != null;
     }

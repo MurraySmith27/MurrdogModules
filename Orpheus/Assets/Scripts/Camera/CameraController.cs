@@ -13,6 +13,8 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] private Camera mainCamera;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Transform cameraFollowRoot;
+
+    [SerializeField] private CinemachineVirtualCamera topDownModeCamera;
     
     [Space(10)]
     
@@ -55,6 +57,8 @@ public class CameraController : Singleton<CameraController>
 
     private bool _isLocked;
 
+    private bool _isTopDownMode;
+
     private bool _isInEdgeOfScreen;
 
     private bool _isMovingOnScreenEdge;
@@ -90,6 +94,9 @@ public class CameraController : Singleton<CameraController>
         
         inputChannel.MouseVerticalScrollEvent -= OnZoomAction;
         inputChannel.MouseVerticalScrollEvent += OnZoomAction;
+
+        MapInteractionController.Instance.OnMapInteractionModeChanged -= OnMapInteractionModeChanged;
+        MapInteractionController.Instance.OnMapInteractionModeChanged += OnMapInteractionModeChanged;
         
         _trackedDolly = virtualCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
         _trackedDolly.m_PathPosition = 1f;
@@ -105,8 +112,39 @@ public class CameraController : Singleton<CameraController>
         inputChannel.LeftMouseDoubleClickEvent -= OnDoubleClick;
         inputChannel.LeftMouseUpEvent -= OnLeftMouseUp;
         inputChannel.MouseMoveEvent -= OnMouseMove;
+
+        if (MapInteractionController.IsAvailable)
+        {
+            MapInteractionController.Instance.OnMapInteractionModeChanged -= OnMapInteractionModeChanged;
+        }
         
         inputChannel.MouseVerticalScrollEvent -= OnZoomAction;
+    }
+
+    private void OnMapInteractionModeChanged(MapInteractionMode mapInteractionMode)
+    {
+
+        if (mapInteractionMode == MapInteractionMode.PlaceBuilding ||
+            mapInteractionMode == MapInteractionMode.PlaceTile)
+        {
+            SetCameraTopDownMode(true);
+            List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();
+            if (cityGuids.Count > 0)
+            {
+                Vector2Int cityPosition = MapSystem.Instance.GetCityCenterPosition(cityGuids[0]);
+
+                Vector3 worldPosition = MapUtils.GetTileWorldPositionFromGridPosition(cityPosition);
+
+                FocusPosition(worldPosition);
+            }
+            
+            SetCameraLock(true);
+        }
+        else
+        {
+            SetCameraTopDownMode(false);
+            SetCameraLock(false);
+        }
     }
 
     private void Update()
@@ -215,7 +253,6 @@ public class CameraController : Singleton<CameraController>
     {
         StopDrag();
     }
-
     private void StopDrag()
     {
         _isDragging = false;
@@ -320,6 +357,13 @@ public class CameraController : Singleton<CameraController>
         _isLocked = locked;
         if (locked)
             _isDragging = false;
+    }
+
+    public void SetCameraTopDownMode(bool useTopDownMode)
+    {
+        _isTopDownMode = useTopDownMode;
+
+        topDownModeCamera.gameObject.SetActive(useTopDownMode);
     }
 
     private void OnZoomAction(UIInputChannel.UIInputChannelCallbackArgs args)

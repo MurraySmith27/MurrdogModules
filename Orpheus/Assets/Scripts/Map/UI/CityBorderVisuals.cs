@@ -67,7 +67,7 @@ public class CityBorderVisuals : MonoBehaviour
             _instantiatedLineRendererObjects.Add(newLineRenderer);
 
             transform.position = centerPosition;
-            cityBorderMeshFilter.transform.position = cityCenterPosition + yOffset;
+            cityBorderMeshFilter.transform.position = cityCenterPosition + yOffset / 2f;
         }
     }
 

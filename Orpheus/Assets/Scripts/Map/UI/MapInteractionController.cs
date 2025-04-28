@@ -238,6 +238,11 @@ public class MapInteractionController : Singleton<MapInteractionController>
             Debug.LogError("CANNOT PLACE TILE ON TILE ALREADY OWNED BY CITY");
             return false;
         }
+        else if (!MapSystem.Instance.IsTileAdjacentToCity(tilePosition))
+        {
+            Debug.LogError("CANNOT PLACE TILE FAR WAY FROM CITY");
+            return false;
+        }
         else
         {
             MapSystem.Instance.PlaceTile(tilePosition, tile);

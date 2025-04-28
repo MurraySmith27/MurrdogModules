@@ -175,7 +175,7 @@ public class ShopPopup : MonoBehaviour
         
         itemSoldOutBanners[0].gameObject.SetActive(ItemSystem.Instance.HasItem(ItemTypes.BONUS_CITIZEN));
         
-        boosterPackSoldOutBanners[0].gameObject.SetActive(_hasPurchasedBoosterPack);
+        boosterPackSoldOutBanners[0].gameObject.SetActive(false);
 
         for (int i = _currentRelics.Count; i < relicIcons.Count; i++)
         {
