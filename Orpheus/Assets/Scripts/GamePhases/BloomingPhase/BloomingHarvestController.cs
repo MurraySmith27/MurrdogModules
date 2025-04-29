@@ -43,11 +43,14 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
 
     private IEnumerator<float> HarvestCoroutine()
     {
-        Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
+        Dictionary<ResourceType, int> resources = PlayerResourcesSystem.Instance.GetCurrentRoundResources();
 
         foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
         {
-            resources[resourceType] = 0;
+            if (!resources.ContainsKey(resourceType))
+            {
+                resources[resourceType] = 0;
+            }
         }
         
         OnHarvestStart?.Invoke();
@@ -64,27 +67,15 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
 
             foreach (Vector2Int cityTile in cityTiles)
             {
-                int numTimesToHarvestTile = 1;
 
                 if (CitizenController.Instance.IsCitizenOnTile(cityTile))
                 {
-                    numTimesToHarvestTile++;
-                }
-                
-                OnTileResourceChangeStart?.Invoke(cityTile);
-                
-                for (int i = 0; i < numTimesToHarvestTile; i++)
-                {
-                    
+                    OnTileResourceChangeStart?.Invoke(cityTile);
+
                     Dictionary<ResourceType, int> resourcesHarvested =
                         TileHarvestController.Instance.GetResourceChangeOnTileHarvest(cityGuid, cityTile, resources);
 
                     OnTileHarvestStart?.Invoke(cityTile, resourcesHarvested);
-                    
-                    if (i > 0)
-                    {
-                        OnTileBonusTickStart?.Invoke(cityTile);
-                    }
 
                     foreach (KeyValuePair<ResourceType, int> resource in resourcesHarvested)
                     {
@@ -118,15 +109,10 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
 
                     OnTileProcessEnd?.Invoke(cityTile);
 
-                    if (i > 0)
-                    {
-                        OnTileBonusTickEnd?.Invoke(cityTile);
-                    }
-                    
                     yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationEndTime);
+                    
+                    OnTileResourceChangeEnd?.Invoke(cityTile);
                 }
-                
-                OnTileResourceChangeEnd?.Invoke(cityTile);
             }
             
             OnCityHarvestEnd?.Invoke(cityGuid);

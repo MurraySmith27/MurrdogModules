@@ -123,7 +123,6 @@ public class CameraController : Singleton<CameraController>
 
     private void OnMapInteractionModeChanged(MapInteractionMode mapInteractionMode)
     {
-
         if (mapInteractionMode == MapInteractionMode.PlaceBuilding ||
             mapInteractionMode == MapInteractionMode.PlaceTile)
         {
