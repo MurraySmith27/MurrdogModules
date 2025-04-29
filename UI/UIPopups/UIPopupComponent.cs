@@ -73,19 +73,21 @@ public class UIPopupComponent : MonoBehaviour
     private IEnumerator OnPopupShowCR()
     {
         _showPopupCRRunning = true;
-        
-        AnimationUtils.ResetAnimator(_animatorComponent);
-        
-        _animatorComponent.SetTrigger(_introAnimatorTrigger);
-        IsActive = true;
 
-        int beforeStateHash = _animatorComponent.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        IsActive = true;
         
-        yield return new WaitUntil(() =>
+        if (_animatorComponent != null)
         {
-            AnimatorStateInfo stateInfo = _animatorComponent.GetCurrentAnimatorStateInfo(0);
-            return stateInfo.normalizedTime >= 1 && stateInfo.fullPathHash != beforeStateHash;
-        });
+            AnimationUtils.ResetAnimator(_animatorComponent);
+
+            _animatorComponent.SetTrigger(_introAnimatorTrigger);
+            int beforeStateHash = _animatorComponent.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            yield return new WaitUntil(() =>
+            {
+                AnimatorStateInfo stateInfo = _animatorComponent.GetCurrentAnimatorStateInfo(0);
+                return stateInfo.normalizedTime >= 1 && stateInfo.fullPathHash != beforeStateHash;
+            });
+        }
         
         onPopupShowFinished?.Invoke();
         
@@ -120,25 +122,28 @@ public class UIPopupComponent : MonoBehaviour
     private IEnumerator OnPopupHideCR()
     {
         _hidePopupCRRunning = true;
-        
-        _animatorComponent.SetTrigger(_outroAnimatorTrigger);
         IsActive = false;
 
-        float timeOut = 0.1f;
-        float timeWaiting = 0f;
-        yield return new WaitUntil(() =>
+        if (_animatorComponent != null)
         {
-            timeWaiting += Time.deltaTime;
-            return _animatorComponent.IsInTransition(0) || timeWaiting >= timeOut;
-        });
-        
-        int beforeStateHash = _animatorComponent.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            _animatorComponent.SetTrigger(_outroAnimatorTrigger);
 
-        yield return new WaitUntil(() =>
-        {
-            AnimatorStateInfo stateInfo = _animatorComponent.GetCurrentAnimatorStateInfo(0);
-            return stateInfo.normalizedTime >= 1 && stateInfo.fullPathHash != beforeStateHash;
-        });
+            float timeOut = 0.1f;
+            float timeWaiting = 0f;
+            yield return new WaitUntil(() =>
+            {
+                timeWaiting += Time.deltaTime;
+                return _animatorComponent.IsInTransition(0) || timeWaiting >= timeOut;
+            });
+
+            int beforeStateHash = _animatorComponent.GetCurrentAnimatorStateInfo(0).fullPathHash;
+
+            yield return new WaitUntil(() =>
+            {
+                AnimatorStateInfo stateInfo = _animatorComponent.GetCurrentAnimatorStateInfo(0);
+                return stateInfo.normalizedTime >= 1 && stateInfo.fullPathHash != beforeStateHash;
+            });
+        }
 
         onPopupHideFinished?.Invoke();
         
