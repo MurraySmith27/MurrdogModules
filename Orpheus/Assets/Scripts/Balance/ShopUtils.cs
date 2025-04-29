@@ -8,7 +8,7 @@ public static class ShopUtils
     public static readonly int BONUS_CITIZEN_COST = 100;
     
     //Booster Pack Costs
-    public static readonly int BASIC_TILE_BOOSTER_COST = 100;
+    public static readonly int BASIC_TILE_BOOSTER_COST = 500;
     
     public static long GetCostOfItem(ItemTypes itemTypes)
     {

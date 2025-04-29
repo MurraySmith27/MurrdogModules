@@ -7,7 +7,8 @@ public static class GameConstants
     public static readonly int TILE_SIZE = 10;
 
     public static readonly float HEX_SIDE_LENGTH = 0.5f;
-    
+
+    public static readonly Vector2Int STARTING_MAP_SIZE = new Vector2Int(50, 50);
 
     public static readonly long[] FOOD_GOALS_PER_HARVEST =
     {
@@ -26,11 +27,15 @@ public static class GameConstants
         77000000000000000,
     };
 
-    public static readonly long STARTING_WOOD = 100;
+    public static readonly long STARTING_WOOD = 1;
 
-    public static readonly long STARTING_STONE = 100;
+    public static readonly long STARTING_STONE = 1;
 
-    public static readonly long STARTING_GOLD = 10000;
+    public static readonly long STARTING_GOLD = 400;
+
+    public static readonly long GOLD_PER_HARVEST = 100;
+
+    public static readonly long HARVEST_GOLD_PER_UNUSED_HAND = 30;
     
     public static readonly Vector2Int[] INITIAL_CITY_TILES = new Vector2Int[]
     {
@@ -39,10 +44,25 @@ public static class GameConstants
         new Vector2Int(-1, 1), new Vector2Int(-1, 0)
     };
     
+    public static readonly TileType[] INITIAL_CITY_TILE_TYPES = new TileType[]
+    {
+        TileType.Grass, TileType.Grass,
+        TileType.Grass, TileType.Grass, TileType.Grass,
+        TileType.Water, TileType.Water,
+    };
+    
+    public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]
+    {
+        new ResourceItem(ResourceType.Corn, 1), new ResourceItem(ResourceType.Corn, 1), 
+        new ResourceItem(ResourceType.Wheat, 1), new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wheat, 1),
+        new ResourceItem(ResourceType.Stone, 1), new ResourceItem(ResourceType.Wood, 1)
+    };
+    
+    
     //interest
-    public static readonly long GOLD_INTEREST_CAP = 50;
-    public static readonly long GOLD_INTEREST_INTERVAL = 10;
-    public static readonly long GOLD_INTEREST_PER_INTERVAL = 1;
+    public static readonly long GOLD_INTEREST_CAP = 5000;
+    public static readonly long GOLD_INTEREST_INTERVAL = 500;
+    public static readonly long GOLD_INTEREST_PER_INTERVAL = 100;
     
     // building yields
 
@@ -64,10 +84,10 @@ public static class GameConstants
     
     
     //shop settings
-    public static readonly long SHOP_REFRESH_GOLD_INITIAL_COST = 50;
-    public static readonly long SHOP_REFRESH_GOLD_INCREASE = 10;
+    public static readonly long SHOP_REFRESH_GOLD_INITIAL_COST = 100;
+    public static readonly long SHOP_REFRESH_GOLD_INCREASE = 50;
 
-    public static readonly long SHOP_RELIC_COST = 200;
+    public static readonly long SHOP_RELIC_COST = 500;
     
 
     public static readonly float SELL_VALUE_PERCENTAGE = 0.4f;

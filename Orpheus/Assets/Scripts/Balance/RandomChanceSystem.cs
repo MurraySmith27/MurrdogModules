@@ -18,6 +18,20 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         OnGameStart();
     }
 
+    private void Start()
+    {
+        GameStartController.Instance.OnGameStart -= OnGameStart;
+        GameStartController.Instance.OnGameStart += OnGameStart;
+    }
+
+    private void OnDestroy()
+    {
+        if (GameStartController.IsAvailable)
+        {
+            GameStartController.Instance.OnGameStart -= OnGameStart;
+        }
+    }
+
     private void OnGameStart()
     {
         _currentSeed = seed;

@@ -105,6 +105,29 @@ public class MapSystem : Singleton<MapSystem>
         return new Vector2Int(_tiles.GetLength(0), _tiles.GetLength(1));
     }
 
+    public void AddStartingCity()
+    {
+        Vector2Int startingCityPos = new Vector2Int(Mathf.FloorToInt(GameConstants.STARTING_MAP_SIZE.x / 2f),
+            Mathf.FloorToInt(GameConstants.STARTING_MAP_SIZE.y / 2f));
+        
+        for (int i = 0; i < GameConstants.INITIAL_CITY_TILES.Length; i++)
+        {
+            TileInformation tile = new TileInformation();
+
+            tile.Buildings = new();
+            tile.Resources = new();
+            if (GameConstants.INITIAL_CITY_RESOURCES[i].Quantity > 0)
+            {
+                tile.Resources.Add(GameConstants.INITIAL_CITY_RESOURCES[i]);
+            }
+            tile.Type = GameConstants.INITIAL_CITY_TILE_TYPES[i];
+            
+            PlaceTile(startingCityPos + GameConstants.INITIAL_CITY_TILES[i], tile);
+        }
+        
+        ConstructBuilding(startingCityPos, BuildingType.CityCapital);
+    }
+
     //constructs a building on a tile, this doesn't check if the building can be constructed, that should be handled elsewhere.
     public void ConstructBuilding(Vector2Int position, BuildingType buildingType)
     {
@@ -315,21 +338,21 @@ public class MapSystem : Singleton<MapSystem>
         
         city.AddTileToCity(newTilePosition);
         
-        if (!resourcesGeneratedAtStart)
-        {
-            TileType type = _tiles[newTilePosition.x, newTilePosition.y].Type;
-            if (addResources)
-            {
-                List<ResourceItem> resources = GenerateResourcesOnTile(type);
-
-                for (int i = 0; i < resources.Count; i++)
-                {
-                    _tiles.AddResourceToTile(newTilePosition.x, newTilePosition.y, resources[i].Type,
-                        resources[i].Quantity);
-                    OnTileResourcesChanged?.Invoke(newTilePosition, resources[i].Type, resources[i].Quantity);
-                }
-            }
-        }
+        // if (!resourcesGeneratedAtStart)
+        // {
+        //     TileType type = _tiles[newTilePosition.x, newTilePosition.y].Type;
+        //     if (addResources)
+        //     {
+        //         List<ResourceItem> resources = GenerateResourcesOnTile(type);
+        //
+        //         for (int i = 0; i < resources.Count; i++)
+        //         {
+        //             _tiles.AddResourceToTile(newTilePosition.x, newTilePosition.y, resources[i].Type,
+        //                 resources[i].Quantity);
+        //             OnTileResourcesChanged?.Invoke(newTilePosition, resources[i].Type, resources[i].Quantity);
+        //         }
+        //     }
+        // }
         
         OnTileAddedToCity?.Invoke(cityCenterPosition, newTilePosition);
         

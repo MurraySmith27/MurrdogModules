@@ -150,11 +150,8 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
             foodScoreTotal += pair.Item2;
             
             OnResourceConversionFoodScoreAddedStart?.Invoke(pair.Item1, pair.Item2);
-
-            if (pair.Item2 > 0)
-            {
-                HarvestState.Instance.AddHarvestFoodScore(pair.Item2);
-            }
+            
+            HarvestState.Instance.AddHarvestFoodScore(pair.Item2);
 
             yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionResourceFoodScoreAddedTime);
             
@@ -174,8 +171,11 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
         
         OnResourceConversionEnd?.Invoke();
         
+        HarvestState.Instance.CheckForWinOrLose();
+        
         yield return OrpheusTiming.WaitForSecondsGameTime(endAnimationTime);
         
         OnResourceConversionEndFinal?.Invoke();
+
     }
 }

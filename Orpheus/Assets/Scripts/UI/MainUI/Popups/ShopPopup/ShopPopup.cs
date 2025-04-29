@@ -169,7 +169,7 @@ public class ShopPopup : MonoBehaviour
         
         citizenCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfItem(ItemTypes.BONUS_CITIZEN)}");
         
-        citizenCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfBoosterPack(BoosterPackTypes.BASIC_TILE_BOOSTER)}");
+        boosterPackCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfBoosterPack(BoosterPackTypes.BASIC_TILE_BOOSTER)}");
         
         shopRelicCostButtons[0].interactable = true;
         

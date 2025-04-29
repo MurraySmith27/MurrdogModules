@@ -20,7 +20,7 @@ public class MapGridOverlay : MonoBehaviour
 
     private void OnTileCullingUpdated(int x, int y, int width, int height)
     {
-        Vector2Int centerPos = new Vector2Int(Mathf.RoundToInt(x + width / 2f), Mathf.RoundToInt(y + height / 2f));
+        Vector2Int centerPos = new Vector2Int(Mathf.RoundToInt(x + width / 2f), Mathf.RoundToInt(y + height / 2f) + 8);
 
         transform.position = MapUtils.GetTileWorldPositionFromGridPosition(centerPos);
     }

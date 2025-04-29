@@ -9,7 +9,7 @@ public class RoundController : Singleton<RoundController>
     [SerializeField] private int numHarvestsBeforeWinter = 2;
 
     private List<GamePhases> interactablePhases = new List<GamePhases>(new GamePhases[]
-        { GamePhases.BuddingBuilding, GamePhases.BloomingHarvestTurn });
+        { GamePhases.BuddingBuilding, GamePhases.BloomingHarvestTurn, GamePhases.MainMenu, GamePhases.GameStart, GamePhases.BloomingEndStep });
     
     private int _currentHarvestInRound = 0;
 
@@ -118,10 +118,6 @@ public class RoundController : Singleton<RoundController>
             {
                 _isInHarvest = false;
                 PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingHarvestTurn);
-            }
-            else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingEndStep && _currentHarvestInRound <= numHarvestsBeforeWinter)
-            {
-                PhaseStateMachine.Instance.ChangePhase(GamePhases.BuddingUpkeep);
             }
             else
             {

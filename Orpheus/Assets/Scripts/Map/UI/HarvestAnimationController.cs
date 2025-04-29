@@ -10,8 +10,8 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
     
     private void Start()
     {
-        BloomingHarvestController.Instance.OnHarvestStart -= OnHarvestStart;
-        BloomingHarvestController.Instance.OnHarvestStart += OnHarvestStart;
+        BloomingHarvestController.Instance.OnHarvestStart -= LockCamera;
+        BloomingHarvestController.Instance.OnHarvestStart += LockCamera;
         
         BloomingHarvestController.Instance.OnCityHarvestStart -= OnCityHarvestStart;
         BloomingHarvestController.Instance.OnCityHarvestStart += OnCityHarvestStart;
@@ -37,35 +37,37 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
         BloomingHarvestController.Instance.OnTileBonusTickEnd += OnTileBonusTickEnd;
 
-        PhaseStateMachine.Instance.OnPhaseExitComplete -= OnPhaseExitComplete;
-        PhaseStateMachine.Instance.OnPhaseExitComplete += OnPhaseExitComplete;
+        BloomingResourceConversionController.Instance.OnResourceConversionStart -= LockCamera;
+        BloomingResourceConversionController.Instance.OnResourceConversionStart += LockCamera;
+
+        BloomingResourceConversionController.Instance.OnResourceConversionEnd -= UnlockCamera;
+        BloomingResourceConversionController.Instance.OnResourceConversionEnd += UnlockCamera;
     }
 
     private void OnDestroy()
     {
         if (BloomingHarvestController.IsAvailable)
         {
-            BloomingHarvestController.Instance.OnHarvestStart -= OnHarvestStart;
+            BloomingHarvestController.Instance.OnHarvestStart -= LockCamera;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
             BloomingHarvestController.Instance.OnTileResourceChangeStart -= OnTileResourceChangeStart;
             BloomingHarvestController.Instance.OnTileResourceChangeEnd -= OnTileResourceChangeEnd;
             BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
             BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
+            BloomingResourceConversionController.Instance.OnResourceConversionStart -= LockCamera;
+            BloomingResourceConversionController.Instance.OnResourceConversionEnd -= UnlockCamera;
         }
     }
 
-    private void OnHarvestStart()
+    private void LockCamera()
     {
         CameraController.Instance.SetCameraLock(true);
     }
 
-    private void OnPhaseExitComplete(GamePhases phase)
+    private void UnlockCamera()
     {
-        if (phase == GamePhases.BloomingResourceConversion)
-        {
-            CameraController.Instance.SetCameraLock(false);
-        }
+        CameraController.Instance.SetCameraLock(true);
     }
     
     private void OnCityHarvestStart(Guid cityGuid)

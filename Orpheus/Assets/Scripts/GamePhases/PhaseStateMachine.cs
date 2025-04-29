@@ -21,7 +21,8 @@ public enum GamePhases
     WiltingRoundUpdatePhase,
     GameWon,
     GameOver,
-    MainMenu
+    MainMenu,
+    GameStart,
 }
 
 public class PhaseStateMachine : Singleton<PhaseStateMachine>
@@ -45,6 +46,7 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     public Action<GamePhases> OnPhaseChanged;
 
     private MainMenuPhase _mainMenuPhase = new();
+    private GameStartPhase _gameStartPhase = new();
     private BuddingGoalsUpdatePhase _buddingGoalsUpdatePhase = new();
     private BuddingUpkeepPhase _buddingUpkeepPhase = new();
     private BuddingBuildingPhase _buddingBuildingPhase = new();
@@ -63,7 +65,7 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     private GameOverPhase _gameOverPhase = new();
 
     private Queue<GamePhases> phaseTransitionQueue = new();
-    
+
     private void Awake()
     {
         currentPhaseState = GamePhases.MainMenu;
@@ -74,6 +76,13 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     {
         GameStartController.Instance.OnGameStart -= OnGameStart;
         GameStartController.Instance.OnGameStart += OnGameStart;
+        
+        _mainMenuPhase.StateEnter(this, () =>
+        {
+            OnPhaseEnterComplete?.Invoke(GamePhases.MainMenu);
+            
+            RelicSystem.Instance.OnPhaseChanged(GamePhases.MainMenu);
+        });
     }
 
     private void OnDestroy()
@@ -86,17 +95,7 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     
     public void OnGameStart()
     {
-        currentPhaseState = GamePhases.BuddingUpkeep;
-        currentPhase = _buddingUpkeepPhase;
-        
-        currentPhase.StateEnter(this, () =>
-        {
-            OnPhaseEnterComplete?.Invoke(GamePhases.BuddingUpkeep);
-        });
-        
-        RelicSystem.Instance.OnPhaseChanged(GamePhases.BuddingUpkeep);
-        
-        OnPhaseChanged?.Invoke(GamePhases.BuddingUpkeep);
+        ChangePhase(GamePhases.BuddingUpkeep);
     }
 
     public void ChangePhase(GamePhases nextPhase)
@@ -149,6 +148,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
         {
             case GamePhases.MainMenu:
                 return _mainMenuPhase;
+            case GamePhases.GameStart:
+                return _gameStartPhase;
             case GamePhases.BuddingGoalsUpdate:
                 return _buddingGoalsUpdatePhase;
             case GamePhases.BuddingUpkeep:

@@ -42,11 +42,5 @@ MonoBehaviour:
       Quantity: 1
     CanBuildOnTiles: 01000000
   - Type: 4
-    Costs:
-    - Type: 0
-      Quantity: 3
-    - Type: 1
-      Quantity: 2
-    - Type: 2
-      Quantity: 10
+    Costs: []
     CanBuildOnTiles: 02000000

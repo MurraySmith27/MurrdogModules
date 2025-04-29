@@ -76,6 +76,10 @@ public class MapInteractionController : Singleton<MapInteractionController>
         {
             SwitchMapInteractionMode(MapInteractionMode.LockCitizens);
         }
+        else if (gamePhase == GamePhases.BloomingHarvest || gamePhase == GamePhases.BloomingResourceConversion)
+        {
+            SwitchMapInteractionMode(MapInteractionMode.None);
+        }
         else
         {
             SwitchMapInteractionMode(MapInteractionMode.Default);
@@ -141,6 +145,8 @@ public class MapInteractionController : Singleton<MapInteractionController>
             switch (CurrentMode)
             {
                 case MapInteractionMode.None:
+                    break;
+                case MapInteractionMode.LockCitizens:
                     break;
                 default:
                     if (_currentlySelectedTilePosition != tilePosition)

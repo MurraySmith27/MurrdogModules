@@ -103,10 +103,15 @@ public class HarvestState : Singleton<HarvestState>
 
     public void AddHarvestFoodScore(long foodScore)
     {
-        CurrentFoodScore += foodScore;
+        if (foodScore != 0)
+        {
+            CurrentFoodScore += foodScore;
+            OnCurrentFoodScoreChanged?.Invoke(CurrentFoodScore);
+        }
+    }
 
-        OnCurrentFoodScoreChanged?.Invoke(CurrentFoodScore);
-        
+    public void CheckForWinOrLose()
+    {
         if (CurrentFoodScore >= CurrentFoodGoal)
         {
             OnFoodGoalReached?.Invoke();

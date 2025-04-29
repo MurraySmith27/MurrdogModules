@@ -1,10 +1,12 @@
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public partial class SROptions
+public class DebugOptions
 {
+    public static readonly DebugOptions Instance = new DebugOptions();
 
     [Category("Camera Testing")]
     public void FocusCameraOnZeroZeroTile()
@@ -17,4 +19,11 @@ public partial class SROptions
     {
         GlobalSettings.GameSpeed *= 2;
     }
+    
+    [Category("Game Speed")]
+    public void ResetGameSpeed()
+    {
+        GlobalSettings.GameSpeed = 1;
+    }
 }
+#endif

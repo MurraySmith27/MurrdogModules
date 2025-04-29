@@ -18,9 +18,6 @@ public class TooltipBase : MonoBehaviour
 
         if (isPointerOver && _currentTooltipIndex == -1)
         {
-            Vector2 worldPosition = rectTransform.TransformPoint(rectTransform.rect.center);
-
-
             Vector2 tooltipPosition = RectTransformUtils.GetPositionOutsideRectTransform(
                 rectTransform,
                 tooltipDirectionOffParent,
@@ -41,7 +38,7 @@ public class TooltipBase : MonoBehaviour
     {
         if (_currentTooltipIndex != -1)
         {
-            TooltipManager.Instance.HideTooltipIfMouseOff(_currentTooltipIndex);
+            TooltipManager.Instance.HideTooltip(_currentTooltipIndex);
         }
     }
     
@@ -49,7 +46,7 @@ public class TooltipBase : MonoBehaviour
     {
         if (_currentTooltipIndex != -1)
         {
-            TooltipManager.Instance.HideTooltipIfMouseOff(_currentTooltipIndex);
+            TooltipManager.Instance.HideTooltip(_currentTooltipIndex);
         }
     }
 
