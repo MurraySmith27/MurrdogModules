@@ -21,6 +21,8 @@ public class TileVisuals : MonoBehaviour
     
     [SerializeField] private ShadowOverlayVisuals shadowOverlayVisuals;
 
+    [SerializeField] private ShadowOverlayVisuals grayOutOverlayVisuals;
+
     [SerializeField] private float bonusTickParticleSystemStartDelay = 0.15f;
     
     [SerializeField] private GameObject bonusTickParticleSystemPrefab;
@@ -160,6 +162,18 @@ public class TileVisuals : MonoBehaviour
     public void ToggleShadow(bool enabled)
     {
         shadowOverlayVisuals.gameObject.SetActive(enabled);
+    }
+
+    public void ToggleGrayOut(bool enabled)
+    {
+        if (!enabled)
+        {
+            grayOutOverlayVisuals.OnDisappear();
+        }
+        else
+        {
+            grayOutOverlayVisuals.gameObject.SetActive(true);
+        }
     }
 
     private void OnGameSpeedChanged(float gameSpeed)

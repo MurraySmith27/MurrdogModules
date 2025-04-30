@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShadowFogMaterial
+  m_Name: GrayOutOverlay
   m_Shader: {fileID: -6465566751694194690, guid: 6377fd709ef78994ab9d5a3602c930bd,
     type: 3}
   m_Parent: {fileID: 0}
@@ -151,8 +151,8 @@ Material:
     - _WormyVerticalOffset: 0.5
     - _ZWrite: 1
     m_Colors:
-    - _AccentColor: {r: 0.3725489, g: 0.10196074, b: 0.066666625, a: 1}
-    - _BaseColor: {r: 0.082352914, g: 0.07450979, b: 0.11372546, a: 1}
+    - _AccentColor: {r: 0.37254903, g: 0.37254903, b: 0.37254903, a: 0.3764706}
+    - _BaseColor: {r: 0.348, g: 0.348, b: 0.348, a: 0.50980395}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

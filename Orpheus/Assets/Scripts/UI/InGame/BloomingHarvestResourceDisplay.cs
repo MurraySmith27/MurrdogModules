@@ -90,6 +90,20 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         
         Vector2Int cityCenter = MapSystem.Instance.GetCityCenterPosition(cityGuid);
 
+        Dictionary<ResourceType, int> currentResources = PlayerResourcesSystem.Instance.GetCurrentRoundResources();
+        
+        foreach (ResourceType key in currentResources.Keys) 
+        {
+            if (currentResources[key] != 0)
+            {
+                BloomingHarvestResourceListItem newListItem =
+                    Instantiate(bloomingHarvestResourceListItemPrefab, listParentTransform);
+                newListItem.Populate(key, currentResources[key]);
+
+                _instantiatedListItemsPerResourceType[key] = (currentResources[key], newListItem);
+            }
+        }
+
         AnimatePositionToTile(cityCenter);
         
         transform.localRotation = Quaternion.Euler(-Quaternion.LookRotation(transform.position - _mainCamera.transform.position, Vector3.up).eulerAngles.x + 90, 0, 0);

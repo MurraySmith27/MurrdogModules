@@ -35,6 +35,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
     public List<(Vector2Int, CitizenBehaviour)> InstantiatedCitizens = new List<(Vector2Int, CitizenBehaviour)>();
 
     private RectInt _lastCullingRect = new RectInt(new Vector2Int(-1,-1), new Vector2Int(1,1));
+
+    private List<Vector2Int> _grayedOutPositions = new();
     
     private void Start()
     {
@@ -219,12 +221,32 @@ public class MapVisualsController : Singleton<MapVisualsController>
         else
         {
             tile.AttachCitizen(newCitizen);
+            tile.SetCitizenLocked(CitizenController.Instance.IsCitizenAtTileLocked(tilePosition));
+
+            if (_grayedOutPositions.Contains(tilePosition))
+            {
+                foreach (Vector2Int position in _grayedOutPositions)
+                {
+                    TileVisuals grayOutTile = GetTileInstanceAtPosition(position);
+
+                    if (grayOutTile != null)
+                    {
+                        grayOutTile.ToggleGrayOut(false);
+                    }
+                }
+                
+                _grayedOutPositions.Clear();
+            }
         }
     }
 
     private void OnCitizenRemovedFromTile(Guid cityGuid, Vector2Int tilePosition)
     {
         TileVisuals tile = GetTileInstanceAtPosition(tilePosition);
+
+        _grayedOutPositions.Add(tilePosition);
+        
+        tile.ToggleGrayOut(true);
 
         if (tile == null)
         {

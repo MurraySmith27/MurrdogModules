@@ -41,6 +41,8 @@ public class CitizenController : Singleton<CitizenController>
     
     private Dictionary<Guid, List<CitizenPlacement>> _citizenPlacements = new();
 
+    private List<Vector2Int> _previousCitizenPositions = new();
+
     private void Start()
     {
         HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
@@ -85,7 +87,7 @@ public class CitizenController : Singleton<CitizenController>
 
             if (allCityGuids.Count > 0)
             {
-                TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumRemainingCitizens + HarvestState.Instance.NumBonusCitizensUsedThisHarvest,
+                TryPlaceCitizensOnUnoccupiedTiles(allCityGuids[0], HarvestState.Instance.NumRemainingCitizens + HarvestState.Instance.NumBonusCitizensUsedThisHarvest, new(),
                     out List<Vector2Int> chosenTiles);
             }            
         }
@@ -123,7 +125,7 @@ public class CitizenController : Singleton<CitizenController>
     //this method assumes there is a bonus citizen item being used.
     public bool TryPlaceBonusCitizenOnRandomTile(Guid cityGuid)
     {
-        if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, 1, out List<Vector2Int> chosenTiles))
+        if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, 1, _citizenPlacements[cityGuid], out List<Vector2Int> chosenTiles))
         {
             HarvestState.Instance.UseBonusCitizens(1);
             
@@ -138,16 +140,34 @@ public class CitizenController : Singleton<CitizenController>
     
     }
 
-    private bool TryPlaceCitizensOnUnoccupiedTiles(Guid cityGuid, int numCitizensToPlace, out List<Vector2Int> chosenTiles)
+    private bool TryPlaceCitizensOnUnoccupiedTiles(Guid cityGuid, int numCitizensToPlace, List<CitizenPlacement> currentCitizenPlacements, out List<Vector2Int> chosenTiles)
     {
         chosenTiles = new();
         
         List<Vector2Int> allOwnedCityTiles = MapSystem.Instance.GetOwnedTilesOfCity(cityGuid);
+
+        Vector2Int cityCenterPosition = MapSystem.Instance.GetCityCenterPosition(cityGuid);
+
+        allOwnedCityTiles.Remove(cityCenterPosition);
+
+        List<Vector2Int> allOwnedCityTilesCurrentlyUnoccupied = allOwnedCityTiles.Where((Vector2Int position) =>
+        {
+            return currentCitizenPlacements.FirstOrDefault(
+                (CitizenPlacement placement) =>
+                {
+                    return placement.Position == position;
+                }) == null;
+        }).ToList();
+        
+        List<Vector2Int> allOwnedCityTilesPreviouslyUnoccupied = allOwnedCityTilesCurrentlyUnoccupied.Where((Vector2Int position) =>
+        {
+            return !_previousCitizenPositions.Contains(position);
+        }).ToList();
         
         List<Vector2Int> unoccupiedCityTiles;
         if (_citizenPlacements.ContainsKey(cityGuid))
         {
-            unoccupiedCityTiles = allOwnedCityTiles.Where((Vector2Int position) =>
+            unoccupiedCityTiles = allOwnedCityTilesPreviouslyUnoccupied.Where((Vector2Int position) =>
             {
                 return _citizenPlacements[cityGuid].FirstOrDefault((CitizenPlacement citizenPlacement) =>
                 {
@@ -157,17 +177,49 @@ public class CitizenController : Singleton<CitizenController>
         }
         else
         {
-            unoccupiedCityTiles = allOwnedCityTiles;
+            unoccupiedCityTiles = allOwnedCityTilesPreviouslyUnoccupied;
+        }
+
+        List<Vector2Int> additionalTileOptions = new();
+        
+        if (unoccupiedCityTiles.Count < numCitizensToPlace)
+        {
+            //first try adding tiles that were not previously occupied with a citizen
+            _previousCitizenPositions.Clear();
+            additionalTileOptions = allOwnedCityTilesCurrentlyUnoccupied;
+
+            if (additionalTileOptions.Count < numCitizensToPlace - unoccupiedCityTiles.Count)
+            {
+                //if it's still not enough, just give all tiles
+                additionalTileOptions = allOwnedCityTiles;
+            }
+        }
+
+        foreach (Vector2Int position in unoccupiedCityTiles)
+        {
+            if (additionalTileOptions.Contains(position))
+            {
+                additionalTileOptions.Remove(position);
+            }
         }
         
         for (int i = 0; i < numCitizensToPlace; i++)
         {
-            if (unoccupiedCityTiles.Count >= 0)
+            if (unoccupiedCityTiles.Count > 0)
             {
                 Vector2Int tile =
                     RandomChanceSystem.Instance.GetNextCitizenTile(unoccupiedCityTiles);
                 
                 unoccupiedCityTiles.Remove(tile);
+                
+                chosenTiles.Add(tile);
+            }
+            else if (additionalTileOptions.Count > 0)
+            {
+                Vector2Int tile =
+                    RandomChanceSystem.Instance.GetNextCitizenTile(additionalTileOptions);
+                
+                additionalTileOptions.Remove(tile);
                 
                 chosenTiles.Add(tile);
             }
@@ -181,8 +233,12 @@ public class CitizenController : Singleton<CitizenController>
         
         foreach (Vector2Int tile in chosenTiles)
         {
-            _citizenPlacements[cityGuid].Add(new CitizenPlacement(tile, false));
+            //citizens start locked, unlock them to discard them
+            _citizenPlacements[cityGuid].Add(new CitizenPlacement(tile, true));
             
+            _previousCitizenPositions.Add(tile);
+            
+            OnCitizenLocked?.Invoke(tile);
             
             OnCitizenAddedToTile?.Invoke(cityGuid, tile);
         }
@@ -195,6 +251,8 @@ public class CitizenController : Singleton<CitizenController>
     public void UseHand()
     { 
         HarvestState.Instance.UseHand();
+
+        _previousCitizenPositions.Clear();
         
         OnHandUsed?.Invoke(_citizenPlacements);
     }
@@ -228,7 +286,7 @@ public class CitizenController : Singleton<CitizenController>
                 }
             }
 
-            if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, removedCitizens, out List<Vector2Int> chosenTiles))
+            if (TryPlaceCitizensOnUnoccupiedTiles(cityGuid, removedCitizens, citizenPlacementsBefore, out List<Vector2Int> chosenTiles))
             {
                 HarvestState.Instance.UseDiscard();
                 
@@ -295,6 +353,22 @@ public class CitizenController : Singleton<CitizenController>
         return false;
     }
 
+    public bool AreAllCitizensLocked()
+    {
+        foreach (Guid cityGuid in _citizenPlacements.Keys)
+        {
+            foreach (var placement in _citizenPlacements[cityGuid])
+            {
+                if (!placement.IsLocked)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     private void Reset()
     {
         List<Guid> allCityGuids = MapSystem.Instance.GetAllCityGuids();
@@ -319,6 +393,8 @@ public class CitizenController : Singleton<CitizenController>
         }
         
         _citizenPlacements.Clear();
+
+        _previousCitizenPositions.Clear();
     }
     
     public bool IsCitizenOnTile(Vector2Int tilePosition)

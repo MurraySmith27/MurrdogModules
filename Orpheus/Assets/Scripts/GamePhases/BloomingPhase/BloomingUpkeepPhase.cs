@@ -7,9 +7,9 @@ public class BloomingUpkeepPhase : PhaseStateBase
 {
     public override void StateEnter(PhaseStateMachine context, Action onEnterComplete)
     {
-        PersistentState.Instance.IncrementHarvestNumber();
-
         HarvestState.Instance.SetFoodGoalForHarvest(PersistentState.Instance.HarvestNumber);
+        
+        PersistentState.Instance.IncrementHarvestNumber();
         
         HarvestState.Instance.ResetFoodScore();
         

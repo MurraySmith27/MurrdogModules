@@ -17,6 +17,12 @@ public class HarvestRoundControlsButtons : MonoBehaviour
         CitizenController.Instance.OnDiscardUsed -= OnDiscardUsed;
         CitizenController.Instance.OnDiscardUsed += OnDiscardUsed;
 
+        CitizenController.Instance.OnCitizenLocked -= OnCitizenLockChanged;
+        CitizenController.Instance.OnCitizenLocked += OnCitizenLockChanged;
+        
+        CitizenController.Instance.OnCitizenUnlocked -= OnCitizenLockChanged;
+        CitizenController.Instance.OnCitizenUnlocked += OnCitizenLockChanged;
+
         HarvestState.Instance.OnHarvestStart -= OnHarvestStart;
         HarvestState.Instance.OnHarvestStart += OnHarvestStart;
     }
@@ -46,13 +52,23 @@ public class HarvestRoundControlsButtons : MonoBehaviour
         List<CitizenController.CitizenPlacement> citizenPositionsAfter
         )
     {
-        discardButton.interactable = HarvestState.Instance.NumRemainingDiscards > 0;
+        UpdateDiscardInteractable();
+    }
+
+    private void OnCitizenLockChanged(Vector2Int position)
+    {
+        UpdateDiscardInteractable();
+    }
+
+    private void UpdateDiscardInteractable()
+    {
+        discardButton.interactable = !CitizenController.Instance.AreAllCitizensLocked() && HarvestState.Instance.NumRemainingDiscards > 0;
     }
 
     private void OnHarvestStart()
     {
         playHandButton.interactable = true;
-        discardButton.interactable = true;
+        UpdateDiscardInteractable();
     }
     
     public void OnPlayHandClick()
