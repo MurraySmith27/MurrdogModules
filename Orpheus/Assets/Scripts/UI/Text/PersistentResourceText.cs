@@ -16,10 +16,25 @@ public class PersistentResourceText : MonoBehaviour
                 PersistentState.Instance.OnStoneValueChanged += OnResourceValueChanged;
                 OnResourceValueChanged(PersistentState.Instance.CurrentStone);
                 break;
+            case PersistentResourceType.Copper:
+                PersistentState.Instance.OnCopperValueChanged += OnResourceValueChanged;
+                PersistentState.Instance.OnCopperValueChanged -= OnResourceValueChanged;
+                OnResourceValueChanged(PersistentState.Instance.CurrentCopper);
+                break;
+            case PersistentResourceType.Steel:
+                PersistentState.Instance.OnSteelValueChanged += OnResourceValueChanged;
+                PersistentState.Instance.OnSteelValueChanged -= OnResourceValueChanged;
+                OnResourceValueChanged(PersistentState.Instance.CurrentSteel);
+                break;
             case PersistentResourceType.Wood:
                 PersistentState.Instance.OnWoodValueChanged -= OnResourceValueChanged;
                 PersistentState.Instance.OnWoodValueChanged += OnResourceValueChanged;
                 OnResourceValueChanged(PersistentState.Instance.CurrentWood);
+                break;
+            case PersistentResourceType.Lumber:
+                PersistentState.Instance.OnLumberValueChanged -= OnResourceValueChanged;
+                PersistentState.Instance.OnLumberValueChanged += OnResourceValueChanged;
+                OnResourceValueChanged(PersistentState.Instance.CurrentLumber);
                 break;
             case PersistentResourceType.Gold:
                 PersistentState.Instance.OnGoldValueChanged -= OnResourceValueChanged;
@@ -38,8 +53,17 @@ public class PersistentResourceText : MonoBehaviour
                 case PersistentResourceType.Stone:
                     PersistentState.Instance.OnStoneValueChanged -= OnResourceValueChanged;
                     break;
+                case PersistentResourceType.Copper:
+                    PersistentState.Instance.OnCopperValueChanged -= OnResourceValueChanged;
+                    break;
+                case PersistentResourceType.Steel:
+                    PersistentState.Instance.OnSteelValueChanged -= OnResourceValueChanged;
+                    break;
                 case PersistentResourceType.Wood:
                     PersistentState.Instance.OnWoodValueChanged -= OnResourceValueChanged;
+                    break;
+                case PersistentResourceType.Lumber:
+                    PersistentState.Instance.OnLumberValueChanged -= OnResourceValueChanged;
                     break;
                 case PersistentResourceType.Gold:
                     PersistentState.Instance.OnGoldValueChanged -= OnResourceValueChanged;

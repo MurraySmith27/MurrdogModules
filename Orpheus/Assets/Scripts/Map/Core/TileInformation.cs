@@ -20,7 +20,10 @@ public enum ResourceType
 public enum PersistentResourceType
 {
     Wood,
+    Lumber,
     Stone,
+    Copper,
+    Steel,
     Gold
 }
 

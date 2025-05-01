@@ -24,8 +24,14 @@ public class PersistentState : Singleton<PersistentState>
     
     public event Action<long> OnWoodValueChanged;
     
+    public event Action<long> OnLumberValueChanged;
+    
     public event Action<long> OnStoneValueChanged;
-
+    
+    public event Action<long> OnCopperValueChanged;
+    
+    public event Action<long> OnSteelValueChanged;
+    
     public event Action<int> OnItemCapacityChanged;
     
     public void IncrementRoundNumber()
@@ -51,6 +57,20 @@ public class PersistentState : Singleton<PersistentState>
         CurrentWood += difference;
 
         OnWoodValueChanged?.Invoke(CurrentWood);
+    }
+    
+    public void ChangeCurrentCopper(long difference)
+    {
+        CurrentCopper += difference;
+
+        OnCopperValueChanged?.Invoke(CurrentCopper);
+    }
+    
+    public void ChangeCurrentSteel(long difference)
+    {
+        CurrentSteel += difference;
+
+        OnSteelValueChanged?.Invoke(CurrentSteel);
     }
     
     public void ChangeCurrentStone(long difference)
