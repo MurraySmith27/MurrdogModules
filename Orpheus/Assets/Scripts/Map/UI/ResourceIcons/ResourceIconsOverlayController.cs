@@ -18,13 +18,9 @@ public class ResourceIconsOverlayController : MonoBehaviour
     [SerializeField] private float iconsScale = 1f;
 
     private Dictionary<Vector2Int, List<(ResourceItem, RectTransform)>> _instantiatedIcons = new();
-
-    private Vector3 _rootOriginalPosition;
     
     private void Start()
     {
-        _rootOriginalPosition = iconsParent.position;
-        
         TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnTileCullingChanged;
         TileFrustrumCulling.Instance.OnTileCullingUpdated += OnTileCullingChanged;
 
@@ -62,6 +58,8 @@ public class ResourceIconsOverlayController : MonoBehaviour
             }
         }
         
+        _instantiatedIcons.Clear();
+        
         for (int i = row; i < row + width; i++)
         {
             for (int j = col; j < col + height; j++)
@@ -79,6 +77,8 @@ public class ResourceIconsOverlayController : MonoBehaviour
             {
                 resourceIconRetriever.ReturnResourceIcon(icon.Item1, icon.Item2);
             }
+            
+            _instantiatedIcons.Remove(position);
         }
         
         SpawnResourceIconsAtTile(position.x, position.y);
@@ -92,6 +92,8 @@ public class ResourceIconsOverlayController : MonoBehaviour
             {
                 resourceIconRetriever.ReturnResourceIcon(icon.Item1, icon.Item2);
             }
+            
+            _instantiatedIcons.Remove(position);
         }
         
         SpawnResourceIconsAtTile(position.x, position.y);

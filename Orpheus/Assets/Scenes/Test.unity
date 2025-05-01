@@ -30346,6 +30346,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1908696264}
+  - {fileID: 1252175381}
   - {fileID: 1852387821}
   m_Father: {fileID: 1777640527}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
@@ -41220,6 +41221,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BloomingHarvestCurrentResources
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642647019336798875, guid: 4d8587e5910114faf8aa807785890ed2,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 5887340999719593410, guid: 4d8587e5910114faf8aa807785890ed2,
         type: 3}
@@ -55450,6 +55456,60 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1244091794}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1252175380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1252175381}
+  - component: {fileID: 1252175382}
+  m_Layer: 5
+  m_Name: CitizenIconsRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1252175381
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252175380}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1792940330}
+  m_Father: {fileID: 704133610}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1252175382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252175380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ec8480d9d8f0045bf52c2d45982042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  citizenLockIconPrefab: {fileID: 4992025243978559137, guid: 294614fbe0f7b4a4d9073778d7eb7637,
+    type: 3}
+  iconsParent: {fileID: 1792940330}
+  iconsDistanceTowardCamera: 1
+  iconsScale: 1
 --- !u!1001 &1253045743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77771,6 +77831,41 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1790215670}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1792940329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1792940330}
+  m_Layer: 5
+  m_Name: IconsRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1792940330
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792940329}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1252175381}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1795415029
 GameObject:
   m_ObjectHideFlags: 0

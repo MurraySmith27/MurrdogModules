@@ -29,8 +29,6 @@ public class TileVisuals : MonoBehaviour
 
     [SerializeField] private float bonusTickParticleSystemDuration = 3f;
 
-    [SerializeField] private LockedCitizenOverlayVisuals lockedCitizenOverlayVisuals;
-
     private List<ResourceIcon> _instantiatedResourceIcons = new List<ResourceIcon>();
 
     private Renderer[] _tileRenderers;
@@ -51,41 +49,17 @@ public class TileVisuals : MonoBehaviour
         GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
         GlobalSettings.OnGameSpeedChanged += OnGameSpeedChanged;
 
-        PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
-        PhaseStateMachine.Instance.OnPhaseTransitionStarted += OnPhaseTransitionStarted;
-        
         OnGameSpeedChanged(GlobalSettings.GameSpeed);
     }
 
     private void OnDestroy()
     {
         GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
-
-        if (PhaseStateMachine.IsAvailable)
-        {
-            PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
-        }
-    }
-
-    private void OnPhaseTransitionStarted(GamePhases gamePhases)
-    {
-        if (gamePhases == GamePhases.BloomingHarvest)
-        {
-            if (_attachedCitizens.Count > 0)
-            {
-                lockedCitizenOverlayVisuals.Hide();
-            }
-        }
     }
 
     private void CollectRenderers()
     {
         _tileRenderers = transform.GetComponentsInChildren<Renderer>();
-    }
-
-    public void SetCitizenLocked(bool locked)
-    {
-        lockedCitizenOverlayVisuals.SetLock(locked);
     }
 
     public void PopulateResourceVisuals(List<ResourceItem> resources)
@@ -134,8 +108,6 @@ public class TileVisuals : MonoBehaviour
     {
         _attachedCitizens.Add(citizen);
         
-        lockedCitizenOverlayVisuals.Show();
-        
         citizen.transform.SetParent(citizensRoot);
     }
 
@@ -145,8 +117,6 @@ public class TileVisuals : MonoBehaviour
         {
             citizen.transform.SetParent(null);
         }
-        
-        lockedCitizenOverlayVisuals.Hide();
         
         _attachedCitizens.Clear();
     }

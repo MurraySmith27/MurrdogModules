@@ -54,8 +54,8 @@ public class CitizenController : Singleton<CitizenController>
         PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
         PhaseStateMachine.Instance.OnPhaseTransitionStarted += OnPhaseTransitionStarted;
 
-        BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
-        BloomingHarvestController.Instance.OnTileBonusTickEnd += OnTileBonusTickEnd;
+        BloomingHarvestController.Instance.OnTileHarvestEnd -= OnTileHarvestEnd;
+        BloomingHarvestController.Instance.OnTileHarvestEnd += OnTileHarvestEnd;
     }
 
     private void OnDestroy()
@@ -73,8 +73,19 @@ public class CitizenController : Singleton<CitizenController>
 
         if (BloomingHarvestController.IsAvailable)
         {
-            BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
+            BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileHarvestEnd;
         }
+    }
+
+    public List<CitizenPlacement> GetAllCitizenPositions()
+    {
+        List<CitizenPlacement> citizenPlacements = new();
+        foreach (Guid key in _citizenPlacements.Keys)
+        {
+            citizenPlacements.AddRange(_citizenPlacements[key]);
+        }
+
+        return citizenPlacements;
     }
 
     private void OnPhaseTransitionStarted(GamePhases gamePhases)
@@ -97,7 +108,7 @@ public class CitizenController : Singleton<CitizenController>
     {
     }
 
-    private void OnTileBonusTickEnd(Vector2Int position)
+    private void OnTileHarvestEnd(Vector2Int position)
     {
         CitizenPlacement placement;
 
