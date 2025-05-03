@@ -13,8 +13,14 @@ public class PersistentState : Singleton<PersistentState>
     public long CurrentGold { get; private set; } = GameConstants.STARTING_GOLD;
 
     public long CurrentWood { get; private set; } = GameConstants.STARTING_WOOD;
+
+    public long CurrentLumber { get; private set; } = GameConstants.STARTING_LUMBER;
     
     public long CurrentStone { get; private set; } = GameConstants.STARTING_STONE;
+    
+    public long CurrentCopper { get; private set; } = GameConstants.STARTING_COPPER;
+
+    public long CurrentSteel { get; private set; } = GameConstants.STARTING_STEEL;
 
     public int CurrentItemCapacity { get; private set; } = GameConstants.STARTING_ITEM_CAPACITY;
 

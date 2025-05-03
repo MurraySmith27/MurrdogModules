@@ -24741,6 +24741,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopPopup
       objectReference: {fileID: 0}
+    - target: {fileID: 1553854197503531574, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796130698590909829, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 22.098717
+      objectReference: {fileID: 0}
     - target: {fileID: 3418018908921308001, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
         type: 3}
       propertyPath: m_Pivot.x
@@ -24840,6 +24850,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203364102590220358, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 22.098701
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915664605341806411, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -29.545498
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990077792200106580, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 22.098488
+      objectReference: {fileID: 0}
+    - target: {fileID: 7982581109947742850, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 29.786798
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141368285448885104, guid: ff05b385ed7ebe2488ed32ae77e0ab71,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -92.60196
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

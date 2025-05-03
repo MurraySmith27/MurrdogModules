@@ -17,7 +17,10 @@ public class ShopPopup : MonoBehaviour
     
     //TODO: Generate 3d previews for booster packs
     [Header("Booster Pack Icons")]
+    [SerializeField] private List<BoosterPackIcon> boosterPackIcons;
+    [SerializeField] private BoosterPackVisualsSO boosterPackVisuals;
     [SerializeField] private List<Image> boosterPackSoldOutBanners;
+    
     
     [Header("UI Elements")] 
     [SerializeField] private Button refreshButton;
@@ -38,6 +41,8 @@ public class ShopPopup : MonoBehaviour
     private List<Icon3DVisual> _instantiatedRelicVisuals = new();
 
     private List<Icon3DVisual> _instantiatedItemVisuals = new();
+    
+    private List<Icon3DVisual> _instantiatedBoosterVisuals = new();
 
     private bool _hasPurchasedBoosterPack = false;
 
@@ -150,7 +155,7 @@ public class ShopPopup : MonoBehaviour
             }
         }
 
-        GameObject itemPrefabs = itemVisuals.GetVisualsPrefabForItem(ItemTypes.BONUS_CITIZEN);
+        GameObject itemPrefab = itemVisuals.GetVisualsPrefabForItem(ItemTypes.BONUS_CITIZEN);
         
         Preview3DController.PreviewTransform bonusCitizenPreviewTransform;
         if (!Preview3DController.Instance.GetPreviewTransform(out bonusCitizenPreviewTransform))
@@ -161,11 +166,30 @@ public class ShopPopup : MonoBehaviour
         
         _currentPreviewTransforms.Add(bonusCitizenPreviewTransform);
         
-        GameObject itemInstance = Instantiate(itemPrefabs, bonusCitizenPreviewTransform.Transform);
+        GameObject itemInstance = Instantiate(itemPrefab, bonusCitizenPreviewTransform.Transform);
         
         _instantiatedItemVisuals.Add(itemInstance.GetComponent<Icon3DVisual>());
-
+        
         itemIcons[0].Populate(bonusCitizenPreviewTransform.UVRect, ItemTypes.BONUS_CITIZEN);
+        
+        
+        GameObject boosterPackPrefab = boosterPackVisuals.GetVisualsPrefabForBoosterPack(BoosterPackTypes.BASIC_TILE_BOOSTER);
+        
+        Preview3DController.PreviewTransform boosterPackPreviewTransform;
+        if (!Preview3DController.Instance.GetPreviewTransform(out boosterPackPreviewTransform))
+        {
+            Debug.LogError("Tried to request a 3d preview transform, but none are available!");
+            return;
+        }
+        
+        _currentPreviewTransforms.Add(boosterPackPreviewTransform);
+        
+        GameObject boosterPackInstance = Instantiate(boosterPackPrefab, boosterPackPreviewTransform.Transform);
+        
+        _instantiatedBoosterVisuals.Add(boosterPackInstance.GetComponent<Icon3DVisual>());
+        
+        boosterPackIcons[0].Populate(boosterPackPreviewTransform.UVRect, BoosterPackTypes.BASIC_TILE_BOOSTER);
+        
         
         citizenCostText.SetText($"<sprite index=0>{ShopUtils.GetCostOfItem(ItemTypes.BONUS_CITIZEN)}");
         

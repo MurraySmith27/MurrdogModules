@@ -38,7 +38,13 @@ public static class GameConstants
 
     public static readonly long STARTING_WOOD = 1;
 
+    public static readonly long STARTING_LUMBER = 0;
+    
     public static readonly long STARTING_STONE = 1;
+    
+    public static readonly long STARTING_COPPER = 0;
+    
+    public static readonly long STARTING_STEEL = 0;
 
     public static readonly long STARTING_GOLD = 400;
 
