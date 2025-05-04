@@ -80,6 +80,86 @@ public class TileHarvestController : Singleton<TileHarvestController>
                         resourcesProcessed[ResourceType.Wheat] -= GameConstants.WHEAT_PER_BREAD;
                     }
                     break;
+                case BuildingType.LumberMill:
+                    if (resourcesSoFar[ResourceType.Wood] >= GameConstants.WOOD_PER_LUMBER)
+                    {
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Lumber))
+                        {
+                            resourcesProcessed[ResourceType.Lumber] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Lumber] += GameConstants.LUMBER_PER_LUMBER_MILL;
+
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Wood))
+                        {
+                            resourcesProcessed[ResourceType.Wood] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Wood] -= GameConstants.WOOD_PER_LUMBER;
+                    }
+                    break;
+                case BuildingType.CopperYard:
+                    if (resourcesSoFar[ResourceType.Stone] >= GameConstants.STONE_PER_COPPER)
+                    {
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Copper))
+                        {
+                            resourcesProcessed[ResourceType.Copper] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Copper] += GameConstants.COPPER_PER_COOPPER_YARD;
+
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Stone))
+                        {
+                            resourcesProcessed[ResourceType.Stone] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Stone] -= GameConstants.STONE_PER_COPPER;
+                    }
+                    break;
+                case BuildingType.SteelYard:
+                    if (resourcesSoFar[ResourceType.Copper] >= GameConstants.COPPER_PER_STEEL)
+                    {
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Steel))
+                        {
+                            resourcesProcessed[ResourceType.Steel] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Steel] += GameConstants.STEEL_PER_STEEL_YARD;
+
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Copper))
+                        {
+                            resourcesProcessed[ResourceType.Copper] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Copper] -= GameConstants.COPPER_PER_STEEL;
+                    }
+                    break;
+                case BuildingType.PopcornFactory:
+                    if (resourcesSoFar[ResourceType.Corn] >= GameConstants.CORN_PER_POPCORN)
+                    {
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Popcorn))
+                        {
+                            resourcesProcessed[ResourceType.Popcorn] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Popcorn] += GameConstants.POPCORN_PER_POPCORN_FACTORY;
+
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Corn))
+                        {
+                            resourcesProcessed[ResourceType.Corn] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Corn] -= GameConstants.CORN_PER_POPCORN;
+                    }
+                    break;
+                case BuildingType.SushiRestaurant:
+                    if (resourcesSoFar[ResourceType.Fish] >= GameConstants.FISH_PER_SUSHI)
+                    {
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Popcorn))
+                        {
+                            resourcesProcessed[ResourceType.Popcorn] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Popcorn] += GameConstants.SUSHI_PER_SUSHI_RESTAURANT;
+
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Fish))
+                        {
+                            resourcesProcessed[ResourceType.Fish] = 0;
+                        }
+                        resourcesProcessed[ResourceType.Fish] -= GameConstants.FISH_PER_SUSHI;
+                    }
+                    break;
             }
         }
         

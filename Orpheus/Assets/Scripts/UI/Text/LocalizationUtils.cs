@@ -22,6 +22,16 @@ public static class LocalizationUtils
                 return "Fish";
             case ResourceType.Bread:
                 return "Bread";
+            case ResourceType.Lumber:
+                return "Lumber";
+            case ResourceType.Copper:
+                return "Copper";
+            case ResourceType.Steel:
+                return "Steel";
+            case ResourceType.Popcorn:
+                return "Popcorn";
+            case ResourceType.Sushi:
+                return "Sushi";
             default:
                 return "";
         }
@@ -41,6 +51,16 @@ public static class LocalizationUtils
                 return "Bakery";
             case BuildingType.FishFarm:
                 return "Fish Farm";
+            case BuildingType.LumberMill:
+                return "Lumber Mill";
+            case BuildingType.CopperYard:
+                return "Copper Yard";
+            case BuildingType.SteelYard:
+                return "Steel Factory";
+            case BuildingType.PopcornFactory:
+                return "Popcorn Factory";
+            case BuildingType.SushiRestaurant:
+                return "Sushi Restaurant";
             default:
                 return "";
         }
@@ -92,6 +112,16 @@ public static class LocalizationUtils
                 return "<fish>";
             case ResourceType.Bread:
                 return "<bread>";
+            case ResourceType.Lumber:
+                return "<lumber>";
+            case ResourceType.Copper:
+                return "<copper>";
+            case ResourceType.Steel:
+                return "<steel>";
+            case ResourceType.Popcorn:
+                return "<popcorn>";
+            case ResourceType.Sushi:
+                return "<sushi>";
             default:
                 return "";
         }
@@ -111,6 +141,16 @@ public static class LocalizationUtils
                 return "<wheatfarm>";
             case BuildingType.Bakery:
                 return "<bakery>";
+            case BuildingType.LumberMill:
+                return "<lumbermill>";
+            case BuildingType.CopperYard:
+                return "<copperyard>";
+            case BuildingType.SteelYard:
+                return "<steelyard>";
+            case BuildingType.PopcornFactory:
+                return "<popcornfactory>";
+            case BuildingType.SushiRestaurant:
+                return "<sushirestaurant>";
             default:
                 return "";
         }

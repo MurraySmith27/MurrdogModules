@@ -14,16 +14,18 @@ public enum ResourceType
     Fish,
     Wood,
     Stone,
-    Bread
+    Bread,
+    Lumber,
+    Copper,
+    Steel,
+    Popcorn,
+    Sushi,
 }
 
 public enum PersistentResourceType
 {
     Wood,
-    Lumber,
     Stone,
-    Copper,
-    Steel,
     Gold
 }
 
@@ -34,7 +36,12 @@ public enum BuildingType
     WheatFarm,
     FishFarm,
     Bakery,
-    CityCapital
+    CityCapital,
+    LumberMill,
+    CopperYard,
+    SteelYard,
+    PopcornFactory,
+    SushiRestaurant,
 }
 
 public struct TileBuilding

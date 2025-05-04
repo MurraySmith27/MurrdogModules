@@ -1,0 +1,170 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1120477042918204935
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955899407731474302, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      propertyPath: m_Name
+      value: SteelYard_Mini
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 4504665666229679502, guid: 40cc41ddad1a3b443af458eeeda690a7, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6233603547661865351, guid: 40cc41ddad1a3b443af458eeeda690a7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3469603969450576387}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40cc41ddad1a3b443af458eeeda690a7, type: 3}
+--- !u!4 &6417223239505721216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6233603547661865351, guid: 40cc41ddad1a3b443af458eeeda690a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1120477042918204935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4463807032448771550
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6417223239505721216}
+    m_Modifications:
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955899407731474302, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_Name
+      value: SteelYard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2908ca12d80846498ca13227f192671, type: 3}
+--- !u!4 &3469603969450576387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 996459582309855197, guid: b2908ca12d80846498ca13227f192671,
+    type: 3}
+  m_PrefabInstance: {fileID: 4463807032448771550}
+  m_PrefabAsset: {fileID: 0}

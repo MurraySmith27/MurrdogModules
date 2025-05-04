@@ -86,13 +86,31 @@ public static class GameConstants
     public static readonly int FISH_PER_FISH_FARM = 1;
     public static readonly int WHEAT_PER_BREAD = 1;
     public static readonly int BREAD_PER_BAKERY = 1;
+    public static readonly int WOOD_PER_LUMBER = 1;
+    public static readonly int LUMBER_PER_LUMBER_MILL = 1;
+    public static readonly int STONE_PER_COPPER = 1;
+    public static readonly int COPPER_PER_COOPPER_YARD = 1;
+    public static readonly int COPPER_PER_STEEL = 1;
+    public static readonly int STEEL_PER_STEEL_YARD = 1;
+    public static readonly int CORN_PER_POPCORN = 1;
+    public static readonly int POPCORN_PER_POPCORN_FACTORY = 1;
+    public static readonly int FISH_PER_SUSHI = 1;
+    public static readonly int SUSHI_PER_SUSHI_RESTAURANT = 1;
+    
 
     public static readonly Dictionary<ResourceType, double> BASE_FOOD_SCORE_PER_RESOURCE =
     new Dictionary<ResourceType, double> {
         {ResourceType.Corn, 1d},
-        {ResourceType.Wheat, 0d},
+        {ResourceType.Wheat, 1d},
         {ResourceType.Bread, 3d},
-        {ResourceType.Fish, 2d}
+        {ResourceType.Fish, 2d},
+        {ResourceType.Wood, 1d},
+        {ResourceType.Stone, 1d},
+        {ResourceType.Lumber, 3d},
+        {ResourceType.Copper, 3d},
+        {ResourceType.Steel, 9d},
+        {ResourceType.Popcorn, 4d},
+        {ResourceType.Sushi, 5d},
     };
 
     public static readonly long GOLD_PER_LEFTOVER_FOOD_SCORE = 10;

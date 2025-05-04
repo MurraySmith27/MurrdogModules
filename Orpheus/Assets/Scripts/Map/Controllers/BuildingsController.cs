@@ -118,6 +118,19 @@ public class BuildingsController : Singleton<BuildingsController>
         buildingTypes.Add(BuildingType.FishFarm);
         buildingTypes.Add(BuildingType.WheatFarm);
         buildingTypes.Add(BuildingType.Bakery);
+
+        if (PersistentState.Instance.HarvestNumber >= 3)
+        {
+            buildingTypes.Add(BuildingType.LumberMill);
+            buildingTypes.Add(BuildingType.CopperYard);
+            buildingTypes.Add(BuildingType.PopcornFactory);
+            buildingTypes.Add(BuildingType.SushiRestaurant);
+        }
+
+        if (PersistentState.Instance.HarvestNumber >= 6)
+        {
+            buildingTypes.Add(BuildingType.SteelYard);
+        }
         
         buildingTypes = RelicSystem.Instance.GetUnlockedBuildingTypes(buildingTypes);
         

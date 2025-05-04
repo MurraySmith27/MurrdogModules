@@ -27,6 +27,16 @@ MonoBehaviour:
     Text: <b>Stone</b><br>A resource that you can harvest.<br>Used to construct buildings.
   - Id: gold
     Text: <b>Gold</b><br>Used to purchase various things.
+  - Id: lumber
+    Text: <b>Lumber</b><br>A resource produced from <wood>.
+  - Id: copper
+    Text: <b>Copper</b><br>A resource produced from <stone>.
+  - Id: steel
+    Text: <b>Steel</b><br>A resource produced from <copper>.
+  - Id: popcorn
+    Text: <b>Popcorn</b><br>A resource produced from <corn>.
+  - Id: sushi
+    Text: <b>Sushi</b><br>A resource produced from <fish>.
   - Id: citizen
     Text: <b>Citizen</b><br>Triggers a tile an additional time during harvest.
   - Id: grasstile
