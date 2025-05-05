@@ -197,7 +197,7 @@ void NormalsSobel_float(float2 UV, float PixelThickness, out float Out) {
     #endif
 }
 
-void DepthAndNormalsSobel_float(float2 UV, float NormalThreshold, float DepthThreshold, float ReverseDepthThreshold, float DarkenAmount, float LightenAmount, float3 LightDirection, float3 WorldSpaceNormal, out float3 Out) {
+void DepthAndNormalsSobel_float(float2 UV, float NormalThreshold, float DepthThreshold, float ReverseDepthThreshold, float DarkenAmount, float LightenAmount, float3 LightDirection, float3 WorldSpaceNormal, out float3 Out, out float Depth) {
 
     #if !defined(SHADERGRAPH_PREVIEW)
     
@@ -269,10 +269,12 @@ void DepthAndNormalsSobel_float(float2 UV, float NormalThreshold, float DepthThr
         }
 
         Out = edgeMix;
+        Depth = centerDepth;
 
     #else
         //Dummy code
         Out = 1;
+        Depth = 1;
     #endif
 }
 

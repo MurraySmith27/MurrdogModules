@@ -113,7 +113,10 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             for (int j = col; j < col + height; j++)
             {
-                InstantiateTileVisuals(i, j);
+                if (MapSystem.Instance.IsTileOwnedByCity(new Vector2Int(i, j)))
+                {
+                    InstantiateTileVisuals(i, j);
+                }
             }
         }
         
@@ -191,7 +194,11 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
     private void OnTilePlaced(Vector2Int position, TileInformation tileInformation)
     {
-        Destroy(InstantiatedMapTiles[position.x, position.y].gameObject);
+        if (InstantiatedMapTiles[position.x, position.y] != null)
+        {
+            Destroy(InstantiatedMapTiles[position.x, position.y].gameObject);
+        }
+
         InstantiateTileVisuals(position.x, position.y);
         InstantiatedMapTiles[position.x, position.y].ToggleVisuals(true);
     }
@@ -238,6 +245,12 @@ public class MapVisualsController : Singleton<MapVisualsController>
     private void OnCitizenRemovedFromTile(Guid cityGuid, Vector2Int tilePosition)
     {
         TileVisuals tile = GetTileInstanceAtPosition(tilePosition);
+
+        if (tile == null)
+        {
+            Debug.LogError("tried to remove citizen from tile not owned by city");
+            return;
+        }
 
         _grayedOutPositions.Add(tilePosition);
         
@@ -296,28 +309,32 @@ public class MapVisualsController : Singleton<MapVisualsController>
     {
         TileVisuals tile = GetTileInstanceAtPosition(tilePosition);
 
-        tile.ShadowAppearAnimation();
-        tile.DetachAllBuildings();
+        if (tile != null)
+        {
 
-        foreach (var pair in InstantiatedBuildings)
-        {
-            if (pair.Item1 == tilePosition)
+            tile.ShadowAppearAnimation();
+            tile.DetachAllBuildings();
+
+            foreach (var pair in InstantiatedBuildings)
             {
-                Destroy(pair.Item2.gameObject);
-                InstantiatedBuildings.Remove(pair);
-                break;
+                if (pair.Item1 == tilePosition)
+                {
+                    Destroy(pair.Item2.gameObject);
+                    InstantiatedBuildings.Remove(pair);
+                    break;
+                }
             }
-        }
-        
-        tile.DetachAllCitizens();
-        
-        foreach (var pair in InstantiatedCitizens)
-        {
-            if (pair.Item1 == tilePosition)
+
+            tile.DetachAllCitizens();
+
+            foreach (var pair in InstantiatedCitizens)
             {
-                Destroy(pair.Item2.gameObject);
-                InstantiatedCitizens.Remove(pair);
-                break;
+                if (pair.Item1 == tilePosition)
+                {
+                    Destroy(pair.Item2.gameObject);
+                    InstantiatedCitizens.Remove(pair);
+                    break;
+                }
             }
         }
     }
@@ -353,7 +370,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
                 for (int j = _lastCullingRect.y; j < _lastCullingRect.y + _lastCullingRect.height; j++)
                 {
                     Vector2Int position = new Vector2Int(i, j);
-                    if (!newCullingRect.Contains(position) && i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
+                    if (!newCullingRect.Contains(position) && i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1) && InstantiatedMapTiles[i, j] != null)
                         InstantiatedMapTiles[i, j].ToggleVisuals(false);
                 }
             }
@@ -364,7 +381,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
             for (int j = col; j < height + col; j++)
             {
                 Vector2Int position = new Vector2Int(i, j);
-                if (!_lastCullingRect.Contains(position) && i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
+                if (MapSystem.Instance.IsTileOwnedByCity(position) && !_lastCullingRect.Contains(position) && i < InstantiatedMapTiles.GetLength(0) && j < InstantiatedMapTiles.GetLength(1))
                 {
                     InstantiatedMapTiles[i, j].ToggleVisuals(true);
                     InstantiatedMapTiles[i, j].ToggleShadow(
