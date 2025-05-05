@@ -197,7 +197,7 @@ void NormalsSobel_float(float2 UV, float PixelThickness, out float Out) {
     #endif
 }
 
-void DepthAndNormalsSobel_float(float2 UV, float NormalThreshold, float DepthThreshold, float ReverseDepthThreshold, float DarkenAmount, float LightenAmount, float3 LightDirection, float3 WorldSpaceNormal, out float3 Out, out float Depth) {
+void DepthAndNormalsSobel_float(float2 UV, float NormalThreshold, float DepthThreshold, float ReverseDepthThreshold, float DarkenAmount, float LightenAmount, float3 LightDirection, float3 WorldSpaceNormal, out float3 Out, out float3 originalColor) {
 
     #if !defined(SHADERGRAPH_PREVIEW)
     
@@ -211,7 +211,7 @@ void DepthAndNormalsSobel_float(float2 UV, float NormalThreshold, float DepthThr
         float2 uvs[4];
         uvs[0] = float2(UV.x, min(1 - 0.001, UV.y + normalizedPixelSize.y));
         uvs[1] = float2(UV.x, max(0, UV.y - normalizedPixelSize.y));
-        uvs[2] = float2(min(1 - 0.001, UV.x + normalizedPixelSize.x), UV.y);
+            uvs[2] = float2(min(1 - 0.001, UV.x + normalizedPixelSize.x), UV.y);
         uvs[3] = float2(max(0, UV.x - normalizedPixelSize.x), UV.y);
 
         float depthDiff = 0;
@@ -250,7 +250,7 @@ void DepthAndNormalsSobel_float(float2 UV, float NormalThreshold, float DepthThr
         float indicator = sqrt(normalSum);
         float normalEdge = step(NormalThreshold, indicator - reverseDepthEdge);
         
-        float3 originalColor = LOAD_TEXTURE2D_LOD(_BlitTexture, uint2(UV * _ScreenSize.xy), 0);
+        originalColor = LOAD_TEXTURE2D_LOD(_BlitTexture, uint2(UV * _ScreenSize.xy), 0);
         
         float3 nearestColor = LOAD_TEXTURE2D_LOD(_BlitTexture, uint2(nearestUV * _ScreenSize.xy), 0);
     
@@ -258,23 +258,29 @@ void DepthAndNormalsSobel_float(float2 UV, float NormalThreshold, float DepthThr
         float ld = dot(normalize(WorldSpaceNormal), normalize(LightDirection));
     
         float3 edgeMix;
-        
-        if (depthEdge > 0)
+
+        if (centerDepth > 0)
         {
-            edgeMix = lerp(originalColor, nearestColor * DarkenAmount, depthEdge);
+            if (depthEdge > 0)
+            {
+                edgeMix = lerp(originalColor, nearestColor * DarkenAmount, depthEdge);
+            }
+            else
+            {
+                edgeMix = lerp(originalColor, originalColor * lerp(LightenAmount, DarkenAmount, ld), normalEdge);
+            }
         }
         else
         {
-            edgeMix = lerp(originalColor, originalColor * lerp(LightenAmount, DarkenAmount, ld), normalEdge);
+            edgeMix = originalColor;
         }
 
         Out = edgeMix;
-        Depth = centerDepth;
 
     #else
         //Dummy code
         Out = 1;
-        Depth = 1;
+        originalColor = float3(1,1,1);
     #endif
 }
 
