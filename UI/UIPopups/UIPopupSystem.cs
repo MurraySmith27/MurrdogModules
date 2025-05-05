@@ -118,12 +118,12 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       _hidePopupActions.Clear();
    }
 
-   public void ShowPopup(string popupId, PanelShowBehaviour showBehaviour = PanelShowBehaviour.KEEP_PREVIOUS)
+   public UIPopupComponent ShowPopup(string popupId, PanelShowBehaviour showBehaviour = PanelShowBehaviour.KEEP_PREVIOUS)
    {
       if (_isCurrentlyStashed)
       {
          Debug.LogError($"Cannot show popup of type {popupId}. System is currently stashed");
-         return;
+         return null;
       }
 
       UIPopup uiPopup = uiPopups.FirstOrDefault(popup => popup.id == popupId);
@@ -133,7 +133,7 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          //see if we've already queued this popup.
          if (_popupQueue.FirstOrDefault(popup => popup.Item1 == popupId).Item2 != null)
          {
-            return;
+            return null;
          }
 
          if (!_popupInstancePool.ContainsKey(popupId))
@@ -182,10 +182,13 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
                _popupQueue.AddLast((popupId, newPopup.GetComponent<UIPopupComponent>()));
             }
          }
+
+         return newPopup;
       }
       else
       {
          Debug.LogError($"Failed to show popup with id: {popupId}");
+         return null;
       }
    }
 
