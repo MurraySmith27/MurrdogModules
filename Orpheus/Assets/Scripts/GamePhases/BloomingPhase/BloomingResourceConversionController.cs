@@ -63,84 +63,81 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
                 continue;
             }
             
-            if (key != ResourceType.Wood && key != ResourceType.Stone)
+            OnResourceConversionResourceStart?.Invoke(key);
+
+            yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionStartTime);
+
+            long currentQuantity = resources[key];
+            
+            OnResourceConversionQuantityProcessed?.Invoke(key, currentQuantity);
+            
+            yield return OrpheusTiming.WaitForSecondsGameTime(resourceQuantityProcessTime);
+            
+            List<(RelicTypes, long)> quantityRelicTypesTriggered = RelicSystem.Instance.OnFoodHarvestedQuantityCalculated(currentQuantity, key, out long foodQuantityChange);
+            
+            foreach ((RelicTypes, long) pair in quantityRelicTypesTriggered)
             {
-                OnResourceConversionResourceStart?.Invoke(key);
-
-                yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionStartTime);
-
-                long currentQuantity = resources[key];
+                currentQuantity += pair.Item2;
+                
+                //TODO: Trigger relic shake
                 
                 OnResourceConversionQuantityProcessed?.Invoke(key, currentQuantity);
-                
                 yield return OrpheusTiming.WaitForSecondsGameTime(resourceQuantityProcessTime);
+            }
+
+            double currentMult = GameConstants.BASE_FOOD_SCORE_PER_RESOURCE[key];
+            
+            OnResourceConversionMultProcessed?.Invoke(key, currentMult);
+
+            yield return OrpheusTiming.WaitForSecondsGameTime(resourceMultProcessTime);
+            
+            List<(RelicTypes, double)> multRelicTypesTriggered = RelicSystem.Instance.OnFoodHarvestedMultCalculated(currentMult, key, out double foodMultChange);
+
+            foreach ((RelicTypes, double) pair in multRelicTypesTriggered)
+            {
+                currentMult += pair.Item2;
                 
-                List<(RelicTypes, long)> quantityRelicTypesTriggered = RelicSystem.Instance.OnFoodHarvestedQuantityCalculated(currentQuantity, key, out long foodQuantityChange);
+                //TODO: Trigger relic shake
                 
-                foreach ((RelicTypes, long) pair in quantityRelicTypesTriggered)
+                OnResourceConversionMultProcessed?.Invoke(key, currentMult);
+                yield return OrpheusTiming.WaitForSecondsGameTime(resourceMultProcessTime);
+            }
+
+            yield return OrpheusTiming.WaitForSecondsGameTime(resourceMultProcessTime);
+            
+            List<(RelicTypes, long, double)> foodScoreRelicTypesTriggered = RelicSystem.Instance.OnConvertResourceToFoodScore(key, currentQuantity, currentMult, out long quantityChange, out double multChange);
+
+            foreach ((RelicTypes, long, double) pair in foodScoreRelicTypesTriggered)
+            {
+                currentQuantity += pair.Item2;
+                currentMult += pair.Item3;
+                
+                //TODO: Trigger relic shake
+                
+                if (pair.Item2 != 0)
                 {
-                    currentQuantity += pair.Item2;
-                    
-                    //TODO: Trigger relic shake
-                    
                     OnResourceConversionQuantityProcessed?.Invoke(key, currentQuantity);
                     yield return OrpheusTiming.WaitForSecondsGameTime(resourceQuantityProcessTime);
                 }
 
-                double currentMult = GameConstants.BASE_FOOD_SCORE_PER_RESOURCE[key];
-                
-                OnResourceConversionMultProcessed?.Invoke(key, currentMult);
-
-                yield return OrpheusTiming.WaitForSecondsGameTime(resourceMultProcessTime);
-                
-                List<(RelicTypes, double)> multRelicTypesTriggered = RelicSystem.Instance.OnFoodHarvestedMultCalculated(currentMult, key, out double foodMultChange);
-
-                foreach ((RelicTypes, double) pair in multRelicTypesTriggered)
+                if (pair.Item3 != 0)
                 {
-                    currentMult += pair.Item2;
-                    
-                    //TODO: Trigger relic shake
-                    
                     OnResourceConversionMultProcessed?.Invoke(key, currentMult);
                     yield return OrpheusTiming.WaitForSecondsGameTime(resourceMultProcessTime);
                 }
-
-                yield return OrpheusTiming.WaitForSecondsGameTime(resourceMultProcessTime);
-                
-                List<(RelicTypes, long, double)> foodScoreRelicTypesTriggered = RelicSystem.Instance.OnConvertResourceToFoodScore(key, currentQuantity, currentMult, out long quantityChange, out double multChange);
-
-                foreach ((RelicTypes, long, double) pair in foodScoreRelicTypesTriggered)
-                {
-                    currentQuantity += pair.Item2;
-                    currentMult += pair.Item3;
-                    
-                    //TODO: Trigger relic shake
-                    
-                    if (pair.Item2 != 0)
-                    {
-                        OnResourceConversionQuantityProcessed?.Invoke(key, currentQuantity);
-                        yield return OrpheusTiming.WaitForSecondsGameTime(resourceQuantityProcessTime);
-                    }
-
-                    if (pair.Item3 != 0)
-                    {
-                        OnResourceConversionMultProcessed?.Invoke(key, currentMult);
-                        yield return OrpheusTiming.WaitForSecondsGameTime(resourceMultProcessTime);
-                    }
-                }
-
-                long resourceFoodScore = (long)Math.Round(currentQuantity * currentMult);
-                
-                OnResourceConversionFoodScoreProcessed?.Invoke(key, resourceFoodScore);
-                
-                yield return OrpheusTiming.WaitForSecondsGameTime(resourceFoodScoreProcessTime);
-                
-                resourceFoodScores.Add((key, resourceFoodScore));
-                
-                OnResourceConversionResourceEnd?.Invoke(key);
-
-                yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionEndTime);
             }
+
+            long resourceFoodScore = (long)Math.Round(currentQuantity * currentMult);
+            
+            OnResourceConversionFoodScoreProcessed?.Invoke(key, resourceFoodScore);
+            
+            yield return OrpheusTiming.WaitForSecondsGameTime(resourceFoodScoreProcessTime);
+            
+            resourceFoodScores.Add((key, resourceFoodScore));
+            
+            OnResourceConversionResourceEnd?.Invoke(key);
+
+            yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionEndTime);
         }
 
         long foodScoreTotal = 0;

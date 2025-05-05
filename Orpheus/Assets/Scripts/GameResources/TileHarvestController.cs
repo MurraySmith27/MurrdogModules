@@ -147,11 +147,11 @@ public class TileHarvestController : Singleton<TileHarvestController>
                 case BuildingType.SushiRestaurant:
                     if (resourcesSoFar[ResourceType.Fish] >= GameConstants.FISH_PER_SUSHI)
                     {
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Popcorn))
+                        if (!resourcesProcessed.ContainsKey(ResourceType.Sushi))
                         {
-                            resourcesProcessed[ResourceType.Popcorn] = 0;
+                            resourcesProcessed[ResourceType.Sushi] = 0;
                         }
-                        resourcesProcessed[ResourceType.Popcorn] += GameConstants.SUSHI_PER_SUSHI_RESTAURANT;
+                        resourcesProcessed[ResourceType.Sushi] += GameConstants.SUSHI_PER_SUSHI_RESTAURANT;
 
                         if (!resourcesProcessed.ContainsKey(ResourceType.Fish))
                         {

@@ -31,6 +31,21 @@ MonoBehaviour:
   - styleTag: bread
     openingTag: <incr a=0.5 w=0 f=0.5><color=#873e23><link="bread">bread</link></color></incr>
     closingTag: 
+  - styleTag: copper
+    openingTag: <color=#b87333><link="copper">copper</link></color>
+    closingTag: 
+  - styleTag: steel
+    openingTag: <color=#cccccc><link="steel">steel</link></color>
+    closingTag: 
+  - styleTag: lumber
+    openingTag: <color=#c4a484><link="lumber">lumber</link></color>
+    closingTag: 
+  - styleTag: popcorn
+    openingTag: <color=#ffffe0><link="popcorn">popcorn</link></color>
+    closingTag: 
+  - styleTag: sushi
+    openingTag: <color=#333333><link="sushi">sushi</link></color>
+    closingTag: 
   - styleTag: gold
     openingTag: <bounce a=0.5 w=0 f=0.5><color=#f2eb63><link="gold">gold</link></color></bounce>
     closingTag: 
@@ -54,4 +69,19 @@ MonoBehaviour:
     closingTag: 
   - styleTag: grasstile
     openingTag: <color=#06944e><link="grasstile">grass tile</link></color>
+    closingTag: 
+  - styleTag: lumberyard
+    openingTag: <color=#c4a484><link="lumberyard">lumber yard</link></color>
+    closingTag: 
+  - styleTag: copperyard
+    openingTag: <color=#b87333><link="copperyard">copper yard</link></color>
+    closingTag: 
+  - styleTag: steelyard
+    openingTag: <color=#cccccc><link="steelyard">steel factory</link></color>
+    closingTag: 
+  - styleTag: popcornfactory
+    openingTag: <color=#ffffe0><link="popcornfactory">popcorn factory</link></color>
+    closingTag: 
+  - styleTag: sushirestaurant
+    openingTag: <color=#333333><link="sushirestaurant">sushi restaurant</link></color>
     closingTag: 

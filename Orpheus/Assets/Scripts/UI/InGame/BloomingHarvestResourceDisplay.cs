@@ -125,7 +125,31 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
 
     private void OnCityHarvestEnd(Guid cityGuid)
     {
-        animator.SetTrigger(animatorDeactivateTriggerName);
+        if (HarvestState.Instance.NumRemainingHands == 0)
+        {
+            animator.SetTrigger(animatorDeactivateTriggerName);
+        }
+        else
+        {
+            AnimateToSideOfScreen(cityGuid);
+        }
+    }
+
+    private void AnimateToSideOfScreen(Guid cityGuid)
+    {
+        Vector3 worldPosition;
+        CameraUtils.GetCameraPointOnPlane(_mainCamera, new Vector2(1f, 0.5f), out worldPosition);
+
+        Vector3 cameraCenterWorldPosition;
+        CameraUtils.GetCameraPointOnPlane(_mainCamera, new Vector2(0.5f, 0.5f), out cameraCenterWorldPosition);
+
+        Vector3 cityCenterWorldPosition = MapUtils.GetTileWorldPositionFromGridPosition(MapSystem.Instance.GetCityCenterPosition(cityGuid));
+        
+        worldPosition += cityCenterWorldPosition - cameraCenterWorldPosition;
+        
+        worldPosition.z += (this.transform as RectTransform).sizeDelta.x / 2f;
+        
+        MEC.Timing.RunCoroutine(AnimatePositionToWorldPositionCoroutine(worldPosition), this.gameObject);
     }
 
     private void OnTileResourceChanged(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
@@ -195,7 +219,6 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         }
     }
 
-
     private void OnTileBonusTickStart(Vector2Int position)
     {
         bonusTickHeaderAnimator.SetTrigger(bonusTickHeaderAnimatorActivateTriggerName);
@@ -208,14 +231,19 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
 
     private void AnimatePositionToTile(Vector2Int tilePosition)
     {
-        MEC.Timing.RunCoroutine(AnimatePositionToTileCoroutine(tilePosition), this.gameObject);
+        AnimatePositionToTileCoroutine(tilePosition);
     }
 
-    private IEnumerator<float> AnimatePositionToTileCoroutine(Vector2Int tilePosition)
+    private void AnimatePositionToTileCoroutine(Vector2Int tilePosition)
+    {
+        Vector3 worldPosition = MapUtils.GetTileWorldPositionFromGridPosition(tilePosition) + verticalOffset * _mainCamera.transform.up;
+
+        MEC.Timing.RunCoroutine(AnimatePositionToWorldPositionCoroutine(worldPosition), this.gameObject);
+    }
+
+    private IEnumerator<float> AnimatePositionToWorldPositionCoroutine(Vector3 worldPosition)
     {
         Vector3 originalPosition = rootTransform.localPosition;
-
-        Vector3 worldPosition = MapUtils.GetTileWorldPositionFromGridPosition(tilePosition) + verticalOffset * _mainCamera.transform.up;
         
         Vector3 destinationPosition = rootTransform.parent.InverseTransformPoint(worldPosition);
 

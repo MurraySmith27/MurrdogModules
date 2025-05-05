@@ -152,10 +152,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3934154681658362575, guid: 40bd9c7b821a4ca4cbb958c953dead65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796890212364430, guid: 40bd9c7b821a4ca4cbb958c953dead65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673382108368594065, guid: 40bd9c7b821a4ca4cbb958c953dead65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064429666574562477, guid: 40bd9c7b821a4ca4cbb958c953dead65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483326051967060067, guid: 40bd9c7b821a4ca4cbb958c953dead65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6955899407731474302, guid: 40bd9c7b821a4ca4cbb958c953dead65,
         type: 3}
       propertyPath: m_Name
       value: LumberMill
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955899407731474302, guid: 40bd9c7b821a4ca4cbb958c953dead65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176098306745174927, guid: 40bd9c7b821a4ca4cbb958c953dead65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

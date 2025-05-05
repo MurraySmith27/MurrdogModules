@@ -24,14 +24,7 @@ public class PersistentState : Singleton<PersistentState>
     
     public event Action<long> OnWoodValueChanged;
     
-    public event Action<long> OnLumberValueChanged;
-    
     public event Action<long> OnStoneValueChanged;
-    
-    public event Action<long> OnCopperValueChanged;
-    
-    public event Action<long> OnSteelValueChanged;
-    
     public event Action<int> OnItemCapacityChanged;
     
     public void IncrementRoundNumber()

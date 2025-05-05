@@ -44,6 +44,11 @@ public static class CameraUtils
         }
         else return false;
     }
+    
+    public static bool GetCameraPointOnPlane(Camera camera, Vector2 normalizedScreenSpaceCoords, out Vector3 centerPointOnPlane)
+    {
+        return GetPointOnPlaneFromMousePosition(normalizedScreenSpaceCoords * new Vector2(Screen.width, Screen.height), camera, out centerPointOnPlane);
+    }
 
     public static bool GetCameraCenterPointOnPlane(Camera camera, out Vector3 centerPointOnPlane)
     {

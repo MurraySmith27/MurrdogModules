@@ -11,6 +11,7 @@ public enum MapInteractionMode
     PlaceBuilding,
     LockCitizens,
     PlaceTile,
+    RemoveTile,
 }
 
 public class MapInteractionController : Singleton<MapInteractionController>
@@ -126,6 +127,12 @@ public class MapInteractionController : Singleton<MapInteractionController>
                         SwitchMapInteractionMode(MapInteractionMode.Default);
                     }
                     break;
+                case MapInteractionMode.RemoveTile:
+                    if (TryRemoveTile(tilePosition))
+                    {
+                        SwitchMapInteractionMode(MapInteractionMode.Default);
+                    }
+                    break;
                 case MapInteractionMode.LockCitizens:
                     if (CitizenController.Instance.IsCitizenOnTile(tilePosition))
                     {
@@ -188,13 +195,22 @@ public class MapInteractionController : Singleton<MapInteractionController>
     
     public void SwitchMapInteractionMode(MapInteractionMode newMode)
     {
-        if (newMode != MapInteractionMode.PlaceBuilding && newMode != MapInteractionMode.PlaceTile)
+        if (newMode == MapInteractionMode.PlaceBuilding || 
+            newMode == MapInteractionMode.PlaceTile || 
+            newMode == MapInteractionMode.RemoveTile)
         {
-            UIPopupSystem.Instance.UnstashAllPopups();
+            GenericPopups.ShowSingleRedButton("Cancel", () =>
+            {
+                UIPopupSystem.Instance.HidePopup("GenericButtonsPopup");
+                SwitchMapInteractionMode(MapInteractionMode.Default);
+            });
         }
         else
         {
-            UIPopupSystem.Instance.StashAllPopups();
+            if (UIPopupSystem.Instance.IsPopupShowing("GenericButtonsPopup"))
+            {
+                UIPopupSystem.Instance.HidePopup("GenericButtonsPopup");
+            }
         }
         
         CurrentMode = newMode;
@@ -254,6 +270,38 @@ public class MapInteractionController : Singleton<MapInteractionController>
             MapSystem.Instance.PlaceTile(tilePosition, tile);
             MapSystem.Instance.AddTileToCity(cityGuids[0], tilePosition);
             return true;
+        }
+    }
+
+    private bool TryRemoveTile(Vector2Int tilePosition)
+    {
+        List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();
+        
+        List<Vector2Int> cityCenterPositions = new List<Vector2Int>();
+
+        foreach (Guid cityGuid in cityGuids)
+        {
+            cityCenterPositions.Add(MapSystem.Instance.GetCityCenterPosition(cityGuid));
+        }
+        
+        if (cityGuids.Count == 0)
+        {
+            Debug.LogError("NO CITIES ARE BUILT, CANT REMOVE TILES.");
+            return false;
+        }
+        else if (!MapSystem.Instance.IsTileOwnedByCity(tilePosition))
+        {
+            Debug.LogError("CANNOT REMOVE TILE FROM CITY, TILE IS NOT OWNED BY CITY.");
+            return false;
+        }
+        else if (cityCenterPositions.Contains(tilePosition))
+        {
+            Debug.LogError("CANNOT REMOVE A CITY CENTER TILE FROM A CITY.");
+            return false;
+        }
+        else
+        {
+            return MapSystem.Instance.TryRemoveTileFromCity(tilePosition);
         }
     }
 

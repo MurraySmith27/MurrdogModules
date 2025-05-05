@@ -46,6 +46,14 @@ public class CityTileData
         }
     }
     
+    public void RemoveTileFromCity(Vector2Int newTile)
+    {
+        if (IsLocationInCity(newTile)) 
+        {
+            _ownedTiles.Remove(newTile);
+        }
+    }
+    
     private void SortTiles() 
     {
         _ownedTiles.Sort(((Vector2Int a, Vector2Int b) =>

@@ -25,24 +25,31 @@ public class ShadowOverlayVisuals : MonoBehaviour
 
     public void OnDisappear()
     {
-        Timing.RunCoroutineSingleton(DisintegrateCoroutine(), this.gameObject, SingletonBehavior.Overwrite);
+        Timing.RunCoroutineSingleton(DisintegrateCoroutine(1f), this.gameObject, SingletonBehavior.Overwrite);
     }
 
-    private IEnumerator<float> DisintegrateCoroutine()
+    public void OnReappear()
+    {
+        Timing.RunCoroutineSingleton(DisintegrateCoroutine(0f), this.gameObject, SingletonBehavior.Overwrite);   
+    }
+
+    private IEnumerator<float> DisintegrateCoroutine(float finalValue)
     {
         MaterialPropertyBlock block = new MaterialPropertyBlock();
         
         shadowRenderer.GetPropertyBlock(block);
         
+        float initialValue = block.GetFloat("_DisintegrateProgress");
+        
         for (float t = 0; t < disintegrateTime; t += Time.deltaTime)
         {
-            block.SetFloat("_DisintegrateProgress", t / disintegrateTime);
+            block.SetFloat("_DisintegrateProgress", Mathf.Lerp(initialValue, finalValue, t / disintegrateTime));
 
             shadowRenderer.SetPropertyBlock(block);
             yield return Timing.WaitForOneFrame;
         }
         
-        block.SetFloat("_DisintegrateProgress", 1f);
+        block.SetFloat("_DisintegrateProgress", finalValue);
 
         shadowRenderer.SetPropertyBlock(block);
         

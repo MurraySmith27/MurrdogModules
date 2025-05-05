@@ -157,10 +157,45 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3934154681658362575, guid: 9d4fb32c8240aba4fa3c95967a10905b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796890212364430, guid: 9d4fb32c8240aba4fa3c95967a10905b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673382108368594065, guid: 9d4fb32c8240aba4fa3c95967a10905b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064429666574562477, guid: 9d4fb32c8240aba4fa3c95967a10905b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483326051967060067, guid: 9d4fb32c8240aba4fa3c95967a10905b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6955899407731474302, guid: 9d4fb32c8240aba4fa3c95967a10905b,
         type: 3}
       propertyPath: m_Name
       value: PopcornFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955899407731474302, guid: 9d4fb32c8240aba4fa3c95967a10905b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176098306745174927, guid: 9d4fb32c8240aba4fa3c95967a10905b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

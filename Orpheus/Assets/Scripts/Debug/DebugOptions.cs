@@ -14,6 +14,20 @@ public class DebugOptions
         CameraController.Instance.FocusPosition(new Vector3(0, 0, 0));
     }
 
+    public void IncrementRoundNumber()
+    {
+        HarvestState.Instance.SetFoodGoalForHarvest(PersistentState.Instance.HarvestNumber);
+        
+        PersistentState.Instance.IncrementHarvestNumber();
+        
+        HarvestState.Instance.ResetFoodScore();
+    }
+
+    public void AddLotsOfGold()
+    {
+        PersistentState.Instance.ChangeCurrentGold(10000);    
+    }
+    
     [Category("Game Speed")]
     public void DoubleGameSpeed()
     {
@@ -25,5 +39,6 @@ public class DebugOptions
     {
         GlobalSettings.GameSpeed = 1;
     }
+    
 }
 #endif

@@ -7,6 +7,7 @@ public enum BoosterPackTypes
 {
     NONE,
     BASIC_TILE_BOOSTER,
+    ROUND_REWARDS_TILE_BOOSTER
 }
 
 public class BoosterPackSystem : Singleton<BoosterPackSystem> 
@@ -26,6 +27,9 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
         switch (type)
         {
             case BoosterPackTypes.BASIC_TILE_BOOSTER:
+                OpenBasicBoosterPack(GameConstants.NUM_TILES_PER_BASIC_BOOSTER);
+                break;
+            case BoosterPackTypes.ROUND_REWARDS_TILE_BOOSTER:
                 OpenBasicBoosterPack(GameConstants.NUM_TILES_PER_BASIC_BOOSTER);
                 break;
             default:

@@ -13,30 +13,30 @@ MonoBehaviour:
   m_Name: BuildingsVisualsData
   m_EditorClassIdentifier: 
   BuildingsVisualsData:
-  - Type: 0
+  - Type: 1
     Prefab: {fileID: 696966427250684961, guid: 8de7093a66b19544aac1938685d5c340, type: 3}
     Icon3DPrefab: {fileID: 158147337098504306, guid: a193986cb3416074094e5df7e686e917,
       type: 3}
     Descrpition: <b>Corn Farm<b><br>Harvests 1 <corn>.<br><br>Must be built on a
       <grasstile>
-  - Type: 1
+  - Type: 2
     Prefab: {fileID: 696966427250684961, guid: d5d1188ba772a3a45bf5869545751731, type: 3}
     Icon3DPrefab: {fileID: 404360159390045895, guid: 3dda5d4f8c5145544bd7fae03d7cef87,
       type: 3}
     Descrpition: <b>Wheat Farm<b><br>Harvests 1 <wheat>.<br><br>Must be built on
       a <grasstile>
-  - Type: 2
+  - Type: 3
     Prefab: {fileID: 696966427250684961, guid: f9669318069bfbb4eaf198915af9b0db, type: 3}
     Icon3DPrefab: {fileID: 2256095890943613835, guid: b834f669ed2abe041b2a6c2da09c50c4,
       type: 3}
     Descrpition: <b>Fish Farm<b><br>Harvests 1 <fish>.<br><br>Must be built on a
       <watertile>.
-  - Type: 4
+  - Type: 0
     Prefab: {fileID: 696966427250684961, guid: a8a67ab0955d492429985c4f49b9aa88, type: 3}
     Icon3DPrefab: {fileID: 3789447713343784036, guid: 34dad95030ec7d14bbd1e7b48ba0f40c,
       type: 3}
     Descrpition: <Castle><br>The center of a city.<br><br>Must be built on a <grasstile>.
-  - Type: 3
+  - Type: 4
     Prefab: {fileID: 696966427250684961, guid: 00afb61cc40d73a4b8b38296ec37d7bf, type: 3}
     Icon3DPrefab: {fileID: 696966427250684961, guid: 40cc41ddad1a3b443af458eeeda690a7,
       type: 3}

@@ -32,11 +32,11 @@ public enum PersistentResourceType
 
 public enum BuildingType
 {
+    CityCapital,
     CornFarm,
     WheatFarm,
     FishFarm,
     Bakery,
-    CityCapital,
     LumberMill,
     CopperYard,
     SteelYard,

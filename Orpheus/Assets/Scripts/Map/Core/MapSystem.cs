@@ -359,6 +359,36 @@ public class MapSystem : Singleton<MapSystem>
         return true;
     }
 
+    public bool TryRemoveTileFromCity(Vector2Int tilePosition)
+    {
+        Guid cityGuid;
+        if (!GetCityGuidFromTile(tilePosition, out cityGuid))
+        {
+            Debug.LogError($"Cannot remove tile from city. could not find city that owns tile ({tilePosition.x}, {tilePosition.y}).");
+            return false;
+        }
+        
+        CityTileData tileData = _cities.FirstOrDefault((CityTileData data) => data.CityGuid == cityGuid);
+        if (tileData == null)
+        {
+            Debug.LogError(
+                $"$Cannot remove tile from city. Could not find city with guid {cityGuid} in city tile data.");
+            return false;
+        }
+
+        if (tileData.IsLocationInCity(tilePosition))
+        {
+            tileData.RemoveTileFromCity(tilePosition);
+            
+            OnTileRemovedFromCity?.Invoke(tileData.GetCapitalLocation(), tilePosition);
+            
+            OnCityOwnedTilesChanged?.Invoke(tileData.GetCapitalLocation(), tileData.GetTilesInOrder());
+            
+            return true;
+        }
+        else return false;
+    }
+
     public List<ResourceItem> GenerateResourcesOnTile(TileType type)
     {
         return _mapResourcesGenerator.GenerateResourcesOnTile(type);

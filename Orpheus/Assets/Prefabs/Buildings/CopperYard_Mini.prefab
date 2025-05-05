@@ -73,10 +73,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3934154681658362575, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796890212364430, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673382108368594065, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064429666574562477, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483326051967060067, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6955899407731474302, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1,
         type: 3}
       propertyPath: m_Name
       value: CopperYard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955899407731474302, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176098306745174927, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

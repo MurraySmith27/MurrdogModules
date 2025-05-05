@@ -19,10 +19,10 @@ MonoBehaviour:
   - Type: 1
     Costs: []
     CanBuildOnTiles: 02000000
-  - Type: 3
+  - Type: 2
     Costs: []
     CanBuildOnTiles: 02000000
-  - Type: 2
+  - Type: 3
     Costs: []
     CanBuildOnTiles: 01000000
   - Type: 4

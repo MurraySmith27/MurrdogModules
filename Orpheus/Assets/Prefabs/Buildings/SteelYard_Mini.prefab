@@ -152,10 +152,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3934154681658362575, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796890212364430, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673382108368594065, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064429666574562477, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483326051967060067, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6955899407731474302, guid: b2908ca12d80846498ca13227f192671,
         type: 3}
       propertyPath: m_Name
       value: SteelYard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955899407731474302, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176098306745174927, guid: b2908ca12d80846498ca13227f192671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -54,6 +54,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
         
         MapSystem.Instance.OnTileAddedToCity -= OnTileAddedToCity;
         MapSystem.Instance.OnTileAddedToCity += OnTileAddedToCity;
+        
+        MapSystem.Instance.OnTileRemovedFromCity -= OnTileRemovedFromCity;
+        MapSystem.Instance.OnTileRemovedFromCity += OnTileRemovedFromCity;
 
         TileFrustrumCulling.Instance.OnTileCullingUpdated -= OnCullingUpdated;
         TileFrustrumCulling.Instance.OnTileCullingUpdated += OnCullingUpdated;
@@ -74,6 +77,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
             MapSystem.Instance.OnTilePlaced -= OnTilePlaced;
             MapSystem.Instance.OnCityOwnedTilesChanged -= OnCityOwnedTilesChanged;
             MapSystem.Instance.OnTileAddedToCity -= OnTileAddedToCity;
+            MapSystem.Instance.OnTileRemovedFromCity -= OnTileRemovedFromCity;
         }
 
         if (TileFrustrumCulling.IsAvailable)
@@ -282,6 +286,42 @@ public class MapVisualsController : Singleton<MapVisualsController>
         CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(tilePosition));
     }
 
+    private void OnTileRemovedFromCity(Vector2Int cityCapitalPosition, Vector2Int tilePosition)
+    {
+        ClearTile(tilePosition);
+        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(tilePosition));
+    }
+
+    private void ClearTile(Vector2Int tilePosition)
+    {
+        TileVisuals tile = GetTileInstanceAtPosition(tilePosition);
+
+        tile.ShadowAppearAnimation();
+        tile.DetachAllBuildings();
+
+        foreach (var pair in InstantiatedBuildings)
+        {
+            if (pair.Item1 == tilePosition)
+            {
+                Destroy(pair.Item2.gameObject);
+                InstantiatedBuildings.Remove(pair);
+                break;
+            }
+        }
+        
+        tile.DetachAllCitizens();
+        
+        foreach (var pair in InstantiatedCitizens)
+        {
+            if (pair.Item1 == tilePosition)
+            {
+                Destroy(pair.Item2.gameObject);
+                InstantiatedCitizens.Remove(pair);
+                break;
+            }
+        }
+    }
+    
     private void ReallocateMapTilesArray(int requiredWidth, int requiredHeight)
     {
         int newWidth = Mathf.Max(requiredWidth, InstantiatedMapTiles.GetLength(0));

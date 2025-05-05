@@ -103,6 +103,16 @@ public class TileVisuals : MonoBehaviour
         
         building.transform.SetParent(buildingsRoot);
     }
+    
+    public void DetachAllBuildings()
+    {
+        foreach (BuildingBehaviour building in _attachedBuildings)
+        {
+            building.transform.SetParent(null);
+        }
+        
+        _attachedCitizens.Clear();
+    }
 
     public void AttachCitizen(CitizenBehaviour citizen)
     {
@@ -132,6 +142,12 @@ public class TileVisuals : MonoBehaviour
     public void ToggleShadow(bool enabled)
     {
         shadowOverlayVisuals.gameObject.SetActive(enabled);
+    }
+
+    public void ShadowAppearAnimation()
+    {
+        shadowOverlayVisuals.gameObject.SetActive(true);
+        shadowOverlayVisuals.OnReappear();
     }
 
     public void ToggleGrayOut(bool enabled)

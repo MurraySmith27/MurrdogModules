@@ -131,7 +131,7 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
 
             newTile.Resources = MapSystem.Instance.GenerateResourcesOnTile(newTile.Type);
             
-            int randomBuildingType = Random.Range(0, Enum.GetNames(typeof(BuildingType)).Length - 1);
+            int randomBuildingType = Random.Range(1, Enum.GetNames(typeof(BuildingType)).Length);
             
             newTile.Buildings = new();
             
