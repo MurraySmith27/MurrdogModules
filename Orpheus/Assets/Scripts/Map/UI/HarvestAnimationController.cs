@@ -10,8 +10,8 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
     
     private void Start()
     {
-        BloomingHarvestController.Instance.OnHarvestStart -= LockCamera;
-        BloomingHarvestController.Instance.OnHarvestStart += LockCamera;
+        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
         
         BloomingHarvestController.Instance.OnCityHarvestStart -= OnCityHarvestStart;
         BloomingHarvestController.Instance.OnCityHarvestStart += OnCityHarvestStart;
@@ -36,12 +36,6 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         
         BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
         BloomingHarvestController.Instance.OnTileBonusTickEnd += OnTileBonusTickEnd;
-
-        BloomingResourceConversionController.Instance.OnResourceConversionStart -= LockCamera;
-        BloomingResourceConversionController.Instance.OnResourceConversionStart += LockCamera;
-
-        BloomingResourceConversionController.Instance.OnResourceConversionEnd -= UnlockCamera;
-        BloomingResourceConversionController.Instance.OnResourceConversionEnd += UnlockCamera;
     }
 
     private void OnDestroy()
@@ -58,6 +52,23 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
             BloomingResourceConversionController.Instance.OnResourceConversionStart -= LockCamera;
             BloomingResourceConversionController.Instance.OnResourceConversionEnd -= UnlockCamera;
         }
+
+        if (PhaseStateMachine.IsAvailable)
+        {
+            PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        }
+    }
+
+    private void OnPhaseChanged(GamePhases gamePhases)
+    {
+        if (gamePhases == GamePhases.BloomingUpkeep)
+        {
+            LockCamera();
+        }
+        else if (gamePhases == GamePhases.BloomingEndStep)
+        {
+            UnlockCamera();
+        }
     }
 
     private void LockCamera()
@@ -67,7 +78,7 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
 
     private void UnlockCamera()
     {
-        CameraController.Instance.SetCameraLock(true);
+        CameraController.Instance.SetCameraLock(false);
     }
     
     private void OnCityHarvestStart(Guid cityGuid)

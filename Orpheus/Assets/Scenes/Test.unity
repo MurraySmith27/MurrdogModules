@@ -35404,6 +35404,134 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 811195311}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &812872241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812872242}
+  - component: {fileID: 812872243}
+  m_Layer: 0
+  m_Name: BackgroundColorSwitcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &812872242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812872241}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2036095505}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812872243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812872241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37dba24371b84be895fa7f95e8a0c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceVisualData: {fileID: 11400000, guid: 95c15ae972909994fbe10b5dbb441c00, type: 2}
+  backgroundMaterial: {fileID: 2100000, guid: a3c00c67e55eb194d8bf5d782670f7c2, type: 2}
+  defaultColor: {r: 0.38431373, g: 0.62352943, b: 0.7607843, a: 1}
+  backgroundHexSizePropertyName: _HexSizeMultiplier
+  backgroundColorPropertyName: _BackgroundColor
+  resourceIncrementAnimationTime: 1
+  backgroundStartingColor: {r: 0, g: 0, b: 0, a: 1}
+  resourceIncrementColorAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 10
+      outSlope: 10
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1
+      value: 1
+      inSlope: -0.0043993704
+      outSlope: -0.0043993704
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5376025
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.315367
+      outSlope: -3.315367
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.032407377
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  resourceIncrementHexSizeDefault: 1
+  resourceIncrementHexSizeIncrease: -0.2
+  resourceIncrementHexSizeAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 10
+      outSlope: 10
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1
+      value: 1
+      inSlope: -0.0043993704
+      outSlope: -0.0043993704
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5376025
+    - serializedVersion: 3
+      time: 0.7
+      value: 0
+      inSlope: 0.0074478653
+      outSlope: 0.0074478653
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.7916666
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.0077539417
+      outSlope: 0.0077539417
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.60833335
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &813723422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88845,6 +88973,7 @@ Transform:
   m_Children:
   - {fileID: 1582744516}
   - {fileID: 150269450}
+  - {fileID: 812872242}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2038080240

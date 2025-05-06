@@ -1,51 +1,56 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "ResourceVisualData", menuName = "Orpheus/ResourceVisualData", order = 1)]
 public class ResourceVisualDataSO : ScriptableObject
 {
-    [SerializeField] private Sprite cornIcon;
-    [SerializeField] private Sprite wheatIcon;
-    [SerializeField] private Sprite fishIcon;
-    [SerializeField] private Sprite woodIcon;
-    [SerializeField] private Sprite stoneIcon;
-    [SerializeField] private Sprite breadIcon;
-    [SerializeField] private Sprite lumberIcon;
-    [SerializeField] private Sprite copperIcon;
-    [SerializeField] private Sprite steelIcon;
-    [SerializeField] private Sprite popcornIcon;
-    [SerializeField] private Sprite sushiIcon;
+    [Serializable]
+    private class ResourceVisualData
+    {
+        public ResourceType Type;
+        public Sprite Sprite;
+        public Color Color;
+    }
+
+    [SerializeField] private List<ResourceVisualData> visualData = new();
 
     public Sprite GetSpriteForResourceItem(ResourceType type)
     {
-        switch (type)
+        ResourceVisualData data = visualData.FirstOrDefault((ResourceVisualData visData) =>
         {
-            case ResourceType.Corn:
-                return cornIcon;
-            case ResourceType.Wheat:
-                return wheatIcon;
-            case ResourceType.Fish:
-                return fishIcon;
-            case ResourceType.Wood:
-                return woodIcon;
-            case ResourceType.Stone:
-                return stoneIcon;
-            case ResourceType.Bread:
-                return breadIcon;
-            case ResourceType.Lumber:
-                return lumberIcon;
-            case ResourceType.Copper:
-                return copperIcon;
-            case ResourceType.Steel:
-                return steelIcon;
-            case ResourceType.Popcorn:
-                return popcornIcon;
-            case ResourceType.Sushi:
-                return sushiIcon;
-        }
+            return visData.Type == type;
+        });
 
-        return null;
+        if (data == null)
+        {
+            Debug.LogError($"Cannot find visual data for resource of type: {Enum.GetName(typeof(ResourceType), type)}");
+            return null;
+        }
+        else
+        {
+            return data.Sprite;
+        }
+    }
+    
+    public Color GetColorForResourceItem(ResourceType type)
+    {
+        ResourceVisualData data = visualData.FirstOrDefault((ResourceVisualData visData) =>
+        {
+            return visData.Type == type;
+        });
+
+        if (data == null)
+        {
+            Debug.LogError($"Cannot find visual data for resource of type: {Enum.GetName(typeof(ResourceType), type)}");
+            return Color.clear;
+        }
+        else
+        {
+            return data.Color;
+        }
     }
 }
