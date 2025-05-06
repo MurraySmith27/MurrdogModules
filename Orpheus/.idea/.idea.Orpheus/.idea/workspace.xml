@@ -4,38 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/BuildingsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/BuildingsData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CopperYard_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CopperYard_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/LumberMill_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/LumberMill_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/PopcornFactory_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/PopcornFactory_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/SteelYard_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/SteelYard_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/SushiRestaurant_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/SushiRestaurant_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BulidingPopup/BuildingPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BulidingPopup/BuildingPopup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/3D/Tiles/TileIcon3DVisual.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/3D/Tiles/TileIcon3DVisual.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingResourceConversionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingResourceConversionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameResources/TileHarvestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameResources/TileHarvestController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/CityTileData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/CityTileData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/ShadowOverlayVisuals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/ShadowOverlayVisuals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceDisplay.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextAssets/TextAnimator StyleSheet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextAssets/TextAnimator StyleSheet.asset" afterDir="false" />
-    </list>
+    <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -222,10 +191,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="37008">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="37008" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -293,6 +262,7 @@
       <workItem from="1746228952611" duration="2356000" />
       <workItem from="1746373195563" duration="6146000" />
       <workItem from="1746397741152" duration="11019000" />
+      <workItem from="1746476063464" duration="3948000" />
     </task>
     <servers />
   </component>
@@ -387,32 +357,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs</url>
-          <line>290</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapVisualsController.cs" containingFunctionPresentation="Method 'OnTileRemovedFromCity'">
-            <startOffsets>
-              <option value="10993" />
-            </startOffsets>
-            <endOffsets>
-              <option value="11017" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Interface/TileVisuals.cs</url>
-          <line>148</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Interface\TileVisuals.cs" containingFunctionPresentation="Method 'ShadowAppearAnimation'">
-            <startOffsets>
-              <option value="4088" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4136" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
