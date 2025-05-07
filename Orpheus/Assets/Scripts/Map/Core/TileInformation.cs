@@ -26,7 +26,8 @@ public enum PersistentResourceType
 {
     Wood,
     Stone,
-    Gold
+    Gold,
+    BuildToken,
 }
 
 

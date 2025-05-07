@@ -15,6 +15,8 @@ public class PersistentState : Singleton<PersistentState>
     public long CurrentWood { get; private set; } = GameConstants.STARTING_WOOD;
     
     public long CurrentStone { get; private set; } = GameConstants.STARTING_STONE;
+
+    public long CurrentBuildTokens { get; private set; } = GameConstants.STARTING_BUILD_TOKENS;
     
     public int CurrentItemCapacity { get; private set; } = GameConstants.STARTING_ITEM_CAPACITY;
 
@@ -25,6 +27,9 @@ public class PersistentState : Singleton<PersistentState>
     public event Action<long> OnWoodValueChanged;
     
     public event Action<long> OnStoneValueChanged;
+
+    public event Action<long> OnBuildTokensValueChanged;
+    
     public event Action<int> OnItemCapacityChanged;
     
     public void IncrementRoundNumber()
@@ -57,6 +62,13 @@ public class PersistentState : Singleton<PersistentState>
         CurrentStone += difference;
 
         OnStoneValueChanged?.Invoke(CurrentStone);
+    }
+    
+    public void ChangeCurrentBuildTokens(long difference)
+    {
+        CurrentBuildTokens += difference;
+        
+        OnBuildTokensValueChanged?.Invoke(CurrentBuildTokens);
     }
 
     public void ChangeItemCapacity(int newCapacity)

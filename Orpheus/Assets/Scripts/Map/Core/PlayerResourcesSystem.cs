@@ -33,6 +33,9 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
             case PersistentResourceType.Gold:
                 PersistentState.Instance.ChangeCurrentGold(diff);
                 break;
+            case PersistentResourceType.BuildToken:
+                PersistentState.Instance.ChangeCurrentBuildTokens(diff);
+                break;
         }
     }
 
@@ -46,6 +49,8 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
                 return PersistentState.Instance.CurrentStone >= quantity;
             case PersistentResourceType.Gold:
                 return PersistentState.Instance.CurrentGold >= quantity;
+            case PersistentResourceType.BuildToken:
+                return PersistentState.Instance.CurrentBuildTokens >= quantity;
         }
 
         return false;

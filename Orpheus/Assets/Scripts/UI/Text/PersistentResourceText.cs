@@ -26,6 +26,12 @@ public class PersistentResourceText : MonoBehaviour
                 PersistentState.Instance.OnGoldValueChanged += OnResourceValueChanged;
                 OnResourceValueChanged(PersistentState.Instance.CurrentGold);
                 break;
+            case PersistentResourceType.BuildToken:
+                PersistentState.Instance.OnBuildTokensValueChanged -= OnResourceValueChanged;
+                PersistentState.Instance.OnBuildTokensValueChanged += OnResourceValueChanged;
+                OnResourceValueChanged(PersistentState.Instance.CurrentBuildTokens);
+                break;
+
         }
     }
 
@@ -43,6 +49,9 @@ public class PersistentResourceText : MonoBehaviour
                     break;
                 case PersistentResourceType.Gold:
                     PersistentState.Instance.OnGoldValueChanged -= OnResourceValueChanged;
+                    break;
+                case PersistentResourceType.BuildToken:
+                    PersistentState.Instance.OnBuildTokensValueChanged -= OnResourceValueChanged;
                     break;
             }
         }

@@ -102,10 +102,34 @@ MonoBehaviour:
     m_HashCode: 1923104158
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 10
+    m_GlyphIndex: 11
     m_Scale: 1
-    m_Name: AllIcons_8
-    m_HashCode: 1923104158
+    m_Name: AllIcons_9
+    m_HashCode: 1923104159
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 12
+    m_Scale: 1
+    m_Name: AllIcons_10
+    m_HashCode: -962072505
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 13
+    m_Scale: 1
+    m_Name: AllIcons_11
+    m_HashCode: -962072506
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 14
+    m_Scale: 1
+    m_Name: AllIcons_12
+    m_HashCode: -962072507
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 15
+    m_Scale: 1
+    m_Name: AllIcons_13
+    m_HashCode: -962072508
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -341,6 +365,22 @@ MonoBehaviour:
     m_GlyphRect:
       m_X: 1536
       m_Y: 1024
+      m_Width: 512
+      m_Height: 512
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1224051055, guid: c23a243bbe9b96e479496265bce78872, type: 3}
+  - m_Index: 15
+    m_Metrics:
+      m_Width: 512
+      m_Height: 512
+      m_HorizontalBearingX: 70
+      m_HorizontalBearingY: 423
+      m_HorizontalAdvance: 590
+    m_GlyphRect:
+      m_X: 1536
+      m_Y: 512
       m_Width: 512
       m_Height: 512
     m_Scale: 1

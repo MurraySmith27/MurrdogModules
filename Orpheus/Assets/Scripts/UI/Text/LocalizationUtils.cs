@@ -76,6 +76,8 @@ public static class LocalizationUtils
                 return "<stone>";
             case PersistentResourceType.Gold:
                 return "<gold>";
+            case PersistentResourceType.BuildToken:
+                return "<buildtoken>";
             default:
                 return "";
         }
@@ -91,6 +93,8 @@ public static class LocalizationUtils
                 return "<sprite index=3>";
             case PersistentResourceType.Gold:
                 return "<sprite index=0>";
+            case PersistentResourceType.BuildToken:
+                return "<sprite index=14>";
             default:
                 return "";
         }

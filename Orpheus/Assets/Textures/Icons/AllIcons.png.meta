@@ -437,6 +437,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: AllIcons_15
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91319212cf367fd4fa46e5382f0ac2c1
+      internalID: -2131661904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -455,6 +476,7 @@ TextureImporter:
       AllIcons_12: 1428168234
       AllIcons_13: 558398524
       AllIcons_14: 161515298
+      AllIcons_15: -2131661904
       AllIcons_2: -814575658
       AllIcons_3: -603747525
       AllIcons_4: 1153645032
