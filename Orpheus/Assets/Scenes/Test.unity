@@ -25474,7 +25474,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 23
+    m_Bits: 279
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -35453,6 +35453,7 @@ MonoBehaviour:
   defaultColor: {r: 0.38431373, g: 0.62352943, b: 0.7607843, a: 1}
   backgroundHexSizePropertyName: _HexSizeMultiplier
   backgroundColorPropertyName: _BackgroundColor
+  fadeAnimationTime: 1
   resourceIncrementAnimationTime: 1
   backgroundStartingColor: {r: 0, g: 0, b: 0, a: 1}
   resourceIncrementColorAnimationCurve:
@@ -44840,7 +44841,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &979111622
 RectTransform:
   m_ObjectHideFlags: 0

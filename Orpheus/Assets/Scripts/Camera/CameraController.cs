@@ -139,6 +139,11 @@ public class CameraController : Singleton<CameraController>
             
             SetCameraLock(true);
         }
+        else if (mapInteractionMode == MapInteractionMode.LockCitizens)
+        {
+            SetCameraTopDownMode(false);
+            SetCameraLock(true);
+        }
         else
         {
             SetCameraTopDownMode(false);

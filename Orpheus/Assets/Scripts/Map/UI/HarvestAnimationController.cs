@@ -73,6 +73,12 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
 
     private void LockCamera()
     {
+        Guid cityGuid = MapSystem.Instance.GetAllCityGuids()[0];
+        
+        Vector2Int cityPosition = MapSystem.Instance.GetCityCenterPosition(cityGuid);
+        
+        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(cityPosition));
+        
         CameraController.Instance.SetCameraLock(true);
     }
 

@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 1059125591584008966}
   - component: {fileID: 4596433333376824095}
   - component: {fileID: 2103766626261559266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hex (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
