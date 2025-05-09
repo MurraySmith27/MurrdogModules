@@ -12,35 +12,35 @@ public static class GameConstants
 
     public static readonly long[] FOOD_GOALS_PER_HARVEST =
     {
-        4,
-        6,
-        8,
-        10,
-        14,
-        18,
-        22,
-        34,
-        42,
-        52,
-        72,
-        92,
-        112,
-        142,
-        182,
-        202,
-        252,
-        302,
-        352,
-        422,
-        472,
-        502
+        2,   
+        4,   
+        6,   
+        8,   
+        12,  
+        16,  
+        20,  
+        32,  
+        40,  
+        50,  
+        70,  
+        90,  
+        110, 
+        140, 
+        180, 
+        200, 
+        250, 
+        300, 
+        350, 
+        420, 
+        470, 
+        500  
     };
 
     public static readonly long STARTING_WOOD = 1;
     
     public static readonly long STARTING_STONE = 1;
 
-    public static readonly long STARTING_BUILD_TOKENS = 1;
+    public static readonly long STARTING_BUILD_TOKENS = 0;
 
     public static readonly long STARTING_GOLD = 400;
 
@@ -64,8 +64,8 @@ public static class GameConstants
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]
     {
-        new ResourceItem(ResourceType.Corn, 1), new ResourceItem(ResourceType.Stone, 1), 
-        new ResourceItem(ResourceType.Wheat, 0), new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wood, 1),
+        new ResourceItem(ResourceType.Corn, 0), new ResourceItem(ResourceType.Stone, 0), 
+        new ResourceItem(ResourceType.Wheat, 0), new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wood, 0),
         new ResourceItem(ResourceType.Stone, 0), new ResourceItem(ResourceType.Wood, 0)
     };
     

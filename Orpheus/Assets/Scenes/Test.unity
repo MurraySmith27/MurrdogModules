@@ -5561,7 +5561,7 @@ GameObject:
   - component: {fileID: 163230030}
   - component: {fileID: 163230032}
   m_Layer: 0
-  m_Name: 0
+  m_Name: UIInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5621,6 +5621,7 @@ MonoBehaviour:
   cameraDecceleration: 150
   cameraHardStopThreshold: 0.001
   maxCameraVelocity: 150
+  maxDistanceFromCityCenter: {x: 40, y: 25}
   cameraMoveAnimCurve:
     serializedVersion: 2
     m_Curve:
