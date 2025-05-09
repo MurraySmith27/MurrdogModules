@@ -5561,7 +5561,7 @@ GameObject:
   - component: {fileID: 163230030}
   - component: {fileID: 163230032}
   m_Layer: 0
-  m_Name: UIInput
+  m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5646,7 +5646,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   cameraMoveAnimTime: 0.5
-  edgeOfScreenMoveThresholds: {x: 0.05, y: 0.05, z: 0.1, w: 0.4}
+  edgeOfScreenMoveThresholds: {x: 0, y: 0, z: 0, w: 0}
   edgeOfScreenDeadZoneWidth: 10
   edgeOfScreenCameraVelocityMinMax: {x: 0, y: 50}
   cameraCullingUpdateDistance: 5
@@ -25283,6 +25283,7 @@ GameObject:
   - component: {fileID: 611748455}
   - component: {fileID: 611748454}
   - component: {fileID: 611748453}
+  - component: {fileID: 611748456}
   m_Layer: 0
   m_Name: CinemachineBrain
   m_TagString: MainCamera
@@ -25436,6 +25437,23 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &611748456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611748451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!1001 &616412532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34697,7 +34715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
-  inputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
+  inputChannel: {fileID: 0}
   uiPopups:
   - id: ShopPopup
     prefab: {fileID: 0}

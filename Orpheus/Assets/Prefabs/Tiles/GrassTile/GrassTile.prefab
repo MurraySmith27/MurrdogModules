@@ -266,6 +266,7 @@ MonoBehaviour:
   citizensRoot: {fileID: 3274471077614038502}
   shadowOverlayVisuals: {fileID: 4829000669476569114}
   grayOutOverlayVisuals: {fileID: 377181445142317258}
+  tilePreviewOverlayVisuals: {fileID: 2186668706728838633}
   bonusTickParticleSystemStartDelay: 0.15
   bonusTickParticleSystemPrefab: {fileID: 6810055551816051034, guid: f7b274fb098a52246be32218d4a07e73,
     type: 3}
@@ -418,11 +419,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileOverlays
       objectReference: {fileID: 0}
-    - target: {fileID: 1165460707796156090, guid: 51ce6a504c7ad4392984b9cc1088b21c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7154039977032998908, guid: 51ce6a504c7ad4392984b9cc1088b21c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -474,8 +470,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 4942838581746303934, guid: 51ce6a504c7ad4392984b9cc1088b21c, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51ce6a504c7ad4392984b9cc1088b21c, type: 3}
@@ -495,6 +490,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fd59fc936d086547a2f6c55dd3ccc3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2186668706728838633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8726890255370760444, guid: 51ce6a504c7ad4392984b9cc1088b21c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7441283492630508821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce485c7d833cfe4a86326a8cbc84334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4829000669476569114 stripped

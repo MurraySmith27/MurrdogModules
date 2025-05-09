@@ -25,12 +25,12 @@ public class ShadowOverlayVisuals : MonoBehaviour
 
     public void OnDisappear()
     {
-        Timing.RunCoroutineSingleton(DisintegrateCoroutine(1f), this.gameObject, SingletonBehavior.Overwrite);
+        Timing.RunCoroutineSingleton(DisintegrateCoroutine(1f).CancelWith(this.gameObject), this.gameObject, SingletonBehavior.Overwrite);
     }
 
     public void OnReappear()
     {
-        Timing.RunCoroutineSingleton(DisintegrateCoroutine(0f), this.gameObject, SingletonBehavior.Overwrite);   
+        Timing.RunCoroutineSingleton(DisintegrateCoroutine(0f).CancelWith(this.gameObject), this.gameObject, SingletonBehavior.Overwrite);   
     }
 
     private IEnumerator<float> DisintegrateCoroutine(float finalValue)

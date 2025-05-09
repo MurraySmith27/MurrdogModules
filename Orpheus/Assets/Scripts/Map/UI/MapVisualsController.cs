@@ -37,6 +37,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
     private RectInt _lastCullingRect = new RectInt(new Vector2Int(-1,-1), new Vector2Int(1,1));
 
     private List<Vector2Int> _grayedOutPositions = new();
+
+    private TileVisuals _lastHoveredOverTileVisuals = null;
     
     private void Start()
     {
@@ -66,6 +68,12 @@ public class MapVisualsController : Singleton<MapVisualsController>
         
         CitizenController.Instance.OnCitizenRemovedFromTile -= OnCitizenRemovedFromTile;
         CitizenController.Instance.OnCitizenRemovedFromTile += OnCitizenRemovedFromTile;
+
+        MapInteractionController.Instance.OnMapInteractionModeChanged -= OnMapInteractionModeChanged;
+        MapInteractionController.Instance.OnMapInteractionModeChanged += OnMapInteractionModeChanged;
+
+        MapInteractionController.Instance.OnTileHoveredOver -= OnTileHoveredOver;
+        MapInteractionController.Instance.OnTileHoveredOver += OnTileHoveredOver;
     }
 
     private void OnDestroy()
@@ -90,6 +98,12 @@ public class MapVisualsController : Singleton<MapVisualsController>
             CitizenController.Instance.OnCitizenAddedToTile -= OnCitizenAddedToTile;
             CitizenController.Instance.OnCitizenRemovedFromTile -= OnCitizenRemovedFromTile;
         }
+
+        if (MapInteractionController.IsAvailable)
+        {
+            MapInteractionController.Instance.OnMapInteractionModeChanged -= OnMapInteractionModeChanged;
+            MapInteractionController.Instance.OnTileHoveredOver -= OnTileHoveredOver;
+        }
     }
 
     public TileVisuals GetTileInstanceAtPosition(Vector2Int position)
@@ -101,6 +115,32 @@ public class MapVisualsController : Singleton<MapVisualsController>
         else return InstantiatedMapTiles[position.x, position.y];
     }
 
+    private void OnMapInteractionModeChanged(MapInteractionMode newInteractionMode)
+    {
+        if (newInteractionMode == MapInteractionMode.PlaceTile)
+        {
+            ToggleAdjacentTilePreviews(true);
+        }
+        else
+        {
+            ToggleAdjacentTilePreviews(false);
+        }
+    }
+
+    private void OnTileHoveredOver(TileVisuals tileVisuals, Vector2Int tilePosition)
+    {
+        if (_lastHoveredOverTileVisuals == tileVisuals) return;
+        
+        if (_lastHoveredOverTileVisuals != null)
+        {
+            _lastHoveredOverTileVisuals.OnHoveredOver(false);
+        }
+        
+        tileVisuals.OnHoveredOver(true);
+
+        _lastHoveredOverTileVisuals = tileVisuals;
+    }
+    
     private void OnMapChunkGenerated(int row, int col, int width, int height)
     {
         //need to populate this map chunk.
@@ -337,6 +377,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
                 }
             }
         }
+        
+        Debug.Log("clear tile");
+        Destroy(tile.gameObject);
     }
     
     private void ReallocateMapTilesArray(int requiredWidth, int requiredHeight)
@@ -392,5 +435,44 @@ public class MapVisualsController : Singleton<MapVisualsController>
         }
 
         _lastCullingRect = newCullingRect;
+    }
+
+    private void ToggleAdjacentTilePreviews(bool toggleEnabled)
+    {
+        List<Guid> allCityGuids = MapSystem.Instance.GetAllCityGuids();
+
+        if (allCityGuids.Count == 0)
+        {
+            return;
+        }
+        
+        List<Vector2Int> adjacentTilePositions = MapSystem.Instance.GetCityAdjacentTiles(allCityGuids[0]);
+
+        foreach (Vector2Int adjacentTilePosition in adjacentTilePositions)
+        {
+            TileVisuals tileVisuals = GetTileInstanceAtPosition(adjacentTilePosition);
+            
+            if (toggleEnabled)
+            {
+                if (tileVisuals == null)
+                {
+                    InstantiateTileVisuals(adjacentTilePosition.x, adjacentTilePosition.y);
+                }
+                
+                tileVisuals = GetTileInstanceAtPosition(adjacentTilePosition);
+
+                tileVisuals.TogglePreviewTile(true);
+            }
+            else
+            {
+                if (tileVisuals != null)
+                {
+                    tileVisuals.TogglePreviewTile(false, () =>
+                    {
+                        ClearTile(adjacentTilePosition);
+                    });
+                }
+            }
+        }
     }
 }

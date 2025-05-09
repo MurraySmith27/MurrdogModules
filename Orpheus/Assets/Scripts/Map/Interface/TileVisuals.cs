@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class TileVisuals : MonoBehaviour
     [SerializeField] private ShadowOverlayVisuals shadowOverlayVisuals;
 
     [SerializeField] private ShadowOverlayVisuals grayOutOverlayVisuals;
+
+    [SerializeField] private TilePreviewOverlayVisuals tilePreviewOverlayVisuals;
 
     [SerializeField] private float bonusTickParticleSystemStartDelay = 0.15f;
     
@@ -57,6 +60,13 @@ public class TileVisuals : MonoBehaviour
         GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
     }
 
+    public void OnHoveredOver(bool hoverEnter)
+    {
+        //if !hoverEnter, the hover has exited
+        
+        tilePreviewOverlayVisuals.ToggleHighlight(hoverEnter);
+    }
+    
     private void CollectRenderers()
     {
         _tileRenderers = transform.GetComponentsInChildren<Renderer>();
@@ -131,17 +141,36 @@ public class TileVisuals : MonoBehaviour
         _attachedCitizens.Clear();
     }
 
-    public void ToggleVisuals(bool enabled)
+    public void ToggleVisuals(bool isEnabled)
     {
         foreach (Renderer renderer in _tileRenderers)
         {
-            renderer.enabled = enabled;
+            renderer.enabled = isEnabled;
         }
     }
 
-    public void ToggleShadow(bool enabled)
+    public void TogglePreviewTile(bool isEnabled, Action onFinished = null)
     {
-        shadowOverlayVisuals.gameObject.SetActive(enabled);
+        
+        if (isEnabled)
+        {
+            ToggleVisuals(false);
+            foreach (Renderer renderer in tilePreviewOverlayVisuals.gameObject.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = true;
+            }
+            
+            tilePreviewOverlayVisuals.Appear(onFinished);
+        }
+        else
+        {
+            tilePreviewOverlayVisuals.Disappear(onFinished);
+        }
+    }
+
+    public void ToggleShadow(bool isEnabled)
+    {
+        shadowOverlayVisuals.gameObject.SetActive(isEnabled);
     }
 
     public void ShadowAppearAnimation()

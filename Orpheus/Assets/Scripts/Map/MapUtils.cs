@@ -13,10 +13,10 @@ public static class MapUtils
     
     public static Vector3 GetTileCenterFromPlanePosition(Vector3 worldPosition)
     {
-        return HexUtils.TileSpaceToWorldSpace(new Vector3(
+        return new Vector3(
                    Mathf.Round(worldPosition.x / GameConstants.TILE_SIZE),
                    0,
-                   Mathf.Round(worldPosition.z / GameConstants.TILE_SIZE)) * GameConstants.TILE_SIZE);
+                   Mathf.Round(worldPosition.z / GameConstants.TILE_SIZE)) * GameConstants.TILE_SIZE;
     }
 
     public static Vector2Int GetGridPositionFromWorldPosition(Vector3 worldPosition)

@@ -229,6 +229,47 @@ public class MapSystem : Singleton<MapSystem>
         }) != null;
     }
 
+    public List<Vector2Int> GetCityAdjacentTiles(Guid cityGuid)
+    {
+        CityTileData city = _cities.FirstOrDefault((CityTileData city) =>
+        {
+            return city.CityGuid == cityGuid;
+        });
+
+        if (city == null)
+        {
+            Debug.LogError($"No such city with guid: {cityGuid} exists in tile data");
+            return new();
+        }
+
+        List<Vector2Int> cityTiles = city.GetTilesInOrder();
+        
+        HashSet<Vector2Int> adjacentTiles = new();
+
+        Vector2Int[] offsets = new Vector2Int[6]
+        {
+            new Vector2Int(1, 0),
+            new Vector2Int(-1, 0),
+            new Vector2Int(0, 1),
+            new Vector2Int(-1, 1),
+            new Vector2Int(0, -1),
+            new Vector2Int(1, -1)
+        };
+        
+        foreach (Vector2Int tileLocation in cityTiles)
+        {
+            foreach (Vector2Int offset in offsets)
+            {
+                if (!adjacentTiles.Contains(tileLocation + offset) && IsTileAdjacentToCity(tileLocation + offset))
+                {
+                    adjacentTiles.Add(tileLocation + offset);
+                }
+            }
+        }
+        
+        return adjacentTiles.ToList();
+    }
+
     public bool IsTileAdjacentToCity(Vector2Int position)
     {
         return _cities.FirstOrDefault((CityTileData city) =>

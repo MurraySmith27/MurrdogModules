@@ -156,10 +156,7 @@ public class MapInteractionController : Singleton<MapInteractionController>
                 case MapInteractionMode.LockCitizens:
                     break;
                 default:
-                    if (_currentlySelectedTilePosition != tilePosition)
-                    {
-                        OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile, tilePosition);
-                    }
+                    OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile, tilePosition);
                     break;
             }
         }
