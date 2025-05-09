@@ -378,7 +378,6 @@ public class MapVisualsController : Singleton<MapVisualsController>
             }
         }
         
-        Debug.Log("clear tile");
         Destroy(tile.gameObject);
     }
     
@@ -446,7 +445,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
             return;
         }
         
-        List<Vector2Int> adjacentTilePositions = MapSystem.Instance.GetCityAdjacentTiles(allCityGuids[0]);
+        List<Vector2Int> adjacentTilePositions = MapSystem.Instance.GetValidNewTilePositions(allCityGuids[0]);
 
         foreach (Vector2Int adjacentTilePosition in adjacentTilePositions)
         {

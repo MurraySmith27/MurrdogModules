@@ -269,6 +269,59 @@ public class MapSystem : Singleton<MapSystem>
         
         return adjacentTiles.ToList();
     }
+    
+    public List<Vector2Int> GetValidNewTilePositions(Guid cityGuid)
+    {
+        
+        CityTileData city = _cities.FirstOrDefault((CityTileData city) =>
+        {
+            return city.CityGuid == cityGuid;
+        });
+
+        if (city == null)
+        {
+            Debug.LogError($"No such city with guid: {cityGuid} exists in tile data");
+            return new();
+        }
+
+        List<Vector2Int> cityTiles = city.GetTilesInOrder();
+
+        float maxAllowableDistance = (((Mathf.Sqrt(9f + 12f * cityTiles.Count) - 3f) / 6f) + 1) * GameConstants.TILE_SIZE * HexUtils.w;
+
+        Vector2Int cityCenterLocation = GetCityCenterPosition(cityGuid);
+
+        Vector3 cityCenterLocationWorldPos = MapUtils.GetTileWorldPositionFromGridPosition(cityCenterLocation);
+        
+        HashSet<Vector2Int> adjacentTiles = new();
+
+        Vector2Int[] offsets = new Vector2Int[6]
+        {
+            new Vector2Int(1, 0),
+            new Vector2Int(-1, 0),
+            new Vector2Int(0, 1),
+            new Vector2Int(-1, 1),
+            new Vector2Int(0, -1),
+            new Vector2Int(1, -1)
+        };
+        
+        foreach (Vector2Int tileLocation in cityTiles)
+        {
+            foreach (Vector2Int offset in offsets)
+            {
+                if (!adjacentTiles.Contains(tileLocation + offset) && IsTileAdjacentToCity(tileLocation + offset))
+                {
+                    Vector3 worldPos = MapUtils.GetTileWorldPositionFromGridPosition(tileLocation + offset);
+
+                    if (Vector3.Distance(worldPos, cityCenterLocationWorldPos) < maxAllowableDistance)
+                    {
+                        adjacentTiles.Add(tileLocation + offset);
+                    }
+                }
+            }
+        }
+        
+        return adjacentTiles.ToList();
+    }
 
     public bool IsTileAdjacentToCity(Vector2Int position)
     {

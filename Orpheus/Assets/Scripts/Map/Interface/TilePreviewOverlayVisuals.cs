@@ -118,15 +118,12 @@ public class TilePreviewOverlayVisuals : MonoBehaviour
     
     private IEnumerator<float> DisappearCoroutine(float disappearDelay, Action onComplete = null)
     {
-        Debug.Log($"disapper delay: {disappearDelay}");
         yield return Timing.WaitForSeconds(disappearDelay);
         
-        Debug.Log($"setting exit trigger");
         animator.SetTrigger(exitAnimatorTriggerName);
         
         yield return Timing.WaitForSeconds(onHighlightDisappearWaitTime);
         
-        Debug.Log($"finished");
         this.gameObject.SetActive(false);
         onComplete?.Invoke();
         _entered = false;
