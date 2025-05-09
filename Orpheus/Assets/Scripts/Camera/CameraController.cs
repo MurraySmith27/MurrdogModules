@@ -26,6 +26,7 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] private float cameraDecceleration = 0.1f;
     [SerializeField] private float cameraHardStopThreshold = 0.01f;
     [SerializeField] private float maxCameraVelocity = 5f;
+    [SerializeField] private Vector2 maxDistanceFromCityCenter = new Vector2(50, 30);
     
     [Space(10)]
     
@@ -322,6 +323,40 @@ public class CameraController : Singleton<CameraController>
 
     private void SetCameraPosition(Vector3 newPosition)
     {
+        //need to clamp the position to a distance from the main city capital.
+        List<Guid> allCityGuids = MapSystem.Instance.GetAllCityGuids();
+
+        if (allCityGuids.Count > 0)
+        {
+            Guid cityGuid = allCityGuids[0];
+
+            Vector2Int cityCenterPosition = MapSystem.Instance.GetCityCenterPosition(cityGuid);
+
+            Vector3 cityCenterWorldPosition = MapUtils.GetTileWorldPositionFromGridPosition(cityCenterPosition);
+
+            float newX = newPosition.x;
+            if (cityCenterWorldPosition.x - newPosition.x > maxDistanceFromCityCenter.y)
+            {
+                newX = cityCenterWorldPosition.x - maxDistanceFromCityCenter.y;
+            }
+            else if (newPosition.x - cityCenterWorldPosition.x > maxDistanceFromCityCenter.y)
+            {
+                newX = cityCenterWorldPosition.x + maxDistanceFromCityCenter.y;
+            }
+            
+            float newY = newPosition.z;
+            if (cityCenterWorldPosition.z - newPosition.z > maxDistanceFromCityCenter.x)
+            {
+                newY = cityCenterWorldPosition.z - maxDistanceFromCityCenter.x;
+            }
+            else if (newPosition.z - cityCenterWorldPosition.z > maxDistanceFromCityCenter.x)
+            {
+                newY = cityCenterWorldPosition.z + maxDistanceFromCityCenter.x;
+            }
+
+            newPosition = new Vector3(newX, 0, newY);
+        }
+        
         cameraFollowRoot.position = newPosition;
         
         OnCameraMoved?.Invoke();
