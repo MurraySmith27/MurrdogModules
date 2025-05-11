@@ -32,7 +32,7 @@ MonoBehaviour:
   m_IsTextObjectScaleStatic: 0
   m_fallbackFontAssets: []
   m_matchMaterialPreset: 1
-  m_defaultSpriteAsset: {fileID: 11400000, guid: cb5c81d6a2d977547ac798914995f647,
+  m_defaultSpriteAsset: {fileID: 11400000, guid: 356e374b01470874bb92b17d9a4b7255,
     type: 2}
   m_defaultSpriteAssetPath: 
   m_enableEmojiSupport: 1

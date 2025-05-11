@@ -49,8 +49,8 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
         BloomingHarvestController.Instance.OnCityHarvestEnd += OnCityHarvestEnd;
         
-        BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileResourceChanged;
-        BloomingHarvestController.Instance.OnTileHarvestStart += OnTileResourceChanged;
+        BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
+        BloomingHarvestController.Instance.OnTileHarvestStart += OnTileHarvestStart;
         
         BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
         BloomingHarvestController.Instance.OnTileProcessStart += OnTileResourceChanged;
@@ -75,7 +75,7 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         {
             BloomingHarvestController.Instance.OnCityHarvestStart -= OnCityHarvestStart;
             BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
-            BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileResourceChanged;
+            BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
             BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
             BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
@@ -152,9 +152,14 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         MEC.Timing.RunCoroutine(AnimatePositionToWorldPositionCoroutine(worldPosition), this.gameObject);
     }
 
-    private void OnTileResourceChanged(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
+    private void OnTileHarvestStart(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
     {
-        Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourcesHarvested), this.gameObject,
+        OnTileResourceChanged(position, (resourcesHarvested, new()));
+    }
+    
+    private void OnTileResourceChanged(Vector2Int position, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesHarvested)
+    {
+        Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourcesHarvested.Item1), this.gameObject,
             SingletonBehavior.Overwrite);
     }
 

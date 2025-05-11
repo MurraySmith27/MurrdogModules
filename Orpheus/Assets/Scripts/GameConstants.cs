@@ -92,7 +92,9 @@ public static class GameConstants
     public static readonly int POPCORN_PER_POPCORN_FACTORY = 1;
     public static readonly int FISH_PER_SUSHI = 1;
     public static readonly int SUSHI_PER_SUSHI_RESTAURANT = 1;
-    
+
+
+    public static readonly int NUM_BUILDINGS_OFFERED_EACH_ROUND = 2;
 
     public static readonly Dictionary<ResourceType, double> BASE_FOOD_SCORE_PER_RESOURCE =
     new Dictionary<ResourceType, double> {

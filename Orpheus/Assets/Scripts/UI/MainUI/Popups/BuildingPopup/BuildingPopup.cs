@@ -21,7 +21,9 @@ public class BuildingPopup : MonoBehaviour
         
         List<BuildingType> buildingTypes = BuildingsController.Instance.GetAvailableBuildingTypes();
 
-        foreach (BuildingType buildingType in buildingTypes)
+        List<BuildingType> offeredBuildings = RandomChanceSystem.Instance.GetCurrentlyOfferedBuildings(buildingTypes, PersistentState.Instance.HarvestNumber);
+
+        foreach (BuildingType buildingType in offeredBuildings)
         {
             BuildingPopupListItem buildingPopupListItem = Instantiate(buildingPopupListItemPrefab, buildingPopupListItemParent);
             

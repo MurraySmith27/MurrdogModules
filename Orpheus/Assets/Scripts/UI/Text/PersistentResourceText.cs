@@ -31,7 +31,21 @@ public class PersistentResourceText : MonoBehaviour
                 PersistentState.Instance.OnBuildTokensValueChanged += OnResourceValueChanged;
                 OnResourceValueChanged(PersistentState.Instance.CurrentBuildTokens);
                 break;
-
+            case PersistentResourceType.Water:
+                PersistentState.Instance.OnWaterValueChanged -= OnResourceValueChanged;
+                PersistentState.Instance.OnWaterValueChanged += OnResourceValueChanged;
+                OnResourceValueChanged(PersistentState.Instance.CurrentWater);
+                break;
+            case PersistentResourceType.Dirt:
+                PersistentState.Instance.OnDirtValueChanged -= OnResourceValueChanged;
+                PersistentState.Instance.OnDirtValueChanged += OnResourceValueChanged;
+                OnResourceValueChanged(PersistentState.Instance.CurrentDirt);
+                break;
+            case PersistentResourceType.Oil:
+                PersistentState.Instance.OnOilValueChanged -= OnResourceValueChanged;
+                PersistentState.Instance.OnOilValueChanged += OnResourceValueChanged;
+                OnResourceValueChanged(PersistentState.Instance.CurrentOil);
+                break;
         }
     }
 
@@ -52,6 +66,15 @@ public class PersistentResourceText : MonoBehaviour
                     break;
                 case PersistentResourceType.BuildToken:
                     PersistentState.Instance.OnBuildTokensValueChanged -= OnResourceValueChanged;
+                    break;
+                case PersistentResourceType.Water:
+                    PersistentState.Instance.OnWaterValueChanged -= OnResourceValueChanged;
+                    break;
+                case PersistentResourceType.Dirt:
+                    PersistentState.Instance.OnDirtValueChanged -= OnResourceValueChanged;
+                    break;
+                case PersistentResourceType.Oil:
+                    PersistentState.Instance.OnOilValueChanged -= OnResourceValueChanged;
                     break;
             }
         }

@@ -28,7 +28,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     
     public event Action<Vector2Int> OnTileHarvestEnd;
     
-    public event Action<Vector2Int, Dictionary<ResourceType, int>> OnTileProcessStart;
+    public event Action<Vector2Int, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> OnTileProcessStart;
     
     public event Action<Vector2Int> OnTileProcessEnd;
     
@@ -72,8 +72,9 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                 {
                     OnTileResourceChangeStart?.Invoke(cityTile);
 
-                    Dictionary<ResourceType, int> resourcesHarvested =
-                        TileHarvestController.Instance.GetResourceChangeOnTileHarvest(cityGuid, cityTile, resources);
+                    // Dictionary<ResourceType, int> resourcesHarvested =
+                    //     TileHarvestController.Instance.GetResourceChangeOnTileHarvest(cityGuid, cityTile, resources);
+                    var resourcesHarvested = new Dictionary<ResourceType, int>();
 
                     OnTileHarvestStart?.Invoke(cityTile, resourcesHarvested);
 
@@ -91,16 +92,25 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                     OnTileHarvestEnd?.Invoke(cityTile);
 
                     //then we process the resources from this tile.
-                    Dictionary<ResourceType, int> resourcesProcessed =
+                    (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesProcessed =
                         TileHarvestController.Instance.GetResourceChangeOnTileProcess(cityGuid, cityTile, resources);
 
                     OnTileProcessStart?.Invoke(cityTile, resourcesProcessed);
 
-                    foreach (KeyValuePair<ResourceType, int> resource in resourcesProcessed)
+                    foreach (KeyValuePair<ResourceType, int> resource in resourcesProcessed.Item1)
                     {
-                        resources[resource.Key] += resource.Value;
                         if (resource.Value != 0)
                         {
+                            resources[resource.Key] += resource.Value;
+                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                        }
+                    }
+                    
+                    foreach (KeyValuePair<PersistentResourceType, int> resource in resourcesProcessed.Item2)
+                    {
+                        if (resource.Value != 0)
+                        {
+                            PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
                             yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
                         }
                     }

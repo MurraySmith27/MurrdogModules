@@ -10,6 +10,8 @@ public class BloomingUpkeepPhase : PhaseStateBase
         HarvestState.Instance.SetFoodGoalForHarvest(PersistentState.Instance.HarvestNumber);
         
         PersistentState.Instance.IncrementHarvestNumber();
+
+        PlayerResourcesSystem.Instance.AddTileTypeResources();
         
         HarvestState.Instance.ResetFoodScore();
         

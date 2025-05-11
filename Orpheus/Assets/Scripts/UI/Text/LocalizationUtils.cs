@@ -78,6 +78,12 @@ public static class LocalizationUtils
                 return "<gold>";
             case PersistentResourceType.BuildToken:
                 return "<buildtoken>";
+            case PersistentResourceType.Water:
+                return "<water>";
+            case PersistentResourceType.Dirt:
+                return "<dirt>";
+            case PersistentResourceType.Oil:
+                return "<oil>";
             default:
                 return "";
         }
@@ -90,11 +96,59 @@ public static class LocalizationUtils
             case PersistentResourceType.Wood:
                 return "<sprite index=1>";
             case PersistentResourceType.Stone:
-                return "<sprite index=3>";
+                return "<sprite index=7>";
             case PersistentResourceType.Gold:
                 return "<sprite index=0>";
             case PersistentResourceType.BuildToken:
+                return "<sprite index=13>";
+            case PersistentResourceType.Water:
+                return "<sprite index=4>";
+            case PersistentResourceType.Dirt:
+                return "<sprite index=5>";
+            case PersistentResourceType.Oil:
+                return "<sprite index=17>";
+            default:
+                return "";
+        }
+    }
+    
+    public static string GetIconTagForResource(ResourceType resourceType)
+    {
+        switch (resourceType)
+        {
+            case ResourceType.Corn:
+                return "<sprite index=6>";
+                break;
+            case ResourceType.Wheat:
                 return "<sprite index=14>";
+                break;
+            case ResourceType.Fish:
+                return "<sprite index=10>";
+                break;
+            case ResourceType.Wood:
+                return "<sprite index=1>";
+                break;
+            case ResourceType.Stone:
+                return "<sprite index=7>";
+                break;
+            case ResourceType.Bread:
+                return "<sprite index=15>";
+                break;
+            case ResourceType.Lumber:
+                return "<sprite index=12>";
+                break;
+            case ResourceType.Copper:
+                return "<sprite index=8>";
+                break;
+            case ResourceType.Steel:
+                return "<sprite index=16>";
+                break;
+            case ResourceType.Popcorn:
+                return "<sprite index=9>";
+                break;
+            case ResourceType.Sushi:
+                return "<sprite index=3>";
+                break;
             default:
                 return "";
         }

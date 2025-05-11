@@ -54,117 +54,45 @@ public class TileHarvestController : Singleton<TileHarvestController>
         return resourcesHarvested;
     }
     
-    public Dictionary<ResourceType, int> GetResourceChangeOnTileProcess(Guid cityGuid, Vector2Int tilePosition, Dictionary<ResourceType, int> resourcesSoFar)
+    public (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) GetResourceChangeOnTileProcess(Guid cityGuid, Vector2Int tilePosition, Dictionary<ResourceType, int> resourcesSoFar)
     {
         List<TileBuilding> buildingsOnTile = MapSystem.Instance.GetBuildingsOnTile(tilePosition);
         
         Dictionary<ResourceType, int> resourcesProcessed = new Dictionary<ResourceType, int>();
         
+        Dictionary<PersistentResourceType, int> persistentResourcesProcessed = new Dictionary<PersistentResourceType, int>();
+        
         foreach (TileBuilding building in buildingsOnTile)
         {
-            switch (building.Type)
+            if (HarvestBuildingsController.Instance.CanProcess(building.Type, resourcesSoFar))
             {
-                case BuildingType.Bakery:
-                    if (resourcesSoFar[ResourceType.Wheat] >= GameConstants.WHEAT_PER_BREAD)
-                    {
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Bread))
-                        {
-                            resourcesProcessed[ResourceType.Bread] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Bread] += GameConstants.BREAD_PER_BAKERY;
+                (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) diff =
+                    HarvestBuildingsController.Instance.GetProcessBuildingDiff(building.Type);
 
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Wheat))
-                        {
-                            resourcesProcessed[ResourceType.Wheat] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Wheat] -= GameConstants.WHEAT_PER_BREAD;
-                    }
-                    break;
-                case BuildingType.LumberMill:
-                    if (resourcesSoFar[ResourceType.Wood] >= GameConstants.WOOD_PER_LUMBER)
+                foreach (KeyValuePair<ResourceType, int> resource in diff.Item1)
+                {
+                    if (!resourcesProcessed.ContainsKey(resource.Key))
                     {
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Lumber))
-                        {
-                            resourcesProcessed[ResourceType.Lumber] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Lumber] += GameConstants.LUMBER_PER_LUMBER_MILL;
-
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Wood))
-                        {
-                            resourcesProcessed[ResourceType.Wood] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Wood] -= GameConstants.WOOD_PER_LUMBER;
+                        resourcesProcessed[resource.Key] = 0;
                     }
-                    break;
-                case BuildingType.CopperYard:
-                    if (resourcesSoFar[ResourceType.Stone] >= GameConstants.STONE_PER_COPPER)
+                    resourcesProcessed[resource.Key] += resource.Value;
+                }
+                
+                foreach (KeyValuePair<PersistentResourceType, int> persistentResource in diff.Item2)
+                {
+                    if (!persistentResourcesProcessed.ContainsKey(persistentResource.Key))
                     {
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Copper))
-                        {
-                            resourcesProcessed[ResourceType.Copper] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Copper] += GameConstants.COPPER_PER_COOPPER_YARD;
-
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Stone))
-                        {
-                            resourcesProcessed[ResourceType.Stone] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Stone] -= GameConstants.STONE_PER_COPPER;
+                        persistentResourcesProcessed[persistentResource.Key] = 0;
                     }
-                    break;
-                case BuildingType.SteelYard:
-                    if (resourcesSoFar[ResourceType.Copper] >= GameConstants.COPPER_PER_STEEL)
-                    {
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Steel))
-                        {
-                            resourcesProcessed[ResourceType.Steel] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Steel] += GameConstants.STEEL_PER_STEEL_YARD;
-
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Copper))
-                        {
-                            resourcesProcessed[ResourceType.Copper] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Copper] -= GameConstants.COPPER_PER_STEEL;
-                    }
-                    break;
-                case BuildingType.PopcornFactory:
-                    if (resourcesSoFar[ResourceType.Corn] >= GameConstants.CORN_PER_POPCORN)
-                    {
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Popcorn))
-                        {
-                            resourcesProcessed[ResourceType.Popcorn] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Popcorn] += GameConstants.POPCORN_PER_POPCORN_FACTORY;
-
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Corn))
-                        {
-                            resourcesProcessed[ResourceType.Corn] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Corn] -= GameConstants.CORN_PER_POPCORN;
-                    }
-                    break;
-                case BuildingType.SushiRestaurant:
-                    if (resourcesSoFar[ResourceType.Fish] >= GameConstants.FISH_PER_SUSHI)
-                    {
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Sushi))
-                        {
-                            resourcesProcessed[ResourceType.Sushi] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Sushi] += GameConstants.SUSHI_PER_SUSHI_RESTAURANT;
-
-                        if (!resourcesProcessed.ContainsKey(ResourceType.Fish))
-                        {
-                            resourcesProcessed[ResourceType.Fish] = 0;
-                        }
-                        resourcesProcessed[ResourceType.Fish] -= GameConstants.FISH_PER_SUSHI;
-                    }
-                    break;
+                    persistentResourcesProcessed[persistentResource.Key] += persistentResource.Value;
+                }
             }
         }
         
         resourcesProcessed = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed, tilePosition);
         
-        return resourcesProcessed;
+        persistentResourcesProcessed = RelicSystem.Instance.OnPersistentResourcesProcessed(persistentResourcesProcessed, tilePosition);
+        
+        return (resourcesProcessed, persistentResourcesProcessed);
     }
 }

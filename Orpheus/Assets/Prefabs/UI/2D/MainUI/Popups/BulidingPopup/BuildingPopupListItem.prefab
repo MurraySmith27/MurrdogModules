@@ -190,6 +190,8 @@ MonoBehaviour:
   tooltipDirectionOffParent: {x: -1, y: 0}
   uiInputChannel: {fileID: 11400000, guid: c4dcd6cd2b4973244b32c4c79794cd6c, type: 2}
   buildingVisualsSO: {fileID: 11400000, guid: 38a281c52bdeba7479450cae7bbc5341, type: 2}
+  buildingProcessRulesSO: {fileID: 11400000, guid: 3b1dece6fa5b8ab43921d691c141a111,
+    type: 2}
 --- !u!1 &3291743393726816418
 GameObject:
   m_ObjectHideFlags: 0

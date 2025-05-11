@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4aea0ff5b95c346abcb0581b5dda9b, type: 3}
+  m_Name: BuildngProcessRules
+  m_EditorClassIdentifier: 
+  buildingProcessRules:
+  - Type: 0
+    ResourceInput: []
+    PersistentResourceInput: []
+    ResourceOutput: []
+    PersistentResourceOutput:
+    - Type: 2
+      Quantity: 10
+  - Type: 1
+    ResourceInput: []
+    PersistentResourceInput:
+    - Type: 4
+      Quantity: 1
+    - Type: 5
+      Quantity: 1
+    ResourceOutput:
+    - Type: 0
+      Quantity: 1
+    PersistentResourceOutput: []
+  - Type: 2
+    ResourceInput: []
+    PersistentResourceInput:
+    - Type: 4
+      Quantity: 1
+    ResourceOutput:
+    - Type: 1
+      Quantity: 1
+    PersistentResourceOutput: []
+  - Type: 3
+    ResourceInput: []
+    PersistentResourceInput:
+    - Type: 4
+      Quantity: 1
+    ResourceOutput:
+    - Type: 2
+      Quantity: 1
+    PersistentResourceOutput: []
+  - Type: 4
+    ResourceInput:
+    - Type: 1
+      Quantity: 1
+    PersistentResourceInput:
+    - Type: 5
+      Quantity: 2
+    - Type: 4
+      Quantity: 1
+    ResourceOutput:
+    - Type: 5
+      Quantity: 0
+    PersistentResourceOutput: []
+  - Type: 5
+    ResourceInput:
+    - Type: 3
+      Quantity: 1
+    PersistentResourceInput:
+    - Type: 6
+      Quantity: 1
+    - Type: 5
+      Quantity: 1
+    ResourceOutput:
+    - Type: 6
+      Quantity: 1
+    PersistentResourceOutput: []
+  - Type: 6
+    ResourceInput:
+    - Type: 4
+      Quantity: 0
+    PersistentResourceInput:
+    - Type: 6
+      Quantity: 1
+    - Type: 5
+      Quantity: 1
+    ResourceOutput:
+    - Type: 7
+      Quantity: 0
+    PersistentResourceOutput: []
+  - Type: 7
+    ResourceInput:
+    - Type: 7
+      Quantity: 1
+    PersistentResourceInput:
+    - Type: 6
+      Quantity: 2
+    - Type: 5
+      Quantity: 1
+    ResourceOutput:
+    - Type: 8
+      Quantity: 1
+    PersistentResourceOutput: []
+  - Type: 8
+    ResourceInput:
+    - Type: 0
+      Quantity: 1
+    PersistentResourceInput:
+    - Type: 6
+      Quantity: 1
+    - Type: 4
+      Quantity: 1
+    ResourceOutput:
+    - Type: 9
+      Quantity: 1
+    PersistentResourceOutput: []
+  - Type: 9
+    ResourceInput:
+    - Type: 2
+      Quantity: 1
+    - Type: 1
+      Quantity: 1
+    PersistentResourceInput:
+    - Type: 4
+      Quantity: 2
+    ResourceOutput:
+    - Type: 10
+      Quantity: 1
+    PersistentResourceOutput: []

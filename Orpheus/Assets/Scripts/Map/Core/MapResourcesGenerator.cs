@@ -80,6 +80,8 @@ public class MapResourcesGenerator
                     _woodProbabilityOnWaterTile,
                     _stoneProbabbilityOnWaterTile
                 );
+            case TileType.Desert:
+                return new();
         }
         
         return new();

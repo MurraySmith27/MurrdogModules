@@ -34,6 +34,6 @@ public class GoalText : MonoBehaviour
 
     private void SetHarvestText(long goal)
     {
-        goalText.SetText($"<sprite index=5><incr a=0.6 f=0.5 w=3>{goal}</incr>");
+        goalText.SetText($"<sprite index=11><incr a=0.6 f=0.5 w=3>{goal}</incr>");
     }
 }

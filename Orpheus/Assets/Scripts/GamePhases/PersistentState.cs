@@ -9,6 +9,12 @@ public class PersistentState : Singleton<PersistentState>
     public int RoundNumber { get; private set; }
     
     public int HarvestNumber { get; private set; }
+    
+    public long CurrentWater { get; private set; }
+    
+    public long CurrentOil { get; private set; }
+    
+    public long CurrentDirt { get; private set; }
 
     public long CurrentGold { get; private set; } = GameConstants.STARTING_GOLD;
 
@@ -23,6 +29,12 @@ public class PersistentState : Singleton<PersistentState>
     public event Action<int> OnRoundEnd;
     
     public event Action<long> OnGoldValueChanged;
+
+    public event Action<long> OnWaterValueChanged;
+    
+    public event Action<long> OnDirtValueChanged;
+    
+    public event Action<long> OnOilValueChanged;
     
     public event Action<long> OnWoodValueChanged;
     
@@ -48,6 +60,27 @@ public class PersistentState : Singleton<PersistentState>
         CurrentGold += difference;
 
         OnGoldValueChanged?.Invoke(CurrentGold);
+    }
+
+    public void ChangeCurrentWater(long difference)
+    {
+        CurrentWater += difference;
+
+        OnWaterValueChanged?.Invoke(CurrentWater);
+    }
+    
+    public void ChangeCurrentDirt(long difference)
+    {
+        CurrentDirt += difference;
+
+        OnDirtValueChanged?.Invoke(CurrentDirt);
+    }
+    
+    public void ChangeCurrentOil(long difference)
+    {
+        CurrentOil += difference;
+
+        OnOilValueChanged?.Invoke(CurrentOil);
     }
     
     public void ChangeCurrentWood(long difference)

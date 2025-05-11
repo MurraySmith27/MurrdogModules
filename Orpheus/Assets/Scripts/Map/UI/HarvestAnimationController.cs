@@ -123,32 +123,45 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
     
     private void OnTileHarvestStart(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
     {
-        TryAnimateTile(position, resourcesChange);
+        TryAnimateTile(position, (resourcesChange, new()));
     }
 
-    private void OnTileProcessStart(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
+    private void OnTileProcessStart(Vector2Int position, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesChange)
     {
-        if (resourcesChange.Values.ToList().FindIndex((int value) => { return value != 0;}) != -1)
+        if (resourcesChange.Item1.Values.ToList().FindIndex((int value) => { return value != 0;}) != -1 || resourcesChange.Item2.Values.ToList().FindIndex((int value) => { return value != 0;}) != -1)
         {
             TryAnimateTile(position, resourcesChange);
         }
     }
 
-    private void TryAnimateTile(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
+    private void TryAnimateTile(Vector2Int position, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesChange)
     {
         TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
         
         tileInstanceAtPosition.TriggerTileHarvestAnimation();
-        foreach (ResourceType resourceType in resourcesChange.Keys)
+        foreach (ResourceType resourceType in resourcesChange.Item1.Keys)
         {
-            if (resourcesChange[resourceType] != 0)
+            if (resourcesChange.Item1[resourceType] != 0)
+            {
+                if (tileInstanceAtPosition != null)
+                {
+                    OnTileHarvestAnimationTriggered?.Invoke(position);
+                }
+
+                return;
+            }
+        }
+        
+        foreach (PersistentResourceType resourceType in resourcesChange.Item2.Keys)
+        {
+            if (resourcesChange.Item2[resourceType] != 0)
             {
                 if (tileInstanceAtPosition != null)
                 {
                     OnTileHarvestAnimationTriggered?.Invoke(position);
                 }
                 
-                break;
+                return;
             }
         }
     }

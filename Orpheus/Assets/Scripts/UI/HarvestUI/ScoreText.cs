@@ -34,6 +34,6 @@ public class ScoreText : MonoBehaviour
 
     private void SetHarvestText(long foodScore)
     {
-        scoreText.SetText($"<sprite index=5><bounce a=0.1 f=0.5>{HarvestState.Instance.CurrentFoodScore}</bounce>");
+        scoreText.SetText($"<sprite index=11><bounce a=0.1 f=0.5>{HarvestState.Instance.CurrentFoodScore}</bounce>");
     }
 }

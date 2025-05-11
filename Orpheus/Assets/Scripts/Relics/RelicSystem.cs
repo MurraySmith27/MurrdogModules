@@ -101,6 +101,24 @@ public class RelicSystem : Singleton<RelicSystem>
         return modifiedResourceDiff;
     }
     
+    public Dictionary<PersistentResourceType, int> OnPersistentResourcesProcessed(Dictionary<PersistentResourceType, int> resourceDiff, Vector2Int position)
+    {
+        //make a copy
+        Dictionary<PersistentResourceType, int> modifiedResourceDiff = resourceDiff.ToDictionary(entry => entry.Key, entry => entry.Value);
+        
+        foreach (RelicTypes relic in relics)
+        {
+            AdditionalTriggeredArgs args;
+            if (_relicInstances[relic].OnPersistentResourcesProcessed(modifiedResourceDiff, position, out modifiedResourceDiff, out args))
+            {
+                OnRelicTriggered?.Invoke(relic, args);
+            }
+        }
+        
+        return modifiedResourceDiff;
+    }
+    
+    
     public void OnResourcesHarvested(Dictionary<ResourceType, int> resourcesOnTile, Dictionary<ResourceType, int> totalResourcesSoFar, 
         Vector2Int position, out Dictionary<ResourceType, int> outResourcesOnTile, out Dictionary<ResourceType, int> outTotalResourcesSoFar)
     {

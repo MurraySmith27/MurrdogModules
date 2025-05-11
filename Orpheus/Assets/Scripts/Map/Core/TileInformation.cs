@@ -4,7 +4,8 @@ public enum TileType
 {
     None,
     Water,
-    Grass
+    Grass,
+    Desert,
 }
 
 public enum ResourceType
@@ -28,6 +29,9 @@ public enum PersistentResourceType
     Stone,
     Gold,
     BuildToken,
+    Water,
+    Dirt,
+    Oil
 }
 
 

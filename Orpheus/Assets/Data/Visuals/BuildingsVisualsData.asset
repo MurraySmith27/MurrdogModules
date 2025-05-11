@@ -17,31 +17,27 @@ MonoBehaviour:
     Prefab: {fileID: 696966427250684961, guid: 8de7093a66b19544aac1938685d5c340, type: 3}
     Icon3DPrefab: {fileID: 158147337098504306, guid: a193986cb3416074094e5df7e686e917,
       type: 3}
-    Descrpition: <b>Corn Farm<b><br>Harvests 1 <corn>.<br><br>Must be built on a
-      <grasstile>
+    Descrpition: 
   - Type: 2
     Prefab: {fileID: 696966427250684961, guid: d5d1188ba772a3a45bf5869545751731, type: 3}
     Icon3DPrefab: {fileID: 404360159390045895, guid: 3dda5d4f8c5145544bd7fae03d7cef87,
       type: 3}
-    Descrpition: <b>Wheat Farm<b><br>Harvests 1 <wheat>.<br><br>Must be built on
-      a <grasstile>
+    Descrpition: 
   - Type: 3
     Prefab: {fileID: 696966427250684961, guid: f9669318069bfbb4eaf198915af9b0db, type: 3}
     Icon3DPrefab: {fileID: 2256095890943613835, guid: b834f669ed2abe041b2a6c2da09c50c4,
       type: 3}
-    Descrpition: <b>Fish Farm<b><br>Harvests 1 <fish>.<br><br>Must be built on a
-      <watertile>.
+    Descrpition: 
   - Type: 0
     Prefab: {fileID: 696966427250684961, guid: a8a67ab0955d492429985c4f49b9aa88, type: 3}
     Icon3DPrefab: {fileID: 3789447713343784036, guid: 34dad95030ec7d14bbd1e7b48ba0f40c,
       type: 3}
-    Descrpition: <Castle><br>The center of a city.<br><br>Must be built on a <grasstile>.
+    Descrpition: 
   - Type: 4
     Prefab: {fileID: 696966427250684961, guid: 00afb61cc40d73a4b8b38296ec37d7bf, type: 3}
     Icon3DPrefab: {fileID: 696966427250684961, guid: 40cc41ddad1a3b443af458eeeda690a7,
       type: 3}
-    Descrpition: <b>Bakery<b><br>Converts 1 <wheat> to 1 <bread>.<br><br>Must be
-      built on a <grasstile>.
+    Descrpition: 
   - Type: 5
     Prefab: {fileID: 696966427250684961, guid: 40bd9c7b821a4ca4cbb958c953dead65, type: 3}
     Icon3DPrefab: {fileID: 441533816867705382, guid: b7742a649dc331045892d03fc742ba55,
@@ -52,23 +48,19 @@ MonoBehaviour:
     Prefab: {fileID: 696966427250684961, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1, type: 3}
     Icon3DPrefab: {fileID: 441533816867705382, guid: c3436c17cdd6c234cb262ad99722f7a8,
       type: 3}
-    Descrpition: <b>Copper Yard<b><br>Converts 1 <stone> to 1 <copper>.<br><br>Must
-      be built on a <grasstile>.
+    Descrpition: 
   - Type: 7
     Prefab: {fileID: 696966427250684961, guid: b2908ca12d80846498ca13227f192671, type: 3}
     Icon3DPrefab: {fileID: 441533816867705382, guid: a1dd172086c752743837088abdb0cfde,
       type: 3}
-    Descrpition: <b>Steel Factory<b><br>Converts 1 <copper> to 1 <steel>.<br><br>Must
-      be built on a <grasstile>.
+    Descrpition: 
   - Type: 8
     Prefab: {fileID: 696966427250684961, guid: 9d4fb32c8240aba4fa3c95967a10905b, type: 3}
     Icon3DPrefab: {fileID: 441533816867705382, guid: 123f237063faa1c43b7c35ae5a65defa,
       type: 3}
-    Descrpition: <b>Popcorn Factory<b><br>Converts 1 <corn> to 1 <popcorn>.<br><br>Must
-      be built on a <grasstile>.
+    Descrpition: 
   - Type: 9
     Prefab: {fileID: 696966427250684961, guid: a5896b78109be264497f3c81413c1847, type: 3}
     Icon3DPrefab: {fileID: 441533816867705382, guid: 7b4a7b3ed4d753b43abc1f1e868a83f4,
       type: 3}
-    Descrpition: <b>Sushi Restaurant<b><br>Converts 1 <fish> to 1 <sushi>.<br><br>Must
-      be built on a <grasstile>.
+    Descrpition: 

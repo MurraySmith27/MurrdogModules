@@ -24,6 +24,15 @@ public abstract class Relic
         args = new();
         return false;
     }
+    
+    //called when a tile processes persistent resources, passed in is the state of currently harvested resources, returned is the modified state
+    public virtual bool OnPersistentResourcesProcessed(Dictionary<PersistentResourceType, int> totalResourceDiff, 
+        Vector2Int position, out Dictionary<PersistentResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
+    {
+        outResourceDiff = totalResourceDiff;
+        args = new();
+        return false;
+    }
 
     public virtual bool OnPhaseChanged(GamePhases phase, out AdditionalTriggeredArgs args)
     {

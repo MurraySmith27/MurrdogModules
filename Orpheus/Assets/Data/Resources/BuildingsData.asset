@@ -15,49 +15,49 @@ MonoBehaviour:
   Buildings:
   - Type: 0
     Costs: []
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 1
     Costs:
     - Type: 3
       Quantity: 1
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 2
     Costs:
     - Type: 3
       Quantity: 1
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 3
     Costs:
     - Type: 3
       Quantity: 1
-    CanBuildOnTiles: 01000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 4
     Costs:
     - Type: 3
       Quantity: 1
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 5
     Costs:
     - Type: 3
       Quantity: 1
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 6
     Costs:
     - Type: 3
       Quantity: 2
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 7
     Costs:
     - Type: 3
       Quantity: 3
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 8
     Costs:
     - Type: 3
       Quantity: 2
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000
   - Type: 9
     Costs:
     - Type: 3
       Quantity: 2
-    CanBuildOnTiles: 02000000
+    CanBuildOnTiles: 020000000100000003000000

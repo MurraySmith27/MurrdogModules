@@ -27,6 +27,14 @@ public class DebugOptions
     {
         PersistentState.Instance.ChangeCurrentGold(10000);    
     }
+
+    public void AddLotsOfWaterDirtAndOil()
+    {
+        PersistentState.Instance.ChangeCurrentWater(300);
+        PersistentState.Instance.ChangeCurrentDirt(300);
+        PersistentState.Instance.ChangeCurrentOil(300);
+        
+    }
     
     [Category("Game Speed")]
     public void DoubleGameSpeed()
