@@ -88,7 +88,7 @@ public abstract class Relic
         out List<BuildingType> newBuildingTypes, out AdditionalTriggeredArgs args)
     {
         args = new();
-        newBuildingTypes = new();
+        newBuildingTypes = buildingTypes;
 
         return false;
     }
