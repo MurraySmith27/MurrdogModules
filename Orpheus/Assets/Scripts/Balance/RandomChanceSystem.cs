@@ -129,21 +129,22 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
 
             newTile.Type = (TileType)Random.Range(0, Enum.GetNames(typeof(TileType)).Length - 1) + 1;
 
-            newTile.Resources = MapSystem.Instance.GenerateResourcesOnTile(newTile.Type);
+            // newTile.Resources = MapSystem.Instance.GenerateResourcesOnTile(newTile.Type);
+            newTile.Resources = new();
             
-            int randomBuildingType = Random.Range(1, Enum.GetNames(typeof(BuildingType)).Length);
+            // int randomBuildingType = Random.Range(1, Enum.GetNames(typeof(BuildingType)).Length);
             
             newTile.Buildings = new();
             
-            if (BuildingsController.Instance.CanConstructBuildingOnTileType(newTile.Type,
-                    (BuildingType)randomBuildingType))
-            {
-                TileBuilding building = new TileBuilding();
-                
-                building.Type = (BuildingType)randomBuildingType;
-                
-                newTile.Buildings.Add(building);
-            }
+            // if (BuildingsController.Instance.CanConstructBuildingOnTileType(newTile.Type,
+            //         (BuildingType)randomBuildingType))
+            // {
+            //     TileBuilding building = new TileBuilding();
+            //     
+            //     building.Type = (BuildingType)randomBuildingType;
+            //     
+            //     newTile.Buildings.Add(building);
+            // }
             
             tiles.Add(newTile);
         }
