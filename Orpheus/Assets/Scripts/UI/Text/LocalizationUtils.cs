@@ -67,6 +67,8 @@ public static class LocalizationUtils
                 return "Mine";
             case BuildingType.Well:
                 return "Well";
+            case BuildingType.DirtPile:
+                return "Dirt Pile";
             default:
                 return "";
         }
@@ -221,6 +223,8 @@ public static class LocalizationUtils
                 return "<mine>";
             case BuildingType.Well:
                 return "<well>";
+            case BuildingType.DirtPile:
+                return "<dirtpile>";
             default:
                 return "";
         }

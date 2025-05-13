@@ -17,7 +17,7 @@ MonoBehaviour:
     Rewards:
     - Type: 4
       Quantity: 0
-      BuildingTypes: 0c000000
+      BuildingTypes: 0c0000000d000000
   - XpForLevel: 4
     Rewards:
     - Type: 4

@@ -50,6 +50,7 @@ public enum BuildingType
     Forest,
     Mine,
     Well,
+    DirtPile,
 }
 
 public struct TileBuilding

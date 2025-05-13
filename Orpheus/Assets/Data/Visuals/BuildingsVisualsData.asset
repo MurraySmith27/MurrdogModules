@@ -42,8 +42,7 @@ MonoBehaviour:
     Prefab: {fileID: 696966427250684961, guid: 40bd9c7b821a4ca4cbb958c953dead65, type: 3}
     Icon3DPrefab: {fileID: 441533816867705382, guid: b7742a649dc331045892d03fc742ba55,
       type: 3}
-    Descrpition: <b>Lumber Mill<b><br>Converts 1 <wood> to 1 <lumber>.<br><br>Must
-      be built on a <grasstile>.
+    Descrpition: 
   - Type: 6
     Prefab: {fileID: 696966427250684961, guid: 1fdd51e75dcf57c4587ea9ca0a82a4d1, type: 3}
     Icon3DPrefab: {fileID: 441533816867705382, guid: c3436c17cdd6c234cb262ad99722f7a8,
@@ -77,5 +76,10 @@ MonoBehaviour:
   - Type: 12
     Prefab: {fileID: 696966427250684961, guid: 428206408d9dcaa43abceb5b7d71d5bd, type: 3}
     Icon3DPrefab: {fileID: 404360159390045895, guid: 0c0c0b6ceb937f149aa3e7742c246942,
+      type: 3}
+    Descrpition: 
+  - Type: 13
+    Prefab: {fileID: 696966427250684961, guid: f9c59fcc2a57349f1b04a9b8136fa3ed, type: 3}
+    Icon3DPrefab: {fileID: 404360159390045895, guid: 3c0cad3faf68d4c3da03b26ce8ac6cef,
       type: 3}
     Descrpition: 

@@ -79,3 +79,8 @@ MonoBehaviour:
     - Type: 3
       Quantity: 0
     CanBuildOnTiles: 020000000100000003000000
+  - Type: 13
+    Costs:
+    - Type: 3
+      Quantity: 0
+    CanBuildOnTiles: 020000000100000003000000

@@ -56,6 +56,15 @@ MonoBehaviour:
     PersistentResourceOutput:
     - Type: 4
       Quantity: 3
+  - Type: 13
+    ResourceInput: []
+    PersistentResourceInput:
+    - Type: 4
+      Quantity: 1
+    ResourceOutput: []
+    PersistentResourceOutput:
+    - Type: 5
+      Quantity: 3
   - Type: 2
     ResourceInput: []
     PersistentResourceInput:
@@ -79,8 +88,6 @@ MonoBehaviour:
     - Type: 1
       Quantity: 1
     PersistentResourceInput:
-    - Type: 5
-      Quantity: 2
     - Type: 4
       Quantity: 1
     ResourceOutput:
@@ -94,8 +101,6 @@ MonoBehaviour:
     PersistentResourceInput:
     - Type: 6
       Quantity: 1
-    - Type: 5
-      Quantity: 1
     ResourceOutput:
     - Type: 6
       Quantity: 1
@@ -103,15 +108,13 @@ MonoBehaviour:
   - Type: 6
     ResourceInput:
     - Type: 4
-      Quantity: 0
+      Quantity: 1
     PersistentResourceInput:
     - Type: 6
       Quantity: 1
-    - Type: 5
-      Quantity: 1
     ResourceOutput:
     - Type: 7
-      Quantity: 0
+      Quantity: 1
     PersistentResourceOutput: []
   - Type: 7
     ResourceInput:
@@ -120,8 +123,6 @@ MonoBehaviour:
     PersistentResourceInput:
     - Type: 6
       Quantity: 2
-    - Type: 5
-      Quantity: 1
     ResourceOutput:
     - Type: 8
       Quantity: 1
@@ -132,8 +133,6 @@ MonoBehaviour:
       Quantity: 1
     PersistentResourceInput:
     - Type: 6
-      Quantity: 1
-    - Type: 4
       Quantity: 1
     ResourceOutput:
     - Type: 9
@@ -147,7 +146,7 @@ MonoBehaviour:
       Quantity: 1
     PersistentResourceInput:
     - Type: 4
-      Quantity: 2
+      Quantity: 1
     ResourceOutput:
     - Type: 10
       Quantity: 1

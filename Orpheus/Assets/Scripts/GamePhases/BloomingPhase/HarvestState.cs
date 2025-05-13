@@ -79,7 +79,7 @@ public class HarvestState : Singleton<HarvestState>
     {
         if (phase == GamePhases.BloomingUpkeep)
         {
-            NumRemainingCitizens = PersistentState.Instance.CurrentCitizenCount;
+            NumRemainingCitizens = MapSystem.Instance.GetAllOwnedCityTiles().Count - 1;//PersistentState.Instance.CurrentCitizenCount;
             NumCitizensUsedThisHarvest = 0;
             NumRemainingDiscards = PersistentState.Instance.CurrentDiscardsPerRound;
             NumDiscardsUsed = 0;

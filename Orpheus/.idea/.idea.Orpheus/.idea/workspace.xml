@@ -5,33 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AssetCredits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetCredits.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/BuildingsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/BuildingsData.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/BuildngProcessRules.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/BuildngProcessRules.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/TechSystem/TechSystemLevels.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/TechSystem/TechSystemLevels.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest_mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mine_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mine_mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingsVisualsSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingsVisualsSO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/HarvestState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/HarvestState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BuddingPhase/BuddingUpkeepPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BuddingPhase/BuddingUpkeepPhase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/HarvestExtraResourceConversionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/HarvestExtraResourceConversionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/WiltingExtraResourceConversionPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/WiltingExtraResourceConversionPhase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/DiscardsText.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/DiscardsText.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/HandsText.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/HandsText.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/BuildingTooltip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/BuildingTooltip.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Blue/Default/slide_vertical_color_section.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Blue/Default/slide_vertical_color_section.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Blue/Double/slide_vertical_color_section.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Blue/Double/slide_vertical_color_section.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/slide_vertical_grey_section.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/slide_vertical_grey_section.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Double/slide_vertical_grey_section.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Double/slide_vertical_grey_section.png.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,6 +169,13 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/murraysmith/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
+      "/Users/murraysmith/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
+      "/Users/murraysmith/Library/Application Support/Symbols/src"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -225,10 +213,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12544">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="12544" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -336,92 +324,37 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/BusinessCardRelic.cs</url>
           <line>13</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Relics\RelicImplementations\BusinessCardRelic.cs" containingFunctionPresentation="Method 'OnFoodScoreConversionComplete'">
-            <startOffsets>
-              <option value="481" />
-            </startOffsets>
-            <endOffsets>
-              <option value="516" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Relics\RelicImplementations\BusinessCardRelic.cs" containingFunctionPresentation="Method 'OnFoodScoreConversionComplete'" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/RoundController.cs</url>
           <line>107</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'GoToNextPhase'">
-            <startOffsets>
-              <option value="3382" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3403" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\RoundController.cs" containingFunctionPresentation="Method 'GoToNextPhase'" />
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs</url>
           <line>243</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\ShopPopup\ShopPopup.cs" containingFunctionPresentation="Method 'OnBoosterPackPurchaseButtonClicked'">
-            <startOffsets>
-              <option value="9004" />
-            </startOffsets>
-            <endOffsets>
-              <option value="9095" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\ShopPopup\ShopPopup.cs" containingFunctionPresentation="Method 'OnBoosterPackPurchaseButtonClicked'" />
           <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs</url>
-          <line>374</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\Core\MapSystem.cs" containingFunctionPresentation="Method 'AddRandomTileToCity'">
-            <startOffsets>
-              <option value="12757" />
-            </startOffsets>
-            <endOffsets>
-              <option value="12809" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs</url>
           <line>240</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapVisualsController.cs" containingFunctionPresentation="Method 'OnBuildingDestroyed'">
-            <startOffsets>
-              <option value="9112" />
-            </startOffsets>
-            <endOffsets>
-              <option value="9148" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapVisualsController.cs" containingFunctionPresentation="Method 'OnBuildingDestroyed'" />
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs</url>
           <line>163</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Balance\RandomChanceSystem.cs" containingFunctionPresentation="Method 'GetCurrentlyOfferedBuildings'">
-            <startOffsets>
-              <option value="5203" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5301" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Balance\RandomChanceSystem.cs" containingFunctionPresentation="Method 'GetCurrentlyOfferedBuildings'" />
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/LevelUpPopup/LevelUpPopup.cs</url>
           <line>26</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\LevelUpPopup\LevelUpPopup.cs" containingFunctionPresentation="Method 'Populate'">
-            <startOffsets>
-              <option value="746" />
-            </startOffsets>
-            <endOffsets>
-              <option value="839" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\LevelUpPopup\LevelUpPopup.cs" containingFunctionPresentation="Method 'Populate'" />
           <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>

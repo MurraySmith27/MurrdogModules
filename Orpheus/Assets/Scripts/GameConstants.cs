@@ -60,7 +60,7 @@ public static class GameConstants
     public static readonly TileType[] INITIAL_CITY_TILE_TYPES = new TileType[]
     {
         TileType.Grass, TileType.Grass,
-        TileType.Grass, TileType.Grass, TileType.Grass,
+        TileType.Grass, TileType.Grass, TileType.Water,
         TileType.Water, TileType.Water,
     };
     
