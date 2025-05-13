@@ -74,12 +74,19 @@ public class PlayerResourcesSystem : Singleton<PlayerResourcesSystem>
         return false;
     }
 
-    public bool PayCost(List<PersistentResourceItem> costs)
+    public bool HasCost(List<PersistentResourceItem> costs)
     {
         foreach (PersistentResourceItem cost in costs)
         {
             if (!HasResource(cost.Type, cost.Quantity)) return false;
         }
+
+        return true;
+    }
+    
+    public bool PayCost(List<PersistentResourceItem> costs)
+    {
+        if (!HasCost(costs)) return false;
         
         foreach (PersistentResourceItem cost in costs)
         {

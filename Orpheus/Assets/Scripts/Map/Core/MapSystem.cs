@@ -59,6 +59,10 @@ public class MapSystem : Singleton<MapSystem>
     public delegate void OnBuildingConstructedDelegate(int row, int col, BuildingType building);
     
     public event OnBuildingConstructedDelegate OnBuildingConstructed;
+    
+    public delegate void OnBuildingDestroyedDelegate(int row, int col);
+    
+    public event OnBuildingDestroyedDelegate OnBuildingDestroyed;
 
     public delegate void OnCityOwnedTilesChangedDelegate(Vector2Int cityCapitalLocation,
         List<Vector2Int> cityOwnedTiles);
@@ -157,6 +161,12 @@ public class MapSystem : Singleton<MapSystem>
         {
             OnBuildingConstructed?.Invoke(position.x, position.y, buildingType);
         }
+    }
+
+    public void DestroyBuilding(Vector2Int position)
+    {
+        _tiles.RemoveAllBuildingsFromTile(position.x, position.y);
+        OnBuildingDestroyed?.Invoke(position.x, position.y);
     }
 
     public void PlaceTile(Vector2Int position, TileInformation tileInformation)

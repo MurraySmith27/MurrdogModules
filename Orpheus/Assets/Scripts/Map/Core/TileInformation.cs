@@ -47,6 +47,8 @@ public enum BuildingType
     SteelYard,
     PopcornFactory,
     SushiRestaurant,
+    Forest,
+    Mine,
 }
 
 public struct TileBuilding

@@ -12,6 +12,7 @@ public enum MapInteractionMode
     LockCitizens,
     PlaceTile,
     RemoveTile,
+    DestroyBuilding,
 }
 
 public class MapInteractionController : Singleton<MapInteractionController>
@@ -121,6 +122,9 @@ public class MapInteractionController : Singleton<MapInteractionController>
                 case MapInteractionMode.PlaceBuilding:
                     TryPlaceBuilding(tilePosition, CurrentlyPlacingBuildingType);
                     break;
+                case MapInteractionMode.DestroyBuilding:
+                    TryDestroyBuilding(tilePosition);
+                    break;
                 case MapInteractionMode.PlaceTile:
                     if (TryPlaceTile(tilePosition, CurrentlyPlacingTile))
                     {
@@ -193,6 +197,7 @@ public class MapInteractionController : Singleton<MapInteractionController>
     public void SwitchMapInteractionMode(MapInteractionMode newMode)
     {
         if (newMode == MapInteractionMode.PlaceBuilding || 
+            newMode == MapInteractionMode.DestroyBuilding ||
             newMode == MapInteractionMode.PlaceTile || 
             newMode == MapInteractionMode.RemoveTile)
         {
@@ -240,6 +245,23 @@ public class MapInteractionController : Singleton<MapInteractionController>
         else
         {
             BuildingsController.Instance.TryPlaceBuilding(tilePosition, buildingType);
+            SwitchMapInteractionMode(MapInteractionMode.Default);
+        }
+    }
+    
+    private void TryDestroyBuilding(Vector2Int tilePosition)
+    {
+        if (!BuildingsController.Instance.IsTileOwned(tilePosition))
+        {
+            Debug.LogError("CANNOT DESTROY BUILDING ON TILE THAT ISN'T OWNED BY A CITY");   
+        }
+        else if (MapSystem.Instance.GetBuildingsOnTile(tilePosition).Count == 0)
+        {
+            Debug.LogError("CANNOT DESTROY BUILDING ON TILE THAT HAS NO BUILDING");
+        }
+        else
+        {
+            BuildingsController.Instance.TryDestroyBuilding(tilePosition);
             SwitchMapInteractionMode(MapInteractionMode.Default);
         }
     }

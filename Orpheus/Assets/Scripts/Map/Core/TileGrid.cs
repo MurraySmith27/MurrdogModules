@@ -79,6 +79,11 @@ public class TileGrid
         }
     } 
     
+    public void RemoveAllBuildingsFromTile(int col, int row)
+    {
+        this[col, row].Buildings.Clear();
+    } 
+    
 #endregion  
     
 #region RESOURCES

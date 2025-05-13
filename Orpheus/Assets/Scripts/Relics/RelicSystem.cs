@@ -271,6 +271,18 @@ public class RelicSystem : Singleton<RelicSystem>
         }
     }
 
+    public void OnBuildingDestroyed(Vector2Int position, BuildingType buildingType)
+    {
+        foreach (RelicTypes relic in relics)
+        {
+            AdditionalTriggeredArgs args;
+            if (_relicInstances[relic].OnBuildingDestroyed(position, buildingType, out args))
+            {
+                OnRelicTriggered?.Invoke(relic, args);
+            }
+        }
+    }
+
     public void OnHarvestStart()
     {
         foreach (RelicTypes relic in relics)

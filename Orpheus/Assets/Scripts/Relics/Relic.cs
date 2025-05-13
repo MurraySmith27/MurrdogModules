@@ -86,6 +86,12 @@ public abstract class Relic
         return false;
     }
     
+    public virtual bool OnBuildingDestroyed(Vector2Int position, BuildingType buildingType, out AdditionalTriggeredArgs args)
+    {
+        args = new();
+        return false;
+    }
+    
     public virtual bool OnHarvestStart(out AdditionalTriggeredArgs args)
     {
         args = new();

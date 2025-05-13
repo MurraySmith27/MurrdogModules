@@ -61,6 +61,10 @@ public static class LocalizationUtils
                 return "Popcorn Factory";
             case BuildingType.SushiRestaurant:
                 return "Sushi Restaurant";
+            case BuildingType.Forest:
+                return "Forest";
+            case BuildingType.Mine:
+                return "Mine";
             default:
                 return "";
         }
@@ -209,6 +213,10 @@ public static class LocalizationUtils
                 return "<popcornfactory>";
             case BuildingType.SushiRestaurant:
                 return "<sushirestaurant>";
+            case BuildingType.Forest:
+                return "<forest>";
+            case BuildingType.Mine:
+                return "<mine>";
             default:
                 return "";
         }

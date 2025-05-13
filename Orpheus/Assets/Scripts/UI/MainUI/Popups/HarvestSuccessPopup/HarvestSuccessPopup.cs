@@ -37,8 +37,8 @@ public class HarvestSuccessPopup : MonoBehaviour
 
     private void Populate()
     {
-        foodRequiredText.SetText($"Required: <sprite=5>{HarvestState.Instance.CurrentFoodGoal}");
-        foodHarvestedText.SetText($"Required: <sprite=5>{HarvestState.Instance.CurrentFoodScore}");
+        foodRequiredText.SetText($"Required: <sprite=11>{HarvestState.Instance.CurrentFoodGoal}");
+        foodHarvestedText.SetText($"Harvested: <sprite=11>{HarvestState.Instance.CurrentFoodScore}");
         
         bonusGoldText.SetText($"Reward: <sprite=0>{BloomingEndStepController.Instance.LastHarvestGoldReiceived}");
         interestText.SetText($"Interest: <sprite=0>{BloomingEndStepController.Instance.LastInterestRecieved}");

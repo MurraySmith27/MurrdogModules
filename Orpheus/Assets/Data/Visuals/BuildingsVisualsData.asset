@@ -64,3 +64,13 @@ MonoBehaviour:
     Icon3DPrefab: {fileID: 441533816867705382, guid: 7b4a7b3ed4d753b43abc1f1e868a83f4,
       type: 3}
     Descrpition: 
+  - Type: 10
+    Prefab: {fileID: 696966427250684961, guid: 6548b66255440894d95186918a8b899e, type: 3}
+    Icon3DPrefab: {fileID: 441533816867705382, guid: f18b6c731ad45734c96835a3a7856c1b,
+      type: 3}
+    Descrpition: 
+  - Type: 11
+    Prefab: {fileID: 696966427250684961, guid: 71952822eb9c8a64080f5a08e3779d71, type: 3}
+    Icon3DPrefab: {fileID: 441533816867705382, guid: ee5b520bc11275340964ff538475cc60,
+      type: 3}
+    Descrpition: 

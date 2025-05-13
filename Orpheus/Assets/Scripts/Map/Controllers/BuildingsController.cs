@@ -35,6 +35,33 @@ public class BuildingsController : Singleton<BuildingsController>
         else return false;
     }
 
+    public bool TryDestroyBuilding(Vector2Int position)
+    {
+        List<TileBuilding> buildingsOnTile = MapSystem.Instance.GetBuildingsOnTile(position);
+        if (buildingsOnTile.Count == 0)
+        {
+            return false;
+        }
+        
+        if (PlayerResourcesSystem.Instance.PayCost(buildingsData.DestroyBuildingsCost))
+        {
+            MapSystem.Instance.DestroyBuilding(position);
+
+            foreach (TileBuilding building in buildingsOnTile)
+            {
+                RelicSystem.Instance.OnBuildingDestroyed(position, building.Type);
+            }
+            
+            return true;
+        }
+        else return false;
+    }
+
+    public bool HasDestroyBuildingCost()
+    {
+        return PlayerResourcesSystem.Instance.HasCost(buildingsData.DestroyBuildingsCost);
+    }
+
     public List<PersistentResourceItem> GetBuildingCost(BuildingType type)
     {
         BuildingData buildingData = buildingsData.Buildings.FirstOrDefault(data => data.Type == type);
@@ -114,6 +141,8 @@ public class BuildingsController : Singleton<BuildingsController>
     {
         List<BuildingType> buildingTypes = new List<BuildingType>();
         
+        buildingTypes.Add(BuildingType.Forest);
+        buildingTypes.Add(BuildingType.Mine);
         buildingTypes.Add(BuildingType.CornFarm);
         buildingTypes.Add(BuildingType.FishFarm);
         buildingTypes.Add(BuildingType.WheatFarm);

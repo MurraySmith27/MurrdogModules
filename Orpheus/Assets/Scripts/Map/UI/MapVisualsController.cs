@@ -47,6 +47,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
         MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
         MapSystem.Instance.OnBuildingConstructed += OnBuildingConstructed;
+        
+        MapSystem.Instance.OnBuildingDestroyed -= OnBuildingDestroyed;
+        MapSystem.Instance.OnBuildingDestroyed += OnBuildingDestroyed;
 
         MapSystem.Instance.OnTilePlaced -= OnTilePlaced;
         MapSystem.Instance.OnTilePlaced += OnTilePlaced;
@@ -82,6 +85,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
             MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
+            MapSystem.Instance.OnBuildingDestroyed -= OnBuildingDestroyed;
             MapSystem.Instance.OnTilePlaced -= OnTilePlaced;
             MapSystem.Instance.OnCityOwnedTilesChanged -= OnCityOwnedTilesChanged;
             MapSystem.Instance.OnTileAddedToCity -= OnTileAddedToCity;
@@ -230,6 +234,33 @@ public class MapVisualsController : Singleton<MapVisualsController>
         }
         
         CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(new Vector2Int(row, col)));
+    }
+
+    private void OnBuildingDestroyed(int row, int col)
+    {
+        Vector2Int position = new(row, col);
+        int index = InstantiatedBuildings.FindIndex((pair) =>
+        {
+            return pair.Item1 == position;
+        });
+        
+        
+        if (index != -1)
+        {
+            TileVisuals tile = GetTileInstanceAtPosition(position);
+
+            if (tile == null)
+            {
+                Debug.LogError($"Error when destroying building: no such tile at position ({row}, {col})");
+            }
+            else
+            {
+                tile.DetachAllBuildings();
+                Destroy(InstantiatedBuildings[index].Item2.gameObject);
+                InstantiatedBuildings.RemoveAt(index);
+            }
+        }
+        
     }
 
     private void OnTilePlaced(Vector2Int position, TileInformation tileInformation)

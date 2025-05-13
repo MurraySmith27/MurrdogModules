@@ -125,7 +125,9 @@ public class CameraController : Singleton<CameraController>
     private void OnMapInteractionModeChanged(MapInteractionMode mapInteractionMode)
     {
         if (mapInteractionMode == MapInteractionMode.PlaceBuilding ||
-            mapInteractionMode == MapInteractionMode.PlaceTile)
+            mapInteractionMode == MapInteractionMode.PlaceTile ||
+            mapInteractionMode == MapInteractionMode.DestroyBuilding || 
+            mapInteractionMode == MapInteractionMode.RemoveTile)
         {
             SetCameraTopDownMode(true);
             List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();

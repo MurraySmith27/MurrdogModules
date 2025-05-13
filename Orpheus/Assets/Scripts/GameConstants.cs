@@ -12,10 +12,12 @@ public static class GameConstants
 
     public static readonly long[] FOOD_GOALS_PER_HARVEST =
     {
-        2,   
-        4,   
-        6,   
-        8,   
+        1,
+        2,
+        3,
+        5,   
+        7,   
+        9,   
         12,  
         16,  
         20,  
@@ -95,6 +97,9 @@ public static class GameConstants
 
 
     public static readonly int NUM_BUILDINGS_OFFERED_EACH_ROUND = 2;
+    public static readonly int NUM_FREE_BUILDING_REFRESHES = 1;
+    public static readonly long INITIAL_BUILDING_REFRESH_GOLD_COST = 20;
+    public static readonly double GOLD_COST_PER_BUILDING_REFRESH_MULTIPLIER = 1.5d;
 
     public static readonly Dictionary<ResourceType, double> BASE_FOOD_SCORE_PER_RESOURCE =
     new Dictionary<ResourceType, double> {
