@@ -139,27 +139,9 @@ public class BuildingsController : Singleton<BuildingsController>
 
     public List<BuildingType> GetAvailableBuildingTypes()
     {
-        List<BuildingType> buildingTypes = new List<BuildingType>();
-        
-        buildingTypes.Add(BuildingType.Forest);
-        buildingTypes.Add(BuildingType.Mine);
-        buildingTypes.Add(BuildingType.CornFarm);
-        buildingTypes.Add(BuildingType.FishFarm);
-        buildingTypes.Add(BuildingType.WheatFarm);
-        buildingTypes.Add(BuildingType.Bakery);
+        List<BuildingType> buildingTypes = new List<BuildingType>(GameConstants.STARTING_BUILDING_TYPES);
 
-        if (PersistentState.Instance.HarvestNumber >= 3)
-        {
-            buildingTypes.Add(BuildingType.LumberMill);
-            buildingTypes.Add(BuildingType.CopperYard);
-            buildingTypes.Add(BuildingType.PopcornFactory);
-            buildingTypes.Add(BuildingType.SushiRestaurant);
-        }
-
-        if (PersistentState.Instance.HarvestNumber >= 6)
-        {
-            buildingTypes.Add(BuildingType.SteelYard);
-        }
+        buildingTypes.AddRange(TechSystem.Instance.GetUnlockedBuildings());
         
         buildingTypes = RelicSystem.Instance.GetUnlockedBuildingTypes(buildingTypes);
         

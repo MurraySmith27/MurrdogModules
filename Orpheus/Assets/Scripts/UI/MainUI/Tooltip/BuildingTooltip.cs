@@ -24,6 +24,7 @@ public class BuildingTooltip : TooltipBase
 
         var input = buildingProcessRulesSO.GetResourceInput(buildingType);
 
+        var output = buildingProcessRulesSO.GetResourceOutput(buildingType);
 
         if (input.Count > 0)
         {
@@ -33,23 +34,35 @@ public class BuildingTooltip : TooltipBase
             }
             additionalDescription += " > ";
         }
-        else
+        else if (output.Count > 0)
         {
             additionalDescription += "Harvests ";
         }
 
-        var output = buildingProcessRulesSO.GetResourceOutput(buildingType);
-        
         foreach (ResourceItem resourceItem in output)
         {
             additionalDescription += LocalizationUtils.GetIconTagForResource(resourceItem.Type) + (resourceItem.Quantity > 1 ? resourceItem.Quantity.ToString() : "");
         }
+        
+        
+        var persistentOutput = buildingProcessRulesSO.GetPersistentResourceOutput(buildingType);
+
+        if (persistentOutput.Count > 0)
+        {
+            additionalDescription += "\nGrants ";
+
+            foreach (PersistentResourceItem persistentResourceItem in persistentOutput)
+            {
+                additionalDescription += LocalizationUtils.GetIconTagForPersistentResource(persistentResourceItem.Type) + persistentResourceItem.Quantity.ToString();
+            }
+        }
+        
 
         var persistentInput = buildingProcessRulesSO.GetPersistentResourceInput(buildingType);
 
         if (persistentInput.Count > 0)
         {
-            additionalDescription += "\nCosts: ";
+            additionalDescription += "\nCosts ";
                 
             foreach (PersistentResourceItem persistentResourceItem in persistentInput)
             {
@@ -57,6 +70,13 @@ public class BuildingTooltip : TooltipBase
             }
         }
         
-        return basicDescription + additionalDescription;
+        string description = basicDescription + additionalDescription;
+
+        if (description.StartsWith("\n"))
+        {
+            description = description.Substring(1);
+        }
+        
+        return $"<b>{LocalizationUtils.GetNameOfBuilding(buildingType)}</b>\n{description}";
     }
 }

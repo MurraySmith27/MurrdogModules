@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620bdaf3c084c474091843aa6e9f1d5f, type: 3}
   m_Name: BuildingsData
   m_EditorClassIdentifier: 
+  DestroyBuildingsCost:
+  - Type: 3
+    Quantity: 1
   Buildings:
   - Type: 0
     Costs: []
@@ -70,4 +73,9 @@ MonoBehaviour:
     Costs:
     - Type: 3
       Quantity: 1
+    CanBuildOnTiles: 020000000100000003000000
+  - Type: 12
+    Costs:
+    - Type: 3
+      Quantity: 0
     CanBuildOnTiles: 020000000100000003000000

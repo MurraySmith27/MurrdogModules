@@ -23,6 +23,16 @@ public class DebugOptions
         HarvestState.Instance.ResetFoodScore();
     }
 
+    public void AddLotsOfBuildingTokens()
+    {
+        PersistentState.Instance.ChangeCurrentBuildTokens(10);
+    }
+
+    public void AddSmallExp()
+    {
+        TechSystem.Instance.AddExp(3);
+    }
+    
     public void AddLotsOfGold()
     {
         PersistentState.Instance.ChangeCurrentGold(10000);    

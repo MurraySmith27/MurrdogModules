@@ -74,3 +74,8 @@ MonoBehaviour:
     Icon3DPrefab: {fileID: 441533816867705382, guid: ee5b520bc11275340964ff538475cc60,
       type: 3}
     Descrpition: 
+  - Type: 12
+    Prefab: {fileID: 696966427250684961, guid: 428206408d9dcaa43abceb5b7d71d5bd, type: 3}
+    Icon3DPrefab: {fileID: 404360159390045895, guid: 0c0c0b6ceb937f149aa3e7742c246942,
+      type: 3}
+    Descrpition: 

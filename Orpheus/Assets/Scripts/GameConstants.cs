@@ -139,4 +139,14 @@ public static class GameConstants
     public static readonly int STARTING_CITIZENS_PER_HARVEST_ROUND = 3;
     public static readonly int STARTING_DISCARDS_PER_HARVEST_ROUND = 3;
     public static readonly int STARTING_HANDS_PER_HARVEST_ROUND = 3;
+
+    public static readonly List<BuildingType> STARTING_BUILDING_TYPES = new List<BuildingType>(
+        new BuildingType[]
+        {
+            BuildingType.Forest,
+            BuildingType.Mine,
+            BuildingType.WheatFarm,
+            BuildingType.CornFarm
+        }
+        );
 }

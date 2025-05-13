@@ -79,11 +79,11 @@ public class HarvestState : Singleton<HarvestState>
     {
         if (phase == GamePhases.BloomingUpkeep)
         {
-            NumRemainingCitizens = GameConstants.STARTING_CITIZENS_PER_HARVEST_ROUND;
+            NumRemainingCitizens = PersistentState.Instance.CurrentCitizenCount;
             NumCitizensUsedThisHarvest = 0;
-            NumRemainingDiscards = GameConstants.STARTING_DISCARDS_PER_HARVEST_ROUND;
+            NumRemainingDiscards = PersistentState.Instance.CurrentDiscardsPerRound;
             NumDiscardsUsed = 0;
-            NumRemainingHands = GameConstants.STARTING_HANDS_PER_HARVEST_ROUND;
+            NumRemainingHands = PersistentState.Instance.CurrentHandsPerRound;
             NumHandsUsed = 0;
 
             NumBonusCitizensUsedThisHarvest = 0;

@@ -49,6 +49,7 @@ public enum BuildingType
     SushiRestaurant,
     Forest,
     Mine,
+    Well,
 }
 
 public struct TileBuilding

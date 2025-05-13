@@ -5,5 +5,11 @@ using UnityEngine;
 
 public class BuddingUpkeepPhase : PhaseStateBase
 {
-    
+    public override void StateEnter(PhaseStateMachine context, Action onEnterComplete)
+    {
+        //apply tech experience
+        TechSystem.Instance.AddExp((int)HarvestState.Instance.CurrentFoodScore);
+        
+        onEnterComplete?.Invoke();
+    }
 }

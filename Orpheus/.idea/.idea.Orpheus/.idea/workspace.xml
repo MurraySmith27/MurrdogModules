@@ -6,34 +6,32 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetCredits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetCredits.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/BuildingsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/BuildingsData.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/BuildngProcessRules.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/BuildngProcessRules.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BulidingPopup/BuildingPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BulidingPopup/BuildingPopup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/HarvestSuccessPopup/HarvestSuccessPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/HarvestSuccessPopup/HarvestSuccessPopup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest_mini.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mine_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mine_mini.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingsVisualsSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingsVisualsSO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/HarvestState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/HarvestState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BuddingPhase/BuddingUpkeepPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BuddingPhase/BuddingUpkeepPhase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/HarvestExtraResourceConversionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/HarvestExtraResourceConversionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/WiltingExtraResourceConversionPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/WiltingPhases/WiltingExtraResourceConversionPhase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Controllers/BuildingsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/BuildingsDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/BuildingsDataSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/PlayerResourcesSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/PlayerResourcesSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileGrid.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapInteractionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/Relic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/Relic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BuildingPopup/BuildingPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BuildingPopup/BuildingPopup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/HarvestSuccessPopup/HarvestSuccessPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/HarvestSuccessPopup/HarvestSuccessPopup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/DiscardsText.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/DiscardsText.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/HandsText.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HarvestUI/HandsText.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/BuildingTooltip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/BuildingTooltip.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.pdn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.pdn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/oil.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/oil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/water.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/water.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TileCitizenLockedOverlayOut.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TileCitizenLockedOverlayOut.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Blue/Default/slide_vertical_color_section.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Blue/Default/slide_vertical_color_section.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Blue/Double/slide_vertical_color_section.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Blue/Double/slide_vertical_color_section.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/slide_vertical_grey_section.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/slide_vertical_grey_section.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Double/slide_vertical_grey_section.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Double/slide_vertical_grey_section.png.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +71,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingsVisualsSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/RelicVisualsSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/ResourceVisualDataSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/TechSystemLevelsSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/TilesVisualsSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/TooltipDataSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/TooltipTextSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -124,6 +123,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/TheMolluskRelic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Settings/GlobalSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TechSystem/TechSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/3D/Icon3DVisual.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/3D/Preview3DController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/3D/TileIcon3DVisual.cs" root0="FORCE_HIGHLIGHTING" />
@@ -145,6 +145,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/GameOverPopup/GameOverPopupListener.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/HarvestSuccessPopup/HarvestSuccessPopup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/HarvestSuccessPopup/HarvestSuccessPopupListener.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/LevelUpPopup/LevelUpPopupListener.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/RoundRewardsOptionsPopup/RoundRewardsOptionsPopupListener.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Submenu/UIItemSubmenu.cs" root0="FORCE_HIGHLIGHTING" />
@@ -175,20 +176,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.43120155&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.43120155",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../OrpheusBuild\Orpheus.exe" />
@@ -301,7 +302,7 @@
       <workItem from="1746653866094" duration="1468000" />
       <workItem from="1746737753628" duration="1365000" />
       <workItem from="1747085900910" duration="5845000" />
-      <workItem from="1747095910659" duration="806000" />
+      <workItem from="1747095910659" duration="12594000" />
     </task>
     <servers />
   </component>
@@ -385,71 +386,6 @@
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/GameResources/TileHarvestController.cs</url>
-          <line>66</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GameResources\TileHarvestController.cs" containingFunctionPresentation="Method 'GetResourceChangeOnTileProcess'">
-            <startOffsets>
-              <option value="2891" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2973" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs</url>
-          <line>112</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\BloomingPhase\BloomingHarvestController.cs" containingFunctionPresentation="Method 'HarvestCoroutine'">
-            <startOffsets>
-              <option value="4590" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4663" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BuildingPopup/BuildingPopup.cs</url>
-          <line>44</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\BuildingPopup\BuildingPopup.cs" containingFunctionPresentation="Method 'Populate'">
-            <startOffsets>
-              <option value="1203" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1225" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BuildingPopup/BuildingPopup.cs</url>
-          <line>42</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\BuildingPopup\BuildingPopup.cs" containingFunctionPresentation="Method 'Populate'">
-            <startOffsets>
-              <option value="1118" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1180" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BuildingPopup/BuildingPopup.cs</url>
-          <line>87</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\BuildingPopup\BuildingPopup.cs" containingFunctionPresentation="Method 'GetCurrentRefreshCost'">
-            <startOffsets>
-              <option value="2674" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2740" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs</url>
           <line>240</line>
           <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Map\UI\MapVisualsController.cs" containingFunctionPresentation="Method 'OnBuildingDestroyed'">
@@ -461,6 +397,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs</url>
+          <line>163</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Balance\RandomChanceSystem.cs" containingFunctionPresentation="Method 'GetCurrentlyOfferedBuildings'">
+            <startOffsets>
+              <option value="5203" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5301" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/LevelUpPopup/LevelUpPopup.cs</url>
+          <line>26</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\LevelUpPopup\LevelUpPopup.cs" containingFunctionPresentation="Method 'Populate'">
+            <startOffsets>
+              <option value="746" />
+            </startOffsets>
+            <endOffsets>
+              <option value="839" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

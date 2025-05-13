@@ -23,6 +23,36 @@ public class BuildingsVisualsSO : ScriptableObject
 
         return "";
     }
+
+    public BuildingBehaviour GetIcon3dPrefabForBuilding(BuildingType buildingType)
+    {
+        BuildingVisualsData buildingVisualsData = BuildingsVisualsData.FirstOrDefault((BuildingVisualsData data) =>
+        {
+            return data.Type == buildingType;
+        });
+
+        if (buildingVisualsData != null)
+        {
+            return buildingVisualsData.Icon3DPrefab;
+        }
+
+        return null;
+    }
+    
+    public BuildingBehaviour GetPrefabForBuilding(BuildingType buildingType)
+    {
+        BuildingVisualsData buildingVisualsData = BuildingsVisualsData.FirstOrDefault((BuildingVisualsData data) =>
+        {
+            return data.Type == buildingType;
+        });
+
+        if (buildingVisualsData != null)
+        {
+            return buildingVisualsData.Prefab;
+        }
+
+        return null;
+    }
 }
 
 [Serializable]

@@ -65,6 +65,8 @@ public static class LocalizationUtils
                 return "Forest";
             case BuildingType.Mine:
                 return "Mine";
+            case BuildingType.Well:
+                return "Well";
             default:
                 return "";
         }
@@ -217,6 +219,8 @@ public static class LocalizationUtils
                 return "<forest>";
             case BuildingType.Mine:
                 return "<mine>";
+            case BuildingType.Well:
+                return "<well>";
             default:
                 return "";
         }

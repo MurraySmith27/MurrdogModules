@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a77088a470bd734694d6fda9c7f8bcb, type: 3}
+  m_Name: TechSystemLevels
+  m_EditorClassIdentifier: 
+  Levels:
+  - XpForLevel: 3
+    Rewards:
+    - Type: 4
+      Quantity: 0
+      BuildingTypes: 0c000000
+  - XpForLevel: 4
+    Rewards:
+    - Type: 4
+      Quantity: 0
+      BuildingTypes: 03000000
+  - XpForLevel: 5
+    Rewards:
+    - Type: 4
+      Quantity: 0
+      BuildingTypes: 050000000600000004000000
+    - Type: 2
+      Quantity: 1
+      BuildingTypes: 
+  - XpForLevel: 7
+    Rewards:
+    - Type: 4
+      Quantity: 0
+      BuildingTypes: 09000000
+  - XpForLevel: 9
+    Rewards:
+    - Type: 4
+      Quantity: 0
+      BuildingTypes: 08000000
+  - XpForLevel: 12
+    Rewards:
+    - Type: 4
+      Quantity: 0
+      BuildingTypes: 07000000
+  - XpForLevel: 15
+    Rewards:
+    - Type: 0
+      Quantity: 1
+      BuildingTypes: 
+  - XpForLevel: 30
+    Rewards:
+    - Type: 1
+      Quantity: 1
+      BuildingTypes: 
+  - XpForLevel: 45
+    Rewards:
+    - Type: 2
+      Quantity: 1
+      BuildingTypes: 
+  - XpForLevel: 70
+    Rewards:
+    - Type: 0
+      Quantity: 1
+      BuildingTypes: 

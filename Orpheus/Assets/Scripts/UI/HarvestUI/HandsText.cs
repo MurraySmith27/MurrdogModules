@@ -43,7 +43,7 @@ public class HandsText : MonoBehaviour
 
     private void OnHarvestEnded()
     {
-        handsText.SetText($"<bounce a=0.1 f=0.5>{GameConstants.STARTING_HANDS_PER_HARVEST_ROUND}</bounce>");
+        
     }
 
     private void SetHandsText(Dictionary<Guid, List<CitizenController.CitizenPlacement>> citizenPlacements)
