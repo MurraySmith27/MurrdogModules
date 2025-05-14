@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8666566425845857508}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: dirtpile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,6 +216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-sand-c
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a8091128f22a18d4ca302aed8a4e86e2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -305,6 +310,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-flat
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e8982431f01c3794984aaa6138ee77b9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -393,6 +403,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: rock-flat-grass
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7c83379fdfc603249a805d2fca2d004b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

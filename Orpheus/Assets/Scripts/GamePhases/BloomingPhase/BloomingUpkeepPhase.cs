@@ -11,7 +11,7 @@ public class BloomingUpkeepPhase : PhaseStateBase
         
         PersistentState.Instance.IncrementHarvestNumber();
 
-        PlayerResourcesSystem.Instance.AddTileTypeResources();
+        // PlayerResourcesSystem.Instance.AddTileTypeResources();
         
         HarvestState.Instance.ResetFoodScore();
         

@@ -8,8 +8,7 @@ public static class GlobalSettings
         get { return PlayerPrefs.GetInt(nameof(IsMapDraggingEnabled), 1) != 0; }
         set { PlayerPrefs.SetInt(nameof(IsMapDraggingEnabled), value ? 1 : 0); }
     }
-
-
+    
     public static event Action<float> OnGameSpeedChanged;
     
     public static float GameSpeed

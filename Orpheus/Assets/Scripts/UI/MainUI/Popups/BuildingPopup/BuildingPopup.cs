@@ -50,7 +50,7 @@ public class BuildingPopup : MonoBehaviour
         
         List<BuildingType> buildingTypes = BuildingsController.Instance.GetAvailableBuildingTypes();
 
-        List<BuildingType> offeredBuildings = RandomChanceSystem.Instance.GetCurrentlyOfferedBuildings(buildingTypes, PersistentState.Instance.HarvestNumber, _numRefreshesUsed);
+        List<BuildingType> offeredBuildings = RandomChanceSystem.Instance.GetCurrentlyOfferedBuildings(buildingTypes, _numRefreshesUsed);
 
         foreach (BuildingType buildingType in offeredBuildings)
         {

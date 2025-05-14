@@ -77,6 +77,9 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
         MapInteractionController.Instance.OnTileHoveredOver -= OnTileHoveredOver;
         MapInteractionController.Instance.OnTileHoveredOver += OnTileHoveredOver;
+
+        PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
+        PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
     }
 
     private void OnDestroy()
@@ -110,6 +113,18 @@ public class MapVisualsController : Singleton<MapVisualsController>
         }
     }
 
+    private void OnPhaseChanged(GamePhases phase)
+    {
+        if (phase == GamePhases.BloomingUpkeep)
+        {
+            if (_lastHoveredOverTileVisuals != null)
+            {
+                _lastHoveredOverTileVisuals.OnHoveredOver(false);
+                _lastHoveredOverTileVisuals = null;
+            }
+        }
+    }
+
     public TileVisuals GetTileInstanceAtPosition(Vector2Int position)
     {
         if (position.x >= InstantiatedMapTiles.GetLength(0) || position.y >= InstantiatedMapTiles.GetLength(0) || position.x < 0 || position.y < 0)
@@ -139,9 +154,12 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             _lastHoveredOverTileVisuals.OnHoveredOver(false);
         }
-        
-        tileVisuals.OnHoveredOver(true);
 
+        if (tileVisuals != null)
+        {
+            tileVisuals.OnHoveredOver(true);
+        }
+        
         _lastHoveredOverTileVisuals = tileVisuals;
     }
     

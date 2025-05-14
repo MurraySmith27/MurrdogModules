@@ -123,7 +123,7 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
     
     private void OnTileHarvestStart(Vector2Int position, Dictionary<ResourceType, int> resourcesChange)
     {
-        TryAnimateTile(position, (resourcesChange, new()));
+        // TryAnimateTile(position, (resourcesChange, new()));
     }
 
     private void OnTileProcessStart(Vector2Int position, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesChange)

@@ -2470,6 +2470,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 803789169}
     m_Modifications:
+    - target: {fileID: 576976623411722421, guid: da99386081b86434992e92e8c8801d00,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 29.750122
+      objectReference: {fileID: 0}
     - target: {fileID: 4800920924475577153, guid: da99386081b86434992e92e8c8801d00,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3739,6 +3744,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1577664973}
     m_Modifications:
+    - target: {fileID: 617197600219516421, guid: 44f32a5f8921ca24c9d6cb179425ae4c,
+        type: 3}
+      propertyPath: typewriterStartsAutomatically
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5814473144206805240, guid: 44f32a5f8921ca24c9d6cb179425ae4c,
         type: 3}
       propertyPath: m_Pivot.x

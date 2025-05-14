@@ -151,18 +151,15 @@ public class MapInteractionController : Singleton<MapInteractionController>
     {
         _currentlyHoveredOverTile = GetTileFromPosition(tilePosition);
         
-        if (_currentlyHoveredOverTile != null)
+        switch (CurrentMode)
         {
-            switch (CurrentMode)
-            {
-                case MapInteractionMode.None:
-                    break;
-                case MapInteractionMode.LockCitizens:
-                    break;
-                default:
-                    OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile, tilePosition);
-                    break;
-            }
+            case MapInteractionMode.None:
+                break;
+            case MapInteractionMode.LockCitizens:
+                break;
+            default:
+                OnTileHoveredOver?.Invoke(_currentlyHoveredOverTile, tilePosition);
+                break;
         }
     }
 

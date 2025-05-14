@@ -154,7 +154,7 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         return tiles;
     }
 
-    public List<BuildingType> GetCurrentlyOfferedBuildings(List<BuildingType> allAvailableBuildings, int harvestNum, int numRefreshesUsed)
+    public List<BuildingType> GetCurrentlyOfferedBuildings(List<BuildingType> allAvailableBuildings, int numRefreshesUsed)
     {
         if (allAvailableBuildings.Count <= GameConstants.NUM_BUILDINGS_OFFERED_EACH_ROUND)
         {
@@ -165,6 +165,11 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         
         Random.InitState(seed);
 
+        if (PersistentState.Instance.HarvestNumber == 0)
+        {
+            
+        }
+        
         List<BuildingType> remainingPicks = new List<BuildingType>(allAvailableBuildings);
         
         List<BuildingType> pickedSubset = new();

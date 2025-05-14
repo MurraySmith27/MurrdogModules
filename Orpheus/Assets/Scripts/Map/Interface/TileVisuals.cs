@@ -13,6 +13,10 @@ public class TileVisuals : MonoBehaviour
     private const string TILE_END_HARVEST_TRIGGER = "End";
     private const string TILE_SHAKE_ANIMATION_TRIGGER = "Shake";
     private const string TILE_APPEAR_ANIMATION_TRIGGER = "Appear";
+    private const string TILE_HOVER_ENTER_ANIMATION_TRIGGER = "HoverEnter";
+    private const string TILE_HOVER_EXIT_ANIMATION_TRIGGER = "HoverExit";
+        
+        
 
     [SerializeField] private Animator animator;
 
@@ -42,6 +46,8 @@ public class TileVisuals : MonoBehaviour
 
     private bool _playedAppearAnimation = false;
 
+    private bool _hoveredOver = false;
+
     private void Awake()
     {
         CollectRenderers();
@@ -52,17 +58,53 @@ public class TileVisuals : MonoBehaviour
         GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
         GlobalSettings.OnGameSpeedChanged += OnGameSpeedChanged;
 
+        PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
+        PhaseStateMachine.Instance.OnPhaseTransitionStarted += OnPhaseTransitionStarted;
+
         OnGameSpeedChanged(GlobalSettings.GameSpeed);
     }
 
     private void OnDestroy()
     {
         GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
+
+        if (PhaseStateMachine.IsAvailable)
+        {
+            PhaseStateMachine.Instance.OnPhaseTransitionStarted -= OnPhaseTransitionStarted;
+        }
+    }
+
+    private void OnPhaseTransitionStarted(GamePhases phase)
+    {
+        if (phase == GamePhases.BloomingHarvest)
+        {
+            animator.speed = GlobalSettings.GameSpeed;
+        }
+        else
+        {
+            animator.speed = 1f;
+        }
     }
 
     public void OnHoveredOver(bool hoverEnter)
     {
         //if !hoverEnter, the hover has exited
+
+        if (hoverEnter != _hoveredOver)
+        {
+            animator.ResetTrigger(TILE_HOVER_ENTER_ANIMATION_TRIGGER);
+            animator.ResetTrigger(TILE_HOVER_EXIT_ANIMATION_TRIGGER);
+            if (hoverEnter)
+            {
+                animator.SetTrigger(TILE_HOVER_ENTER_ANIMATION_TRIGGER);
+            }
+            else
+            {
+                animator.SetTrigger(TILE_HOVER_EXIT_ANIMATION_TRIGGER);
+            }
+            
+            _hoveredOver = hoverEnter;
+        }
         
         tilePreviewOverlayVisuals.ToggleHighlight(hoverEnter);
     }
@@ -112,6 +154,8 @@ public class TileVisuals : MonoBehaviour
         _attachedBuildings.Add(building);
         
         building.transform.SetParent(buildingsRoot);
+        building.transform.localPosition = Vector3.zero;
+        building.transform.localRotation = Quaternion.identity;
     }
     
     public void DetachAllBuildings()
@@ -193,7 +237,11 @@ public class TileVisuals : MonoBehaviour
 
     private void OnGameSpeedChanged(float gameSpeed)
     {
-        animator.speed = gameSpeed;
+        if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingHarvest ||
+            PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingResourceConversion)
+        {
+            animator.speed = gameSpeed;
+        }
     }
 
     public void OnTileAppear()
