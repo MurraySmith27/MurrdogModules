@@ -92981,6 +92981,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
+  buildingProcessRules: {fileID: 11400000, guid: 3b1dece6fa5b8ab43921d691c141a111,
+    type: 2}
   useRandomSeed: 1
   seed: 0
 --- !u!4 &2118447634

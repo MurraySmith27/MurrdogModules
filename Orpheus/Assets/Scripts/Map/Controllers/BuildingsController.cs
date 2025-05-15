@@ -141,6 +141,7 @@ public class BuildingsController : Singleton<BuildingsController>
     {
         List<BuildingType> buildingTypes = new List<BuildingType>(GameConstants.STARTING_BUILDING_TYPES);
 
+        Debug.LogError($"building types lenght: {buildingTypes.Count}");
         buildingTypes.AddRange(TechSystem.Instance.GetUnlockedBuildings());
         
         buildingTypes = RelicSystem.Instance.GetUnlockedBuildingTypes(buildingTypes);

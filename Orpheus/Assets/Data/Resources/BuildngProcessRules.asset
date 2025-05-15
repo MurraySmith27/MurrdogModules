@@ -49,18 +49,14 @@ MonoBehaviour:
     PersistentResourceOutput: []
   - Type: 12
     ResourceInput: []
-    PersistentResourceInput:
-    - Type: 5
-      Quantity: 1
+    PersistentResourceInput: []
     ResourceOutput: []
     PersistentResourceOutput:
     - Type: 4
       Quantity: 3
   - Type: 13
     ResourceInput: []
-    PersistentResourceInput:
-    - Type: 4
-      Quantity: 1
+    PersistentResourceInput: []
     ResourceOutput: []
     PersistentResourceOutput:
     - Type: 5

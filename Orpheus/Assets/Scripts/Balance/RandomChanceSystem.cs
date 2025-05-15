@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class RandomChanceSystem : Singleton<RandomChanceSystem>
 {
-
+    [SerializeField] private BuildingProcessRulesSO buildingProcessRules;
     [SerializeField] private bool useRandomSeed = true;
     [SerializeField] private int seed = 0;
 
@@ -164,11 +165,6 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         int seed = _currentSeed + PersistentState.Instance.HarvestNumber * 340543 + numRefreshesUsed * 31;
         
         Random.InitState(seed);
-
-        if (PersistentState.Instance.HarvestNumber == 0)
-        {
-            
-        }
         
         List<BuildingType> remainingPicks = new List<BuildingType>(allAvailableBuildings);
         
@@ -177,10 +173,32 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         for (int i = 0; i < GameConstants.NUM_BUILDINGS_OFFERED_EACH_ROUND; i++)
         {
             int newPick = Random.Range(0, remainingPicks.Count);
-            
-            pickedSubset.Add(remainingPicks[newPick]);
+
+            BuildingType newBuildingType = remainingPicks[newPick];
+            pickedSubset.Add(newBuildingType);
             
             remainingPicks.RemoveAt(newPick);
+
+            if (PersistentState.Instance.HarvestNumber == 0)
+            {
+                Debug.LogError("detecting as first");
+                //also offer the corresponding resource generator
+                List<PersistentResourceItem> selectedBuildingPersistentInputs =
+                    buildingProcessRules.GetPersistentResourceInput(newBuildingType);
+                if (selectedBuildingPersistentInputs.FirstOrDefault((persistentResourceItem) =>
+                    {
+                        return persistentResourceItem.Type == PersistentResourceType.Dirt;
+                    }) != null)
+                {
+                    pickedSubset.Add(BuildingType.DirtPile);
+                }
+                else
+                {
+                    pickedSubset.Add(BuildingType.Well);
+                }
+
+                break;
+            }
         }
 
         Random.InitState((int)DateTime.Now.Ticks);
