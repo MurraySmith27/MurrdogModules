@@ -15,6 +15,7 @@ public class BackgroundAnimator : MonoBehaviour
     [SerializeField] private string backgroundHexSizePropertyName = "_HexSizeMultiplier"; 
 
     [SerializeField] private string backgroundColorPropertyName = "_BackgroundColor";
+    [SerializeField] private string doAnimationPropertyName = "_DoAnimation";
 
     [Space(10)] 
     [Header("Animation")] 
@@ -69,6 +70,8 @@ public class BackgroundAnimator : MonoBehaviour
     {
         float initialHexSize = resourceIncrementHexSizeDefault;
         
+        backgroundMaterial.SetInt(doAnimationPropertyName, 0);
+        
         for (float t = 0; t <= resourceIncrementAnimationTime; t += Time.deltaTime * GlobalSettings.GameSpeed)
         {
             float progress = t / resourceIncrementAnimationTime;
@@ -79,6 +82,7 @@ public class BackgroundAnimator : MonoBehaviour
             yield return Timing.WaitForOneFrame;
         }
         
+        backgroundMaterial.SetInt(doAnimationPropertyName, 1);
         backgroundMaterial.SetColor(backgroundColorPropertyName, Color.Lerp(backgroundStartingColor, color, resourceIncrementColorAnimationCurve.Evaluate(1f)));
         backgroundMaterial.SetFloat(backgroundHexSizePropertyName, Mathf.Lerp(initialHexSize, resourceIncrementHexSizeIncrease, resourceIncrementHexSizeAnimationCurve.Evaluate(1f)));
     }

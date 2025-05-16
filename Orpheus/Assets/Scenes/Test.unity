@@ -35976,9 +35976,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceVisualData: {fileID: 11400000, guid: 95c15ae972909994fbe10b5dbb441c00, type: 2}
   backgroundMaterial: {fileID: 2100000, guid: a3c00c67e55eb194d8bf5d782670f7c2, type: 2}
-  defaultColor: {r: 0.38431373, g: 0.62352943, b: 0.7607843, a: 1}
+  defaultColor: {r: 0.8490566, g: 0.5807227, b: 0.6250812, a: 1}
   backgroundHexSizePropertyName: _HexSizeMultiplier
   backgroundColorPropertyName: _BackgroundColor
+  doAnimationPropertyName: _DoAnimation
   fadeAnimationTime: 1
   resourceIncrementAnimationTime: 1
   backgroundStartingColor: {r: 0, g: 0, b: 0, a: 1}
