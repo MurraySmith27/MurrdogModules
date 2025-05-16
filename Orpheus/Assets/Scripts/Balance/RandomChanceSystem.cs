@@ -181,7 +181,6 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
 
             if (PersistentState.Instance.HarvestNumber == 0)
             {
-                Debug.LogError("detecting as first");
                 //also offer the corresponding resource generator
                 List<PersistentResourceItem> selectedBuildingPersistentInputs =
                     buildingProcessRules.GetPersistentResourceInput(newBuildingType);

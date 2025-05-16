@@ -173,7 +173,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepColor: {r: 0.39446232, g: 0.50889826, b: 0.66699994, a: 1}
+    - _DeepColor: {r: 0.39607844, g: 0.6509465, b: 0.6666667, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0}
     - _FoamDirection: {r: 0.1, g: 0, b: 0, a: 0}
@@ -185,7 +185,7 @@ Material:
     - _NormalsTiling: {r: 1, g: 1, b: 0, a: 0}
     - _RipplesColor: {r: 0.638, g: 0.638, b: 0.638, a: 0.3254902}
     - _ShadowColor: {r: 0.18850705, g: 0.17493197, b: 0.43299997, a: 0}
-    - _ShallowColor: {r: 0.4470588, g: 0.7529412, b: 0.7156075, a: 0.2}
+    - _ShallowColor: {r: 0.09211465, g: 0.8490566, b: 0.80916196, a: 1}
     - _ShoreFoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShoreFoamMinMax: {r: -0.33, g: 1.82, b: 0, a: 0}
     - _ShoreFoamOffset: {r: 1, g: 1, b: 0, a: 0}
