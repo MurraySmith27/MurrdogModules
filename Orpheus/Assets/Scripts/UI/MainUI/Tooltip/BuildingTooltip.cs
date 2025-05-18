@@ -22,54 +22,68 @@ public class BuildingTooltip : TooltipBase
 
         string additionalDescription = string.IsNullOrEmpty(basicDescription) ? "" : "\n";
 
-        var input = buildingProcessRulesSO.GetResourceInput(buildingType);
+        int numLanes = buildingProcessRulesSO.GetNumProcessLanes(buildingType);
 
-        var output = buildingProcessRulesSO.GetResourceOutput(buildingType);
-
-        if (input.Count > 0)
+        for (int i = 0; i < numLanes; i++)
         {
-            foreach (ResourceItem resourceItem in input)
+
+            var input = buildingProcessRulesSO.GetResourceInput(buildingType, i);
+
+            var output = buildingProcessRulesSO.GetResourceOutput(buildingType, i);
+
+            if (input.Count > 0)
             {
-                additionalDescription += LocalizationUtils.GetIconTagForResource(resourceItem.Type) + (resourceItem.Quantity > 1 ? resourceItem.Quantity.ToString() : "");
+                foreach (ResourceItem resourceItem in input)
+                {
+                    additionalDescription += LocalizationUtils.GetIconTagForResource(resourceItem.Type) +
+                                             (resourceItem.Quantity > 1 ? resourceItem.Quantity.ToString() : "");
+                }
+
+                additionalDescription += " > ";
             }
-            additionalDescription += " > ";
-        }
-        else if (output.Count > 0)
-        {
-            additionalDescription += "Harvests ";
-        }
-
-        foreach (ResourceItem resourceItem in output)
-        {
-            additionalDescription += LocalizationUtils.GetIconTagForResource(resourceItem.Type) + (resourceItem.Quantity > 1 ? resourceItem.Quantity.ToString() : "");
-        }
-        
-        
-        var persistentOutput = buildingProcessRulesSO.GetPersistentResourceOutput(buildingType);
-
-        if (persistentOutput.Count > 0)
-        {
-            additionalDescription += "\nGrants ";
-
-            foreach (PersistentResourceItem persistentResourceItem in persistentOutput)
+            else if (output.Count > 0)
             {
-                additionalDescription += LocalizationUtils.GetIconTagForPersistentResource(persistentResourceItem.Type) + persistentResourceItem.Quantity.ToString();
+                additionalDescription += "Harvests ";
             }
-        }
-        
 
-        var persistentInput = buildingProcessRulesSO.GetPersistentResourceInput(buildingType);
-
-        if (persistentInput.Count > 0)
-        {
-            additionalDescription += "\nCosts ";
-                
-            foreach (PersistentResourceItem persistentResourceItem in persistentInput)
+            foreach (ResourceItem resourceItem in output)
             {
-                additionalDescription += LocalizationUtils.GetIconTagForPersistentResource(persistentResourceItem.Type) + persistentResourceItem.Quantity.ToString();
+                additionalDescription += LocalizationUtils.GetIconTagForResource(resourceItem.Type) +
+                                         (resourceItem.Quantity > 1 ? resourceItem.Quantity.ToString() : "");
             }
+
+
+            var persistentOutput = buildingProcessRulesSO.GetPersistentResourceOutput(buildingType, i);
+
+            if (persistentOutput.Count > 0)
+            {
+                additionalDescription += "\nGrants ";
+
+                foreach (PersistentResourceItem persistentResourceItem in persistentOutput)
+                {
+                    additionalDescription +=
+                        LocalizationUtils.GetIconTagForPersistentResource(persistentResourceItem.Type) +
+                        persistentResourceItem.Quantity.ToString();
+                }
+            }
+
+
+            var persistentInput = buildingProcessRulesSO.GetPersistentResourceInput(buildingType, i);
+
+            if (persistentInput.Count > 0)
+            {
+                additionalDescription += "\nCosts ";
+
+                foreach (PersistentResourceItem persistentResourceItem in persistentInput)
+                {
+                    additionalDescription +=
+                        LocalizationUtils.GetIconTagForPersistentResource(persistentResourceItem.Type) +
+                        persistentResourceItem.Quantity.ToString();
+                }
+            }
+
         }
-        
+
         string description = basicDescription + additionalDescription;
 
         if (description.StartsWith("\n"))

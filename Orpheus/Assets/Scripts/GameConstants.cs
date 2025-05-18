@@ -114,6 +114,12 @@ public static class GameConstants
         {ResourceType.Steel, 9d},
         {ResourceType.Popcorn, 4d},
         {ResourceType.Sushi, 5d},
+        {ResourceType.Flour, 3d},
+        {ResourceType.Dough, 5d},
+        {ResourceType.Toast, 12d},
+        {ResourceType.ButteredToast, 25d},
+        {ResourceType.Butter, 7d},
+        {ResourceType.Milk, 4d},
     };
 
     public static readonly long GOLD_PER_LEFTOVER_FOOD_SCORE = 10;

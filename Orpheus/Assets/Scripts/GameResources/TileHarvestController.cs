@@ -64,10 +64,12 @@ public class TileHarvestController : Singleton<TileHarvestController>
         
         foreach (TileBuilding building in buildingsOnTile)
         {
-            if (HarvestBuildingsController.Instance.CanProcess(building.Type, resourcesSoFar))
+            List<int> validProcesLaneIndices = HarvestBuildingsController.Instance.CanProcessLanes(building.Type, resourcesSoFar);
+
+            foreach (int validLaneIndex in validProcesLaneIndices)
             {
                 (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) diff =
-                    HarvestBuildingsController.Instance.GetProcessBuildingDiff(building.Type);
+                    HarvestBuildingsController.Instance.GetProcessBuildingDiff(building.Type, validLaneIndex);
 
                 foreach (KeyValuePair<ResourceType, int> resource in diff.Item1)
                 {
@@ -75,15 +77,17 @@ public class TileHarvestController : Singleton<TileHarvestController>
                     {
                         resourcesProcessed[resource.Key] = 0;
                     }
+
                     resourcesProcessed[resource.Key] += resource.Value;
                 }
-                
+
                 foreach (KeyValuePair<PersistentResourceType, int> persistentResource in diff.Item2)
                 {
                     if (!persistentResourcesProcessed.ContainsKey(persistentResource.Key))
                     {
                         persistentResourcesProcessed[persistentResource.Key] = 0;
                     }
+
                     persistentResourcesProcessed[persistentResource.Key] += persistentResource.Value;
                 }
             }

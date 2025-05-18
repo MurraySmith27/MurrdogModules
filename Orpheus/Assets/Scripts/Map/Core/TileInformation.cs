@@ -21,6 +21,12 @@ public enum ResourceType
     Steel,
     Popcorn,
     Sushi,
+    Flour,
+    Dough,
+    Toast,
+    ButteredToast,
+    Butter,
+    Milk,
 }
 
 public enum PersistentResourceType
@@ -51,6 +57,11 @@ public enum BuildingType
     Mine,
     Well,
     DirtPile,
+    Mill,
+    Toaster,
+    CowFarm,
+    Stirrer,
+    Mixer,
 }
 
 public struct TileBuilding

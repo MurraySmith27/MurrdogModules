@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using UnityEditor;
 using UnityEngine;
 
 public class DebugOptions
@@ -46,6 +47,22 @@ public class DebugOptions
         
     }
     
+    private BuildingType _buildingType = BuildingType.Well;
+
+    public BuildingType BuildingType
+    {
+        get { return _buildingType; }
+        set
+        {
+            _buildingType = value;
+        }
+    }
+    
+    public void PlaceSelectedBuilding()
+    {
+        MapInteractionController.Instance.SwitchToPlaceBuildingMode(BuildingType);
+    }
+    
     [Category("Game Speed")]
     public void DoubleGameSpeed()
     {
@@ -57,6 +74,7 @@ public class DebugOptions
     {
         GlobalSettings.GameSpeed = 1;
     }
+
     
 }
 #endif

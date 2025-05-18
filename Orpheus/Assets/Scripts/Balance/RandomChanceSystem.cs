@@ -183,7 +183,7 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
             {
                 //also offer the corresponding resource generator
                 List<PersistentResourceItem> selectedBuildingPersistentInputs =
-                    buildingProcessRules.GetPersistentResourceInput(newBuildingType);
+                    buildingProcessRules.GetPersistentResourceInput(newBuildingType, 0);
                 if (selectedBuildingPersistentInputs.FirstOrDefault((persistentResourceItem) =>
                     {
                         return persistentResourceItem.Type == PersistentResourceType.Dirt;

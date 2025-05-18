@@ -32,6 +32,18 @@ public static class LocalizationUtils
                 return "Popcorn";
             case ResourceType.Sushi:
                 return "Sushi";
+            case ResourceType.Flour:
+                return "Flour";
+            case ResourceType.Dough:
+                return "Dough";
+            case ResourceType.Toast:
+                return "Toast";
+            case ResourceType.ButteredToast:
+                return "ButteredToast";
+            case ResourceType.Butter:
+                return "Butter";
+            case ResourceType.Milk:
+                return "Milk";
             default:
                 return "";
         }
@@ -69,6 +81,16 @@ public static class LocalizationUtils
                 return "Well";
             case BuildingType.DirtPile:
                 return "Dirt Pile";
+            case BuildingType.Mill:
+                return "Mill";
+            case BuildingType.Toaster:
+                return "Toaster";
+            case BuildingType.CowFarm:
+                return "CowFarm";
+            case BuildingType.Stirrer:
+                return "Stirrer";
+            case BuildingType.Mixer:
+                return "Mixer";
             default:
                 return "";
         }
@@ -157,6 +179,18 @@ public static class LocalizationUtils
             case ResourceType.Sushi:
                 return "<sprite index=3>";
                 break;
+            case ResourceType.Flour:
+                return "<sprite index=20>";
+            case ResourceType.Dough:
+                return "<sprite index=18>";
+            case ResourceType.Toast:
+                return "<sprite index=21>";
+            case ResourceType.ButteredToast:
+                return "<sprite index=23>";
+            case ResourceType.Butter:
+                return "<sprite index=19>";
+            case ResourceType.Milk:
+                return "<sprite index=22>";
             default:
                 return "";
         }
@@ -188,6 +222,18 @@ public static class LocalizationUtils
                 return "<popcorn>";
             case ResourceType.Sushi:
                 return "<sushi>";
+            case ResourceType.Flour:
+                return "<flour>";
+            case ResourceType.Dough:
+                return "<dough>";
+            case ResourceType.Toast:
+                return "<toast>";
+            case ResourceType.ButteredToast:
+                return "<butteredtoast>";
+            case ResourceType.Butter:
+                return "<butter>";
+            case ResourceType.Milk:
+                return "<milk>";
             default:
                 return "";
         }
@@ -225,6 +271,16 @@ public static class LocalizationUtils
                 return "<well>";
             case BuildingType.DirtPile:
                 return "<dirtpile>";
+            case BuildingType.Mill:
+                return "<mill>";
+            case BuildingType.Toaster:
+                return "<toaster>";
+            case BuildingType.CowFarm:
+                return "<cowfarm>";
+            case BuildingType.Stirrer:
+                return "<stirrer>";
+            case BuildingType.Mixer:
+                return "<mixer>";
             default:
                 return "";
         }
