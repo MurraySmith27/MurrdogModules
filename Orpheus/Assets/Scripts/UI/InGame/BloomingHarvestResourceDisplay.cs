@@ -221,6 +221,12 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
             _instantiatedListItemsPerResourceType[resourceType] = (newQuantity, newListItem);
 
             yield return OrpheusTiming.WaitForSecondsGameTime(timeToWait);
+
+            if (newQuantity == 0)
+            {
+                Destroy(_instantiatedListItemsPerResourceType[resourceType].Item2.gameObject);
+                _instantiatedListItemsPerResourceType.Remove(resourceType);
+            }
         }
     }
 

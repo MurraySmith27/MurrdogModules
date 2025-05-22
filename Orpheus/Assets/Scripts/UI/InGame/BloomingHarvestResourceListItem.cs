@@ -19,9 +19,11 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
     [SerializeField] private string activateAnimatorTriggerName = "Activate";
     [SerializeField] private string incrementAnimatorTriggerName = "Increment";
     [SerializeField] private string decrementAnimatorTriggerName = "Decrement";
+    [SerializeField] private string decrementToZeroAnimatorTriggerName = "DecrementToZero";
 
     [SerializeField] private float incrementTextWaitTime = 0.5f;
     [SerializeField] private float decrementTextWaitTime = 0.05f;
+    [SerializeField] private float decrementToZeroWaitTime = 0.45f;
 
     [SerializeField] private TextMeshProUGUI incrementText;
     [SerializeField] private TextMeshProUGUI decrementText;
@@ -41,7 +43,14 @@ public class BloomingHarvestResourceListItem : MonoBehaviour
 
     public void ModifyQuantity(long quantityDifference)
     {
-        if (quantityDifference > 0)
+        if (quantityDifference + _currentQuantity == 0)
+        {
+            decrementText.SetText($"{-quantityDifference}");
+            Timing.RunCoroutineSingleton(SetMainTextAfterSeconds(decrementTextWaitTime), this.gameObject,
+                SingletonBehavior.Overwrite);
+            animator.SetTrigger(decrementToZeroAnimatorTriggerName);
+        }
+        else if (quantityDifference > 0)
         {
             incrementText.SetText($"{quantityDifference}");
             

@@ -6,33 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/BuildingsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/BuildingsData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/BuildngProcessRules.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/BuildngProcessRules.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/ResourceVisualData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/ResourceVisualData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DirtPile.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DirtPile.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Buildings/Well/WellBucket.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Buildings/Well/WellBucket.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mill.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mill.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Well.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Well.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingProcessRulesSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DiskUtils/BuildingProcessRulesSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItem.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItem.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItemActivate.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItemActivate.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItemDecrement.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItemDecrement.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourcesListItemIncrement.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourcesListItemIncrement.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameResources/TileHarvestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameResources/TileHarvestController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Controllers/HarvestBuildingsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Controllers/HarvestBuildingsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/TileInformation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/BuildingTooltip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/BuildingTooltip.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextAssets/Resources/AllIcons.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextAssets/Resources/AllIcons.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.pdn" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.pdn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/AllIcons.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/butter.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/butter.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/buttered_toast.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/buttered_toast.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/dough.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/dough.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/milk.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/milk.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Icons/toast.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Icons/toast.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/Core/MapSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceDisplay.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceListItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceListItem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,7 +292,10 @@
       <workItem from="1747255016564" duration="3722000" />
       <workItem from="1747400825111" duration="371000" />
       <workItem from="1747429420775" duration="3903000" />
-      <workItem from="1747578785672" duration="5830000" />
+      <workItem from="1747578785672" duration="6425000" />
+      <workItem from="1747746444309" duration="2571000" />
+      <workItem from="1747830194564" duration="3055000" />
+      <workItem from="1747859777329" duration="1325000" />
     </task>
     <servers />
   </component>
@@ -391,6 +377,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceListItem.cs</url>
+          <line>50</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\InGame\BloomingHarvestResourceListItem.cs" containingFunctionPresentation="Method 'ModifyQuantity'">
+            <startOffsets>
+              <option value="1739" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1795" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceListItem.cs</url>
+          <line>67</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\InGame\BloomingHarvestResourceListItem.cs" containingFunctionPresentation="Method 'ModifyQuantity'">
+            <startOffsets>
+              <option value="2445" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2495" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

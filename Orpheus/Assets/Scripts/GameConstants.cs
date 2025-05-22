@@ -60,8 +60,15 @@ public static class GameConstants
     public static readonly TileType[] INITIAL_CITY_TILE_TYPES = new TileType[]
     {
         TileType.Grass, TileType.Grass,
-        TileType.Grass, TileType.Grass, TileType.Water,
-        TileType.Water, TileType.Water,
+        TileType.Grass, TileType.Grass, TileType.Grass,
+        TileType.Grass, TileType.Water,
+    };
+    
+    public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
+    {
+        BuildingType.WheatFarm, BuildingType.Mill,
+        BuildingType.Stirrer, BuildingType.CityCapital, BuildingType.Bakery,
+        BuildingType.Toaster, BuildingType.CityCapital
     };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]

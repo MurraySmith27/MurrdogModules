@@ -125,6 +125,13 @@ public class MapSystem : Singleton<MapSystem>
                 tile.Resources.Add(GameConstants.INITIAL_CITY_RESOURCES[i]);
             }
             tile.Type = GameConstants.INITIAL_CITY_TILE_TYPES[i];
+
+            if (GameConstants.INITIAL_CITY_BUILDINGS[i] != BuildingType.CityCapital)
+            {
+                TileBuilding newBuilding = new TileBuilding();
+                newBuilding.Type = GameConstants.INITIAL_CITY_BUILDINGS[i];
+                tile.Buildings.Add(newBuilding);
+            }
             
             PlaceTile(startingCityPos + GameConstants.INITIAL_CITY_TILES[i], tile);
         }
