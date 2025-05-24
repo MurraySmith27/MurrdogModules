@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class RelicIcon : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
     [SerializeField] private RawImage rawImage;
     
     private RelicTypes _relicType;
@@ -20,5 +21,10 @@ public class RelicIcon : MonoBehaviour
     public RelicTypes GetRelicType()
     {
         return _relicType;
+    }
+
+    public void OnTick()
+    {
+        animator.SetTrigger("Tick");
     }
 }

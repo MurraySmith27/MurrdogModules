@@ -29,6 +29,9 @@ public class RelicsList : MonoBehaviour
         
         RelicSystem.Instance.OnRelicRemoved -= OnRelicRemoved;
         RelicSystem.Instance.OnRelicRemoved += OnRelicRemoved;
+
+        BloomingResourceConversionController.Instance.OnRelicTriggered -= OnRelicTriggered;
+        BloomingResourceConversionController.Instance.OnRelicTriggered += OnRelicTriggered;
     }
 
     private void OnDestroy()
@@ -37,6 +40,11 @@ public class RelicsList : MonoBehaviour
         {
             RelicSystem.Instance.OnRelicAdded -= OnRelicAdded;
             RelicSystem.Instance.OnRelicRemoved -= OnRelicRemoved;
+        }
+
+        if (BloomingResourceConversionController.IsAvailable)
+        {
+            BloomingResourceConversionController.Instance.OnRelicTriggered -= OnRelicTriggered;
         }
     }
 
@@ -98,6 +106,14 @@ public class RelicsList : MonoBehaviour
             Preview3DController.Instance.FreePreviewTransform(_instantiatedRelicVisuals[relicType].Item1);
             
             _instantiatedRelicVisuals.Remove(relicType);
+        }
+    }
+
+    private void OnRelicTriggered(RelicTypes relicType)
+    {
+        if (_instantiatedRelicIcons.ContainsKey(relicType))
+        {
+            _instantiatedRelicIcons[relicType].OnTick();
         }
     }
 }

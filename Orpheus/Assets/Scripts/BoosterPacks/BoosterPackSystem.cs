@@ -7,7 +7,8 @@ public enum BoosterPackTypes
 {
     NONE,
     BASIC_TILE_BOOSTER,
-    ROUND_REWARDS_TILE_BOOSTER
+    ROUND_REWARDS_TILE_BOOSTER,
+    ROUND_REWARDS_BUILDING_BOOSTER
 }
 
 public class BoosterPackSystem : Singleton<BoosterPackSystem> 
@@ -18,6 +19,7 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
     {
         public List<TileInformation> tiles;
         public List<RelicTypes> relics;
+        public List<BuildingType> buildings;
     }
     
     private BoosterPackOfferings _currentOfferings;
@@ -32,6 +34,9 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
             case BoosterPackTypes.ROUND_REWARDS_TILE_BOOSTER:
                 OpenBasicBoosterPack(GameConstants.NUM_TILES_PER_BASIC_BOOSTER);
                 break;
+            case BoosterPackTypes.ROUND_REWARDS_BUILDING_BOOSTER:
+                OpenBuildingsBoosterPack();
+                break;
             default:
                 break;
         }
@@ -45,6 +50,17 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
 
         _currentOfferings = new();
         _currentOfferings.tiles = tiles;
+    }
+
+    private void OpenBuildingsBoosterPack()
+    {
+        List<BuildingType> allAvailableBuildingTypes = new List<BuildingType>(GameConstants.STARTING_BUILDING_TYPES);
+        allAvailableBuildingTypes.AddRange(TechSystem.Instance.GetUnlockedBuildings());
+        
+        List<BuildingType> buildingTypes = RandomChanceSystem.Instance.GetCurrentlyOfferedBuildings(allAvailableBuildingTypes, 0);
+
+        _currentOfferings = new();
+        _currentOfferings.buildings = buildingTypes;
     }
 
     public BoosterPackOfferings GetCurrentOfferings()

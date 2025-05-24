@@ -125,14 +125,7 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
 
     private void OnCityHarvestEnd(Guid cityGuid)
     {
-        if (HarvestState.Instance.NumRemainingHands == 0)
-        {
-            animator.SetTrigger(animatorDeactivateTriggerName);
-        }
-        else
-        {
-            AnimateToSideOfScreen(cityGuid);
-        }
+        animator.SetTrigger(animatorDeactivateTriggerName);
     }
 
     private void AnimateToSideOfScreen(Guid cityGuid)

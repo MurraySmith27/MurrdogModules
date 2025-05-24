@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MEC;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
     [Space(10)]
     [Header("Building Spawning")] 
     [SerializeField] private BuildingsVisualsSO buildingsVisualsData;
+
+    [SerializeField] private float buildingAppearParticleWaitTime = 3f;
 
     [Space(10)] 
     [Header("Citizen Visualization")] 
@@ -240,6 +243,8 @@ public class MapVisualsController : Singleton<MapVisualsController>
         
         InstantiatedBuildings.Add((new Vector2Int(row, col), newBuilding));
 
+        CreateBuildingAppearParticle(newBuilding.transform);
+
         TileVisuals tile = GetTileInstanceAtPosition(new Vector2Int(row, col));
 
         if (tile == null)
@@ -254,6 +259,20 @@ public class MapVisualsController : Singleton<MapVisualsController>
         CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(new Vector2Int(row, col)));
     }
 
+    private void CreateBuildingAppearParticle(Transform parent)
+    {
+        Timing.RunCoroutine(CreateBuildingAppearParticleCoroutine(parent), this.gameObject);
+    }
+
+    private IEnumerator<float> CreateBuildingAppearParticleCoroutine(Transform parent)
+    {
+        GameObject particleInstance = Instantiate(buildingsVisualsData.BuildingAppearParticle, parent);
+
+        yield return Timing.WaitForSeconds(buildingAppearParticleWaitTime);
+        
+        Destroy(particleInstance);
+    }
+    
     private void OnBuildingDestroyed(int row, int col)
     {
         Vector2Int position = new(row, col);

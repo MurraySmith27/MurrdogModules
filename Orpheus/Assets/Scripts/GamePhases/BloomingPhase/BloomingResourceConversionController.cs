@@ -27,6 +27,8 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
     public event Action<ResourceType, long> OnResourceConversionFoodScoreAddedEnd;
 
     public event Action<long> OnResourceConversionBonusFoodScoreAdded;
+
+    public event Action<RelicTypes> OnRelicTriggered;
     
     
     public void DoResourceConversion()
@@ -79,7 +81,7 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
             {
                 currentQuantity += pair.Item2;
                 
-                //TODO: Trigger relic shake
+                OnRelicTriggered?.Invoke(pair.Item1);
                 
                 OnResourceConversionQuantityProcessed?.Invoke(key, currentQuantity);
                 yield return OrpheusTiming.WaitForSecondsGameTime(resourceQuantityProcessTime);
@@ -97,7 +99,7 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
             {
                 currentMult += pair.Item2;
                 
-                //TODO: Trigger relic shake
+                OnRelicTriggered?.Invoke(pair.Item1);
                 
                 OnResourceConversionMultProcessed?.Invoke(key, currentMult);
                 yield return OrpheusTiming.WaitForSecondsGameTime(resourceMultProcessTime);
@@ -112,7 +114,7 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
                 currentQuantity += pair.Item2;
                 currentMult += pair.Item3;
                 
-                //TODO: Trigger relic shake
+                OnRelicTriggered?.Invoke(pair.Item1);
                 
                 if (pair.Item2 != 0)
                 {
@@ -149,6 +151,7 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
             OnResourceConversionFoodScoreAddedStart?.Invoke(pair.Item1, pair.Item2);
             
             HarvestState.Instance.AddHarvestFoodScore(pair.Item2);
+            PersistentState.Instance.ChangeCurrentGold(pair.Item2);
 
             yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionResourceFoodScoreAddedTime);
             
@@ -161,6 +164,8 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
         if (RelicSystem.Instance.OnFoodScoreConversionComplete(foodScoreTotal, resources, out long outFoodScore))
         {
             HarvestState.Instance.AddHarvestFoodScore(outFoodScore - foodScoreTotal);
+            PersistentState.Instance.ChangeCurrentGold(outFoodScore - foodScoreTotal);
+            
             OnResourceConversionBonusFoodScoreAdded?.Invoke(outFoodScore);
             yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionResourceFoodScoreAddedTime);
         }

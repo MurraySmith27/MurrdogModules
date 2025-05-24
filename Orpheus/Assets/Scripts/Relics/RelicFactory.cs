@@ -46,6 +46,9 @@ public class RelicFactory
             case RelicTypes.EXTRA_DISCARD:
                 return new ExtraDiscardRelic();
                 break;
+            case RelicTypes.COW_PLUSHIE:
+                return new CowPlushieRelic();
+                break;
         }
 
         return null;

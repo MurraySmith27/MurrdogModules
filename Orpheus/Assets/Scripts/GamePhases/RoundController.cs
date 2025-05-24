@@ -9,7 +9,7 @@ public class RoundController : Singleton<RoundController>
     [SerializeField] private int numHarvestsBeforeWinter = 2;
 
     private List<GamePhases> interactablePhases = new List<GamePhases>(new GamePhases[]
-        { GamePhases.BuddingBuilding, GamePhases.BloomingHarvestTurn, GamePhases.MainMenu, GamePhases.GameStart, GamePhases.BloomingEndStep });
+        { GamePhases.BuddingBuilding, GamePhases.MainMenu, GamePhases.GameStart });
     
     private int _currentHarvestInRound = 0;
 
@@ -108,23 +108,27 @@ public class RoundController : Singleton<RoundController>
                 _hasLostGame = false;
                 PhaseStateMachine.Instance.ChangePhase(GamePhases.GameOver);
             }
-            else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingHarvestTurn && _handUsed)
+            else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingHarvestTurn)// && _handUsed)
             {
                 _handUsed = false;
                 _isInHarvest = true;
                 PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingHarvest);
             }
-            else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingHarvest && _isInHarvest)
+            else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingHarvest) // && _isInHarvest)
             {
-                _isInHarvest = false;
-                if (HarvestState.Instance.NumRemainingHands > 0)
-                {
-                    PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingHarvestTurn);
-                }
-                else
-                {
-                    PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingResourceConversion);
-                }
+                // _isInHarvest = false;
+                // if (HarvestState.Instance.NumRemainingHands > 0)
+                // {
+                //     PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingHarvestTurn);
+                // }
+                // else
+                // {
+                PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingResourceConversion);
+                // }
+            }
+            else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingEndStep)
+            {
+                PhaseStateMachine.Instance.ChangePhase(GamePhases.BuddingUpkeep);
             }
             else
             {

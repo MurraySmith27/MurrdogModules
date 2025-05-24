@@ -61,14 +61,21 @@ public static class GameConstants
     {
         TileType.Grass, TileType.Grass,
         TileType.Grass, TileType.Grass, TileType.Grass,
-        TileType.Grass, TileType.Water,
+        TileType.Grass, TileType.Grass,
     };
+    
+    // public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
+    // {
+    //     BuildingType.WheatFarm, BuildingType.Mill,
+    //     BuildingType.Stirrer, BuildingType.CityCapital, BuildingType.Bakery,
+    //     BuildingType.Toaster, BuildingType.CityCapital
+    // };
     
     public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
     {
-        BuildingType.WheatFarm, BuildingType.Mill,
-        BuildingType.Stirrer, BuildingType.CityCapital, BuildingType.Bakery,
-        BuildingType.Toaster, BuildingType.CityCapital
+        BuildingType.WheatFarm, BuildingType.CowFarm,
+        BuildingType.Stirrer, BuildingType.CityCapital, BuildingType.CityCapital,   
+        BuildingType.WheatFarm, BuildingType.CowFarm
     };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]
@@ -82,7 +89,7 @@ public static class GameConstants
     //interest
     public static readonly long GOLD_INTEREST_CAP = 5000;
     public static readonly long GOLD_INTEREST_INTERVAL = 500;
-    public static readonly long GOLD_INTEREST_PER_INTERVAL = 100;
+    public static readonly long GOLD_INTEREST_PER_INTERVAL = 0;//100;
     
     // building yields
 
@@ -103,7 +110,7 @@ public static class GameConstants
     public static readonly int SUSHI_PER_SUSHI_RESTAURANT = 1;
 
 
-    public static readonly int NUM_BUILDINGS_OFFERED_EACH_ROUND = 2;
+    public static readonly int NUM_BUILDINGS_OFFERED_EACH_ROUND = 3;
     public static readonly int NUM_FREE_BUILDING_REFRESHES = 1;
     public static readonly long INITIAL_BUILDING_REFRESH_GOLD_COST = 20;
     public static readonly double GOLD_COST_PER_BUILDING_REFRESH_MULTIPLIER = 1.5d;

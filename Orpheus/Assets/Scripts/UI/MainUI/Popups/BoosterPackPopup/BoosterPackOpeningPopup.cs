@@ -7,6 +7,7 @@ public enum BoosterPackOptionTypes
 {
     Tile,
     Relic,
+    Building
 }
 
 public class BoosterPackOpeningPopup : MonoBehaviour
@@ -16,6 +17,7 @@ public class BoosterPackOpeningPopup : MonoBehaviour
         public BoosterPackOptionTypes Type;
         public RelicTypes Relic;
         public TileInformation Tile;
+        public BuildingType Building;
     }
     
     [Header("Options")]
@@ -64,6 +66,21 @@ public class BoosterPackOpeningPopup : MonoBehaviour
 
                 int temp = optionNum;
                 _instantiatedOptions[^1].Item1.Populate(relic, () => {OnOptionSelected(temp);});
+                optionNum++;
+            }
+        }
+
+        if (currentOfferings.buildings != null)
+        {
+            foreach (BuildingType building in currentOfferings.buildings)
+            {
+                BoosterPackOptionData data = new();
+                data.Type = BoosterPackOptionTypes.Building;
+                data.Building = building;
+                _instantiatedOptions.Add((Instantiate(boosterPackOptionPrefab, boosterPackOptionParent), data));
+
+                int temp = optionNum;
+                _instantiatedOptions[^1].Item1.Populate(building, () => { OnOptionSelected(temp); });
                 optionNum++;
             }
         }
@@ -118,6 +135,9 @@ public class BoosterPackOpeningPopup : MonoBehaviour
                 break;
             case BoosterPackOptionTypes.Relic:
                 RelicSystem.Instance.AddRelic(chosenOption.Relic);
+                break;
+            case BoosterPackOptionTypes.Building:
+                MapInteractionController.Instance.SwitchToPlaceBuildingMode(chosenOption.Building);
                 break;
             default:
                 break;

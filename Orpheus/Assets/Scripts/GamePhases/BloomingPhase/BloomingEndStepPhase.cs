@@ -7,7 +7,7 @@ public class BloomingEndStepPhase : PhaseStateBase
 {
     public override void StateEnter(PhaseStateMachine context, Action onEnterComplete)
     {
-        BloomingEndStepController.Instance.ApplyRoundBonusGold();
+        // BloomingEndStepController.Instance.ApplyRoundBonusGold();
         
         onEnterComplete?.Invoke();
     }

@@ -38,7 +38,7 @@ public class BloomingEndStepController : Singleton<BloomingEndStepController>
     private void ApplyInterest()
     {
         //firstly, apply interest
-        long interestAcquired = (int)Math.Floor((Mathf.Min(PersistentState.Instance.CurrentGold, GameConstants.GOLD_INTEREST_CAP) / GameConstants.GOLD_INTEREST_INTERVAL) * GameConstants.GOLD_INTEREST_PER_INTERVAL); 
+        long interestAcquired = 0;//(int)Math.Floor((Mathf.Min(PersistentState.Instance.CurrentGold, GameConstants.GOLD_INTEREST_CAP) / GameConstants.GOLD_INTEREST_INTERVAL) * GameConstants.GOLD_INTEREST_PER_INTERVAL); 
         
         interestAcquired = RelicSystem.Instance.OnGoldInterestAdded(PersistentState.Instance.CurrentGold, interestAcquired);
         

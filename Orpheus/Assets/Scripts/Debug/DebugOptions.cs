@@ -63,6 +63,22 @@ public class DebugOptions
         MapInteractionController.Instance.SwitchToPlaceBuildingMode(BuildingType);
     }
     
+    private RelicTypes _relicType = RelicTypes.COW_PLUSHIE;
+    
+    public RelicTypes RelicType
+    {
+        get { return _relicType; }
+        set
+        {
+            _relicType = value;
+        }
+    }
+    
+    public void AddSelectedRelic()
+    {
+        RelicSystem.Instance.AddRelic(RelicType);
+    }
+    
     [Category("Game Speed")]
     public void DoubleGameSpeed()
     {

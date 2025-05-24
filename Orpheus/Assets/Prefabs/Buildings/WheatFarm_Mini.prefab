@@ -427,6 +427,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2854651989311681981, guid: d5d1188ba772a3a45bf5869545751731,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2854651989311681981, guid: d5d1188ba772a3a45bf5869545751731,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2854651989311681981, guid: d5d1188ba772a3a45bf5869545751731,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2854651989311681981, guid: d5d1188ba772a3a45bf5869545751731,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2862374239235851266, guid: d5d1188ba772a3a45bf5869545751731,
         type: 3}
       propertyPath: m_Layer
@@ -473,6 +493,11 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3145826207719947408, guid: d5d1188ba772a3a45bf5869545751731,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230790057329209095, guid: d5d1188ba772a3a45bf5869545751731,
         type: 3}
       propertyPath: m_Layer
       value: 7

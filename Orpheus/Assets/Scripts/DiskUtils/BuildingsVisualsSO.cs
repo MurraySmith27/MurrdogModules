@@ -7,7 +7,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuildingsVisualsData", menuName = "Orpheus/Buildings Visuals Data", order = 1)]
 public class BuildingsVisualsSO : ScriptableObject
 {
+    public GameObject BuildingAppearParticle;
+        
     public List<BuildingVisualsData> BuildingsVisualsData = new List<BuildingVisualsData>();
+    
 
     public string GetDescriptionForBuilding(BuildingType buildingType)
     {

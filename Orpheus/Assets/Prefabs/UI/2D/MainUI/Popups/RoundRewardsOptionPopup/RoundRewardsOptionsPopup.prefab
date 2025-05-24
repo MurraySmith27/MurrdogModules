@@ -844,14 +844,14 @@ PrefabInstance:
     - target: {fileID: 738027183771560246, guid: e144fd2be325a264085339c7c801382d,
         type: 3}
       propertyPath: m_text
-      value: 'Remove a Hex
+      value: 'Remove a Card
 
 '
       objectReference: {fileID: 0}
     - target: {fileID: 738027183771560246, guid: e144fd2be325a264085339c7c801382d,
         type: 3}
       propertyPath: m_fontSize
-      value: 57.1
+      value: 55.5
       objectReference: {fileID: 0}
     - target: {fileID: 738027183771560246, guid: e144fd2be325a264085339c7c801382d,
         type: 3}
@@ -877,7 +877,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5c81d8fd950fd43d5850229a4a1cef36,
+      objectReference: {fileID: 21300000, guid: 8886cbb7a77f24ded8acf175e43b3487,
         type: 3}
     - target: {fileID: 2616996256361805394, guid: e144fd2be325a264085339c7c801382d,
         type: 3}
@@ -1025,6 +1025,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 738027183771560246, guid: e144fd2be325a264085339c7c801382d,
         type: 3}
+      propertyPath: m_text
+      value: Add a Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 738027183771560246, guid: e144fd2be325a264085339c7c801382d,
+        type: 3}
       propertyPath: m_fontSize
       value: 57.1
       objectReference: {fileID: 0}
@@ -1052,7 +1057,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0a8be488083c64128989b9d695d4acad,
+      objectReference: {fileID: 21300000, guid: 4657e2f75fbc44482bb62b0cf41fe0c1,
         type: 3}
     - target: {fileID: 2616996256361805394, guid: e144fd2be325a264085339c7c801382d,
         type: 3}

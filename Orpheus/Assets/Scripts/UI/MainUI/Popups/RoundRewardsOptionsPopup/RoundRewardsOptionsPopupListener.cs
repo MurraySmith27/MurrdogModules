@@ -25,7 +25,8 @@ public class RoundRewardsOptionsPopupListener : MonoBehaviour
         {
             if (PersistentState.Instance.HarvestNumber > 0)
             {
-                UIPopupSystem.Instance.ShowPopup("RoundRewardsOptionsPopup");
+                BoosterPackSystem.Instance.OpenBoosterPack(BoosterPackTypes.ROUND_REWARDS_BUILDING_BOOSTER);
+                // UIPopupSystem.Instance.ShowPopup("RoundRewardsOptionsPopup");
             }
         }
     }

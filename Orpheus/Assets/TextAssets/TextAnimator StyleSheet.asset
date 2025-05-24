@@ -85,3 +85,15 @@ MonoBehaviour:
   - styleTag: sushirestaurant
     openingTag: <color=#333333><link="sushirestaurant">sushi restaurant</link></color>
     closingTag: 
+  - styleTag: mult
+    openingTag: <color=#EF2847><link="mult">mult</link></color>
+    closingTag: 
+  - styleTag: quantity
+    openingTag: <color=#1B9FD6><link="quantity">quantity</link></color>
+    closingTag: 
+  - styleTag: dairy
+    openingTag: <color=#a19e47><link="dairy">dairy</link></color>
+    closingTag: 
+  - styleTag: food
+    openingTag: <color=#53a147><link="food">food</link></color>
+    closingTag: 

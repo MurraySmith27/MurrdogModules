@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class BoosterPackOption : MonoBehaviour
 {
+    [SerializeField] private BuildingsVisualsSO buildingsVisualsSO;
+    [SerializeField] private BuildingProcessRulesSO buildingProcessRulesSO;
+    
     [SerializeField] private TileIcon3DVisual tile3DVisualPrefab;
 
     [SerializeField] private OrpheusUIInputChannel inputChannel;
@@ -34,6 +37,8 @@ public class BoosterPackOption : MonoBehaviour
     private List<Preview3DController.PreviewTransform> _previewTransforms = new List<Preview3DController.PreviewTransform>();
     
     private TileIcon3DVisual _tile3DVisualInstance;
+
+    private BuildingBehaviour _building3DVisualInstance;
 
     private Action _onSelectedCallback;
 
@@ -86,6 +91,35 @@ public class BoosterPackOption : MonoBehaviour
         AnimationUtils.ResetAnimator(animator);
         animator.SetTrigger(animatorEnterTrigger);
     }
+    
+    public void Populate(BuildingType building, Action onSelectedCallback)
+    {
+        Clear();
+
+        _onSelectedCallback = onSelectedCallback;
+        
+        titleText.SetText(LocalizationUtils.GetNameOfBuilding(building));
+        cardTypeText.SetText($"Building");
+        descriptionText.SetText(GenerateTileDescription(building));
+        versionText.SetText($"");
+        
+        if (!Preview3DController.Instance.GetPreviewTransform(out Preview3DController.PreviewTransform previewTransform))
+        {
+            Debug.LogError("No preview transforms available!");
+            return;
+        }
+        
+        _previewTransforms.Add(previewTransform);
+
+        BuildingBehaviour prefab = buildingsVisualsSO.GetIcon3dPrefabForBuilding(building);
+        
+        _building3DVisualInstance = Instantiate(prefab, previewTransform.Transform);
+        
+        itemPreviewImage.uvRect = previewTransform.UVRect;
+        
+        AnimationUtils.ResetAnimator(animator);
+        animator.SetTrigger(animatorEnterTrigger);
+    }
 
 
     public void Populate(RelicTypes relic, Action onSelectedCallback)
@@ -112,6 +146,11 @@ public class BoosterPackOption : MonoBehaviour
         return description;
     }
 
+    private string GenerateTileDescription(BuildingType building)
+    {
+        return LocalizationUtils.GetDescriptionOfBuilding(building, buildingsVisualsSO, buildingProcessRulesSO, false);
+    }
+
     private void Clear()
     {
         _isHoveredOver = false;
@@ -126,6 +165,11 @@ public class BoosterPackOption : MonoBehaviour
         if (_tile3DVisualInstance != null)
         {
             Destroy(_tile3DVisualInstance.gameObject);
+        }
+
+        if (_building3DVisualInstance != null)
+        {
+            Destroy(_building3DVisualInstance.gameObject);
         }
     }
 

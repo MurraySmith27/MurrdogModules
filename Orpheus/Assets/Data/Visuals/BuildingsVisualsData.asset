@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4139cc755bad48d49820b631afb7e3cb, type: 3}
   m_Name: BuildingsVisualsData
   m_EditorClassIdentifier: 
+  BuildingAppearParticle: {fileID: 7509743311376471906, guid: de0d7f1d9b8b51241987281d387ee169,
+    type: 3}
   BuildingsVisualsData:
   - Type: 1
     Prefab: {fileID: 696966427250684961, guid: 8de7093a66b19544aac1938685d5c340, type: 3}

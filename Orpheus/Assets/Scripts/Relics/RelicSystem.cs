@@ -19,7 +19,8 @@ public enum RelicTypes
     THE_MOLLUSK,
     STONE_ROSE,
     EXTRA_HAND,
-    EXTRA_DISCARD
+    EXTRA_DISCARD,
+    COW_PLUSHIE
 }
 
 public struct AdditionalTriggeredArgs

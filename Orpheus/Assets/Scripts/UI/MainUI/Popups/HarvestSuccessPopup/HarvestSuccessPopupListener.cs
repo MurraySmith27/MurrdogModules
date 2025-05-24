@@ -23,7 +23,7 @@ public class HarvestSuccessPopupListener : MonoBehaviour
     {
         if (phase == GamePhases.BloomingEndStep)
         {
-            UIPopupSystem.Instance.ShowPopup("HarvestSuccessPopup");
+            // UIPopupSystem.Instance.ShowPopup("HarvestSuccessPopup");
         }
     }
 }
