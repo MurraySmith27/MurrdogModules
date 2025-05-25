@@ -90,7 +90,7 @@ public static class LocalizationUtils
             case BuildingType.Stirrer:
                 return "Stirrer";
             case BuildingType.Mixer:
-                return "Mixer";
+                return "Cutting Board";
             default:
                 return "";
         }
@@ -294,9 +294,16 @@ public static class LocalizationUtils
 
         int numLanes = buildingProcessRulesSO.GetNumProcessLanes(buildingType);
 
+        bool first = true;
         for (int i = 0; i < numLanes; i++)
         {
-
+            if (!first)
+            {
+                additionalDescription += "\n";
+            }
+                    
+            first = false;
+            
             var input = buildingProcessRulesSO.GetResourceInput(buildingType, i);
 
             var output = buildingProcessRulesSO.GetResourceOutput(buildingType, i);
@@ -315,6 +322,7 @@ public static class LocalizationUtils
             {
                 additionalDescription += "Harvests ";
             }
+            
 
             foreach (ResourceItem resourceItem in output)
             {
@@ -335,22 +343,20 @@ public static class LocalizationUtils
                         persistentResourceItem.Quantity.ToString();
                 }
             }
+        }
+        
+        var persistentInput = buildingProcessRulesSO.GetPersistentResourceInput(buildingType, 0);
 
+        if (persistentInput.Count > 0)
+        {
+            additionalDescription += "\nCosts ";
 
-            var persistentInput = buildingProcessRulesSO.GetPersistentResourceInput(buildingType, i);
-
-            if (persistentInput.Count > 0)
+            foreach (PersistentResourceItem persistentResourceItem in persistentInput)
             {
-                additionalDescription += "\nCosts ";
-
-                foreach (PersistentResourceItem persistentResourceItem in persistentInput)
-                {
-                    additionalDescription +=
-                        LocalizationUtils.GetIconTagForPersistentResource(persistentResourceItem.Type) +
-                        persistentResourceItem.Quantity.ToString();
-                }
+                additionalDescription +=
+                    LocalizationUtils.GetIconTagForPersistentResource(persistentResourceItem.Type) +
+                    persistentResourceItem.Quantity.ToString();
             }
-
         }
 
         string description = basicDescription + additionalDescription;

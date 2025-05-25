@@ -106,7 +106,7 @@ MonoBehaviour:
       type: 3}
     Descrpition: 
   - Type: 18
-    Prefab: {fileID: 696966427250684961, guid: a0c41302aebc49f4ead7259da8d85bfe, type: 3}
-    Icon3DPrefab: {fileID: 3789447713343784036, guid: 4d9c64e883771274395f4a216b2558be,
+    Prefab: {fileID: 696966427250684961, guid: 9409b4b872a3b494e84d4749bdea03b5, type: 3}
+    Icon3DPrefab: {fileID: 404360159390045895, guid: 45be9be352ea4664aaaa71638139b5ef,
       type: 3}
     Descrpition: 

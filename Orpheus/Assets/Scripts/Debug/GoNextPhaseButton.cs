@@ -7,7 +7,11 @@ using UnityEngine.UI;
 
 public class GoNextPhaseButton : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
     [SerializeField] private Button goNextPhaseButton;
+
+    [SerializeField] private string animatorEnterTriggerName = "Enter";
+    [SerializeField] private string animatorExitTriggerName = "Exit";
     
     private void Awake()
     {
@@ -32,12 +36,24 @@ public class GoNextPhaseButton : MonoBehaviour
     
     public void OnClick()
     {
-        goNextPhaseButton.interactable = false;
         RoundController.Instance.GoToNextPhase();
     }
 
+    private bool _isActive = false;
+    
     private void OnPhaseChanged(GamePhases phase)
     {
-        goNextPhaseButton.interactable = RoundController.Instance.IsInInteractableRound();
+        if (phase == GamePhases.BuddingBuilding)
+        {
+            AnimationUtils.ResetAnimator(animator);
+            animator.SetTrigger(animatorEnterTriggerName);
+            _isActive = true;
+        }
+        else if (_isActive)
+        {
+            animator.SetTrigger(animatorExitTriggerName);
+            _isActive = false;
+        }
+        
     }
 }

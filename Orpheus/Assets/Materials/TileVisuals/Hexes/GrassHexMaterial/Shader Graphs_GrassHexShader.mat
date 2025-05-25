@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _DirtTex:
+        m_Texture: {fileID: 2800000, guid: c07edd84031d12949a57d385464240d1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _GrassTex:
         m_Texture: {fileID: 2800000, guid: eea2e87acf79c48dda3831187e4551d9, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -42,9 +46,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Brightness: 1.01
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _Saturation: 1.4
+    m_Colors:
+    - _ColorStrength: {r: 1.1, g: 1.17, b: 0.04, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7912700404639877931
 MonoBehaviour:

@@ -21,10 +21,13 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
         public List<RelicTypes> relics;
         public List<BuildingType> buildings;
     }
-    
+
+    private BoosterPackTypes _currentBoosterPackType;
     private BoosterPackOfferings _currentOfferings;
+
+    private int _numRefreshes = 0;
     
-    public void OpenBoosterPack(BoosterPackTypes type)
+    public void OpenBoosterPack(BoosterPackTypes type, bool isRefresh = true)
     {
         switch (type)
         {
@@ -40,13 +43,19 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
             default:
                 break;
         }
+        
+        _currentBoosterPackType = type;
 
-        OnBoosterPackOpened?.Invoke(type);
+        if (isRefresh)
+        {
+            _numRefreshes = 0;
+            OnBoosterPackOpened?.Invoke(type);
+        }
     }
 
     private void OpenBasicBoosterPack(int numTiles)
     {
-        List<TileInformation> tiles = RandomChanceSystem.Instance.GetTileBoosterPackOfferings(numTiles);
+        List<TileInformation> tiles = RandomChanceSystem.Instance.GetTileBoosterPackOfferings(numTiles, _numRefreshes);
 
         _currentOfferings = new();
         _currentOfferings.tiles = tiles;
@@ -57,7 +66,7 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
         List<BuildingType> allAvailableBuildingTypes = new List<BuildingType>(GameConstants.STARTING_BUILDING_TYPES);
         allAvailableBuildingTypes.AddRange(TechSystem.Instance.GetUnlockedBuildings());
         
-        List<BuildingType> buildingTypes = RandomChanceSystem.Instance.GetCurrentlyOfferedBuildings(allAvailableBuildingTypes, 0);
+        List<BuildingType> buildingTypes = RandomChanceSystem.Instance.GetCurrentlyOfferedBuildings(allAvailableBuildingTypes, _numRefreshes);
 
         _currentOfferings = new();
         _currentOfferings.buildings = buildingTypes;
@@ -71,5 +80,11 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
     public void RemoveCurrentOfferings()
     {
         _currentOfferings = null;
+    }
+
+    public void RefreshOfferings()
+    {
+        _numRefreshes++;
+        OpenBoosterPack(_currentBoosterPackType, false);
     }
 }

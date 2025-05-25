@@ -34,6 +34,11 @@ public class DebugOptions
         TechSystem.Instance.AddExp(3);
     }
     
+    public void AddAllExp()
+    {
+        TechSystem.Instance.AddExp(500);
+    }
+    
     public void AddLotsOfGold()
     {
         PersistentState.Instance.ChangeCurrentGold(10000);    

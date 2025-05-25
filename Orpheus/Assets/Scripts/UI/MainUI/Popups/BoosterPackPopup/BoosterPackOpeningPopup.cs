@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,14 +30,66 @@ public class BoosterPackOpeningPopup : MonoBehaviour
     
     [Header("UI")] 
     [SerializeField] private Button chooseButton;
+    [SerializeField] private Button refreshButton;
+    [SerializeField] private TMP_Text refreshCostText;
 
     private List<(BoosterPackOption, BoosterPackOptionData)> _instantiatedOptions = new();
 
     private int _currentlySelectedOptionIndex = -1;
 
+    private int _numRefreshesUsed = 0;
+
+    private void OnEnable()
+    {
+        _numRefreshesUsed = 0;
+        PersistentState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
+        PersistentState.Instance.OnGoldValueChanged += OnGoldValueChanged;
+    }
+
+    private void OnDisable()
+    {
+        if (PersistentState.IsAvailable)
+        {
+            PersistentState.Instance.OnGoldValueChanged -= OnGoldValueChanged;
+        }
+    }
+
+    private void OnGoldValueChanged(long newValue)
+    {
+        SetRefreshButtonState();
+    }
+    
+    private void SetRefreshButtonState()
+    {
+        long currentRefreshCost = GetCurrentRefreshCost();
+        if (currentRefreshCost <= 0)
+        {
+            refreshCostText.SetText($"FREE");
+        }
+        else
+        {
+            refreshCostText.SetText($"<sprite index=0>{currentRefreshCost}");
+        }
+        
+        refreshButton.interactable = PersistentState.Instance.CurrentGold >= currentRefreshCost;
+    }
+
+    private long GetCurrentRefreshCost()
+    {
+        if (_numRefreshesUsed < GameConstants.NUM_FREE_BUILDING_REFRESHES)
+        {
+            return 0;
+        }
+        else return (long)(GameConstants.INITIAL_BUILDING_REFRESH_GOLD_COST *
+                           Math.Pow(GameConstants.GOLD_COST_PER_BUILDING_REFRESH_MULTIPLIER,
+                               (_numRefreshesUsed - GameConstants.NUM_FREE_BUILDING_REFRESHES)));
+    }
+
     public void PopulateBoosterPackContents()
     {
         Reset();
+        
+        SetRefreshButtonState();
         
         BoosterPackSystem.BoosterPackOfferings currentOfferings = BoosterPackSystem.Instance.GetCurrentOfferings();
 
@@ -151,5 +205,20 @@ public class BoosterPackOpeningPopup : MonoBehaviour
         UIPopupSystem.Instance.HidePopup("BoosterPackOpeningPopup");
         
         BoosterPackSystem.Instance.RemoveCurrentOfferings();
+    }
+    
+    public void OnRefreshButtonClicked()
+    {
+        long refreshCost = GetCurrentRefreshCost();
+        if (PersistentState.Instance.CurrentGold >= refreshCost)
+        {
+            PersistentState.Instance.ChangeCurrentGold(-refreshCost);
+            
+            BoosterPackSystem.Instance.RefreshOfferings();
+            
+            _numRefreshesUsed++;
+            PopulateBoosterPackContents();
+        }
+        
     }
 }

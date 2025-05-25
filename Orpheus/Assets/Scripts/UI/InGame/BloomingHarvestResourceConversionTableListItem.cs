@@ -74,7 +74,7 @@ public class BloomingHarvestResourceConversionTableListItem : MonoBehaviour
     public void SetMult(double mult)
     {
         multParent.SetActive(true);
-        multText.SetText($"{Math.Round(mult, 2)}");
+        multText.SetText($"<sprite=0>{Math.Round(mult, 2)}");
         
         if (!_hasShownMultEnter)
         {
@@ -90,7 +90,7 @@ public class BloomingHarvestResourceConversionTableListItem : MonoBehaviour
     public void SetFoodScore(long foodScore)
     {
         foodScoreParent.SetActive(true);
-        foodScoreText.SetText($"<sprite index=11>{foodScore}");
+        foodScoreText.SetText($"<sprite index=0>{foodScore}");
         
         if (!_hasShownFoodScoreExtension)
         {

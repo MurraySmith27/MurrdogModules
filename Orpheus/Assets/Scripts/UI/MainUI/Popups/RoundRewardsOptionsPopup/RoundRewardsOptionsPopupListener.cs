@@ -21,7 +21,7 @@ public class RoundRewardsOptionsPopupListener : MonoBehaviour
 
     private void OnPhaseChanged(GamePhases phase)
     {
-        if (phase == GamePhases.BuddingUpkeep)
+        if (phase == GamePhases.BuddingBuilding)
         {
             if (PersistentState.Instance.HarvestNumber > 0)
             {

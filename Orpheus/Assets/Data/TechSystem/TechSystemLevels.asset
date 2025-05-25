@@ -63,6 +63,6 @@ MonoBehaviour:
       BuildingTypes: 
   - XpForLevel: 70
     Rewards:
-    - Type: 0
+    - Type: 4
       Quantity: 1
-      BuildingTypes: 
+      BuildingTypes: 1100000012000000100000000f0000000e000000

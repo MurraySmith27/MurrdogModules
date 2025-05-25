@@ -9,7 +9,7 @@ public class BackgroundAnimator : MonoBehaviour
     [SerializeField] private ResourceVisualDataSO resourceVisualData;
 
     [SerializeField] private Material backgroundMaterial;
-
+    
     [SerializeField] private Color defaultColor;
 
     [SerializeField] private string backgroundHexSizePropertyName = "_HexSizeMultiplier"; 

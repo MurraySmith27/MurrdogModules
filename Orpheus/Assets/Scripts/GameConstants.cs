@@ -73,9 +73,9 @@ public static class GameConstants
     
     public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
     {
-        BuildingType.WheatFarm, BuildingType.CowFarm,
-        BuildingType.Stirrer, BuildingType.CityCapital, BuildingType.CityCapital,   
-        BuildingType.WheatFarm, BuildingType.CowFarm
+        BuildingType.WheatFarm, BuildingType.Mill,
+        BuildingType.Stirrer, BuildingType.CityCapital, BuildingType.Bakery,   
+        BuildingType.Toaster, BuildingType.CowFarm
     };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]

@@ -479,7 +479,7 @@ MonoBehaviour:
       m_Height: 256
       m_HorizontalBearingX: 0
       m_HorizontalBearingY: 220
-      m_HorizontalAdvance: 3.5
+      m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 1024
       m_Y: 1536
@@ -495,7 +495,7 @@ MonoBehaviour:
       m_Height: 256
       m_HorizontalBearingX: 0
       m_HorizontalBearingY: 220
-      m_HorizontalAdvance: 3.5
+      m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 1024
       m_Y: 1280
@@ -511,7 +511,7 @@ MonoBehaviour:
       m_Height: 256
       m_HorizontalBearingX: 0
       m_HorizontalBearingY: 220
-      m_HorizontalAdvance: 3.5
+      m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 1024
       m_Y: 1024
@@ -527,7 +527,7 @@ MonoBehaviour:
       m_Height: 256
       m_HorizontalBearingX: 0
       m_HorizontalBearingY: 220
-      m_HorizontalAdvance: 3.5
+      m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 1280
       m_Y: 1024
@@ -543,7 +543,7 @@ MonoBehaviour:
       m_Height: 256
       m_HorizontalBearingX: 0
       m_HorizontalBearingY: 220
-      m_HorizontalAdvance: 3.5
+      m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 1280
       m_Y: 1280
@@ -559,7 +559,7 @@ MonoBehaviour:
       m_Height: 256
       m_HorizontalBearingX: 0
       m_HorizontalBearingY: 220
-      m_HorizontalAdvance: 3.5
+      m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 1280
       m_Y: 1536

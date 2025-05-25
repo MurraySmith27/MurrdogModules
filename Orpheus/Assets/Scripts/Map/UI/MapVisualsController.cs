@@ -22,7 +22,6 @@ public class MapVisualsController : Singleton<MapVisualsController>
     [Header("Citizen Visualization")] 
     [SerializeField] private CitizenVisualsSO citizenVisualsData;
     
-    
     [Space(10)]
     [Header("City Visualization")] 
     [SerializeField] private Transform cityBorderVisualsParent;
@@ -362,7 +361,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
         _grayedOutPositions.Add(tilePosition);
         
-        tile.ToggleGrayOut(true);
+        // tile.ToggleGrayOut(true);
 
         if (tile == null)
         {

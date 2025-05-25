@@ -116,9 +116,9 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         return tile;
     }
 
-    public List<TileInformation> GetTileBoosterPackOfferings(int numTiles)
+    public List<TileInformation> GetTileBoosterPackOfferings(int numTiles, int numRefreshes)
     {
-        int seed = _currentSeed + PersistentState.Instance.HarvestNumber;
+        int seed = _currentSeed + PersistentState.Instance.HarvestNumber + numRefreshes * 103;
         
         Random.InitState(seed);
 
