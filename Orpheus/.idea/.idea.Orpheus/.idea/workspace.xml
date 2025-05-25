@@ -5,97 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/TechSystem/TechSystemLevels.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/TechSystem/TechSystemLevels.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/BuildingsVisualsData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Skybox/SkyboxShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Skybox/SkyboxShader.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Buildings/Wheat/Wheat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Buildings/Wheat/Wheat.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Buildings/Wheat/WheatFarm.shadergraph" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Buildings/Wheat/WheatFarm.shadergraph.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Buildings/Wheat/WheatWindNoise.shadersubgraph" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Buildings/Wheat/WheatWindNoise.shadersubgraph.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/GrassHexMaterial/GrassHexShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/GrassHexMaterial/GrassHexShader.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/GrassHexMaterial/Shader Graphs_GrassHexShader.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/GrassHexMaterial/Shader Graphs_GrassHexShader.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/HexUberShader.shadersubgraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/HexUberShader.shadersubgraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/WaterHex/NewWaterShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/WaterHex/NewWaterShader.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/WaterHex/Water.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/WaterHex/Water.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/UI/3D/CityBorder/BorderLineMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/UI/3D/CityBorder/BorderLineMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/UI/3D/CityBorder/CityBorderLineShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/UI/3D/CityBorder/CityBorderLineShader.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/UI/3D/SelectedTileIndicator/SelectedTileIndicatorNew 1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/UI/3D/SelectedTileIndicator/SelectedTileIndicatorNew 1.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/UI/3D/SelectedTileIndicator/SelectedTileIndicatorNew.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/UI/3D/SelectedTileIndicator/SelectedTileIndicatorNew.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Hex/Hex_smooth_thick.blend" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Hex/Hex_smooth_thick.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Hex/Hex_smooth_thick.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Hex/Hex_smooth_thick.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Hex/Hex_smooth_thick.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Hex/Hex_smooth_thick.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Bakery.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Bakery.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Bakery_Mini.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Bakery_Mini.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Castle.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Castle.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Castle_Mini.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Castle_Mini.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CornFarm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CornFarm.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CornFarm_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CornFarm_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CowFarm.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CowFarm.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CowFarm_mini.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/CowFarm_mini.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/DirtPile_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/DirtPile_mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/FishFarm_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/FishFarm_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Forest_mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/LumberMill_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/LumberMill_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mill.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mill.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mill_mini.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mill_mini.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mine_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mine_mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mixer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mixer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mixer_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mixer_mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mixer_mini.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mixer_mini.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Stirrer.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Stirrer.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Stirrer_mini.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Stirrer_mini.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/SushiRestaurant_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/SushiRestaurant_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Toaster_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Toaster_mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Well_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Well_mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/WheatFarm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/WheatFarm.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/WheatFarm_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/WheatFarm_Mini.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/GrassTile/GrassTile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/GrassTile/GrassTile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/TileHoverEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/TileHoverEnter.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/TileHoverExit.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/TileHoverExit.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/TileHoverIn.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/TileHoverIn.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/WaterTile/WaterTile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/WaterTile/WaterTile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/BloomingHarvestResourceListItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/RelicsAndItems/3DVisualBatchRenderTexture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/RelicsAndItems/3DVisualBatchRenderTexture.renderTexture" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetCredits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetCredits.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/GoNextPhaseButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/GoNextPhaseButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTableListItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTableListItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Misc/BackgroundAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Misc/BackgroundAnimator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/RoundRewardsOptionsPopup/RoundRewardsOptionsPopupListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/RoundRewardsOptionsPopup/RoundRewardsOptionsPopupListener.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextAssets/Resources/AllIcons.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextAssets/Resources/AllIcons.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Map/Hex/GrassTile_Tex.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Map/Hex/GrassTile_Tex.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/fire_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/fire_01.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/fire_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/fire_02.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_01.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_02.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_03.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_04.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_05.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_06.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flame_06.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flare_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/flare_01.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/button_rectangle_depth_flat.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Grey/Default/button_rectangle_depth_flat.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/terrafactorialogo.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/terrafactorialogo.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,10 +210,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="17748">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="17748" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -386,7 +300,8 @@
       <workItem from="1747955618436" duration="4443000" />
       <workItem from="1748002095174" duration="597000" />
       <workItem from="1748042319622" duration="6707000" />
-      <workItem from="1748126077894" duration="3731000" />
+      <workItem from="1748126077894" duration="4202000" />
+      <workItem from="1748211312428" duration="4698000" />
     </task>
     <servers />
   </component>
@@ -494,6 +409,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Audio/AudioManager.cs</url>
+          <line>37</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Audio\AudioManager.cs" containingFunctionPresentation="Method 'OnGoldValueChanged'">
+            <startOffsets>
+              <option value="1604" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1662" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

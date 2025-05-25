@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{63106892-00b3-4eda-ab64-5c6f49fcf6a7}">
+		<property name="assetPath">
+			<value>SlidesAndTransitions/SwooshSlide2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.0929931972789115</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d8fb04a6-f206-483f-b98b-d518fea39dd8}</destination>
+		</relationship>
+	</object>
+</objects>

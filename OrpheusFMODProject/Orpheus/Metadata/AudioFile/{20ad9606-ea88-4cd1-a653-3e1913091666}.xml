@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{20ad9606-ea88-4cd1-a653-3e1913091666}">
+		<property name="assetPath">
+			<value>AlertsAndNotifications/GenericNotification9.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.55517006802721092</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d8fb04a6-f206-483f-b98b-d518fea39dd8}</destination>
+		</relationship>
+	</object>
+</objects>

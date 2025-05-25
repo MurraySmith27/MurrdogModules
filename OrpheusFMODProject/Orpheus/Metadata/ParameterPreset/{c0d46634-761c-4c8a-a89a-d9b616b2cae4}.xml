@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{c0d46634-761c-4c8a-a89a-d9b616b2cae4}">
+		<property name="name">
+			<value>NumTicksThisHarvest</value>
+		</property>
+		<relationship name="folder">
+			<destination>{237ff360-5dab-43fb-a394-a4619f0aa339}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{22415be1-2beb-4d01-9002-d2b7202d52dc}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{22415be1-2beb-4d01-9002-d2b7202d52dc}">
+		<property name="maximum">
+			<value>20</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
