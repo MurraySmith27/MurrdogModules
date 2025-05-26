@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{c308fece-1130-4a33-b0d9-25177c285969}">
+		<property name="assetPath">
+			<value>CyberLeaf-ModernUISFX/Buttons/ClickAndSlide.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.276984126984127</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{824259a3-0fe1-4931-8e90-6bdfeff423c6}</destination>
+		</relationship>
+	</object>
+</objects>

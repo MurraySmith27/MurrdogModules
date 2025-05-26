@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{6162ba84-8eb2-4a9e-92b2-1d6619b446cb}">
+		<property name="assetPath">
+			<value>CyberLeaf-ModernUISFX/AlertsAndNotifications/Success6.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.0122222222222221</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{824259a3-0fe1-4931-8e90-6bdfeff423c6}</destination>
+		</relationship>
+	</object>
+</objects>

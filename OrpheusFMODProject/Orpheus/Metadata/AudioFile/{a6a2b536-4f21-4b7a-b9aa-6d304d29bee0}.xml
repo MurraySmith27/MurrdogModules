@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a6a2b536-4f21-4b7a-b9aa-6d304d29bee0}">
+		<property name="assetPath">
+			<value>CyberLeaf-ModernUISFX/AlertsAndNotifications/SciFiNotification1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.77866213151927433</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{824259a3-0fe1-4931-8e90-6bdfeff423c6}</destination>
+		</relationship>
+	</object>
+</objects>

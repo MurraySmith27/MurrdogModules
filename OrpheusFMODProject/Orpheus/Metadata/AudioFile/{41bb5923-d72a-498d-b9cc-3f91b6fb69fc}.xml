@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{41bb5923-d72a-498d-b9cc-3f91b6fb69fc}">
+		<property name="assetPath">
+			<value>KenneyCasino/dice-shake-3.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5236961451247166</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{824259a3-0fe1-4931-8e90-6bdfeff423c6}</destination>
+		</relationship>
+	</object>
+</objects>

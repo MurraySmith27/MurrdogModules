@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{4677b7f3-088f-4b9b-936f-2599ce2d02cd}">
+		<property name="assetPath">
+			<value>CyberLeaf-ModernUISFX/SlidesAndTransitions/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{824259a3-0fe1-4931-8e90-6bdfeff423c6}</destination>
+		</relationship>
+	</object>
+</objects>

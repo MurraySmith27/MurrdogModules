@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{52509627-3ce3-4917-9b30-f6f7ed979604}">
+		<property name="name">
+			<value>IsInCardMenu</value>
+		</property>
+		<relationship name="folder">
+			<destination>{577096ba-2b28-44d0-bc58-69345b38e4bd}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{53d8db6b-b715-4258-9dc7-1b28cabe8acd}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{53d8db6b-b715-4258-9dc7-1b28cabe8acd}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

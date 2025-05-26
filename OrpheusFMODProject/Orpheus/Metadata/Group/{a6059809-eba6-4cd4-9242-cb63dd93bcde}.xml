@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{a6059809-eba6-4cd4-9242-cb63dd93bcde}">
+		<property name="name">
+			<value>HarvestSFX</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{f89512b2-13fc-4ca7-b465-2f0793163a96}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{7e7cac8b-ff48-49d0-b19d-91f3ea6742ac}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{9f6cb45e-088e-482e-8c95-d4058e54c6df}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{f89512b2-13fc-4ca7-b465-2f0793163a96}">
+		<relationship name="effects">
+			<destination>{1c87df05-a32a-4204-8378-e6d4e40a7d38}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{7e7cac8b-ff48-49d0-b19d-91f3ea6742ac}" />
+	<object class="MixerBusFader" id="{1c87df05-a32a-4204-8378-e6d4e40a7d38}" />
+</objects>

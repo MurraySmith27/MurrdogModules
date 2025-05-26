@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="Workspace" id="{2ee79a2b-9349-45d8-969f-31c82f3753de}">
+	<object class="Workspace" id="{1577f3b7-5b7c-441f-a57d-841e6709b826}">
 		<relationship name="projectSettings">
-			<destination>{6e26eb04-0a56-4ddb-9009-8ea0817587b6}</destination>
+			<destination>{2fe3cac5-fb0c-4d88-9656-d36f669db273}</destination>
+		</relationship>
+		<relationship name="changelist">
+			<destination>{c947c6b6-c890-4d3e-9174-0db1ca2cd829}</destination>
 		</relationship>
 	</object>
-	<object class="ProjectSettings" id="{6e26eb04-0a56-4ddb-9009-8ea0817587b6}">
+	<object class="ProjectSettings" id="{2fe3cac5-fb0c-4d88-9656-d36f669db273}">
 		<property name="windowLayout">
-			<value>AAAAAQAAABYAQQB1AGQAaQBvACAAQgBpAG4AIAAxAAAAQgHZ0MsAAwAAAAAKdwAAAHwAAAwIAAADawAACngAAACbAAAMBwAAA2oAAAABAAAAAAeAAAAKeAAAAJsAAAwHAAADag==</value>
+			<value>AAAAAgAAAA4ATQBpAHgAZQByACAAMgAAAEIB2dDLAAMAAP/////////4AAAHgAAABAgAAAKAAAABFAAABw0AAAPjAAAAAAIAAAAHgAAAAAAAAAAXAAAHfwAABAcAAAAWAEEAdQBkAGkAbwAgAEIAaQBuACAAMQAAAEIB2dDLAAMAAAAAAvcAAAB9AAAEiAAAA2wAAAL4AAAAnAAABIcAAANrAAAAAAAAAAAHgAAAAvgAAACcAAAEhwAAA2s=</value>
 		</property>
 		<relationship name="activePlatform">
-			<destination>{907dc032-966a-4021-8cec-ca5205d4dade}</destination>
+			<destination>{521c9a98-28b9-4f6e-af13-7b43240cbf51}</destination>
 		</relationship>
 	</object>
+	<object class="WorkspaceChangelist" id="{c947c6b6-c890-4d3e-9174-0db1ca2cd829}" />
 </objects>
