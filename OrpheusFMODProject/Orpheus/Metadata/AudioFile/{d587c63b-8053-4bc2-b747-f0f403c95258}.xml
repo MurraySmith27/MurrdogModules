@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{d587c63b-8053-4bc2-b747-f0f403c95258}">
 		<property name="assetPath">
-			<value>easy-cozy-morning-jazz-coffee-podcast-192585.mp3</value>
+			<value>Music/easy-cozy-morning-jazz-coffee-podcast-192585.mp3</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

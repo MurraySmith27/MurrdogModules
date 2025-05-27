@@ -5,11 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AssetCredits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetCredits.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemEnter.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemFoodScoreChanged.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemFoodScoreChanged.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemFoodScoreEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemFoodScoreEnter.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemMultChanged.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemMultChanged.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemMultEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemMultEnter.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemQuantityChanged.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemQuantityChanged.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemQuantityEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemQuantityEnter.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemScore.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemScore.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Audio/AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Audio/AudioManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Misc/BackgroundAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Misc/BackgroundAnimator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/LevelUpPopup/LevelUpPopupListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/LevelUpPopup/LevelUpPopupListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/Generic/Group 2(2).png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/Generic/Group 2(2).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.cache/buildrecords/Desktop/Master.br" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.cache/buildrecords/Desktop/Master.br" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.user/Metadata/Workspace.user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.user/Metadata/Workspace.user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Assets/easy-cozy-morning-jazz-coffee-podcast-192585.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.bank" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.bank" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.strings.bank" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.strings.bank" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/AudioFile/{d587c63b-8053-4bc2-b747-f0f403c95258}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/AudioFile/{d587c63b-8053-4bc2-b747-f0f403c95258}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{41137982-c726-4843-9480-3c960b3ed4e5}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{41137982-c726-4843-9480-3c960b3ed4e5}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{6b7a4931-6653-4332-b35b-2666c5a25bd9}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{6b7a4931-6653-4332-b35b-2666c5a25bd9}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{a5611be3-eaf2-43f8-9ada-0d7db9a822ff}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{a5611be3-eaf2-43f8-9ada-0d7db9a822ff}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{b4c84cbd-cbd3-4b36-bcb0-1608dbbcbd97}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{b4c84cbd-cbd3-4b36-bcb0-1608dbbcbd97}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{cd366a11-ed4d-4df8-ae45-d4c4c75f66b2}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{cd366a11-ed4d-4df8-ae45-d4c4c75f66b2}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{f17723fd-5a74-4b47-9a41-25d2250793e8}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{f17723fd-5a74-4b47-9a41-25d2250793e8}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{fa15458f-2ef6-46cf-a3dc-5007e80a0a75}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{fa15458f-2ef6-46cf-a3dc-5007e80a0a75}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{1eedfe7c-071d-426f-83ca-865c808d37bc}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{1eedfe7c-071d-426f-83ca-865c808d37bc}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{9f6cb45e-088e-482e-8c95-d4058e54c6df}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{9f6cb45e-088e-482e-8c95-d4058e54c6df}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{a6059809-eba6-4cd4-9242-cb63dd93bcde}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{a6059809-eba6-4cd4-9242-cb63dd93bcde}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/ParameterPreset/{52509627-3ce3-4917-9b30-f6f7ed979604}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/ParameterPreset/{52509627-3ce3-4917-9b30-f6f7ed979604}.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +55,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/69cf3f5d501444b69536f0c0ef5f823810fc00/fb/419b841d/Enumerable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90c0c642f3204a9da1fa974b2295abc027800/35/89d915e7/Animator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90eb55fde4a0443d932e954fdb5b47a83e000/81/0bc34346/Graph.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c648d86e9013479d818310c5918e31a4176600/e9/03d3f5c2/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/de920293e401402ab375ad8a2e1b19da46ac00/44/d691d667/List`1.cs" root0="FORCE_HIGHLIGHTING" />
@@ -33,8 +64,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/MurrdogModules/Libraries/Trinary Software/Timing.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MurrdogModules/Rendering/RendererFeatures/CopyDepthFeature.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AssetManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/murra/Desktop/dev/Orpheus/Orpheus/Assets/Scripts/Balance/RandomChanceSystem.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/murra/Desktop/dev/Orpheus/Orpheus/Assets/Scripts/Balance/RandomChanceSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Balance/ShopUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" root0="FORCE_HIGHLIGHTING" />
@@ -138,6 +167,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Tooltip/TooltipBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Mouse/UIMouseData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/SwitchPlacingBuildingTypeButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Text/DayText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Text/PersistentResourceText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Text/TextController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Timing/OrpheusTiming.cs" root0="FORCE_HIGHLIGHTING" />
@@ -210,10 +240,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="17748">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12896">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="17748" />
+      <option name="pid" value="12896" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -301,7 +331,8 @@
       <workItem from="1748002095174" duration="597000" />
       <workItem from="1748042319622" duration="6707000" />
       <workItem from="1748126077894" duration="4202000" />
-      <workItem from="1748211312428" duration="4698000" />
+      <workItem from="1748211312428" duration="5763000" />
+      <workItem from="1748296843483" duration="11958000" />
     </task>
     <servers />
   </component>
@@ -359,69 +390,30 @@
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/ShopPopup/ShopPopup.cs</url>
-          <line>243</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\MainUI\Popups\ShopPopup\ShopPopup.cs" containingFunctionPresentation="Method 'OnBoosterPackPurchaseButtonClicked'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Text/DayText.cs</url>
+          <line>28</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Text\DayText.cs" containingFunctionPresentation="Method 'OnPhaseChanged'">
             <startOffsets>
-              <option value="9004" />
+              <option value="684" />
             </startOffsets>
             <endOffsets>
-              <option value="9095" />
+              <option value="749" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="41" />
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs</url>
-          <line>68</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\BoosterPacks\BoosterPackSystem.cs" containingFunctionPresentation="Method 'OpenBuildingsBoosterPack'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs</url>
+          <line>89</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\PersistentState.cs" containingFunctionPresentation="Method 'IncrementHarvestNumber'">
             <startOffsets>
-              <option value="2025" />
+              <option value="2777" />
             </startOffsets>
             <endOffsets>
-              <option value="2159" />
+              <option value="2793" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs</url>
-          <line>159</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\Balance\RandomChanceSystem.cs" containingFunctionPresentation="Method 'GetCurrentlyOfferedBuildings'">
-            <startOffsets>
-              <option value="5156" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5238" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/DiskUtils/TechSystemLevelsSO.cs</url>
-          <line>178</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\DiskUtils\TechSystemLevelsSO.cs" containingFunctionPresentation="Method 'GetAllUnlockedBuildingTypes'">
-            <startOffsets>
-              <option value="4400" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4424" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Audio/AudioManager.cs</url>
-          <line>37</line>
-          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Audio\AudioManager.cs" containingFunctionPresentation="Method 'OnGoldValueChanged'">
-            <startOffsets>
-              <option value="1604" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1662" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="48" />
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

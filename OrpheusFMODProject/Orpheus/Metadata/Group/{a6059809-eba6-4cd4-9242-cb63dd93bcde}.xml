@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="MixerGroup" id="{a6059809-eba6-4cd4-9242-cb63dd93bcde}">
+		<property name="volume">
+			<value>-6.5</value>
+		</property>
 		<property name="name">
 			<value>HarvestSFX</value>
 		</property>
@@ -16,9 +19,51 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{f89512b2-13fc-4ca7-b465-2f0793163a96}">
 		<relationship name="effects">
+			<destination>{15a61018-d5d9-4381-a715-aff30d86b511}</destination>
 			<destination>{1c87df05-a32a-4204-8378-e6d4e40a7d38}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{7e7cac8b-ff48-49d0-b19d-91f3ea6742ac}" />
+	<object class="PitchShifterEffect" id="{15a61018-d5d9-4381-a715-aff30d86b511}">
+		<property name="pitch">
+			<value>1</value>
+		</property>
+		<relationship name="automators">
+			<destination>{bf862093-0520-4745-8913-d9e396174ea7}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{1c87df05-a32a-4204-8378-e6d4e40a7d38}" />
+	<object class="Automator" id="{bf862093-0520-4745-8913-d9e396174ea7}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>pitch</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{c56173d9-6127-47e0-99fa-439463f39e07}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationCurve" id="{c56173d9-6127-47e0-99fa-439463f39e07}">
+		<relationship name="parameter">
+			<destination>{7507c042-0356-4bfb-a83d-e9bec3c5f427}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{724f6001-1ae1-4b64-b4f1-bed5e9b95311}</destination>
+			<destination>{8f7cdc2b-f38d-4652-b588-dd56230663f5}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{724f6001-1ae1-4b64-b4f1-bed5e9b95311}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{8f7cdc2b-f38d-4652-b588-dd56230663f5}">
+		<property name="position">
+			<value>20</value>
+		</property>
+		<property name="value">
+			<value>1.5</value>
+		</property>
+	</object>
 </objects>

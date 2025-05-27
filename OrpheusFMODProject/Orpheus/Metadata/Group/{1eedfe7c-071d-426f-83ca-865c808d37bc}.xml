@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="MixerGroup" id="{1eedfe7c-071d-426f-83ca-865c808d37bc}">
+		<property name="volume">
+			<value>-9</value>
+		</property>
 		<property name="name">
 			<value>Music</value>
 		</property>
@@ -22,7 +25,7 @@
 			<value>volume</value>
 		</property>
 		<property name="amount">
-			<value>5</value>
+			<value>30</value>
 		</property>
 		<relationship name="sidechains">
 			<destination>{38867f3e-1a67-4ff4-ac1c-dbe54e768d39}</destination>

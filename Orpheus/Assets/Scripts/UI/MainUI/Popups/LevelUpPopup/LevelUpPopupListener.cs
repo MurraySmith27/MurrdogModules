@@ -20,10 +20,10 @@ public class LevelUpPopupListener : MonoBehaviour
 
     private void OnLevelUp(int level)
     { 
-        UIPopupComponent popupInstance = UIPopupSystem.Instance.ShowPopup("LevelUpPopup");
+        // UIPopupComponent popupInstance = UIPopupSystem.Instance.ShowPopup("LevelUpPopup");
 
-        LevelUpPopup levelUpPopup = popupInstance.GetComponent<LevelUpPopup>();
+        // LevelUpPopup levelUpPopup = popupInstance.GetComponent<LevelUpPopup>();
         
-        levelUpPopup.Populate(level);
+        // levelUpPopup.Populate(level);
     }
 }

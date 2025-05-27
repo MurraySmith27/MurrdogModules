@@ -33,6 +33,7 @@ public class CameraController : Singleton<CameraController>
     [Header("Camera Focus On Tile Controls")]
     [SerializeField] private AnimationCurve cameraMoveAnimCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
     [SerializeField] private float cameraMoveAnimTime = 0.5f;
+    [SerializeField] private float cameraUpOffset = 6f;
     
     [Space(10)]
     
@@ -372,6 +373,8 @@ public class CameraController : Singleton<CameraController>
 
     public void FocusPosition(Vector3 worldPosition, Action onFocusCompleteCallback = null)
     {
+
+        worldPosition += new Vector3(1, 0, 0) * cameraUpOffset;
         Timing.RunCoroutineSingleton(_MoveAnimationCoroutine(worldPosition, onFocusCompleteCallback), _moveCoroutineHandle,
             SingletonBehavior.Overwrite);
     }

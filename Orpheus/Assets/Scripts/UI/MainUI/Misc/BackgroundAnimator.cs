@@ -12,6 +12,10 @@ public class BackgroundAnimator : MonoBehaviour
     
     [SerializeField] private Color defaultColor;
 
+    [SerializeField] private Color inShopPopupColor;
+    
+    [SerializeField] private Color inPopupColor;
+
     [SerializeField] private string backgroundHexSizePropertyName = "_HexSizeMultiplier"; 
 
     [SerializeField] private string backgroundColorPropertyName = "_BackgroundColor";
@@ -20,6 +24,7 @@ public class BackgroundAnimator : MonoBehaviour
     [Space(10)] 
     [Header("Animation")] 
     [SerializeField] private float fadeAnimationTime = 1f;
+    [SerializeField] private float popupFadeAnimationTime = 0.75f;
     [SerializeField] private float resourceIncrementAnimationTime = 1f;
 
     [SerializeField] private Color backgroundStartingColor = Color.black;
@@ -28,6 +33,8 @@ public class BackgroundAnimator : MonoBehaviour
     [SerializeField] private float resourceIncrementHexSizeIncrease = 1.2f;
     [SerializeField] private AnimationCurve resourceIncrementHexSizeAnimationCurve;
 
+    private bool _isInPopup = false;
+    
     private void Awake()
     {
         backgroundMaterial.SetColor(backgroundColorPropertyName, defaultColor);
@@ -44,6 +51,12 @@ public class BackgroundAnimator : MonoBehaviour
         
         BloomingHarvestResourceDisplay.Instance.OnResourceIncrementAnimationTriggered -= OnResourceIncrementAnimationTriggered;
         BloomingHarvestResourceDisplay.Instance.OnResourceIncrementAnimationTriggered += OnResourceIncrementAnimationTriggered;
+        
+        UIPopupSystem.Instance.OnPopupShown -= OnPopupShown;
+        UIPopupSystem.Instance.OnPopupShown += OnPopupShown;
+        
+        UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
+        UIPopupSystem.Instance.OnPopupHidden += OnPopupHidden;
     }
 
     private void OnDestroy()
@@ -58,6 +71,12 @@ public class BackgroundAnimator : MonoBehaviour
         {
             BloomingHarvestController.Instance.OnHarvestStart -= FadeToBaseColor;
             BloomingHarvestController.Instance.OnHarvestEnd -= ResetToDefaultColor;
+        }
+
+        if (UIPopupSystem.IsAvailable)
+        {
+            UIPopupSystem.Instance.OnPopupShown -= OnPopupShown;
+            UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
         }
     }
 
@@ -96,21 +115,44 @@ public class BackgroundAnimator : MonoBehaviour
 
     private void ResetToDefaultColor()
     {
-        Timing.RunCoroutineSingleton(FadeToColor(defaultColor), this.gameObject, SingletonBehavior.Overwrite);
+        Timing.RunCoroutineSingleton(FadeToColor(defaultColor, fadeAnimationTime), this.gameObject, SingletonBehavior.Overwrite);
     }
 
     private void FadeToBaseColor()
     {
-        Timing.RunCoroutineSingleton(FadeToColor(backgroundStartingColor), this.gameObject, SingletonBehavior.Overwrite);
+        Timing.RunCoroutineSingleton(FadeToColor(backgroundStartingColor, fadeAnimationTime), this.gameObject, SingletonBehavior.Overwrite);
+    }
+    
+    private void OnPopupShown(string popupName)
+    {
+        if (!_isInPopup)
+        {
+            Color color = inPopupColor;
+            
+            if (popupName == "ShopPopup")
+                color = inShopPopupColor;
+            
+            Timing.RunCoroutineSingleton(FadeToColor(color, popupFadeAnimationTime), this.gameObject, SingletonBehavior.Overwrite);
+            _isInPopup = true;
+        }
     }
 
-    private IEnumerator<float> FadeToColor(Color color)
+    private void OnPopupHidden(string popupName)
+    {
+        if (_isInPopup && UIPopupSystem.Instance.IsPopupShowing())
+        {
+            Timing.RunCoroutineSingleton(FadeToColor(defaultColor, popupFadeAnimationTime), this.gameObject, SingletonBehavior.Overwrite);
+            _isInPopup = false;
+        }
+    }
+
+    private IEnumerator<float> FadeToColor(Color color, float animationTime)
     {
         Color initialColor = backgroundMaterial.GetColor(backgroundColorPropertyName);
         
-        for (float t = 0; t <= fadeAnimationTime; t += Time.deltaTime * GlobalSettings.GameSpeed)
+        for (float t = 0; t <= animationTime; t += Time.deltaTime * GlobalSettings.GameSpeed)
         {
-            float progress = t / fadeAnimationTime;
+            float progress = t / animationTime;
             
             backgroundMaterial.SetColor(backgroundColorPropertyName, Color.Lerp(initialColor, color, progress));
 

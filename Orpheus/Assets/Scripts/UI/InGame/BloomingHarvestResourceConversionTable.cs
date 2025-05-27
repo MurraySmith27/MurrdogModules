@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
     [SerializeField] private string tickAnimatorTriggerName = "Tick";
 
     private Dictionary<ResourceType, BloomingHarvestResourceConversionTableListItem> _listItems = new();
+
+    private BloomingHarvestResourceConversionTableListItem _placeholderEmpty;
     
     private void Start()
     {
@@ -61,6 +64,13 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
         GlobalSettings.OnGameSpeedChanged -= OnGameSpeedChanged;
     }
 
+    private void OnEnable()
+    {
+        if (_placeholderEmpty == null) { 
+            _placeholderEmpty = Instantiate(listItemPrefab, listItemsParent);
+        }
+    }
+
     private void OnConversionStart()
     {
         Clear();
@@ -77,6 +87,11 @@ public class BloomingHarvestResourceConversionTable : MonoBehaviour
 
     private void OnResourceConversionStart(ResourceType type)
     {
+        if (_placeholderEmpty != null)
+        {
+            Destroy(_placeholderEmpty.gameObject);
+        }
+        
         BloomingHarvestResourceConversionTableListItem newInstance = Instantiate(listItemPrefab, listItemsParent);
 
         _listItems.Add(type, newInstance);

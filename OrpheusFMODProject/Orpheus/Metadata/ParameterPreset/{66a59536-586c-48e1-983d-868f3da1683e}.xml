@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{66a59536-586c-48e1-983d-868f3da1683e}">
+		<property name="name">
+			<value>IsInHarvest</value>
+		</property>
+		<relationship name="folder">
+			<destination>{577096ba-2b28-44d0-bc58-69345b38e4bd}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{71f45cab-996e-42fa-95a6-108b678a10cb}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{71f45cab-996e-42fa-95a6-108b678a10cb}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
