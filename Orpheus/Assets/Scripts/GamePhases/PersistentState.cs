@@ -9,12 +9,12 @@ public class PersistentState : Singleton<PersistentState>
     public int RoundNumber { get; private set; }
     
     public int HarvestNumber { get; private set; }
-    
-    public long CurrentWater { get; private set; }
-    
-    public long CurrentOil { get; private set; }
-    
-    public long CurrentDirt { get; private set; }
+
+    public long CurrentWater { get; private set; } = 1000;
+
+    public long CurrentOil { get; private set; } = 1000;
+
+    public long CurrentDirt { get; private set; } = 1000;
 
     public long CurrentGold { get; private set; } = GameConstants.STARTING_GOLD;
 

@@ -67,7 +67,6 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
 
             foreach (Vector2Int cityTile in cityTiles)
             {
-
                 if (CitizenController.Instance.IsCitizenOnTile(cityTile))
                 {
                     OnTileResourceChangeStart?.Invoke(cityTile);

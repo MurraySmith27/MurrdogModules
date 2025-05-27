@@ -312,7 +312,7 @@ public static class LocalizationUtils
             {
                 foreach (ResourceItem resourceItem in input)
                 {
-                    additionalDescription += LocalizationUtils.GetIconTagForResource(resourceItem.Type) +
+                    additionalDescription += $"<size=38><voffset=-5>{LocalizationUtils.GetIconTagForResource(resourceItem.Type)}</size></voffset>" +
                                              (resourceItem.Quantity > 1 ? resourceItem.Quantity.ToString() : "");
                 }
 
@@ -326,7 +326,7 @@ public static class LocalizationUtils
 
             foreach (ResourceItem resourceItem in output)
             {
-                additionalDescription += LocalizationUtils.GetIconTagForResource(resourceItem.Type) +
+                additionalDescription += $"<size=38><voffset=-5>{LocalizationUtils.GetIconTagForResource(resourceItem.Type)}</size></voffset>" +
                                          (resourceItem.Quantity > 1 ? resourceItem.Quantity.ToString() : "");
             }
             

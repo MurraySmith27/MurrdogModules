@@ -12,6 +12,8 @@ public class DayText : MonoBehaviour
     {
         PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+        
+        SetDayText();
     }
 
     private void OnDestroy()
@@ -26,7 +28,12 @@ public class DayText : MonoBehaviour
     {
         if (gamePhases == GamePhases.BuddingUpkeep) 
         {
-            dayText.SetText($"Day {PersistentState.Instance.HarvestNumber}");
+            SetDayText();
         }
+    }
+
+    private void SetDayText()
+    {
+        dayText.SetText($"Day {PersistentState.Instance.HarvestNumber + 1}");
     }
 }

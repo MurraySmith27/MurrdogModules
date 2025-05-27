@@ -6,40 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/WaterHex/Water.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/TileVisuals/Hexes/WaterHex/Water.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemEnter.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemFoodScoreChanged.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemFoodScoreChanged.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemFoodScoreEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemFoodScoreEnter.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemMultChanged.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemMultChanged.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemMultEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemMultEnter.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemQuantityChanged.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemQuantityChanged.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemQuantityEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemQuantityEnter.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemScore.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/InGameUI/BloomingPhase/ResourceConversionTable/ResourceConversionTableListItemScore.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/PersistentState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Audio/AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Audio/AudioManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InGame/BloomingHarvestResourceConversionTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Misc/BackgroundAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Misc/BackgroundAnimator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/LevelUpPopup/LevelUpPopupListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/LevelUpPopup/LevelUpPopupListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/DayText.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/DayText.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/Generic/Group 2(2).png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/Generic/Group 2(2).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.cache/buildrecords/Desktop/Master.br" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.cache/buildrecords/Desktop/Master.br" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.user/Metadata/Workspace.user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.user/Metadata/Workspace.user.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Assets/easy-cozy-morning-jazz-coffee-podcast-192585.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.bank" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.bank" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.strings.bank" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.strings.bank" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/AudioFile/{d587c63b-8053-4bc2-b747-f0f403c95258}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/AudioFile/{d587c63b-8053-4bc2-b747-f0f403c95258}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{41137982-c726-4843-9480-3c960b3ed4e5}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{41137982-c726-4843-9480-3c960b3ed4e5}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{6b7a4931-6653-4332-b35b-2666c5a25bd9}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{6b7a4931-6653-4332-b35b-2666c5a25bd9}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{a5611be3-eaf2-43f8-9ada-0d7db9a822ff}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{a5611be3-eaf2-43f8-9ada-0d7db9a822ff}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{b4c84cbd-cbd3-4b36-bcb0-1608dbbcbd97}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{b4c84cbd-cbd3-4b36-bcb0-1608dbbcbd97}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{cd366a11-ed4d-4df8-ae45-d4c4c75f66b2}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{cd366a11-ed4d-4df8-ae45-d4c4c75f66b2}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{f17723fd-5a74-4b47-9a41-25d2250793e8}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{f17723fd-5a74-4b47-9a41-25d2250793e8}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{fa15458f-2ef6-46cf-a3dc-5007e80a0a75}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{fa15458f-2ef6-46cf-a3dc-5007e80a0a75}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{1eedfe7c-071d-426f-83ca-865c808d37bc}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{1eedfe7c-071d-426f-83ca-865c808d37bc}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{9f6cb45e-088e-482e-8c95-d4058e54c6df}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{9f6cb45e-088e-482e-8c95-d4058e54c6df}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{a6059809-eba6-4cd4-9242-cb63dd93bcde}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Group/{a6059809-eba6-4cd4-9242-cb63dd93bcde}.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/ParameterPreset/{52509627-3ce3-4917-9b30-f6f7ed979604}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/ParameterPreset/{52509627-3ce3-4917-9b30-f6f7ed979604}.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,10 +221,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12896">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="12896" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -332,7 +313,8 @@
       <workItem from="1748042319622" duration="6707000" />
       <workItem from="1748126077894" duration="4202000" />
       <workItem from="1748211312428" duration="5763000" />
-      <workItem from="1748296843483" duration="11958000" />
+      <workItem from="1748296843483" duration="12605000" />
+      <workItem from="1748385632206" duration="2447000" />
     </task>
     <servers />
   </component>
@@ -391,13 +373,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Text/DayText.cs</url>
-          <line>28</line>
+          <line>30</line>
           <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\UI\Text\DayText.cs" containingFunctionPresentation="Method 'OnPhaseChanged'">
             <startOffsets>
-              <option value="684" />
+              <option value="715" />
             </startOffsets>
             <endOffsets>
-              <option value="749" />
+              <option value="728" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="59" />
@@ -407,10 +389,10 @@
           <line>89</line>
           <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\Scripts\GamePhases\PersistentState.cs" containingFunctionPresentation="Method 'IncrementHarvestNumber'">
             <startOffsets>
-              <option value="2777" />
+              <option value="2789" />
             </startOffsets>
             <endOffsets>
-              <option value="2793" />
+              <option value="2805" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="61" />
