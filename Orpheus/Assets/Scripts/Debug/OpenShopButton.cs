@@ -8,11 +8,22 @@ public class OpenShopButton : MonoBehaviour
     [SerializeField] private Button openShopButton;
 
     [SerializeField] private string shopPopupName = "ShopPopup";
+    
+    [SerializeField] private Animator animator;
+    
+    [SerializeField] private string shopAnimatorEnterTriggerName = "Enter";
+    
+    [SerializeField] private string shopAnimatorExitTriggerName = "Exit";
 
     private void Start()
     {
         PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
+
+        UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
+        UIPopupSystem.Instance.OnPopupHidden += OnPopupHidden;
+
+        animator.speed = 1.3f;
     }
 
     private void OnDestroy()
@@ -21,6 +32,16 @@ public class OpenShopButton : MonoBehaviour
         {
             PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         }
+
+        if (UIPopupSystem.IsAvailable)
+        {
+            UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
+        }
+    }
+
+    private void OnEnable()
+    {
+        AnimatorEnter();
     }
 
     private void OnPhaseChanged(GamePhases phase)
@@ -42,6 +63,23 @@ public class OpenShopButton : MonoBehaviour
         else
         {
             UIPopupSystem.Instance.ShowPopup(shopPopupName);
+            AnimatorExit();
         }
+    }
+
+    private void OnPopupHidden(string popupName)
+    {
+        AnimatorEnter();
+    }
+
+    private void AnimatorEnter()
+    {
+        AnimationUtils.ResetAnimator(animator);
+        animator.SetTrigger(shopAnimatorEnterTriggerName);
+    }
+
+    private void AnimatorExit()
+    {
+        animator.SetTrigger(shopAnimatorExitTriggerName);
     }
 }

@@ -44,7 +44,7 @@ public static class GameConstants
 
     public static readonly long STARTING_BUILD_TOKENS = 0;
 
-    public static readonly long STARTING_GOLD = 400;
+    public static readonly long STARTING_GOLD = 3;
 
     public static readonly long GOLD_PER_HARVEST = 100;
 
@@ -59,9 +59,9 @@ public static class GameConstants
     
     public static readonly TileType[] INITIAL_CITY_TILE_TYPES = new TileType[]
     {
-        TileType.Grass, TileType.Grass,
-        TileType.Grass, TileType.Grass, TileType.Grass,
         TileType.Grass, TileType.Water,
+        TileType.Water, TileType.Grass, TileType.Grass,
+        TileType.Grass, TileType.Grass,
     };
     
     // public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
@@ -73,9 +73,9 @@ public static class GameConstants
     
     public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
     {
-        BuildingType.WheatFarm, BuildingType.Mill,
-        BuildingType.Stirrer, BuildingType.CityCapital, BuildingType.Bakery,   
-        BuildingType.Toaster, BuildingType.CityCapital
+        BuildingType.CityCapital, BuildingType.CityCapital,
+        BuildingType.CityCapital, BuildingType.CityCapital, BuildingType.CityCapital,   
+        BuildingType.CityCapital, BuildingType.CityCapital
     };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]

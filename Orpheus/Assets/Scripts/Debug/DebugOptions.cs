@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEditor;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class DebugOptions
@@ -95,7 +96,10 @@ public class DebugOptions
     {
         GlobalSettings.GameSpeed = 1;
     }
-
     
+    public void OpenBuildingBoosterPack()
+    {
+        BoosterPackSystem.Instance.OpenBoosterPack(BoosterPackTypes.ROUND_REWARDS_BUILDING_BOOSTER);
+    }
 }
 #endif
