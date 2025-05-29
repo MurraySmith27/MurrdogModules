@@ -105,7 +105,7 @@ public class BoosterPackOpeningPopup : MonoBehaviour
                 _instantiatedOptions.Add((Instantiate(boosterPackOptionPrefab, boosterPackOptionParent), data));
 
                 int temp = optionNum;
-                _instantiatedOptions[^1].Item1.Populate(tile, () => { OnOptionSelected(temp); });
+                _instantiatedOptions[^1].Item1.Populate(tile, () => { OnOptionSelected(temp); }, optionNum);
                 optionNum++;
             }
         }
@@ -134,7 +134,7 @@ public class BoosterPackOpeningPopup : MonoBehaviour
                 _instantiatedOptions.Add((Instantiate(boosterPackOptionPrefab, boosterPackOptionParent), data));
 
                 int temp = optionNum;
-                _instantiatedOptions[^1].Item1.Populate(building, () => { OnOptionSelected(temp); });
+                _instantiatedOptions[^1].Item1.Populate(building, () => { OnOptionSelected(temp); }, optionNum);
                 optionNum++;
             }
         }
@@ -178,8 +178,33 @@ public class BoosterPackOpeningPopup : MonoBehaviour
     public void OnChooseButtonClicked()
     {
         UIPopupSystem.Instance.HidePopup("BoosterPackOpeningPopup");
-        UIPopupSystem.Instance.HidePopup("ShopPopup");
+        // UIPopupSystem.Instance.HidePopup("ShopPopup");
+        
+        //TODO: Removet his
+        PersistentState.Instance.ChangeCurrentGold(-_instantiatedOptions[_currentlySelectedOptionIndex].Item1.TEMP_GOLD_COST_REMOVE_THIS);
 
+        BoosterPackOptionData chosenOption = _instantiatedOptions[_currentlySelectedOptionIndex].Item2;
+
+        switch (chosenOption.Type)
+        {
+            case BoosterPackOptionTypes.Tile:
+                MapInteractionController.Instance.SwitchToPlaceTileMode(chosenOption.Tile);
+                break;
+            case BoosterPackOptionTypes.Relic:
+                RelicSystem.Instance.AddRelic(chosenOption.Relic);
+                break;
+            case BoosterPackOptionTypes.Building:
+                MapInteractionController.Instance.SwitchToPlaceBuildingMode(chosenOption.Building);
+                break;
+            default:
+                break;
+        }
+        
+        BoosterPackSystem.Instance.RemoveCurrentOfferings();
+    }
+
+    public void Blah()
+    {
         BoosterPackOptionData chosenOption = _instantiatedOptions[_currentlySelectedOptionIndex].Item2;
 
         switch (chosenOption.Type)

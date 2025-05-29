@@ -13,7 +13,7 @@ public class BakersDozenRelic : Relic
     {
         args = new();
 
-        outResourceDiff = resourceDiff;
+        outResourceDiff = new();
 
         List<TileBuilding> buildingTiles = MapSystem.Instance.GetBuildingsOnTile(position);
 
@@ -33,6 +33,11 @@ public class BakersDozenRelic : Relic
             float r = UnityEngine.Random.Range(0f, 1f);
             if (r >= BAKERS_DOZEN_RELIC_PROBABILITY)
             {
+                if (!outResourceDiff.ContainsKey(ResourceType.Wheat))
+                {
+                    outResourceDiff.Add(ResourceType.Wheat, 0);
+                }
+                
                 outResourceDiff[ResourceType.Wheat] += 1;
                 return true;
             }

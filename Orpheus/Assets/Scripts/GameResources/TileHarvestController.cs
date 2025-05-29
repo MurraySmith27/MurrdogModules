@@ -93,8 +93,6 @@ public class TileHarvestController : Singleton<TileHarvestController>
             }
         }
         
-        resourcesProcessed = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed, tilePosition);
-        
         persistentResourcesProcessed = RelicSystem.Instance.OnPersistentResourcesProcessed(persistentResourcesProcessed, tilePosition);
         
         return (resourcesProcessed, persistentResourcesProcessed);

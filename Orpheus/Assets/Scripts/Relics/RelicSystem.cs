@@ -20,7 +20,8 @@ public enum RelicTypes
     STONE_ROSE,
     EXTRA_HAND,
     EXTRA_DISCARD,
-    COW_PLUSHIE
+    COW_PLUSHIE,
+    BAG_MILK,
 }
 
 public struct AdditionalTriggeredArgs
@@ -85,21 +86,33 @@ public class RelicSystem : Singleton<RelicSystem>
         return relics;
     }
     
-    public Dictionary<ResourceType, int> OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position)
+    public List<(RelicTypes, Dictionary<ResourceType, int>)> OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position, out Dictionary<ResourceType, int> modifiedResourceDiff)
     {
         //make a copy
-        Dictionary<ResourceType, int> modifiedResourceDiff = resourceDiff.ToDictionary(entry => entry.Key, entry => entry.Value);
-        
+        modifiedResourceDiff = resourceDiff.ToDictionary(entry => entry.Key, entry => entry.Value);
+
+        List<(RelicTypes, Dictionary<ResourceType, int>)> relicsAndResourceDiffs = new();
         foreach (RelicTypes relic in relics)
         {
+            Dictionary<ResourceType, int> relicResourcesDiff = new();
             AdditionalTriggeredArgs args;
-            if (_relicInstances[relic].OnResourcesProcessed(modifiedResourceDiff, position, out modifiedResourceDiff, out args))
+            if (_relicInstances[relic].OnResourcesProcessed(modifiedResourceDiff, position, out relicResourcesDiff, out args))
             {
+                relicsAndResourceDiffs.Add((relic, relicResourcesDiff));
+
+                foreach (ResourceType key in relicResourcesDiff.Keys)
+                {
+                    if (!modifiedResourceDiff.ContainsKey(key))
+                    {
+                        modifiedResourceDiff.Add(key, 0);
+                    }
+                    modifiedResourceDiff[key] += relicResourcesDiff[key];
+                }
                 OnRelicTriggered?.Invoke(relic, args);
             }
         }
         
-        return modifiedResourceDiff;
+        return relicsAndResourceDiffs;
     }
     
     public Dictionary<PersistentResourceType, int> OnPersistentResourcesProcessed(Dictionary<PersistentResourceType, int> resourceDiff, Vector2Int position)

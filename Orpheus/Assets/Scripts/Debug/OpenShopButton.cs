@@ -22,7 +22,7 @@ public class OpenShopButton : MonoBehaviour
 
         UIPopupSystem.Instance.OnPopupHidden -= OnPopupHidden;
         UIPopupSystem.Instance.OnPopupHidden += OnPopupHidden;
-
+        
         animator.speed = 1.3f;
     }
 
@@ -69,7 +69,10 @@ public class OpenShopButton : MonoBehaviour
 
     private void OnPopupHidden(string popupName)
     {
-        AnimatorEnter();
+        if (popupName == "ShopPopup")
+        {
+            AnimatorEnter();
+        }
     }
 
     private void AnimatorEnter()

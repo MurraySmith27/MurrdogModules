@@ -42,9 +42,9 @@ public static class GameConstants
     
     public static readonly long STARTING_STONE = 1;
 
-    public static readonly long STARTING_BUILD_TOKENS = 0;
+    public static readonly long STARTING_BUILD_TOKENS = 100;
 
-    public static readonly long STARTING_GOLD = 3;
+    public static readonly long STARTING_GOLD = 30;
 
     public static readonly long GOLD_PER_HARVEST = 100;
 
@@ -52,16 +52,16 @@ public static class GameConstants
     
     public static readonly Vector2Int[] INITIAL_CITY_TILES = new Vector2Int[]
     {
-        new Vector2Int(1, 0), new Vector2Int(1, -1),
-        new Vector2Int(0, 1), new Vector2Int(0, 0), new Vector2Int(0, -1),
-        new Vector2Int(-1, 1), new Vector2Int(-1, 0)
+        new Vector2Int(1, 1), new Vector2Int(1, 0), new Vector2Int(1, -1), new Vector2Int(1, -2),
+        new Vector2Int(0, 2),new Vector2Int(0, 1), new Vector2Int(0, 0), new Vector2Int(0, -1), new Vector2Int(0, -2),
+        new Vector2Int(-1, 2), new Vector2Int(-1, 1), new Vector2Int(-1, 0), new Vector2Int(-1, -1),
     };
     
     public static readonly TileType[] INITIAL_CITY_TILE_TYPES = new TileType[]
     {
-        TileType.Grass, TileType.Water,
-        TileType.Water, TileType.Grass, TileType.Grass,
-        TileType.Grass, TileType.Grass,
+        TileType.Grass,TileType.Grass, TileType.Grass, TileType.Grass,
+        TileType.Water, TileType.Grass, TileType.Grass, TileType.Grass, TileType.Grass,
+        TileType.Grass, TileType.Grass, TileType.Grass, TileType.Grass,
     };
     
     // public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
@@ -73,16 +73,16 @@ public static class GameConstants
     
     public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
     {
-        BuildingType.CityCapital, BuildingType.CityCapital,
-        BuildingType.CityCapital, BuildingType.CityCapital, BuildingType.CityCapital,   
-        BuildingType.CityCapital, BuildingType.CityCapital
+        BuildingType.WheatFarm, BuildingType.WheatFarm, BuildingType.CowFarm, BuildingType.Stirrer,
+        BuildingType.FishFarm, BuildingType.Mill, BuildingType.CityCapital, BuildingType.Stirrer, BuildingType.Bakery, 
+        BuildingType.Toaster, BuildingType.Mixer, BuildingType.WheatFarm, BuildingType.Mixer,
     };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]
     {
-        new ResourceItem(ResourceType.Corn, 0), new ResourceItem(ResourceType.Stone, 0), 
-        new ResourceItem(ResourceType.Wheat, 0), new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wood, 0),
-        new ResourceItem(ResourceType.Stone, 0), new ResourceItem(ResourceType.Wood, 0)
+        new ResourceItem(ResourceType.Corn, 0), new ResourceItem(ResourceType.Stone, 0), new ResourceItem(ResourceType.Stone, 0), new ResourceItem(ResourceType.Stone, 0), 
+        new ResourceItem(ResourceType.Stone, 0),new ResourceItem(ResourceType.Wheat, 0), new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wood, 0),new ResourceItem(ResourceType.Stone, 0),
+        new ResourceItem(ResourceType.Stone, 0), new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Stone, 0), new ResourceItem(ResourceType.Stone, 0), 
     };
     
     
@@ -140,10 +140,10 @@ public static class GameConstants
     
     
     //shop settings
-    public static readonly long SHOP_REFRESH_GOLD_INITIAL_COST = 100;
+    public static readonly long SHOP_REFRESH_GOLD_INITIAL_COST = 3;
     public static readonly long SHOP_REFRESH_GOLD_INCREASE = 50;
 
-    public static readonly long SHOP_RELIC_COST = 500;
+    public static readonly long SHOP_RELIC_COST = 5;
     
 
     public static readonly float SELL_VALUE_PERCENTAGE = 0.4f;

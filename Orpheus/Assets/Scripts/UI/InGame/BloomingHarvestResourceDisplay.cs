@@ -155,7 +155,7 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourcesHarvested.Item1), this.gameObject,
             SingletonBehavior.Overwrite);
     }
-
+    
     private IEnumerator<float> HarvestTileCoroutine(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
     {
         AnimatePositionToTile(position);

@@ -97,7 +97,7 @@ public class AudioManager : Singleton<AudioManager>
         PhaseStateMachine.Instance.OnPhaseChanged -= OnPhaseChanged;
         PhaseStateMachine.Instance.OnPhaseChanged += OnPhaseChanged;
         
-        FireOneShotAtCameraCenter(musicAudioEventName);
+        // FireOneShotAtCameraCenter(musicAudioEventName);
     }
 
     private void OnDestroy()

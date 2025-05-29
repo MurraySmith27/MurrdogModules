@@ -155,6 +155,18 @@ MonoBehaviour:
       - Type: 14
         Quantity: 1
       PersistentResourceOutput: []
+    - ResourceInput:
+      - Type: 1
+        Quantity: 1
+      - Type: 2
+        Quantity: 1
+      PersistentResourceInput:
+      - Type: 6
+        Quantity: 1
+      ResourceOutput:
+      - Type: 10
+        Quantity: 1
+      PersistentResourceOutput: []
   - Type: 3
     ProcessLanes:
     - ResourceInput: []

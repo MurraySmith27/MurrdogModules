@@ -6,12 +6,122 @@
   <component name="ChangeListManager">
     <list default="true" id="10eea742-2778-46db-88e4-b4a1b077c2fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Orpheus/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/Resources/BuildngProcessRules.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Resources/BuildngProcessRules.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/Visuals/RelicVisualsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Visuals/RelicVisualsData.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Skybox/Background.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/ShopPopup/ShopRelic.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/ShopPopup/ShopRelic.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Skybox/SkyboxShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Skybox/SkyboxShader.shadergraph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Bakery/Bakery_Mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Bakery/Bakery_Mini.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mill/Mill_mini.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Mill/Mill_mini.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopupEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopupEnter.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOption.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOption.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOptionEnter.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackOptionEnter.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackPopup.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackPopup.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackSelected.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/2D/MainUI/Popups/BoosterPackPopup/BoosterPackSelected.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/DebugOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/RandomChanceSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Balance/ShopUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Balance/ShopUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BoosterPacks/BoosterPackSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debug/OpenShopButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debug/OpenShopButton.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePhases/BloomingPhase/BloomingHarvestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameResources/TileHarvestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameResources/TileHarvestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/UI/MapVisualsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/BakersDozenRelic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/BakersDozenRelic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/JellyDonutRelic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/JellyDonutRelic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/LuckyCoinRelic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/LuckyCoinRelic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/RustyPlowshareRelic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/RustyPlowshareRelic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/TheMolluskRelic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/TheMolluskRelic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Relics/RelicSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Audio/AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Audio/AudioManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOpeningPopup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOption.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackOption.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackPopupListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainUI/Popups/BoosterPackPopup/BoosterPackPopupListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Text/LocalizationUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextAssets/TextAnimator StyleSheet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextAssets/TextAnimator StyleSheet.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/circle_05.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/dirt_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/dirt_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/dirt_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/dirt_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/dirt_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/dirt_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/light_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/light_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/light_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/light_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/light_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/light_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/magic_05.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/muzzle_05.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/scorch_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/scorch_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/scorch_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/scorch_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/scorch_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/scorch_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/scratch_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/scratch_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/slash_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/slash_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/slash_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/slash_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/slash_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/slash_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/slash_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/slash_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_05.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_06.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_06.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_07.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_07.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_08.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_08.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_09.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_09.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_10.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/smoke_10.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_05.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_06.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_06.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_07.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/spark_07.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_05.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_06.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_06.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_07.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_07.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_08.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_08.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_09.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/star_09.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/symbol_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/symbol_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/symbol_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/symbol_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_05.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_06.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_06.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_07.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/trace_07.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/twirl_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/twirl_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/twirl_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/twirl_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/twirl_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/twirl_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/window_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/window_01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/window_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/window_02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/window_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/window_03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/window_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Particles/External/kenney-particles/PNG (Black background)/window_04.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack-rpg-expansion/PNG/cursorGauntlet_blue.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack-rpg-expansion/PNG/cursorGauntlet_blue.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack-rpg-expansion/PNG/cursorGauntlet_grey.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack-rpg-expansion/PNG/cursorGauntlet_grey.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Green/Default/button_rectangle_depth_flat.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/UI/kenney_ui-pack/Green/Default/button_rectangle_depth_flat.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.cache/buildrecords/Desktop/Master.br" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.cache/buildrecords/Desktop/Master.br" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.unsaved/Metadata/Event/{d7a8fca6-8fb2-47ad-8785-16110e231794}.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.unsaved/metadataFileMapping.data" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.user/Metadata/Workspace.user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/.user/Metadata/Workspace.user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.bank" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.bank" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.strings.bank" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Build/Desktop/Master.strings.bank" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{d7a8fca6-8fb2-47ad-8785-16110e231794}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{d7a8fca6-8fb2-47ad-8785-16110e231794}.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{f7e10072-4ac0-4241-abf6-881e32cfd978}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OrpheusFMODProject/Orpheus/Metadata/Event/{f7e10072-4ac0-4241-abf6-881e32cfd978}.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +141,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90eb55fde4a0443d932e954fdb5b47a83e000/81/0bc34346/Graph.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c648d86e9013479d818310c5918e31a4176600/e9/03d3f5c2/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/de920293e401402ab375ad8a2e1b19da46ac00/44/d691d667/List`1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DEBUG_REMOVE.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MurrdogModules/General/GameObjectUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MurrdogModules/General/RectTransformUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MurrdogModules/Libraries/Trinary Software/Timing.cs" root0="SKIP_HIGHLIGHTING" />
@@ -94,6 +205,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/UI/TogglePlaceBuildingModeButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/Relic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicFactory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/BagMilkRelic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/BakersDozenRelic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/CaptainsHookRelic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Relics/RelicImplementations/CowPlushie.cs" root0="FORCE_HIGHLIGHTING" />
@@ -148,11 +260,14 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.10.3/Tests/Runtime/StateDrivenCameraTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collections@1.2.4/Unity.Collections.Tests/WordsTests.gen.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.visualstudio@2.0.22/Editor/COMIntegration/COMIntegration~/COMIntegration.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.6/Tests/Tests/Shared/TestRigidTransform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/Runtime/PostProcessing/Shaders/ffx/ffx_cas.hlsl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/ShaderLibrary/Filtering.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/ShaderLibrary/Random.hlsl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/Tests/Editor/Debugging/PanelNameAndOrderTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.searcher@4.9.2/Samples~/Editor/SearcherExampleHostWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.searcher@4.9.2/Samples~/Editor/SearcherExampleWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/InputField/ContentValidation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/RectangleContainsScreenPointTest.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -164,20 +279,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.43120155&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.43120155",
+    "git-widget-placeholder": "trailer-footage-buildings",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../OrpheusBuild\Orpheus.exe" />
@@ -213,10 +328,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12512">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="12512" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -307,7 +422,7 @@
       <workItem from="1748211312428" duration="5763000" />
       <workItem from="1748296843483" duration="12605000" />
       <workItem from="1748385632206" duration="2447000" />
-      <workItem from="1748469810765" duration="2597000" />
+      <workItem from="1748469810765" duration="17463000" />
     </task>
     <servers />
   </component>
@@ -389,6 +504,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupSystem.cs</url>
+          <line>231</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\MurrdogModules\UI\UIPopups\UIPopupSystem.cs" containingFunctionPresentation="Method 'HidePopup'">
+            <startOffsets>
+              <option value="6977" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7074" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/MurrdogModules/UI/UIPopups/UIPopupSystem.cs</url>
+          <line>122</line>
+          <properties documentPath="C:\Users\murra\Desktop\dev\Orpheus\Orpheus\Assets\MurrdogModules\UI\UIPopups\UIPopupSystem.cs" containingFunctionPresentation="Method 'ShowPopup'">
+            <startOffsets>
+              <option value="3773" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3797" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

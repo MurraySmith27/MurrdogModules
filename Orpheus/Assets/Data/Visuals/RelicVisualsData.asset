@@ -23,8 +23,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: d0588e7c87b83fd4a806909ade5e6b56, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: b9d30bef80090db498647184bd9962c0,
       type: 3}
-    description: <b>Rusty Plowshare</b><br>After surviving the winter,<br>create
-      a free <wheatfarm> on an unoccupied tile.
+    description: <b>Rusty Plowshare</b><br>Each time you harvest a <wheat>, harvest
+      one more.
   - relicType: 3
     sprite: {fileID: 21300000, guid: 4e6b91d21ebcee34d80fde3f81ac45a0, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: 4e2ef3aee3263f8439d4aceaccc1cebb,
@@ -40,7 +40,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: ab95abf20d3a38c45b64f11c26a98f0f, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: 04e976b4a43973f4f817a9f08083c71f,
       type: 3}
-    description: <b>Lucky Coin</b><br>Interest cap increased to 100.
+    description: <b>Lucky Coin</b><br>Harvesting <wheat> grants 1 <gold>
   - relicType: 6
     sprite: {fileID: 21300000, guid: 107e2722aacfbf44890d7c5ef85453c6, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: 0c479520c3357464791174e8ced7425d,
@@ -51,8 +51,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 49deb4c4d1b84ec48a819e51158b1452, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: 2b150e18122aa4340b2d9fc90c4366a8,
       type: 3}
-    description: <b>Jelly Donut</b><br>Unused <wheat><br>at the end of the harvest
-      is converted to <gold> (1 <wheat> = 10 gold).
+    description: <b>Jelly Donut</b><br><sushirestaurant>s produce +1 <sushi>
   - relicType: 8
     sprite: {fileID: 21300000, guid: 8f540302071d02a4e950cf4df5d4271d, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: 1b00a36bbf5496247b1462caec94e583,
@@ -62,7 +61,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: df91b6694cb297e4db6a9714710a9a9c, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: c3dedcb45c5651442952cbe3a6c4b0f6,
       type: 3}
-    description: <b>The Mollusk</b><br>Each <fishfarm> also harvests 1 <stone>.
+    description: <b>The Mollusk</b><br>Each <fishfarm> harvests twice
   - relicType: 10
     sprite: {fileID: 21300000, guid: 5dba5dc5a0a8e0d4bba24467b7ef5dd8, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: 3644b3334596cab44be110e9a7e6648f,
@@ -82,4 +81,11 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 5dba5dc5a0a8e0d4bba24467b7ef5dd8, type: 3}
     visualsPrefab: {fileID: 3255521675241447148, guid: 15c2dd76828e24d48a920bbeb6e676b0,
       type: 3}
-    description: <b>Cow Plushie</b><br> +1 <mult> to <dairy> products
+    description: <b>Cow Plushie</b><br> <color=#b89921>+<sprite=0>1</color> to <dairy>
+      products
+  - relicType: 14
+    sprite: {fileID: 21300000, guid: 5dba5dc5a0a8e0d4bba24467b7ef5dd8, type: 3}
+    visualsPrefab: {fileID: 3255521675241447148, guid: 15c2dd76828e24d48a920bbeb6e676b0,
+      type: 3}
+    description: <b>Bagged Milk</b><br>Each time you harvest a <dairy> product, gain
+      1 <gold>

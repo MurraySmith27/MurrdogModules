@@ -4,29 +4,18 @@ using UnityEngine;
 
 public class JellyDonutRelic : Relic
 {
-    private const int JELLY_DONUT_RELIC_GOLD_PER_WHEAT = 10;
-    
-    public override bool OnFoodScoreConversionComplete(long baseFoodScore, Dictionary<ResourceType, int> resourcesToConvert, out long convertedFoodScore, out AdditionalTriggeredArgs args)
+    public override bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
     {
-        convertedFoodScore = baseFoodScore;
         args = new();
-
-        int amountOfWheat = 0;
-        if (resourcesToConvert.ContainsKey(ResourceType.Wheat))
+        outResourceDiff = new Dictionary<ResourceType, int>();
+        if (totalResourceDiff.ContainsKey(ResourceType.Sushi) && totalResourceDiff[ResourceType.Sushi] > 0)
         {
-            amountOfWheat = resourcesToConvert[ResourceType.Wheat];
+            outResourceDiff.Add(ResourceType.Sushi, 1);
+            args.LongArg++;
+            return true;
         }
-
-        int goldAwarded = JELLY_DONUT_RELIC_GOLD_PER_WHEAT * amountOfWheat;
-
-        if (goldAwarded > 0)
-        {
-            PlayerResourcesSystem.Instance.AddResource(PersistentResourceType.Gold, goldAwarded);
-        }
-
-        args.IntArg = goldAwarded;
-        
-        return amountOfWheat > 0;
+        else return false;
     }
 
     public override void SerializeRelic()

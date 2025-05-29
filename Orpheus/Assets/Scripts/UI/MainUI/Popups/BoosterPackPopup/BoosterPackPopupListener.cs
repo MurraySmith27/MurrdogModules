@@ -23,7 +23,7 @@ public class BoosterPackPopupListener : MonoBehaviour
 
     private void OnBoosterPackOpened(BoosterPackTypes type)
     {
-        UIPopupSystem.Instance.ShowPopup("BoosterPackOpeningPopup", PanelShowBehaviour.HIDE_PREVIOUS);
+        UIPopupSystem.Instance.ShowPopup("BoosterPackOpeningPopup");//, PanelShowBehaviour.HIDE_PREVIOUS);
 
         popup.PopulateBoosterPackContents();
     }

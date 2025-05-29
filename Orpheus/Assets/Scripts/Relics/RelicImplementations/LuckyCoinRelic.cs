@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class LuckyCoinRelic : Relic
 {
-    private const long LUCKY_COIN_INTEREST_CAP_INCREASE = 50;
-    
-    public override bool OnGoldInterestAdded(long coinTotalBefore, long interest, out long newInterest, out AdditionalTriggeredArgs args)
+    public override bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
     {
-        newInterest = interest;
         args = new();
-        
-        
-        if (coinTotalBefore >= GameConstants.GOLD_INTEREST_CAP)
+        outResourceDiff = new Dictionary<ResourceType, int>();
+        if (totalResourceDiff.ContainsKey(ResourceType.Corn) && totalResourceDiff[ResourceType.Corn] > 0)
         {
-            long additionalInterest = ((long)Mathf.Min(coinTotalBefore - GameConstants.GOLD_INTEREST_CAP, LUCKY_COIN_INTEREST_CAP_INCREASE) % GameConstants.GOLD_INTEREST_INTERVAL) * GameConstants.GOLD_INTEREST_PER_INTERVAL;
-            
-            newInterest += additionalInterest;
-            
-            args.LongArg = additionalInterest;
-            
+            PersistentState.Instance.ChangeCurrentGold(1);
+            args.LongArg++;
             return true;
         }
-        
-        return false;
+        else return false;
     }
 
     public override void SerializeRelic()

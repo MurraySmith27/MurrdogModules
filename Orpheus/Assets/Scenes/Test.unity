@@ -79048,7 +79048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDOL: 1
   cityStartAnimationTime: 1
-  cityEndAnimationTime: 3
+  cityEndAnimationTime: 0.5
   tileHarvestAnimationTime: 0.25
   tileProcessAnimationTime: 0.25
   tileAnimationEndTime: 0.1
@@ -81919,7 +81919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
+  m_Color: {r: 0.3254902, g: 0.3254902, b: 0.3254902, a: 0.6313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -89411,6 +89411,7 @@ GameObject:
   - component: {fileID: 1989190228}
   - component: {fileID: 1989190230}
   - component: {fileID: 1989190229}
+  - component: {fileID: 1989190231}
   m_Layer: 6
   m_Name: TaxText
   m_TagString: Untagged
@@ -89535,6 +89536,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989190227}
   m_CullTransparentMesh: 1
+--- !u!114 &1989190231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989190227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fcd0f766949d7449aaeca5cb62ac6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1989640594
 PrefabInstance:
   m_ObjectHideFlags: 0

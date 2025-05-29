@@ -5,24 +5,23 @@ using Random = UnityEngine.Random;
 
 public class RustyPlowshareRelic : Relic
 {
-    public override bool OnPhaseChanged(GamePhases phase, out AdditionalTriggeredArgs args)
+    public override bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
     {
         args = new();
-        
-        if (phase == GamePhases.BuddingUpkeep)
+        outResourceDiff = new Dictionary<ResourceType, int>();
+        if (totalResourceDiff.ContainsKey(ResourceType.Wheat) && totalResourceDiff[ResourceType.Wheat] > 0)
         {
-            List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();
-            
-            Guid cityGuid = cityGuids[Random.Range(0, cityGuids.Count)];
-
-            Vector2Int cityTile;
-            if (MapSystem.Instance.GetUnoccupiedTileInCity(cityGuid, out cityTile))
+            if (!outResourceDiff.ContainsKey(ResourceType.Corn))
             {
-                return BuildingsController.Instance.TryPlaceBuilding(cityTile, BuildingType.WheatFarm);
+                outResourceDiff.Add(ResourceType.Corn, 0);
             }
-        }
 
-        return false;
+            outResourceDiff[ResourceType.Corn]++;
+            args.LongArg++;
+            return true;
+        }
+        else return false;
     }
 
     public override void SerializeRelic()

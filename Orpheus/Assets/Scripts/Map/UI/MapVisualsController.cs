@@ -254,8 +254,11 @@ public class MapVisualsController : Singleton<MapVisualsController>
         {
             tile.AttachBuilding(newBuilding);
         }
-        
-        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(new Vector2Int(row, col)));
+
+        if (buildingType == BuildingType.CityCapital)
+        {
+            CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(new Vector2Int(row, col)));
+        }
     }
 
     private void CreateBuildingAppearParticle(Transform parent)
@@ -403,7 +406,7 @@ public class MapVisualsController : Singleton<MapVisualsController>
 
     private void OnTileAddedToCity(Vector2Int cityCapitalPosition, Vector2Int tilePosition)
     {
-        CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(tilePosition));
+        // CameraController.Instance.FocusPosition(MapUtils.GetTileWorldPositionFromGridPosition(tilePosition));
     }
 
     private void OnTileRemovedFromCity(Vector2Int cityCapitalPosition, Vector2Int tilePosition)

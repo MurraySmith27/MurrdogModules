@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class BoosterPackOption : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class BoosterPackOption : MonoBehaviour
     [SerializeField] private TMP_Text cardTypeText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private TMP_Text versionText;
+    [SerializeField] private TMP_Text goldCostText;
     [SerializeField] private RawImage itemPreviewImage;
 
     [Space(10)] 
@@ -33,6 +35,9 @@ public class BoosterPackOption : MonoBehaviour
     [SerializeField] private string animatorOnDeselectedTrigger = "Deselected";
     [SerializeField] private string animatorOnHoveredStartTrigger = "HoverStart";
     [SerializeField] private string animatorOnHoveredEndTrigger = "HoverEnd";
+
+    [SerializeField] private float animationDelayBase = 0.3f;
+    [SerializeField] private float animationDelayPerIndex = 0.2f;
     
     private List<Preview3DController.PreviewTransform> _previewTransforms = new List<Preview3DController.PreviewTransform>();
     
@@ -43,6 +48,8 @@ public class BoosterPackOption : MonoBehaviour
     private Action _onSelectedCallback;
 
     private bool _isHoveredOver;
+
+    public int TEMP_GOLD_COST_REMOVE_THIS;
 
     private void Start()
     {
@@ -63,7 +70,7 @@ public class BoosterPackOption : MonoBehaviour
         Clear();
     }
     
-    public void Populate(TileInformation tile, Action onSelectedCallback)
+    public void Populate(TileInformation tile, Action onSelectedCallback, int index)
     {
         Clear();
 
@@ -88,11 +95,14 @@ public class BoosterPackOption : MonoBehaviour
         
         itemPreviewImage.uvRect = previewTransform.UVRect;
         
-        AnimationUtils.ResetAnimator(animator);
-        animator.SetTrigger(animatorEnterTrigger);
+        //TODO: remove this
+        TEMP_GOLD_COST_REMOVE_THIS = Random.Range(1, 2);
+        goldCostText.SetText($"<sprite=0>{TEMP_GOLD_COST_REMOVE_THIS}");
+        
+        Invoke(nameof(PlayEnterAnimation), animationDelayBase + index * animationDelayPerIndex);
     }
     
-    public void Populate(BuildingType building, Action onSelectedCallback)
+    public void Populate(BuildingType building, Action onSelectedCallback, int index)
     {
         Clear();
 
@@ -117,6 +127,15 @@ public class BoosterPackOption : MonoBehaviour
         
         itemPreviewImage.uvRect = previewTransform.UVRect;
         
+        //TODO: remove this
+        TEMP_GOLD_COST_REMOVE_THIS = Random.Range(1, 2);
+        goldCostText.SetText($"<sprite=0>{TEMP_GOLD_COST_REMOVE_THIS}");
+        
+        Invoke(nameof(PlayEnterAnimation), animationDelayBase + index * animationDelayPerIndex);
+    }
+
+    private void PlayEnterAnimation()
+    {
         AnimationUtils.ResetAnimator(animator);
         animator.SetTrigger(animatorEnterTrigger);
     }

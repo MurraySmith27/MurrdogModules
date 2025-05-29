@@ -206,7 +206,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5157f239c9e91024b86f9891c0ba011a, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.4
+  m_PixelsPerUnitMultiplier: 0.6
 --- !u!114 &1527721843073817127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,18 +262,6 @@ MonoBehaviour:
       - m_Target: {fileID: 5731677954101850638}
         m_TargetAssemblyTypeName: BoosterPackOpeningPopup, Assembly-CSharp
         m_MethodName: OnChooseButtonClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3405307085517912026}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -607,7 +595,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.35
+  m_PixelsPerUnitMultiplier: 0.6
 --- !u!114 &7794229682290346495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1500,7 +1488,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.4
+  m_PixelsPerUnitMultiplier: 0.6
 --- !u!114 &6761968053095260022
 MonoBehaviour:
   m_ObjectHideFlags: 0

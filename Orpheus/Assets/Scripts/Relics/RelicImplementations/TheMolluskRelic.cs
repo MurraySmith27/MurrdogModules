@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class TheMolluskRelic : Relic
 {
-    private const int THE_MOLLUSK_RELIC_STONE_PER_FISH_FARM = 1;
-    
-    public override bool OnBuildingConstructed(Vector2Int position, BuildingType buildingType, out AdditionalTriggeredArgs args)
+    public override bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
     {
         args = new();
-
-        if (buildingType == BuildingType.FishFarm)
+        outResourceDiff = new Dictionary<ResourceType, int>();
+        if (totalResourceDiff.ContainsKey(ResourceType.Fish) && totalResourceDiff[ResourceType.Fish] > 0)
         {
-            MapSystem.Instance.AddResourcesToTile(position, ResourceType.Stone, THE_MOLLUSK_RELIC_STONE_PER_FISH_FARM);
-            args.IntArg = 1;
+            outResourceDiff.Add(ResourceType.Fish, 1);
+            args.LongArg++;
             return true;
         }
         else return false;
-        
     }
 
     public override void SerializeRelic()

@@ -49,6 +49,9 @@ public class RelicFactory
             case RelicTypes.COW_PLUSHIE:
                 return new CowPlushieRelic();
                 break;
+            case RelicTypes.BAG_MILK:
+                return new BagMilkRelic();
+                break;
         }
 
         return null;

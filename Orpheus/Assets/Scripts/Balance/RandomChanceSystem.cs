@@ -47,10 +47,32 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         return _currentSeed;
     }
 
+    private int num = 0;
     public List<RelicTypes> GenerateRelicTypesInShop(int numRelics, int numRefreshes)
     {
         //create a random seed based on the current global seed, the current turn number, and number of refreshes
 
+        num++;
+        if (num == 1)
+        {
+            return new List<RelicTypes>(new RelicTypes[]
+            {
+                RelicTypes.RUSTY_PLOWSHARE,
+                RelicTypes.THE_MOLLUSK,
+                RelicTypes.COW_PLUSHIE,
+            });
+        }
+        else if (num == 2)
+        {
+            return new List<RelicTypes>(new RelicTypes[]
+            {
+                RelicTypes.BAG_MILK,
+                RelicTypes.JELLY_DONUT,
+                RelicTypes.THE_MOLLUSK,
+            });
+        }
+
+        
         int seed = _currentSeed + 3605 * PersistentState.Instance.RoundNumber + 2821 *  numRefreshes;
         
         Random.InitState(seed);
