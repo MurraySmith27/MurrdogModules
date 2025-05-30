@@ -68,7 +68,16 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
             {
                 RelicTypes.BAG_MILK,
                 RelicTypes.JELLY_DONUT,
-                RelicTypes.THE_MOLLUSK,
+                RelicTypes.TATTERED_MAP,
+            });
+        }
+        else
+        {
+            return new List<RelicTypes>(new RelicTypes[]
+            {
+                RelicTypes.CAPTAINS_HOOK,
+                RelicTypes.JELLY_DONUT,
+                RelicTypes.TATTERED_MAP,
             });
         }
 

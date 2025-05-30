@@ -55,6 +55,9 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
         BloomingHarvestController.Instance.OnTileProcessStart += OnTileResourceChanged;
 
+        BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
+        BloomingHarvestController.Instance.OnRelicTriggered += OnRelicTriggered;
+
         BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
         BloomingHarvestController.Instance.OnTileBonusTickStart += OnTileBonusTickStart;
         
@@ -77,6 +80,7 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
             BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
+            BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
             BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
             BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
         }
@@ -155,71 +159,83 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourcesHarvested.Item1), this.gameObject,
             SingletonBehavior.Overwrite);
     }
+
+    private void OnRelicTriggered(Vector2Int position, RelicTypes relicTypes, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourceDiff)
+    {
+        Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourceDiff.Item1), this.gameObject,
+            SingletonBehavior.Overwrite);
+    }
     
     private IEnumerator<float> HarvestTileCoroutine(Vector2Int position, Dictionary<ResourceType, int> resourcesHarvested)
     {
         AnimatePositionToTile(position);
+
         
         foreach (ResourceType resourceType in resourcesHarvested.Keys)
         {
             if (resourcesHarvested[resourceType] == 0) continue;
             
-            float timeToWait = baseWaitTimePerResourceChange;
+            yield return Timing.WaitUntilDone(Timing.RunCoroutine(ProcessResourceHelper(resourcesHarvested, resourceType), this.gameObject));
+        }
+    }
+    
+    private IEnumerator<float> ProcessResourceHelper(Dictionary<ResourceType, int> resourcesHarvested, ResourceType resourceType)
+    {
+        float timeToWait = baseWaitTimePerResourceChange;
+        
+        int existingQuantity = 0;
+        BloomingHarvestResourceListItem newListItem;
+        if (_instantiatedListItemsPerResourceType.ContainsKey(resourceType))
+        {
+            existingQuantity = _instantiatedListItemsPerResourceType[resourceType].Item1;
+            newListItem = _instantiatedListItemsPerResourceType[resourceType].Item2;
+            newListItem.ModifyQuantity(resourcesHarvested[resourceType]);
             
-            int existingQuantity = 0;
-            BloomingHarvestResourceListItem newListItem;
-            if (_instantiatedListItemsPerResourceType.ContainsKey(resourceType))
+            if (resourcesHarvested[resourceType] > 0)
             {
-                existingQuantity = _instantiatedListItemsPerResourceType[resourceType].Item1;
-                newListItem = _instantiatedListItemsPerResourceType[resourceType].Item2;
-                newListItem.ModifyQuantity(resourcesHarvested[resourceType]);
-                
-                if (resourcesHarvested[resourceType] > 0)
-                {
-                    OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeIncrementAnim, () =>
-                    {
-                        animator.SetTrigger(animatorIncrementResourceTriggerName);
-                        OnResourceIncrementAnimationTriggered?.Invoke(resourceType);   
-                    });
-
-                    timeToWait += waitBeforeIncrementAnim;
-                }
-                else if (resourcesHarvested[resourceType] < 0)
-                {
-                    OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeDecrementAnim, () =>
-                    {
-                        animator.SetTrigger(animatorDecrementResourceTriggerName);
-                        OnResourceDecrementAnimationTriggered?.Invoke(resourceType);
-                    });
-                    
-                    timeToWait += waitBeforeDecrementAnim;
-                }
-            }
-            else
-            {
-                newListItem = Instantiate(bloomingHarvestResourceListItemPrefab, listParentTransform);
-                newListItem.Populate(resourceType, resourcesHarvested[resourceType]);
-                
-                OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeCreateListItemAnim, () =>
+                OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeIncrementAnim, () =>
                 {
                     animator.SetTrigger(animatorIncrementResourceTriggerName);
-                    OnResourceIncrementAnimationTriggered?.Invoke(resourceType);
+                    OnResourceIncrementAnimationTriggered?.Invoke(resourceType);   
+                });
+
+                timeToWait += waitBeforeIncrementAnim;
+            }
+            else if (resourcesHarvested[resourceType] < 0)
+            {
+                OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeDecrementAnim, () =>
+                {
+                    animator.SetTrigger(animatorDecrementResourceTriggerName);
+                    OnResourceDecrementAnimationTriggered?.Invoke(resourceType);
                 });
                 
-                timeToWait += waitBeforeCreateListItemAnim;
+                timeToWait += waitBeforeDecrementAnim;
             }
+        }
+        else
+        {
+            newListItem = Instantiate(bloomingHarvestResourceListItemPrefab, listParentTransform);
+            newListItem.Populate(resourceType, resourcesHarvested[resourceType]);
             
-            int newQuantity = existingQuantity + resourcesHarvested[resourceType];
-
-            _instantiatedListItemsPerResourceType[resourceType] = (newQuantity, newListItem);
-
-            yield return OrpheusTiming.WaitForSecondsGameTime(timeToWait);
-
-            if (newQuantity == 0)
+            OrpheusTiming.InvokeCallbackAfterSecondsGameTime(waitBeforeCreateListItemAnim, () =>
             {
-                Destroy(_instantiatedListItemsPerResourceType[resourceType].Item2.gameObject);
-                _instantiatedListItemsPerResourceType.Remove(resourceType);
-            }
+                animator.SetTrigger(animatorIncrementResourceTriggerName);
+                OnResourceIncrementAnimationTriggered?.Invoke(resourceType);
+            });
+            
+            timeToWait += waitBeforeCreateListItemAnim;
+        }
+        
+        int newQuantity = existingQuantity + resourcesHarvested[resourceType];
+
+        _instantiatedListItemsPerResourceType[resourceType] = (newQuantity, newListItem);
+
+        yield return OrpheusTiming.WaitForSecondsGameTime(timeToWait);
+
+        if (newQuantity == 0)
+        {
+            Destroy(_instantiatedListItemsPerResourceType[resourceType].Item2.gameObject);
+            _instantiatedListItemsPerResourceType.Remove(resourceType);
         }
     }
 

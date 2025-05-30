@@ -44,7 +44,7 @@ public static class GameConstants
 
     public static readonly long STARTING_BUILD_TOKENS = 100;
 
-    public static readonly long STARTING_GOLD = 30;
+    public static readonly long STARTING_GOLD = 42;
 
     public static readonly long GOLD_PER_HARVEST = 100;
 
@@ -75,7 +75,7 @@ public static class GameConstants
     {
         BuildingType.WheatFarm, BuildingType.WheatFarm, BuildingType.CowFarm, BuildingType.Stirrer,
         BuildingType.FishFarm, BuildingType.Mill, BuildingType.CityCapital, BuildingType.Stirrer, BuildingType.Bakery, 
-        BuildingType.Toaster, BuildingType.Mixer, BuildingType.WheatFarm, BuildingType.Mixer,
+        BuildingType.WheatFarm, BuildingType.Mixer, BuildingType.Toaster, BuildingType.Mixer
     };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]
@@ -141,7 +141,7 @@ public static class GameConstants
     
     //shop settings
     public static readonly long SHOP_REFRESH_GOLD_INITIAL_COST = 3;
-    public static readonly long SHOP_REFRESH_GOLD_INCREASE = 50;
+    public static readonly long SHOP_REFRESH_GOLD_INCREASE = 1;
 
     public static readonly long SHOP_RELIC_COST = 5;
     

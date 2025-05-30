@@ -10,7 +10,7 @@ public class CameraShakeController : MonoBehaviour
     [SerializeField] private CinemachineImpulseSource decrementImpulseSource;
     [SerializeField] private CinemachineImpulseSource genericImpulseSource;
 
-    [SerializeField] private float forceIncreasePerResource = 0.05f;
+    [SerializeField] private float forceIncreasePerResource = 0.1f;
     
     private float _currentForce = 1f;
     

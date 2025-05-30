@@ -86,19 +86,20 @@ public class RelicSystem : Singleton<RelicSystem>
         return relics;
     }
     
-    public List<(RelicTypes, Dictionary<ResourceType, int>)> OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position, out Dictionary<ResourceType, int> modifiedResourceDiff)
+    public List<(RelicTypes, Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position, out Dictionary<ResourceType, int> modifiedResourceDiff)
     {
         //make a copy
         modifiedResourceDiff = resourceDiff.ToDictionary(entry => entry.Key, entry => entry.Value);
 
-        List<(RelicTypes, Dictionary<ResourceType, int>)> relicsAndResourceDiffs = new();
+        List<(RelicTypes, Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> relicsAndResourceDiffs = new();
         foreach (RelicTypes relic in relics)
         {
             Dictionary<ResourceType, int> relicResourcesDiff = new();
+            Dictionary<PersistentResourceType, int> relicPersistentResourcesDiff = new();
             AdditionalTriggeredArgs args;
-            if (_relicInstances[relic].OnResourcesProcessed(modifiedResourceDiff, position, out relicResourcesDiff, out args))
+            if (_relicInstances[relic].OnResourcesProcessed(modifiedResourceDiff, position, out relicResourcesDiff, out relicPersistentResourcesDiff, out args))
             {
-                relicsAndResourceDiffs.Add((relic, relicResourcesDiff));
+                relicsAndResourceDiffs.Add((relic, relicResourcesDiff, relicPersistentResourcesDiff));
 
                 foreach (ResourceType key in relicResourcesDiff.Keys)
                 {

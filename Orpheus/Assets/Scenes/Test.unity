@@ -61251,7 +61251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: -0.3144539}
   m_AnchorMax: {x: 1, y: 1.1466333}
-  m_AnchoredPosition: {x: 4.9241, y: 0}
+  m_AnchoredPosition: {x: 4.9240723, y: 0}
   m_SizeDelta: {x: 9.8482, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348771596
@@ -79047,8 +79047,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
-  cityStartAnimationTime: 1
-  cityEndAnimationTime: 0.5
+  cityStartAnimationTime: 0.7
+  cityEndAnimationTime: 0.2
   tileHarvestAnimationTime: 0.25
   tileProcessAnimationTime: 0.25
   tileAnimationEndTime: 0.1
@@ -79066,8 +79066,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
-  startAnimationTime: 1
-  endAnimationTime: 2
+  startAnimationTime: 0.4
+  endAnimationTime: 6
   resourceConversionStartTime: 1.3
   resourceQuantityProcessTime: 0.5
   resourceMultProcessTime: 0.5
@@ -81893,12 +81893,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 8
-    m_Right: 8
+    m_Left: 16
+    m_Right: 16
     m_Top: 8
     m_Bottom: 8
   m_ChildAlignment: 3
-  m_Spacing: 0
+  m_Spacing: 36.22
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1

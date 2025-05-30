@@ -18,9 +18,10 @@ public abstract class Relic
     
     //called when a tile processes resources, passed in is the state of currently harvested resources, returned is the modified state
     public virtual bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
-        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out Dictionary<PersistentResourceType, int> outPersistentResourcesDiff, out AdditionalTriggeredArgs args)
     {
         outResourceDiff = totalResourceDiff;
+        outPersistentResourcesDiff = new();
         args = new();
         return false;
     }

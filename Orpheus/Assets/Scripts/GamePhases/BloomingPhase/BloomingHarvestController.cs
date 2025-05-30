@@ -36,7 +36,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     
     public event Action<Vector2Int> OnTileBonusTickEnd;
 
-    public event Action<RelicTypes> OnRelicTriggered;
+    public event Action<Vector2Int, RelicTypes, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> OnRelicTriggered;
     
     public void StartHarvest()
     {
@@ -100,7 +100,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                     
                     
                     Dictionary<ResourceType, int> relicResourcesDiff = resourcesProcessed.Item1;
-                    List<(RelicTypes, Dictionary<ResourceType, int>)> relicsTriggered = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed.Item1, cityTile, out relicResourcesDiff);
+                    List<(RelicTypes, Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> relicsTriggered = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed.Item1, cityTile, out relicResourcesDiff);
 
                     OnTileProcessStart?.Invoke(cityTile, resourcesProcessed);
 
@@ -126,13 +126,9 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                     {
                         RelicTypes relicType = item.Item1;
                         Dictionary<ResourceType, int> resourcesDiff = item.Item2;
+                        Dictionary<PersistentResourceType, int> persistentResourceDiff = item.Item3;
 
-                        if (resourcesDiff.Count == 0)
-                        {
-                            OnRelicTriggered?.Invoke(relicType);
-                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                        }
-                        else
+                        if (resourcesDiff.Count > 0)
                         {
                             foreach (KeyValuePair<ResourceType, int> resource in resourcesDiff)
                             {
@@ -144,7 +140,22 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                                     }
                                     
                                     resources[resource.Key] += resource.Value;
-                                    OnRelicTriggered?.Invoke(relicType);
+                                    OnRelicTriggered?.Invoke(cityTile, relicType, (new Dictionary<ResourceType, int>(new KeyValuePair<ResourceType, int>[]{new KeyValuePair<ResourceType, int>(resource.Key, resource.Value)}), new()));
+                                    yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                                }
+                            }
+                        }
+                        
+                        if (persistentResourceDiff.Count > 0)
+                        {
+                            foreach (KeyValuePair<PersistentResourceType, int> resource in persistentResourceDiff)
+                            {
+                                if (resource.Value != 0)
+                                {
+                                    
+                                    PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
+                                    
+                                    OnRelicTriggered?.Invoke(cityTile, relicType, (new(),new Dictionary<PersistentResourceType, int>(new KeyValuePair<PersistentResourceType, int>[]{new KeyValuePair<PersistentResourceType, int>(resource.Key, resource.Value)})));
                                     yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
                                 }
                             }

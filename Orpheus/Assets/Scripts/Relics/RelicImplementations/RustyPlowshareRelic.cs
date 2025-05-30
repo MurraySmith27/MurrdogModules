@@ -6,10 +6,12 @@ using Random = UnityEngine.Random;
 public class RustyPlowshareRelic : Relic
 {
     public override bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
-        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, 
+        out Dictionary<PersistentResourceType, int> outPersistentResourcesDiff, out AdditionalTriggeredArgs args)
     {
         args = new();
         outResourceDiff = new Dictionary<ResourceType, int>();
+        outPersistentResourcesDiff = new();
         if (totalResourceDiff.ContainsKey(ResourceType.Wheat) && totalResourceDiff[ResourceType.Wheat] > 0)
         {
             if (!outResourceDiff.ContainsKey(ResourceType.Corn))

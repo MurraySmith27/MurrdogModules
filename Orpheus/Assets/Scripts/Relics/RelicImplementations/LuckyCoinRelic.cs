@@ -5,13 +5,15 @@ using UnityEngine;
 public class LuckyCoinRelic : Relic
 {
     public override bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
-        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, 
+        out Dictionary<PersistentResourceType, int> outPersistentResourcesDiff, out AdditionalTriggeredArgs args)
     {
         args = new();
         outResourceDiff = new Dictionary<ResourceType, int>();
+        outPersistentResourcesDiff = new();
         if (totalResourceDiff.ContainsKey(ResourceType.Corn) && totalResourceDiff[ResourceType.Corn] > 0)
         {
-            PersistentState.Instance.ChangeCurrentGold(1);
+            outPersistentResourcesDiff.Add(PersistentResourceType.Gold, 1);
             args.LongArg++;
             return true;
         }

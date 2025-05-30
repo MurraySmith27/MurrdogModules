@@ -57,6 +57,9 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
         OnResourceConversionStart?.Invoke();
 
         yield return OrpheusTiming.WaitForSecondsGameTime(startAnimationTime);
+
+        //TODO: Remove this
+        GlobalSettings.GameSpeed = 2f;
         
         foreach (ResourceType key in resources.Keys)
         {

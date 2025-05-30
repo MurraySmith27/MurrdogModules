@@ -25,6 +25,9 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
         BloomingHarvestController.Instance.OnTileProcessStart += OnTileProcessStart;
 
+        BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
+        BloomingHarvestController.Instance.OnRelicTriggered += OnRelicTriggered;
+
         BloomingHarvestController.Instance.OnTileResourceChangeStart -= OnTileResourceChangeStart;
         BloomingHarvestController.Instance.OnTileResourceChangeStart += OnTileResourceChangeStart;
         
@@ -45,6 +48,7 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
             BloomingHarvestController.Instance.OnHarvestStart -= LockCamera;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
+            BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
             BloomingHarvestController.Instance.OnTileResourceChangeStart -= OnTileResourceChangeStart;
             BloomingHarvestController.Instance.OnTileResourceChangeEnd -= OnTileResourceChangeEnd;
             BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
@@ -131,6 +135,14 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         if (resourcesChange.Item1.Values.ToList().FindIndex((int value) => { return value != 0;}) != -1 || resourcesChange.Item2.Values.ToList().FindIndex((int value) => { return value != 0;}) != -1)
         {
             TryAnimateTile(position, resourcesChange);
+        }
+    }
+
+    private void OnRelicTriggered(Vector2Int position, RelicTypes relicType, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesDiff)
+    {
+        if (resourcesDiff.Item1.Values.ToList().FindIndex((int value) => { return value != 0;}) != -1)
+        {
+            TryAnimateTile(position, resourcesDiff);
         }
     }
 

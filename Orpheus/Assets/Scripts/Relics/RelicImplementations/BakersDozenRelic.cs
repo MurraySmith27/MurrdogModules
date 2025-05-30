@@ -8,12 +8,14 @@ public class BakersDozenRelic : Relic
 {
     private const float BAKERS_DOZEN_RELIC_PROBABILITY = 0.5f;
     
-    public override bool OnResourcesProcessed(Dictionary<ResourceType, int> resourceDiff, Vector2Int position,
-        out Dictionary<ResourceType, int> outResourceDiff, out AdditionalTriggeredArgs args)
+    public override bool OnResourcesProcessed(Dictionary<ResourceType, int> totalResourceDiff, 
+        Vector2Int position, out Dictionary<ResourceType, int> outResourceDiff, 
+        out Dictionary<PersistentResourceType, int> outPersistentResourcesDiff, out AdditionalTriggeredArgs args)
     {
         args = new();
 
         outResourceDiff = new();
+        outPersistentResourcesDiff = new();
 
         List<TileBuilding> buildingTiles = MapSystem.Instance.GetBuildingsOnTile(position);
 
@@ -28,7 +30,7 @@ public class BakersDozenRelic : Relic
             }
         }
         
-        if (containsBakery && resourceDiff.ContainsKey(ResourceType.Bread) && resourceDiff.ContainsKey(ResourceType.Wheat))
+        if (containsBakery && totalResourceDiff.ContainsKey(ResourceType.Bread) && totalResourceDiff.ContainsKey(ResourceType.Wheat))
         {
             float r = UnityEngine.Random.Range(0f, 1f);
             if (r >= BAKERS_DOZEN_RELIC_PROBABILITY)

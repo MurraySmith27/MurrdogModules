@@ -32,6 +32,9 @@ public class RelicsList : MonoBehaviour
 
         BloomingResourceConversionController.Instance.OnRelicTriggered -= OnRelicTriggered;
         BloomingResourceConversionController.Instance.OnRelicTriggered += OnRelicTriggered;
+
+        BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
+        BloomingHarvestController.Instance.OnRelicTriggered += OnRelicTriggered;
     }
 
     private void OnDestroy()
@@ -45,6 +48,11 @@ public class RelicsList : MonoBehaviour
         if (BloomingResourceConversionController.IsAvailable)
         {
             BloomingResourceConversionController.Instance.OnRelicTriggered -= OnRelicTriggered;
+        }
+
+        if (BloomingHarvestController.IsAvailable)
+        {
+            BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
         }
     }
 
@@ -115,5 +123,10 @@ public class RelicsList : MonoBehaviour
         {
             _instantiatedRelicIcons[relicType].OnTick();
         }
+    }
+
+    private void OnRelicTriggered(Vector2Int position, RelicTypes relicType, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourceDiff)
+    {
+        OnRelicTriggered(relicType);
     }
 }

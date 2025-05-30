@@ -58,6 +58,9 @@ public class AudioManager : Singleton<AudioManager>
         BloomingHarvestController.Instance.OnTileProcessEnd -= OnTileProcessEnd;
         BloomingHarvestController.Instance.OnTileProcessEnd += OnTileProcessEnd;
         
+        BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
+        BloomingHarvestController.Instance.OnRelicTriggered += OnRelicTriggered;
+        
         HarvestAnimationController.Instance.OnTileHarvestAnimationTriggered -= OnTileTick;
         HarvestAnimationController.Instance.OnTileHarvestAnimationTriggered += OnTileTick;
         
@@ -200,6 +203,11 @@ public class AudioManager : Singleton<AudioManager>
     }
 
     private void OnRelicTriggered(RelicTypes relicType)
+    {
+        FireOneShotAtCameraCenter(relicTriggeredAudioEventName);
+    }
+    
+    private void OnRelicTriggered(Vector2Int position, RelicTypes relicType, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourceDiff)
     {
         FireOneShotAtCameraCenter(relicTriggeredAudioEventName);
     }
