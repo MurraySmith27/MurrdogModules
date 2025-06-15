@@ -50,16 +50,16 @@ public class BuildingPopup : MonoBehaviour
         
         List<BuildingType> buildingTypes = BuildingsController.Instance.GetAvailableBuildingTypes();
 
-        List<BuildingType> offeredBuildings = RandomChanceSystem.Instance.GetCurrentlyOfferedBuildings(buildingTypes, _numRefreshesUsed);
+        List<TileInformation> offeredBuildings = RandomChanceSystem.Instance.GetCurrentlyOfferedTiles(buildingTypes, _numRefreshesUsed);
 
-        foreach (BuildingType buildingType in offeredBuildings)
+        foreach (TileInformation buildingType in offeredBuildings)
         {
             BuildingPopupListItem buildingPopupListItem = Instantiate(buildingPopupListItemPrefab, buildingPopupListItemParent);
             
-            _listItemInstances.Add((buildingPopupListItem, buildingType));
+            _listItemInstances.Add((buildingPopupListItem, buildingType.Buildings[0].Type));
             buildingPopupListItem.transform.SetSiblingIndex(0);
             
-            buildingPopupListItem.Populate(buildingType);
+            buildingPopupListItem.Populate(buildingType.Buildings[0].Type);
         }
     }
 

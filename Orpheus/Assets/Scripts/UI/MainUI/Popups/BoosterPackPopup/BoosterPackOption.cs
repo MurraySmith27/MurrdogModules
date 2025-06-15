@@ -128,8 +128,8 @@ public class BoosterPackOption : MonoBehaviour
         itemPreviewImage.uvRect = previewTransform.UVRect;
         
         //TODO: remove this
-        TEMP_GOLD_COST_REMOVE_THIS = Random.Range(1, 2);
-        goldCostText.SetText($"<sprite=0>{TEMP_GOLD_COST_REMOVE_THIS}");
+        List<PersistentResourceItem> buildingCosts = BuildingsController.Instance.GetBuildingCost(building);
+        goldCostText.SetText($"<sprite=0>{buildingCosts[0].Type}");
         
         Invoke(nameof(PlayEnterAnimation), animationDelayBase + index * animationDelayPerIndex);
     }
@@ -150,19 +150,7 @@ public class BoosterPackOption : MonoBehaviour
     
     private string GenerateTileDescription(TileInformation tile)
     {
-        string description = string.Empty;
-
-        if (tile.Buildings.Count > 0)
-        {
-            description += $"{LocalizationUtils.GetTagForBuilding(tile.Buildings[0].Type)}\n";
-        }
-        
-        foreach (ResourceItem resource in tile.Resources)
-        {
-            description += $"+{resource.Quantity} {LocalizationUtils.GetTagForResource(resource.Type)}\n";
-        }
-        
-        return description;
+        return GenerateTileDescription(tile.Buildings[0].Type);
     }
 
     private string GenerateTileDescription(BuildingType building)

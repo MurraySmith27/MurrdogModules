@@ -8,6 +8,9 @@ public class BuildingsController : Singleton<BuildingsController>
 {
     [SerializeField] private BuildingsDataSO buildingsData;
     
+    //TODO: Serialize this
+    public int NumBuildingsPurchased { get; private set; }
+    
     public bool TryPlaceBuilding(Vector2Int position, BuildingType type)
     {
         BuildingData buildingData = buildingsData.Buildings.FirstOrDefault(data => data.Type == type);
@@ -103,6 +106,20 @@ public class BuildingsController : Singleton<BuildingsController>
 
         return buildingData != null && buildingData.CanBuildOnTiles.Contains(tileType);
     }
+    
+    public List<TileType> GetCompatibleTileTypes(BuildingType buildingType)
+    {
+        List<TileType> compatibleTileTypes = new();
+        for (int i = 0; i < Enum.GetNames(typeof(TileType)).Length; i++)
+        {
+            if (CanConstructBuildingOnTileType((TileType)i, buildingType))
+            {
+                compatibleTileTypes.Add((TileType)i);
+            }
+        }
+        
+        return compatibleTileTypes;
+    }
 
     public bool CanBuildOverExistingStructures(Vector2Int position, BuildingType type)
     {
@@ -120,6 +137,12 @@ public class BuildingsController : Singleton<BuildingsController>
     public bool IsTileOwned(Vector2Int position)
     {
         return MapSystem.Instance.IsTileOwnedByCity(position);
+    }
+
+    public void PurchaseBuilding()
+    {
+        
+        NumBuildingsPurchased++;
     }
     
     public bool CanBuildCityCapital(Vector2Int position)

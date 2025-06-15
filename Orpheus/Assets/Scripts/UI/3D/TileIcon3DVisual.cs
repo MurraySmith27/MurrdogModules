@@ -26,6 +26,8 @@ public class TileIcon3DVisual : Icon3DVisual
             TileVisuals prefab = tileVisuals.Prefab;
             
             _tileVisualsInstance = Instantiate(prefab, tileVisualsParent);
+
+            _tileVisualsInstance.transform.localRotation = Quaternion.Euler(0, -45f, 0);
             
             _tileVisualsInstance.gameObject.SetLayerRecursive(LayerMask.NameToLayer(icon3dVisualLayerName));
             
@@ -48,7 +50,7 @@ public class TileIcon3DVisual : Icon3DVisual
                     _tileVisualsInstance.AttachBuilding(buildingInstance);
 
                     buildingInstance.transform.localPosition = new Vector3(0, 0, 0);
-                    buildingInstance.transform.localScale = new Vector3(1, 1, 1);
+                    buildingInstance.transform.localScale *= 0.2f;
                     buildingInstance.transform.localRotation = Quaternion.identity;
                 }
             }

@@ -60,42 +60,16 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
         _currentOfferings = new();
         _currentOfferings.tiles = tiles;
     }
-
-
-    private int num = 0;
+    
     private void OpenBuildingsBoosterPack()
     {
         List<BuildingType> allAvailableBuildingTypes = new List<BuildingType>(GameConstants.STARTING_BUILDING_TYPES);
         allAvailableBuildingTypes.AddRange(TechSystem.Instance.GetUnlockedBuildings());
-
-        if (num == 0)
-        {
-            allAvailableBuildingTypes = new List<BuildingType>(new BuildingType[]
-            {
-                BuildingType.Forest, BuildingType.WheatFarm, BuildingType.Mine,
-            });
-        }
-        else if (num == 1)
-        {
-            allAvailableBuildingTypes = new List<BuildingType>(new BuildingType[]
-            {
-                BuildingType.LumberMill, BuildingType.CornFarm, BuildingType.CowFarm,
-            });
-        }
-        else
-        {
-            allAvailableBuildingTypes = new List<BuildingType>(new BuildingType[]
-            {   
-                BuildingType.Stirrer, BuildingType.Mixer, BuildingType.Mill,
-            });
-        }
-
-        num++;
         
-        List<BuildingType> buildingTypes = RandomChanceSystem.Instance.GetCurrentlyOfferedBuildings(allAvailableBuildingTypes, _numRefreshes);
-
+        List<TileInformation> tiles = RandomChanceSystem.Instance.GetCurrentlyOfferedTiles(allAvailableBuildingTypes, _numRefreshes);
+        
         _currentOfferings = new();
-        _currentOfferings.buildings = buildingTypes;
+        _currentOfferings.tiles = tiles;
     }
 
     public BoosterPackOfferings GetCurrentOfferings()

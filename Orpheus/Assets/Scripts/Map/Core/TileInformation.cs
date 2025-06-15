@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public enum TileType
 {
@@ -67,6 +68,11 @@ public enum BuildingType
 public struct TileBuilding
 {
     public BuildingType Type;
+
+    public TileBuilding(BuildingType type)
+    {
+        Type = type;
+    }
 }
 
 public struct TileInformation
@@ -79,4 +85,11 @@ public struct TileInformation
     
     //buildings on a tile
     public List<TileBuilding> Buildings;
+
+    public TileInformation(TileType tileType)
+    {
+        Resources = new();
+        Buildings = new();
+        Type = tileType;
+    }
 }

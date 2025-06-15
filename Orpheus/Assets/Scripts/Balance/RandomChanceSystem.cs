@@ -186,53 +186,75 @@ public class RandomChanceSystem : Singleton<RandomChanceSystem>
         return tiles;
     }
 
-    public List<BuildingType> GetCurrentlyOfferedBuildings(List<BuildingType> allAvailableBuildings, int numRefreshesUsed)
+    public List<TileInformation> GetCurrentlyOfferedTiles(List<BuildingType> allAvailableBuildings, int numRefreshesUsed)
     {
-        if (allAvailableBuildings.Count <= GameConstants.NUM_BUILDINGS_OFFERED_EACH_ROUND)
-        {
-            return allAvailableBuildings;
-        }
-        
         int seed = _currentSeed + PersistentState.Instance.HarvestNumber * 340543 + numRefreshesUsed * 31;
         
         Random.InitState(seed);
         
-        List<BuildingType> remainingPicks = new List<BuildingType>(allAvailableBuildings);
-        
-        List<BuildingType> pickedSubset = new();
-        
-        for (int i = 0; i < GameConstants.NUM_BUILDINGS_OFFERED_EACH_ROUND; i++)
+        List<BuildingType> availableBuildings = allAvailableBuildings;
+        if (allAvailableBuildings.Count > GameConstants.NUM_BUILDINGS_OFFERED_EACH_ROUND)
         {
-            int newPick = Random.Range(0, remainingPicks.Count);
-
-            BuildingType newBuildingType = remainingPicks[newPick];
-            pickedSubset.Add(newBuildingType);
             
-            remainingPicks.RemoveAt(newPick);
 
-            if (PersistentState.Instance.HarvestNumber == 0)
+            List<BuildingType> remainingPicks = new List<BuildingType>(allAvailableBuildings);
+
+            List<BuildingType> pickedSubset = new();
+
+            for (int i = 0; i < GameConstants.NUM_BUILDINGS_OFFERED_EACH_ROUND; i++)
             {
-                //also offer the corresponding resource generator
-                List<PersistentResourceItem> selectedBuildingPersistentInputs =
-                    buildingProcessRules.GetPersistentResourceInput(newBuildingType, 0);
-                if (selectedBuildingPersistentInputs.FirstOrDefault((persistentResourceItem) =>
-                    {
-                        return persistentResourceItem.Type == PersistentResourceType.Dirt;
-                    }) != null)
-                {
-                    pickedSubset.Add(BuildingType.DirtPile);
-                }
-                else
-                {
-                    pickedSubset.Add(BuildingType.Well);
-                }
+                int newPick = Random.Range(0, remainingPicks.Count);
 
-                break;
+                BuildingType newBuildingType = remainingPicks[newPick];
+                pickedSubset.Add(newBuildingType);
+
+                remainingPicks.RemoveAt(newPick);
+
+                if (PersistentState.Instance.HarvestNumber == 0)
+                {
+                    //also offer the corresponding resource generator
+                    List<PersistentResourceItem> selectedBuildingPersistentInputs =
+                        buildingProcessRules.GetPersistentResourceInput(newBuildingType, 0);
+                    if (selectedBuildingPersistentInputs.FirstOrDefault((persistentResourceItem) =>
+                        {
+                            return persistentResourceItem.Type == PersistentResourceType.Dirt;
+                        }) != null)
+                    {
+                        pickedSubset.Add(BuildingType.DirtPile);
+                    }
+                    else
+                    {
+                        pickedSubset.Add(BuildingType.Well);
+                    }
+
+                    break;
+                }
             }
+
+
+            availableBuildings = pickedSubset;
         }
 
+        List<TileInformation> selectedTiles = new();
+
+        foreach (BuildingType buildingType in availableBuildings)
+        {
+            List<TileType> availableTileTypes = BuildingsController.Instance.GetCompatibleTileTypes(buildingType);
+
+            if (availableTileTypes.Count > 0)
+            {
+                TileInformation tile = new(availableTileTypes[Random.Range(0, availableTileTypes.Count)]);
+                tile.Buildings.Add(new TileBuilding(buildingType));
+                selectedTiles.Add(tile);
+            }
+            else
+            {
+                Debug.LogError($"not enough tile types available for building: {Enum.GetName(typeof(BuildingType), buildingType)}");
+            }
+        }
+        
         Random.InitState((int)DateTime.Now.Ticks);
         
-        return pickedSubset;
+        return selectedTiles;
     }
 }
