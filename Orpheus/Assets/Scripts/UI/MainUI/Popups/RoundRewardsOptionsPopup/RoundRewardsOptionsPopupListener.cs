@@ -23,11 +23,11 @@ public class RoundRewardsOptionsPopupListener : MonoBehaviour
     {
         if (phase == GamePhases.BuddingBuilding)
         {
-            if (PersistentState.Instance.HarvestNumber > 0)
-            {
+            // if (PersistentState.Instance.HarvestNumber > 0)
+            // {
                 BoosterPackSystem.Instance.OpenBoosterPack(BoosterPackTypes.ROUND_REWARDS_BUILDING_BOOSTER);
                 // UIPopupSystem.Instance.ShowPopup("RoundRewardsOptionsPopup");
-            }
+            // }
         }
     }
 }

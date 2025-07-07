@@ -8,6 +8,8 @@ public class RoundController : Singleton<RoundController>
 {
     [SerializeField] private int numHarvestsBeforeWinter = 2;
 
+    [SerializeField] private List<GamePhases> naturalPhaseOrder;
+
     private List<GamePhases> interactablePhases = new List<GamePhases>(new GamePhases[]
         { GamePhases.BuddingBuilding, GamePhases.MainMenu, GamePhases.GameStart });
     
@@ -112,7 +114,7 @@ public class RoundController : Singleton<RoundController>
             {
                 _handUsed = false;
                 _isInHarvest = true;
-                PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingHarvest);
+                PhaseStateMachine.Instance.ChangePhase(GamePhases.BloomingHarvestYieldBonuses);
             }
             else if (PhaseStateMachine.Instance.CurrentPhase == GamePhases.BloomingHarvest) // && _isInHarvest)
             {
@@ -132,8 +134,11 @@ public class RoundController : Singleton<RoundController>
             }
             else
             {
-                PhaseStateMachine.Instance.ChangePhase((GamePhases)(((int)PhaseStateMachine.Instance.CurrentPhase + 1) %
-                                                                Enum.GetNames(typeof(GamePhases)).Length));
+                int currentPhaseIndex = naturalPhaseOrder.IndexOf(PhaseStateMachine.Instance.CurrentPhase);
+                
+                int nextPhaseIndex = (currentPhaseIndex + 1) % naturalPhaseOrder.Count;
+                
+                PhaseStateMachine.Instance.ChangePhase(naturalPhaseOrder[nextPhaseIndex]);
             }
         }
     }

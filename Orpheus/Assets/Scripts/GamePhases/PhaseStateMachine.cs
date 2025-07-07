@@ -23,6 +23,7 @@ public enum GamePhases
     GameOver,
     MainMenu,
     GameStart,
+    BloomingHarvestYieldBonuses,
 }
 
 public class PhaseStateMachine : Singleton<PhaseStateMachine>
@@ -63,6 +64,7 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
     private WiltingRoundUpdatePhase _wiltingRoundUpdatePhase = new();
     private GameWonPhase _gameWonPhase = new();
     private GameOverPhase _gameOverPhase = new();
+    private BloomingHarvestYieldBonusesPhase _bloomingHarvestYieldBonusesPhase = new();
 
     private Queue<GamePhases> phaseTransitionQueue = new();
 
@@ -182,6 +184,8 @@ public class PhaseStateMachine : Singleton<PhaseStateMachine>
                 return _gameWonPhase;
             case GamePhases.GameOver:
                 return _gameOverPhase;
+            case GamePhases.BloomingHarvestYieldBonuses:
+                return _bloomingHarvestYieldBonusesPhase;
             default:
                 return null;
         }

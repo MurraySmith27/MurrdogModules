@@ -5,7 +5,7 @@ using MEC;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BloomingHarvestController : Singleton<BloomingHarvestController>
+public class BloomingTileBonusYieldsController : Singleton<BloomingTileBonusYieldsController>
 {
     [SerializeField] private float cityStartAnimationTime = 1f;
     [SerializeField] private float cityEndAnimationTime = 1f;
@@ -14,41 +14,44 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     [SerializeField] private float tileAnimationEndTime = 0.3f;
     [SerializeField] private float tileAnimationTimePerResource = 0.5f;
 
-    public event Action OnHarvestStart;
-    public event Action OnHarvestEnd;
-    public event Action<Guid> OnCityHarvestStart;
-    public event Action<Guid> OnCityHarvestEnd;
-    public event Action<Vector2Int> OnTileResourceChangeStart;
-    public event Action<Vector2Int> OnTileResourceChangeEnd;
-    public event Action<Vector2Int, Dictionary<ResourceType, int>> OnTileHarvestStart;
-    public event Action<Vector2Int> OnTileHarvestEnd;
-    public event Action<Vector2Int, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> OnTileProcessStart;
-    public event Action<Vector2Int> OnTileProcessEnd;
-    public event Action<Vector2Int> OnTileBonusTickStart;
-    public event Action<Vector2Int> OnTileBonusTickEnd;
-    public event Action<Vector2Int, RelicTypes, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> OnRelicTriggered;
+    public event Action OnTileBonusYieldsStart;
+    public event Action OnTileBonusYieldsEnd;
+    public event Action<Guid> OnCityTileBonusYieldsStart;
+    public event Action<Guid> OnCityTileBonusYieldsEnd;
+
+    public event Action<Vector2Int, int> OnTileYieldBonusChangeStart;
+    public event Action<Vector2Int, int> OnTileYieldBonusChangeEnd;
     
     public void StartTileBonusYields()
     {
-        
+        Timing.RunCoroutineSingleton(TileBonusYieldsCoroutine(), this.gameObject, SingletonBehavior.Wait);
     }
 
     private IEnumerator<float> TileBonusYieldsCoroutine()
     {
-        List<(Vector2Int, Vector2Int, int)> allTileYieldBonuses;
-        if (TerrainBonusSystem.Instance.GetTileYieldBonuses(out allTileYieldBonuses))
+        OnTileBonusYieldsStart?.Invoke();
+
+        Dictionary<Vector2Int, int> currentTileYieldBonus = new();
+        
+        List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();
+
+        foreach (Guid cityGuid in cityGuids)
         {
-            foreach (var bonus in allTileYieldBonuses)
+            OnCityTileBonusYieldsStart?.Invoke(cityGuid);
+            
+            List<(Vector2Int, Vector2Int, int)> allTileYieldBonuses;
+            if (TerrainBonusSystem.Instance.GetTileYieldBonuses(out allTileYieldBonuses))
             {
-                
+                foreach (var bonus in allTileYieldBonuses)
+                {
+                    
+                }
             }
+            
+            OnCityTileBonusYieldsEnd?.Invoke(cityGuid);
         }
     }
     
-    public void StartHarvest()
-    {
-        Timing.RunCoroutineSingleton(HarvestCoroutine(), this.gameObject, SingletonBehavior.Wait);
-    }
 
     private IEnumerator<float> HarvestCoroutine()
     {

@@ -58,9 +58,6 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
 
         yield return OrpheusTiming.WaitForSecondsGameTime(startAnimationTime);
 
-        //TODO: Remove this
-        GlobalSettings.GameSpeed = 2f;
-        
         foreach (ResourceType key in resources.Keys)
         {
             if (resources[key] == 0)
@@ -172,7 +169,6 @@ public class BloomingResourceConversionController : Singleton<BloomingResourceCo
             OnResourceConversionBonusFoodScoreAdded?.Invoke(outFoodScore);
             yield return OrpheusTiming.WaitForSecondsGameTime(resourceConversionResourceFoodScoreAddedTime);
         }
-
         
         OnResourceConversionEnd?.Invoke();
         

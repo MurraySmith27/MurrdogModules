@@ -29,6 +29,16 @@ public class MapSystem : Singleton<MapSystem>
     [Header("Resources Settings")] 
     [SerializeField] private bool resourcesGeneratedAtStart = false;
     
+    private readonly Vector2Int[] OFFSETS = new Vector2Int[6]
+    {
+        new Vector2Int(1, 0),
+        new Vector2Int(-1, 0),
+        new Vector2Int(0, 1),
+        new Vector2Int(-1, 1),
+        new Vector2Int(0, -1),
+        new Vector2Int(1, -1)
+    };
+    
     private MapGenerator _mapGenerator;
     private MapResourcesGenerator _mapResourcesGenerator;
     private TileGrid _tiles = new TileGrid();
@@ -262,20 +272,10 @@ public class MapSystem : Singleton<MapSystem>
         List<Vector2Int> cityTiles = city.GetTilesInOrder();
         
         HashSet<Vector2Int> adjacentTiles = new();
-
-        Vector2Int[] offsets = new Vector2Int[6]
-        {
-            new Vector2Int(1, 0),
-            new Vector2Int(-1, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(-1, 1),
-            new Vector2Int(0, -1),
-            new Vector2Int(1, -1)
-        };
         
         foreach (Vector2Int tileLocation in cityTiles)
         {
-            foreach (Vector2Int offset in offsets)
+            foreach (Vector2Int offset in OFFSETS)
             {
                 if (!adjacentTiles.Contains(tileLocation + offset) && IsTileAdjacentToCity(tileLocation + offset))
                 {
@@ -285,6 +285,20 @@ public class MapSystem : Singleton<MapSystem>
         }
         
         return adjacentTiles.ToList();
+    }
+
+    public List<Vector2Int> GetAdjacentTilesToPosition(Vector2Int position)
+    {
+        List<Vector2Int> adjacentTiles = new();
+        foreach (Vector2Int offset in OFFSETS)
+        {
+            if (IsTileOwnedByCity(position + offset))
+            {
+                adjacentTiles.Add(position + offset);
+            }
+        }
+
+        return adjacentTiles;
     }
     
     public List<Vector2Int> GetValidNewTilePositions(Guid cityGuid)
@@ -310,20 +324,10 @@ public class MapSystem : Singleton<MapSystem>
         Vector3 cityCenterLocationWorldPos = MapUtils.GetTileWorldPositionFromGridPosition(cityCenterLocation);
         
         HashSet<Vector2Int> adjacentTiles = new();
-
-        Vector2Int[] offsets = new Vector2Int[6]
-        {
-            new Vector2Int(1, 0),
-            new Vector2Int(-1, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(-1, 1),
-            new Vector2Int(0, -1),
-            new Vector2Int(1, -1)
-        };
         
         foreach (Vector2Int tileLocation in cityTiles)
         {
-            foreach (Vector2Int offset in offsets)
+            foreach (Vector2Int offset in OFFSETS)
             {
                 if (!adjacentTiles.Contains(tileLocation + offset) && IsTileAdjacentToCity(tileLocation + offset))
                 {

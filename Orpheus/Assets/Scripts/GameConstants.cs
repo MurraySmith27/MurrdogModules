@@ -52,40 +52,23 @@ public static class GameConstants
     
     public static readonly Vector2Int[] INITIAL_CITY_TILES = new Vector2Int[]
     {
-        new Vector2Int(1, 0), new Vector2Int(1, -1),
-        new Vector2Int(0, 1), new Vector2Int(0, 0), new Vector2Int(0, -1),
-        new Vector2Int(-1, 1), new Vector2Int(-1, 0)
+        new Vector2Int(0, 0)
     };
     
     public static readonly TileType[] INITIAL_CITY_TILE_TYPES = new TileType[]
     {
-        TileType.Grass, TileType.Water,
-        TileType.Water, TileType.Grass, TileType.Grass,
-        TileType.Grass, TileType.Grass,
+        TileType.Grass
     };
-    
-    // public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
-    // {
-    //     BuildingType.WheatFarm, BuildingType.Mill,
-    //     BuildingType.Stirrer, BuildingType.CityCapital, BuildingType.Bakery,
-    //     BuildingType.Toaster, BuildingType.CityCapital
-    // };
-    
+
     public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
     {
-        BuildingType.CityCapital, BuildingType.CityCapital,
-        BuildingType.CityCapital, BuildingType.CityCapital, BuildingType.CityCapital,   
-        BuildingType.CityCapital, BuildingType.CityCapital
+        BuildingType.CityCapital
     };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]
     {
-        new ResourceItem(ResourceType.Corn, 0), new ResourceItem(ResourceType.Stone, 0), 
-        new ResourceItem(ResourceType.Wheat, 0), new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wood, 0),
-        new ResourceItem(ResourceType.Stone, 0), new ResourceItem(ResourceType.Wood, 0)
+        new ResourceItem(ResourceType.Wood, 0)
     };
-
-    
     
     //interest
     public static readonly long GOLD_INTEREST_CAP = 5000;

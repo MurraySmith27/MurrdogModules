@@ -87,12 +87,4 @@ public class BoosterPackSystem : Singleton<BoosterPackSystem>
         _numRefreshes++;
         OpenBoosterPack(_currentBoosterPackType, false);
     }
-
-    private void Update()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            OpenBoosterPack(BoosterPackTypes.ROUND_REWARDS_BUILDING_BOOSTER);
-        }
-    }
 }

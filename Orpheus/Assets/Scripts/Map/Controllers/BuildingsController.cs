@@ -7,6 +7,8 @@ using UnityEngine;
 public class BuildingsController : Singleton<BuildingsController>
 {
     [SerializeField] private BuildingsDataSO buildingsData;
+
+    [SerializeField] private BuildingProcessRulesSO buildingsProcessRulesSO;
     
     //TODO: Serialize this
     public int NumBuildingsPurchased { get; private set; }
@@ -170,4 +172,27 @@ public class BuildingsController : Singleton<BuildingsController>
         
         return buildingTypes;
     }
+
+    public List<ResourceItem> GetAllOutputResourcesOfBuilding(BuildingType buildingType)
+    {
+        if (buildingsProcessRulesSO == null)
+        {
+            Debug.LogError($"Cannot get output resources of building type: " +
+                           $"{Enum.GetName(typeof(BuildingType), buildingType)}. " +
+                           $"Building Process Rules Scriptable Object is not assigned!");
+            return new();
+        }
+
+        List<ResourceItem> allResourceItems = new();
+
+        int numProcessLanes = buildingsProcessRulesSO.GetNumProcessLanes(buildingType);
+        for (int i = 0; i < numProcessLanes; i++)
+        {
+            List<ResourceItem> outputResourceItems = buildingsProcessRulesSO.GetResourceOutput(buildingType, i);
+            
+            allResourceItems.AddRange(outputResourceItems);
+        }
+
+        return allResourceItems;
+    } 
 }
