@@ -58992,6 +58992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDOL: 1
   buildingsData: {fileID: 11400000, guid: f8650a50e7a5a3345a6c5c5e7771a084, type: 2}
+  buildingsProcessRulesSO: {fileID: 0}
 --- !u!4 &1284455924
 Transform:
   m_ObjectHideFlags: 0
@@ -89874,6 +89875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDOL: 1
   numHarvestsBeforeWinter: 2
+  naturalPhaseOrder: 
 --- !u!114 &2000435926
 MonoBehaviour:
   m_ObjectHideFlags: 0
