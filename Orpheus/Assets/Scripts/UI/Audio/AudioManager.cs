@@ -59,6 +59,9 @@ public class AudioManager : Singleton<AudioManager>
         BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
         BloomingHarvestController.Instance.OnTileProcessStart += OnTileProcessStart;
         
+        BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested -= OnTileBonusYieldResourceHarvested;
+        BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested -= OnTileBonusYieldResourceHarvested;
+        
         BloomingHarvestController.Instance.OnTileProcessEnd -= OnTileProcessEnd;
         BloomingHarvestController.Instance.OnTileProcessEnd += OnTileProcessEnd;
         
@@ -124,6 +127,7 @@ public class AudioManager : Singleton<AudioManager>
         if (BloomingHarvestController.IsAvailable)
         {
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
+            BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested -= OnTileBonusYieldResourceHarvested;
             BloomingHarvestController.Instance.OnTileProcessEnd -= OnTileProcessEnd;
         }
 
@@ -194,6 +198,11 @@ public class AudioManager : Singleton<AudioManager>
     }
 
     private void OnTileProcessStart(Vector2Int position, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resources)
+    {
+        CreateAndPlayEventAtLocation(tileProcessStartAudioEventName, MapUtils.GetTileWorldPositionFromGridPosition(position));
+    }
+    
+    private void OnTileBonusYieldResourceHarvested(Vector2Int position, ResourceType resourceType)
     {
         CreateAndPlayEventAtLocation(tileProcessStartAudioEventName, MapUtils.GetTileWorldPositionFromGridPosition(position));
     }

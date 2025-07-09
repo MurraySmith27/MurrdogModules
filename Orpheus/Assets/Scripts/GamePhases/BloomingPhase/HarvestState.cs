@@ -188,4 +188,13 @@ public class HarvestState : Singleton<HarvestState>
         
         OnTileYieldBonusesChanged?.Invoke(_currentRoundYieldBonuses);
     }
+
+    public long GetAdditionalYieldForTile(Vector2Int tile)
+    {
+        if (_currentRoundYieldBonuses.ContainsKey(tile))
+        {
+            return _currentRoundYieldBonuses[tile];
+        }
+        else return 0;
+    }
 }

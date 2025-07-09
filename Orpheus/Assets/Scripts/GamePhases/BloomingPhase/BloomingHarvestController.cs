@@ -23,6 +23,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     public event Action<Vector2Int, Dictionary<ResourceType, int>> OnTileHarvestStart;
     public event Action<Vector2Int> OnTileHarvestEnd;
     public event Action<Vector2Int, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> OnTileProcessStart;
+    public event Action<Vector2Int, ResourceType> OnTileBonusYieldResourceHarvested;
     public event Action<Vector2Int> OnTileProcessEnd;
     public event Action<Vector2Int> OnTileBonusTickStart;
     public event Action<Vector2Int> OnTileBonusTickEnd;
@@ -71,13 +72,26 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
 
                     OnTileHarvestStart?.Invoke(cityTile, resourcesHarvested);
 
+                    long yieldBonus = HarvestState.Instance.GetAdditionalYieldForTile(cityTile);
+                    
                     foreach (KeyValuePair<ResourceType, int> resource in resourcesHarvested)
                     {
-                        resources[resource.Key] += resource.Value;
                         if (resource.Value != 0)
                         {
+                            resources[resource.Key] += resource.Value;
+                           
                             yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                            
+                            for (int i = 0; i < yieldBonus; i++)
+                            {
+                                resources[resource.Key] += 1;
+                                
+                                OnTileBonusYieldResourceHarvested?.Invoke(cityTile, resource.Key);
+                                
+                                yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                            }
                         }
+
                     }
 
                     yield return OrpheusTiming.WaitForSecondsGameTime(tileHarvestAnimationTime);
@@ -99,15 +113,26 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                         if (resource.Value != 0)
                         {
                             resources[resource.Key] += resource.Value;
+                            
                             yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                            
+                            for (int i = 0; i < relicResourcesDiff[resource.Key]; i++)
+                            {
+                                resources[resource.Key] += 1;
+
+                                OnTileBonusYieldResourceHarvested?.Invoke(cityTile, resource.Key);
+                                
+                                yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                            }
                         }
+
                     }
                     
                     foreach (KeyValuePair<PersistentResourceType, int> resource in resourcesProcessed.Item2)
                     {
                         if (resource.Value != 0)
                         {
-                            PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
+                            PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value + (int)yieldBonus);
                             yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);    
                         }
                     }

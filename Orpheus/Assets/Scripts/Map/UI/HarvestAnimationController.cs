@@ -25,6 +25,9 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
         BloomingHarvestController.Instance.OnTileProcessStart += OnTileProcessStart;
 
+        BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested -= OnTileBonusYieldResourceHarvested;
+        BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested += OnTileBonusYieldResourceHarvested;
+
         BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
         BloomingHarvestController.Instance.OnRelicTriggered += OnRelicTriggered;
 
@@ -50,6 +53,7 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
             BloomingHarvestController.Instance.OnHarvestStart -= LockCamera;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;
+            BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested -= OnTileBonusYieldResourceHarvested;
             BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
             BloomingHarvestController.Instance.OnTileResourceChangeStart -= OnTileResourceChangeStart;
             BloomingHarvestController.Instance.OnTileResourceChangeEnd -= OnTileResourceChangeEnd;
@@ -138,6 +142,17 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
         {
             TryAnimateTile(position, resourcesChange);
         }
+    }
+
+    private void OnTileBonusYieldResourceHarvested(Vector2Int position, ResourceType resourceType)
+    {
+        TileVisuals tileInstanceAtPosition = MapVisualsController.Instance.GetTileInstanceAtPosition(position);
+        
+        tileInstanceAtPosition.TriggerTileHarvestAnimation();
+        
+        OnTileHarvestAnimationTriggered?.Invoke(position);
+        
+        tileInstanceAtPosition.TileYieldIncreasedAnimation(-1);
     }
 
     private void OnRelicTriggered(Vector2Int position, RelicTypes relicType, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesDiff)

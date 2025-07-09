@@ -54,6 +54,9 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
         
         BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
         BloomingHarvestController.Instance.OnTileProcessStart += OnTileResourceChanged;
+        
+        BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested -= OnTileBonusYieldResourceHarvested;
+        BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested += OnTileBonusYieldResourceHarvested;
 
         BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
         BloomingHarvestController.Instance.OnRelicTriggered += OnRelicTriggered;
@@ -80,6 +83,7 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
             BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileResourceChanged;
+            BloomingHarvestController.Instance.OnTileBonusYieldResourceHarvested -= OnTileBonusYieldResourceHarvested;
             BloomingHarvestController.Instance.OnRelicTriggered -= OnRelicTriggered;
             BloomingHarvestController.Instance.OnTileBonusTickStart -= OnTileBonusTickStart;
             BloomingHarvestController.Instance.OnTileBonusTickEnd -= OnTileBonusTickEnd;
@@ -157,6 +161,14 @@ public class BloomingHarvestResourceDisplay : Singleton<BloomingHarvestResourceD
     private void OnTileResourceChanged(Vector2Int position, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesHarvested)
     {
         Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourcesHarvested.Item1), this.gameObject,
+            SingletonBehavior.Overwrite);
+    }
+
+    private void OnTileBonusYieldResourceHarvested(Vector2Int position, ResourceType resourceType)
+    {
+        Dictionary<ResourceType, int> resourcesHarvested = new Dictionary<ResourceType, int>();
+        resourcesHarvested.Add(resourceType, 1);
+        Timing.RunCoroutineSingleton(HarvestTileCoroutine(position, resourcesHarvested), this.gameObject,
             SingletonBehavior.Overwrite);
     }
 
