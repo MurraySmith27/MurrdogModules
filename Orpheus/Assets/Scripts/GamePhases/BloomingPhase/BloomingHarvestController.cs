@@ -28,23 +28,6 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     public event Action<Vector2Int> OnTileBonusTickEnd;
     public event Action<Vector2Int, RelicTypes, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> OnRelicTriggered;
     
-    public void StartTileBonusYields()
-    {
-        
-    }
-
-    private IEnumerator<float> TileBonusYieldsCoroutine()
-    {
-        List<(Vector2Int, Vector2Int, int)> allTileYieldBonuses;
-        if (TerrainBonusSystem.Instance.GetTileYieldBonuses(out allTileYieldBonuses))
-        {
-            foreach (var bonus in allTileYieldBonuses)
-            {
-                
-            }
-        }
-    }
-    
     public void StartHarvest()
     {
         Timing.RunCoroutineSingleton(HarvestCoroutine(), this.gameObject, SingletonBehavior.Wait);

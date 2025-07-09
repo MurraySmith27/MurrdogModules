@@ -60,6 +60,10 @@ public class HarvestState : Singleton<HarvestState>
     public event Action OnHarvestFailed;
 
     public event Action OnHarvestStart;
+
+    public event Action<Dictionary<Vector2Int, int>> OnTileYieldBonusesChanged;
+
+    private Dictionary<Vector2Int, int> _currentRoundYieldBonuses;
     
     private void Start()
     {
@@ -176,5 +180,12 @@ public class HarvestState : Singleton<HarvestState>
                            $"but there are only {GameConstants.FOOD_GOALS_PER_HARVEST.Length} food goal defined.");
             return;
         }
+    }
+
+    public void RegisterCurrentRoundYieldBonuses(Dictionary<Vector2Int, int> currentRoundYieldBonuses)
+    {
+        _currentRoundYieldBonuses = currentRoundYieldBonuses;
+        
+        OnTileYieldBonusesChanged?.Invoke(_currentRoundYieldBonuses);
     }
 }

@@ -45,6 +45,8 @@ public class HarvestAnimationController : Singleton<HarvestAnimationController>
     {
         if (BloomingHarvestController.IsAvailable)
         {
+            BloomingHarvestController.Instance.OnCityHarvestStart -= OnCityHarvestStart;
+            BloomingHarvestController.Instance.OnCityHarvestEnd -= OnCityHarvestEnd;
             BloomingHarvestController.Instance.OnHarvestStart -= LockCamera;
             BloomingHarvestController.Instance.OnTileHarvestStart -= OnTileHarvestStart;
             BloomingHarvestController.Instance.OnTileProcessStart -= OnTileProcessStart;

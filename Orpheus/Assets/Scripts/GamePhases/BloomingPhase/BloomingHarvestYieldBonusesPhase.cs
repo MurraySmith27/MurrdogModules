@@ -11,15 +11,15 @@ public class BloomingHarvestYieldBonusesPhase : PhaseStateBase
     {
         _onPhaseEnterComplete = onPhaseEnterComplete;
         
-        BloomingHarvestController.Instance.OnTileBonusYieldsEnd -= OnTileBonusYieldsComplete;
-        BloomingHarvestController.Instance.OnTileBonusYieldsEnd += OnTileBonusYieldsComplete;
+        BloomingTileBonusYieldsController.Instance.OnBonusYieldsEnd -= OnTileBonusYieldsComplete;
+        BloomingTileBonusYieldsController.Instance.OnBonusYieldsEnd += OnTileBonusYieldsComplete;
         
-        BloomingHarvestController.Instance.StartTileBonusYields();
+        BloomingTileBonusYieldsController.Instance.StartTileBonusYields();
     }
 
     private void OnTileBonusYieldsComplete()
     {
         _onPhaseEnterComplete?.Invoke();
-        BloomingHarvestController.Instance.OnTileBonusYieldsEnd -= OnTileBonusYieldsComplete;
+        BloomingTileBonusYieldsController.Instance.OnBonusYieldsEnd -= OnTileBonusYieldsComplete;
     }
 }

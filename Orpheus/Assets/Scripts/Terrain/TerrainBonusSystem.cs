@@ -49,15 +49,12 @@ public class TerrainBonusSystem : Singleton<TerrainBonusSystem>
 
         foreach ((TileType, Vector2Int) cityTile in currentCityTiles)
         {
-            if (!_terrainInstances.ContainsKey(cityTile.Item1))
+            List<(Vector2Int, int)> tileBonuses;
+            if (_terrainInstances[cityTile.Item1].GetTerrainBonusTileYields(cityTile.Item2, out tileBonuses))
             {
-                List<(Vector2Int, int)> tileBonuses = new();
-                if (_terrainInstances[cityTile.Item1].GetTerrainBonusTileYields(cityTile.Item2, out tileBonuses))
+                foreach ((Vector2Int, int) tileBonus in tileBonuses)
                 {
-                    foreach ((Vector2Int, int) tileBonus in tileBonuses)
-                    {
-                        yieldBonuses.Add((cityTile.Item2, tileBonus.Item1, tileBonus.Item2));
-                    }
+                    yieldBonuses.Add((cityTile.Item2, tileBonus.Item1, tileBonus.Item2));
                 }
             }
         }

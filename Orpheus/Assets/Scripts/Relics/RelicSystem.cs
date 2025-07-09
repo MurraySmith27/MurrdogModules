@@ -154,6 +154,26 @@ public class RelicSystem : Singleton<RelicSystem>
         outResourcesOnTile = modifiedResourcesOnTile;
     }
 
+    public List<(RelicTypes, int)> OnTileYieldBonusesApplied(Vector2Int sourcePosition, Vector2Int destinationPosition, int yieldDifference, out int modifiedYieldDifference)
+    {
+        List<(RelicTypes, int)> triggeredRelics = new();
+        
+        modifiedYieldDifference = yieldDifference;
+
+        foreach (RelicTypes relic in relics)
+        {
+            AdditionalTriggeredArgs args;
+            int copy = modifiedYieldDifference;
+            if (_relicInstances[relic].OnTileYieldBonusesApplied(sourcePosition, destinationPosition, copy, out modifiedYieldDifference, out args))
+            {
+                int diff = modifiedYieldDifference - copy;
+                triggeredRelics.Add((relic, diff));
+                OnRelicTriggered?.Invoke(relic, args);
+            }
+        }
+        return triggeredRelics;
+    }
+
     public void OnPhaseChanged(GamePhases phase)
     {
         foreach (RelicTypes relic in relics)

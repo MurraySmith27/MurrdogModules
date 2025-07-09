@@ -24,6 +24,10 @@ public class AudioManager : Singleton<AudioManager>
     
     [SerializeField] private string resourceLostAudioEventName = "ResourceLost";
     
+    [SerializeField] private string bonusYieldSourceTile = "BonusYieldSourceTile";
+    
+    [SerializeField] private string tileBonusYield = "BonusYieldApplied";
+    
     [SerializeField] private string buildingConstructedAudioEventName = "BuildingConstructed";
     
     [SerializeField] private string musicAudioEventName = "BGM";
@@ -63,6 +67,12 @@ public class AudioManager : Singleton<AudioManager>
         
         HarvestAnimationController.Instance.OnTileHarvestAnimationTriggered -= OnTileTick;
         HarvestAnimationController.Instance.OnTileHarvestAnimationTriggered += OnTileTick;
+
+        HarvestTileBonusYieldsAnimationController.Instance.OnTileBonusYieldApplied -= OnTileYieldBonus;
+        HarvestTileBonusYieldsAnimationController.Instance.OnTileBonusYieldApplied += OnTileYieldBonus;
+        
+        HarvestTileBonusYieldsAnimationController.Instance.OnTileBonusYieldSourceStart -= OnTileYieldBonusSourceTile;
+        HarvestTileBonusYieldsAnimationController.Instance.OnTileBonusYieldSourceStart += OnTileYieldBonusSourceTile;
         
         BloomingHarvestResourceDisplay.Instance.OnResourceIncrementAnimationTriggered -= OnResourceIncrement;
         BloomingHarvestResourceDisplay.Instance.OnResourceIncrementAnimationTriggered += OnResourceIncrement;
@@ -220,6 +230,16 @@ public class AudioManager : Singleton<AudioManager>
     private void OnResourceDecrement(ResourceType resourceType)
     {
         FireOneShotAtCameraCenter(resourceLostAudioEventName);
+    }
+
+    private void OnTileYieldBonus(Vector2Int sourcePosition, Vector2Int targetPosition, int tileYield)
+    {
+        FireOneShotAtCameraCenter(tileBonusYield);
+    }
+    
+    private void OnTileYieldBonusSourceTile(Vector2Int position)
+    {
+        FireOneShotAtCameraCenter(bonusYieldSourceTile);
     }
 
     private void OnPopupShown(string popupName)

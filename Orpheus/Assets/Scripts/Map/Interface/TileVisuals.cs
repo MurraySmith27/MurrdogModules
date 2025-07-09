@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MEC;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TileVisuals : MonoBehaviour
 {
@@ -15,14 +17,18 @@ public class TileVisuals : MonoBehaviour
     private const string TILE_APPEAR_ANIMATION_TRIGGER = "Appear";
     private const string TILE_HOVER_ENTER_ANIMATION_TRIGGER = "HoverEnter";
     private const string TILE_HOVER_EXIT_ANIMATION_TRIGGER = "HoverExit";
-        
-        
-
+    
     [SerializeField] private Animator animator;
 
     [SerializeField] private Transform buildingsRoot = new RectTransform();
     
     [SerializeField] private Transform citizensRoot = new RectTransform();
+
+    [SerializeField] private Transform buildingHeightGimbal;
+
+    [SerializeField] private Renderer terrainRenderer;
+    
+    [SerializeField] private string terrainRendererOverlayMaterialProgressPropertyName = "_OverlayVisibility";
     
     [SerializeField] private ShadowOverlayVisuals shadowOverlayVisuals;
 
@@ -36,6 +42,11 @@ public class TileVisuals : MonoBehaviour
 
     [SerializeField] private float bonusTickParticleSystemDuration = 3f;
 
+    [SerializeField] private Vector2Int tileBonusYieldAnimationRange = new Vector2Int(0, 10);
+    [SerializeField] private float maxTileAdditionalHeight = 10f;
+    [SerializeField] private float tileYieldAnimationDuration = 0.1f;
+    [SerializeField] private AnimationCurve tileYieldBonusHeightAnimationCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+
     private List<ResourceIcon> _instantiatedResourceIcons = new List<ResourceIcon>();
 
     private Renderer[] _tileRenderers;
@@ -47,6 +58,8 @@ public class TileVisuals : MonoBehaviour
     private bool _playedAppearAnimation = false;
 
     private bool _hoveredOver = false;
+
+    private int _currentYieldBonus = 0;
 
     private void Awake()
     {
@@ -119,6 +132,43 @@ public class TileVisuals : MonoBehaviour
 
     }
 
+    public void TileYieldIncreasedAnimation(int yieldDiff)
+    {
+        _currentYieldBonus += yieldDiff;
+
+        MEC.Timing.RunCoroutineSingleton(AnimateTileYieldBonus(_currentYieldBonus), this.gameObject, SingletonBehavior.Overwrite);
+    }
+
+    private IEnumerator<float> AnimateTileYieldBonus(int currentYieldBonus)
+    {
+        float yieldBoostProgress = (currentYieldBonus / (float)(tileBonusYieldAnimationRange.y - tileBonusYieldAnimationRange.x));
+        
+        float originalHeight = buildingHeightGimbal.localPosition.y;
+        float destinationHeight = (yieldBoostProgress) * maxTileAdditionalHeight;
+        
+        MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+        terrainRenderer.GetPropertyBlock(propertyBlock);
+
+        float originalTerrainProgress = propertyBlock.GetFloat(terrainRendererOverlayMaterialProgressPropertyName);
+        float finalTerrainProgress = yieldBoostProgress;
+        
+        for (float t = 0f; t < tileYieldAnimationDuration; t += Time.deltaTime * GlobalSettings.GameSpeed)
+        {
+            float progress = t / tileYieldAnimationDuration;
+
+            float heightProgress = tileYieldBonusHeightAnimationCurve.Evaluate(progress);
+                
+            buildingHeightGimbal.localPosition = new Vector3(0f, Mathf.Lerp(originalHeight, destinationHeight, heightProgress), 0f);
+            
+            propertyBlock.SetFloat(terrainRendererOverlayMaterialProgressPropertyName, Mathf.Lerp(originalTerrainProgress, finalTerrainProgress, progress));
+
+            yield return Timing.WaitForOneFrame;
+        }
+        
+        buildingHeightGimbal.localPosition = new Vector3(0f, destinationHeight, 0f);
+        propertyBlock.SetFloat(terrainRendererOverlayMaterialProgressPropertyName, finalTerrainProgress);
+    }
+
     public void StartTileHarvestAnimation()
     {
         AnimationUtils.ResetAnimator(animator, TILE_DEFAULT_STATE_NAME);
@@ -147,6 +197,12 @@ public class TileVisuals : MonoBehaviour
     public void EndTileHarvestAnimation()
     {
         animator.SetTrigger(TILE_END_HARVEST_TRIGGER);
+        
+        if (_currentYieldBonus > 0)
+        {
+            _currentYieldBonus = 0;
+            MEC.Timing.RunCoroutineSingleton(AnimateTileYieldBonus(0), this.gameObject, SingletonBehavior.Overwrite);
+        }
     }
 
     public void AttachBuilding(BuildingBehaviour building)

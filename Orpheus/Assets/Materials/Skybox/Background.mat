@@ -117,7 +117,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _HexSize: 3
-    - _HexSizeMultiplier: 0.9999867
+    - _HexSizeMultiplier: 0.8074056
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -139,7 +139,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BackgroundColor: {r: 1, g: 0.5254902, b: 0.20784315, a: 0.8}
+    - _BackgroundColor: {r: 0.9674991, g: 0.97096866, b: 0.7648467, a: 0.99960166}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 1, g: 1, b: 1, a: 0.2}

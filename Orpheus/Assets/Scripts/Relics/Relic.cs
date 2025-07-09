@@ -35,6 +35,13 @@ public abstract class Relic
         return false;
     }
 
+    public virtual bool OnTileYieldBonusesApplied(Vector2Int sourcePosition, Vector2Int destinationPosition, int yieldDifference, out int modifiedYieldDifference, out AdditionalTriggeredArgs args)
+    {
+        args = new();
+        modifiedYieldDifference = yieldDifference;
+        return false;
+    }
+    
     public virtual bool OnPhaseChanged(GamePhases phase, out AdditionalTriggeredArgs args)
     {
         args = new();

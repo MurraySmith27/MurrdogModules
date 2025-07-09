@@ -37444,6 +37444,52 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 834745024}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &841565375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841565377}
+  - component: {fileID: 841565376}
+  m_Layer: 0
+  m_Name: ResourcesController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &841565376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841565375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a46c8e5c8a2b4c57822559240340e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DDOL: 1
+  resourceTagsSO: {fileID: 11400000, guid: 29a38415796c746a0bad53c6c7c6714b, type: 2}
+--- !u!4 &841565377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841565375}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &844150137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39770,6 +39816,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867927067}
   m_CullTransparentMesh: 1
+--- !u!1 &873149625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 873149627}
+  - component: {fileID: 873149626}
+  m_Layer: 0
+  m_Name: TerrainBonusSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &873149626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873149625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e0543a59c604829beeb9ddc03bf187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DDOL: 1
+--- !u!4 &873149627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873149625}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.46958, y: -7.7340994, z: -11.63024}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &873538685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55845,6 +55936,8 @@ MonoBehaviour:
   tileProcessEndAudioEventName: TileProcessEnd
   resourceGainedAudioEventName: ResourceGained
   resourceLostAudioEventName: ResourceLost
+  bonusYieldSourceTile: BonusYieldSourceTile
+  tileBonusYield: BonusYieldApplied
   buildingConstructedAudioEventName: BuildingConstructed
   musicAudioEventName: BGM
   isPopupShowingParameterName: IsInCardMenu
@@ -58992,7 +59085,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDOL: 1
   buildingsData: {fileID: 11400000, guid: f8650a50e7a5a3345a6c5c5e7771a084, type: 2}
-  buildingsProcessRulesSO: {fileID: 0}
+  buildingsProcessRulesSO: {fileID: 11400000, guid: 3b1dece6fa5b8ab43921d691c141a111,
+    type: 2}
 --- !u!4 &1284455924
 Transform:
   m_ObjectHideFlags: 0
@@ -79010,6 +79104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1762293192}
   - component: {fileID: 1762293193}
+  - component: {fileID: 1762293197}
   - component: {fileID: 1762293194}
   - component: {fileID: 1762293195}
   - component: {fileID: 1762293196}
@@ -79103,6 +79198,28 @@ MonoBehaviour:
   DDOL: 1
   buildingProcessRules: {fileID: 11400000, guid: 3b1dece6fa5b8ab43921d691c141a111,
     type: 2}
+--- !u!114 &1762293197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762293191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2689a22104e9041a9ba88e80f544585c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DDOL: 1
+  startWaitTime: 0.2
+  endWaitTime: 0.2
+  cityStartAnimationTime: 0.5
+  cityEndAnimationTime: 0.5
+  tileBonusYieldSourceStartTime: 0.25
+  tileBonusYieldSourceEndTime: 0.25
+  tileAnimationEndTime: 0.3
+  tileAnimationPerYieldBonus: 0.1
+  tileAnimationRelicBonus: 0.1
 --- !u!1001 &1764559556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89705,6 +89822,7 @@ GameObject:
   - component: {fileID: 1996416008}
   - component: {fileID: 1996416009}
   - component: {fileID: 1996416010}
+  - component: {fileID: 1996416011}
   m_Layer: 0
   m_Name: 3D
   m_TagString: Untagged
@@ -89762,6 +89880,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 852622c19b950434588e5428c284d6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DDOL: 1
+--- !u!114 &1996416011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996416007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d2c40fb1a3bcc46bda1ca4360e8fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
@@ -89875,7 +90006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDOL: 1
   numHarvestsBeforeWinter: 2
-  naturalPhaseOrder: 
+  naturalPhaseOrder: 00000000010000000200000003000000040000000500000012000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
 --- !u!114 &2000435926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95119,5 +95250,7 @@ SceneRoots:
   - {fileID: 383111857}
   - {fileID: 2069358361}
   - {fileID: 863581332}
+  - {fileID: 873149627}
   - {fileID: 1180059279}
   - {fileID: 768228571}
+  - {fileID: 841565377}

@@ -7,20 +7,30 @@ using UnityEngine.Serialization;
 
 public class BloomingTileBonusYieldsController : Singleton<BloomingTileBonusYieldsController>
 {
-    [SerializeField] private float cityStartAnimationTime = 1f;
-    [SerializeField] private float cityEndAnimationTime = 1f;
-    [SerializeField] private float tileHarvestAnimationTime = 0.25f;
-    [SerializeField] private float tileProcessAnimationTime = 0.25f;
-    [SerializeField] private float tileAnimationEndTime = 0.3f;
-    [SerializeField] private float tileAnimationTimePerResource = 0.5f;
 
-    public event Action OnTileBonusYieldsStart;
-    public event Action OnTileBonusYieldsEnd;
+    [SerializeField] private float startWaitTime = 0.2f;
+    [SerializeField] private float endWaitTime = 0.2f;
+    [SerializeField] private float cityStartAnimationTime = 0.5f;
+    [SerializeField] private float cityEndAnimationTime = 0.5f;
+    [SerializeField] private float tileBonusYieldSourceStartTime = 0.25f;
+    [SerializeField] private float tileBonusYieldSourceEndTime = 0.25f;
+    [SerializeField] private float tileAnimationEndTime = 0.3f;
+    [SerializeField] private float tileAnimationPerYieldBonus = 0.1f;
+    [SerializeField] private float tileAnimationRelicBonus = 0.1f;
+
+    public event Action OnBonusYieldsStart;
+    public event Action OnBonusYieldsEnd;
     public event Action<Guid> OnCityTileBonusYieldsStart;
     public event Action<Guid> OnCityTileBonusYieldsEnd;
 
-    public event Action<Vector2Int, int> OnTileYieldBonusChangeStart;
-    public event Action<Vector2Int, int> OnTileYieldBonusChangeEnd;
+    public event Action<Vector2Int> OnTileYieldBonusSourceStart;
+    public event Action<Vector2Int> OnTileYieldBonusSourceEnd;
+    
+    //source tile, destination tile, yield diff
+    public event Action<Vector2Int, Vector2Int, int> OnTileYieldBonusGranted;
+    
+    //relic type, source tile, destination tile, yield diff
+    public event Action<RelicTypes, Vector2Int, Vector2Int, int> OnRelicTriggered;
     
     public void StartTileBonusYields()
     {
@@ -29,9 +39,11 @@ public class BloomingTileBonusYieldsController : Singleton<BloomingTileBonusYiel
 
     private IEnumerator<float> TileBonusYieldsCoroutine()
     {
-        OnTileBonusYieldsStart?.Invoke();
+        OnBonusYieldsStart?.Invoke();
+        
+        yield return OrpheusTiming.WaitForSecondsGameTime(startWaitTime);
 
-        Dictionary<Vector2Int, int> currentTileYieldBonus = new();
+        Dictionary<Vector2Int, int> currentYieldBonus = new();
         
         List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();
 
@@ -39,157 +51,70 @@ public class BloomingTileBonusYieldsController : Singleton<BloomingTileBonusYiel
         {
             OnCityTileBonusYieldsStart?.Invoke(cityGuid);
             
+            yield return OrpheusTiming.WaitForSecondsGameTime(cityStartAnimationTime);
+            
             List<(Vector2Int, Vector2Int, int)> allTileYieldBonuses;
             if (TerrainBonusSystem.Instance.GetTileYieldBonuses(out allTileYieldBonuses))
             {
+                Dictionary<Vector2Int, List<(Vector2Int, int)>> tileBonusesSortedBySource = new();
+
                 foreach (var bonus in allTileYieldBonuses)
                 {
+                    if (!tileBonusesSortedBySource.ContainsKey(bonus.Item1))
+                    {
+                        tileBonusesSortedBySource.Add(bonus.Item1, new List<(Vector2Int, int)>());   
+                    }
                     
+                    tileBonusesSortedBySource[bonus.Item1].Add((bonus.Item2, bonus.Item3));
+                }
+
+                foreach (Vector2Int source in tileBonusesSortedBySource.Keys)
+                {
+                    OnTileYieldBonusSourceStart?.Invoke(source);
+
+                    yield return OrpheusTiming.WaitForSecondsGameTime(tileBonusYieldSourceStartTime);
+
+                    foreach (var pair in tileBonusesSortedBySource[source])
+                    {
+                        int yieldDifference;
+                        
+                        List<(RelicTypes, int)> triggeredRelics = RelicSystem.Instance.OnTileYieldBonusesApplied(source, pair.Item1, pair.Item2, out yieldDifference);
+
+                        foreach (var relicPair in triggeredRelics)
+                        {
+                            //relic type, source, dest, yield diff
+                            OnRelicTriggered?.Invoke(relicPair.Item1, source, pair.Item1, relicPair.Item2);
+                            
+                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationRelicBonus);
+                        }
+                        
+                        if (!currentYieldBonus.ContainsKey(pair.Item1))
+                        {
+                            currentYieldBonus.Add(pair.Item1, 0);
+                        }
+
+                        currentYieldBonus[pair.Item1] += yieldDifference;
+                        
+                        OnTileYieldBonusGranted?.Invoke(source, pair.Item1, pair.Item2);
+
+                        yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationPerYieldBonus);
+                    }
+
+                    OnTileYieldBonusSourceEnd?.Invoke(source);
+
+                    yield return OrpheusTiming.WaitForSecondsGameTime(tileBonusYieldSourceEndTime);
                 }
             }
             
             OnCityTileBonusYieldsEnd?.Invoke(cityGuid);
-        }
-    }
-    
-
-    private IEnumerator<float> HarvestCoroutine()
-    {
-        Dictionary<ResourceType, int> resources = PlayerResourcesSystem.Instance.GetCurrentRoundResources();
-
-        foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
-        {
-            if (!resources.ContainsKey(resourceType))
-            {
-                resources[resourceType] = 0;
-            }
-        }
-        
-        OnHarvestStart?.Invoke();
-        
-        List<Guid> cityGuids = MapSystem.Instance.GetAllCityGuids();
-        
-        foreach (Guid cityGuid in cityGuids)
-        {
-            OnCityHarvestStart?.Invoke(cityGuid);
-            
-            yield return OrpheusTiming.WaitForSecondsGameTime(cityStartAnimationTime);
-
-            List<Vector2Int> cityTiles = MapSystem.Instance.GetOwnedTilesOfCity(cityGuid);
-
-            foreach (Vector2Int cityTile in cityTiles)
-            {
-
-                List<TileBuilding> buildingsOnTile = MapSystem.Instance.GetBuildingsOnTile(cityTile);
-                if (CitizenController.Instance.IsCitizenOnTile(cityTile) && buildingsOnTile.Count > 0 && buildingsOnTile[0].Type != BuildingType.CityCapital)
-                {
-                    OnTileResourceChangeStart?.Invoke(cityTile);
-
-                    // Dictionary<ResourceType, int> resourcesHarvested =
-                    //     TileHarvestController.Instance.GetResourceChangeOnTileHarvest(cityGuid, cityTile, resources);
-                    var resourcesHarvested = new Dictionary<ResourceType, int>();
-
-                    OnTileHarvestStart?.Invoke(cityTile, resourcesHarvested);
-
-                    foreach (KeyValuePair<ResourceType, int> resource in resourcesHarvested)
-                    {
-                        resources[resource.Key] += resource.Value;
-                        if (resource.Value != 0)
-                        {
-                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                        }
-                    }
-
-                    yield return OrpheusTiming.WaitForSecondsGameTime(tileHarvestAnimationTime);
-
-                    OnTileHarvestEnd?.Invoke(cityTile);
-
-                    //then we process the resources from this tile.
-                    (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesProcessed =
-                        TileHarvestController.Instance.GetResourceChangeOnTileProcess(cityGuid, cityTile, resources);
-                    
-                    
-                    Dictionary<ResourceType, int> relicResourcesDiff = resourcesProcessed.Item1;
-                    List<(RelicTypes, Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> relicsTriggered = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed.Item1, cityTile, out relicResourcesDiff);
-
-                    OnTileProcessStart?.Invoke(cityTile, resourcesProcessed);
-
-                    foreach (KeyValuePair<ResourceType, int> resource in resourcesProcessed.Item1)
-                    {
-                        if (resource.Value != 0)
-                        {
-                            resources[resource.Key] += resource.Value;
-                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                        }
-                    }
-                    
-                    foreach (KeyValuePair<PersistentResourceType, int> resource in resourcesProcessed.Item2)
-                    {
-                        if (resource.Value != 0)
-                        {
-                            PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
-                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);    
-                        }
-                    }
-
-                    foreach (var item in relicsTriggered)
-                    {
-                        RelicTypes relicType = item.Item1;
-                        Dictionary<ResourceType, int> resourcesDiff = item.Item2;
-                        Dictionary<PersistentResourceType, int> persistentResourceDiff = item.Item3;
-
-                        if (resourcesDiff.Count > 0)
-                        {
-                            foreach (KeyValuePair<ResourceType, int> resource in resourcesDiff)
-                            {
-                                if (resource.Value != 0)
-                                {
-                                    if (!resources.ContainsKey(resource.Key))
-                                    {
-                                        resources.Add(resource.Key, 0);
-                                    }
-                                    
-                                    resources[resource.Key] += resource.Value;
-                                    OnRelicTriggered?.Invoke(cityTile, relicType, (new Dictionary<ResourceType, int>(new KeyValuePair<ResourceType, int>[]{new KeyValuePair<ResourceType, int>(resource.Key, resource.Value)}), new()));
-                                    yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                                }
-                            }
-                        }
-                        
-                        if (persistentResourceDiff.Count > 0)
-                        {
-                            foreach (KeyValuePair<PersistentResourceType, int> resource in persistentResourceDiff)
-                            {
-                                if (resource.Value != 0)
-                                {
-                                    
-                                    PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
-                                    
-                                    OnRelicTriggered?.Invoke(cityTile, relicType, (new(),new Dictionary<PersistentResourceType, int>(new KeyValuePair<PersistentResourceType, int>[]{new KeyValuePair<PersistentResourceType, int>(resource.Key, resource.Value)})));
-                                    yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                                }
-                            }
-                        }
-                    }
-
-                    yield return OrpheusTiming.WaitForSecondsGameTime(tileProcessAnimationTime);
-
-                    OnTileProcessEnd?.Invoke(cityTile);
-
-                    yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationEndTime);
-                    
-                    OnTileResourceChangeEnd?.Invoke(cityTile);
-                }
-            }
-            
-            OnCityHarvestEnd?.Invoke(cityGuid);
             
             yield return Timing.WaitForSeconds(cityEndAnimationTime);
         }
         
-        PlayerResourcesSystem.Instance.RegisterCurrentRoundResources(resources);
+        HarvestState.Instance.RegisterCurrentRoundYieldBonuses(currentYieldBonus);
         
-        OnHarvestEnd?.Invoke();
+        yield return OrpheusTiming.WaitForSecondsGameTime(endWaitTime);
+        
+        OnBonusYieldsEnd?.Invoke();
     }
-    
 }
