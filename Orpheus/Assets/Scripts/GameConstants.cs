@@ -52,22 +52,31 @@ public static class GameConstants
     
     public static readonly Vector2Int[] INITIAL_CITY_TILES = new Vector2Int[]
     {
-        new Vector2Int(0, 0)
+        new Vector2Int(0, 0), new Vector2Int(-1, 0),
+        new Vector2Int(1, -1), new Vector2Int(-1, -1),
+        new Vector2Int(1, -2), new Vector2Int(0, -2),
     };
     
     public static readonly TileType[] INITIAL_CITY_TILE_TYPES = new TileType[]
     {
-        TileType.Grass
+        TileType.Grass, TileType.Grass,
+        TileType.Grass, TileType.Grass,
+        TileType.Grass, TileType.Grass,
     };
 
     public static readonly BuildingType[] INITIAL_CITY_BUILDINGS = new BuildingType[]
     {
-        BuildingType.CityCapital
+        BuildingType.CityCapital, BuildingType.CityCapital,
+        BuildingType.CityCapital, BuildingType.CityCapital,
+        BuildingType.CityCapital, BuildingType.CityCapital,
     };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]
     {
-        new ResourceItem(ResourceType.Wood, 0)
+        new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wood, 0),
+        new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wood, 0),
+        new ResourceItem(ResourceType.Wood, 0), new ResourceItem(ResourceType.Wood, 0),
+        
     };
     
     //interest

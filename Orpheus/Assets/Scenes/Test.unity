@@ -79148,7 +79148,7 @@ MonoBehaviour:
   tileHarvestAnimationTime: 0.25
   tileProcessAnimationTime: 0.25
   tileAnimationEndTime: 0.1
-  tileAnimationTimePerResource: 0.3
+  tileAnimationTimePerResource: 0.7
 --- !u!114 &1762293194
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -161,6 +161,8 @@ public class TileVisuals : MonoBehaviour
             buildingHeightGimbal.localPosition = new Vector3(0f, Mathf.Lerp(originalHeight, destinationHeight, heightProgress), 0f);
             
             propertyBlock.SetFloat(terrainRendererOverlayMaterialProgressPropertyName, Mathf.Lerp(originalTerrainProgress, finalTerrainProgress, progress));
+            
+            terrainRenderer.SetPropertyBlock(propertyBlock);
 
             yield return Timing.WaitForOneFrame;
         }

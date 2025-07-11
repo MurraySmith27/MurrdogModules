@@ -116,7 +116,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                             
                             yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
                             
-                            for (int i = 0; i < relicResourcesDiff[resource.Key]; i++)
+                            for (int i = 0; i < yieldBonus; i++)
                             {
                                 resources[resource.Key] += 1;
 
@@ -132,7 +132,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                     {
                         if (resource.Value != 0)
                         {
-                            PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value + (int)yieldBonus);
+                            PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
                             yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);    
                         }
                     }
