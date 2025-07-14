@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using MEC;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,6 +14,7 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     [SerializeField] private float tileProcessAnimationTime = 0.25f;
     [SerializeField] private float tileAnimationEndTime = 0.3f;
     [SerializeField] private float tileAnimationTimePerResource = 0.5f;
+    [SerializeField] private float augmentAdditionalTickTriggeredTime = 0.5f;
 
     public event Action OnHarvestStart;
     public event Action OnHarvestEnd;
@@ -24,6 +26,8 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
     public event Action<Vector2Int> OnTileHarvestEnd;
     public event Action<Vector2Int, (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> OnTileProcessStart;
     public event Action<Vector2Int, ResourceType> OnTileBonusYieldResourceHarvested;
+
+    public event Action<Vector2Int> OnAdditionalAugmentTickTriggered;
     public event Action<Vector2Int> OnTileProcessEnd;
     public event Action<Vector2Int> OnTileBonusTickStart;
     public event Action<Vector2Int> OnTileBonusTickEnd;
@@ -73,105 +77,141 @@ public class BloomingHarvestController : Singleton<BloomingHarvestController>
                     OnTileHarvestStart?.Invoke(cityTile, resourcesHarvested);
 
                     long yieldBonus = HarvestState.Instance.GetAdditionalYieldForTile(cityTile);
-                    
-                    foreach (KeyValuePair<ResourceType, int> resource in resourcesHarvested)
-                    {
-                        if (resource.Value != 0)
-                        {
-                            resources[resource.Key] += resource.Value;
-                           
-                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                            
-                            for (int i = 0; i < yieldBonus; i++)
-                            {
-                                resources[resource.Key] += 1;
-                                
-                                OnTileBonusYieldResourceHarvested?.Invoke(cityTile, resource.Key);
-                                
-                                yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                            }
-                        }
 
+                    List<Augment.AugmentTriggeredData> augmentData = AugmentSystem.Instance.OnTileTriggered(cityTile);
+
+                    int augmentTickTimes = 0;
+                    long augmentGoldGranted = 0;
+
+                    foreach (Augment.AugmentTriggeredData augmentTriggeredData in augmentData)
+                    {
+                        augmentTickTimes += augmentTriggeredData.NumAdditionalTileTriggers;
+                        augmentGoldGranted += augmentTriggeredData.NumGoldAdded;
                     }
 
-                    yield return OrpheusTiming.WaitForSecondsGameTime(tileHarvestAnimationTime);
 
-                    OnTileHarvestEnd?.Invoke(cityTile);
-
-                    //then we process the resources from this tile.
-                    (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesProcessed =
-                        TileHarvestController.Instance.GetResourceChangeOnTileProcess(cityGuid, cityTile, resources);
-                    
-                    
-                    Dictionary<ResourceType, int> relicResourcesDiff = resourcesProcessed.Item1;
-                    List<(RelicTypes, Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)> relicsTriggered = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed.Item1, cityTile, out relicResourcesDiff);
-
-                    OnTileProcessStart?.Invoke(cityTile, resourcesProcessed);
-
-                    foreach (KeyValuePair<ResourceType, int> resource in resourcesProcessed.Item1)
+                    for (int tickTime = 0; tickTime < 1 + augmentTickTimes; tickTime++)
                     {
-                        if (resource.Value != 0)
+                        if (tickTime > 0)
                         {
-                            resources[resource.Key] += resource.Value;
-                            
-                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                            
-                            for (int i = 0; i < yieldBonus; i++)
-                            {
-                                resources[resource.Key] += 1;
+                            OnAdditionalAugmentTickTriggered?.Invoke(cityTile);
 
-                                OnTileBonusYieldResourceHarvested?.Invoke(cityTile, resource.Key);
-                                
-                                yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                            }
-                        }
-
-                    }
-                    
-                    foreach (KeyValuePair<PersistentResourceType, int> resource in resourcesProcessed.Item2)
-                    {
-                        if (resource.Value != 0)
-                        {
-                            PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
-                            yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);    
-                        }
-                    }
-
-                    foreach (var item in relicsTriggered)
-                    {
-                        RelicTypes relicType = item.Item1;
-                        Dictionary<ResourceType, int> resourcesDiff = item.Item2;
-                        Dictionary<PersistentResourceType, int> persistentResourceDiff = item.Item3;
-
-                        if (resourcesDiff.Count > 0)
-                        {
-                            foreach (KeyValuePair<ResourceType, int> resource in resourcesDiff)
-                            {
-                                if (resource.Value != 0)
-                                {
-                                    if (!resources.ContainsKey(resource.Key))
-                                    {
-                                        resources.Add(resource.Key, 0);
-                                    }
-                                    
-                                    resources[resource.Key] += resource.Value;
-                                    OnRelicTriggered?.Invoke(cityTile, relicType, (new Dictionary<ResourceType, int>(new KeyValuePair<ResourceType, int>[]{new KeyValuePair<ResourceType, int>(resource.Key, resource.Value)}), new()));
-                                    yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
-                                }
-                            }
+                            yield return OrpheusTiming.WaitForSecondsGameTime(augmentAdditionalTickTriggeredTime);
                         }
                         
-                        if (persistentResourceDiff.Count > 0)
+                        foreach (KeyValuePair<ResourceType, int> resource in resourcesHarvested)
                         {
-                            foreach (KeyValuePair<PersistentResourceType, int> resource in persistentResourceDiff)
+                            if (resource.Value != 0)
                             {
-                                if (resource.Value != 0)
+                                resources[resource.Key] += resource.Value;
+
+                                yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+
+                                for (int i = 0; i < yieldBonus; i++)
                                 {
-                                    
-                                    PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
-                                    
-                                    OnRelicTriggered?.Invoke(cityTile, relicType, (new(),new Dictionary<PersistentResourceType, int>(new KeyValuePair<PersistentResourceType, int>[]{new KeyValuePair<PersistentResourceType, int>(resource.Key, resource.Value)})));
+                                    resources[resource.Key] += 1;
+
+                                    OnTileBonusYieldResourceHarvested?.Invoke(cityTile, resource.Key);
+
                                     yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                                }
+
+                                yieldBonus = 0;
+                            }
+                        }
+
+                        yield return OrpheusTiming.WaitForSecondsGameTime(tileHarvestAnimationTime);
+
+                        OnTileHarvestEnd?.Invoke(cityTile);
+
+                        //then we process the resources from this tile.
+                        (Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>) resourcesProcessed =
+                            TileHarvestController.Instance.GetResourceChangeOnTileProcess(cityGuid, cityTile,
+                                resources);
+
+                        Dictionary<ResourceType, int> relicResourcesDiff = resourcesProcessed.Item1;
+                        List<(RelicTypes, Dictionary<ResourceType, int>, Dictionary<PersistentResourceType, int>)>
+                            relicsTriggered = RelicSystem.Instance.OnResourcesProcessed(resourcesProcessed.Item1,
+                                cityTile, out relicResourcesDiff);
+
+                        OnTileProcessStart?.Invoke(cityTile, resourcesProcessed);
+
+                        foreach (KeyValuePair<ResourceType, int> resource in resourcesProcessed.Item1)
+                        {
+                            if (resource.Value != 0)
+                            {
+                                resources[resource.Key] += resource.Value;
+
+                                yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+
+                                for (int i = 0; i < yieldBonus; i++)
+                                {
+                                    resources[resource.Key] += 1;
+
+                                    OnTileBonusYieldResourceHarvested?.Invoke(cityTile, resource.Key);
+
+                                    yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                                }
+
+                                yieldBonus = 0;
+                            }
+
+                        }
+
+                        foreach (KeyValuePair<PersistentResourceType, int> resource in resourcesProcessed.Item2)
+                        {
+                            if (resource.Value != 0)
+                            {
+                                PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
+                                yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                            }
+                        }
+
+                        foreach (var item in relicsTriggered)
+                        {
+                            RelicTypes relicType = item.Item1;
+                            Dictionary<ResourceType, int> resourcesDiff = item.Item2;
+                            Dictionary<PersistentResourceType, int> persistentResourceDiff = item.Item3;
+
+                            if (resourcesDiff.Count > 0)
+                            {
+                                foreach (KeyValuePair<ResourceType, int> resource in resourcesDiff)
+                                {
+                                    if (resource.Value != 0)
+                                    {
+                                        if (!resources.ContainsKey(resource.Key))
+                                        {
+                                            resources.Add(resource.Key, 0);
+                                        }
+
+                                        resources[resource.Key] += resource.Value;
+                                        OnRelicTriggered?.Invoke(cityTile, relicType,
+                                            (new Dictionary<ResourceType, int>(new KeyValuePair<ResourceType, int>[] { new KeyValuePair<ResourceType, int>(resource.Key, resource.Value) }),
+                                                new()));
+                                        yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                                    }
+                                }
+                            }
+
+                            if (persistentResourceDiff.Count > 0)
+                            {
+                                foreach (KeyValuePair<PersistentResourceType, int> resource in persistentResourceDiff)
+                                {
+                                    if (resource.Value != 0)
+                                    {
+
+                                        PlayerResourcesSystem.Instance.AddResource(resource.Key, resource.Value);
+
+                                        OnRelicTriggered?.Invoke(cityTile, relicType,
+                                            (new(),
+                                                new Dictionary<PersistentResourceType, int>(
+                                                    new KeyValuePair<PersistentResourceType, int>[]
+                                                    {
+                                                        new KeyValuePair<PersistentResourceType, int>(resource.Key,
+                                                            resource.Value)
+                                                    })));
+                                        yield return OrpheusTiming.WaitForSecondsGameTime(tileAnimationTimePerResource);
+                                    }
                                 }
                             }
                         }

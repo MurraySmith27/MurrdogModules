@@ -70,6 +70,13 @@ public static class GameConstants
         BuildingType.CityCapital, BuildingType.CityCapital,
         BuildingType.CityCapital, BuildingType.CityCapital,
     };
+
+    public static readonly AugmentTypes[] INITIAL_CITY_AUGMENTS = new AugmentTypes[]
+    {
+        AugmentTypes.NONE, AugmentTypes.FOIL,
+        AugmentTypes.NONE, AugmentTypes.HOLO,
+        AugmentTypes.NONE, AugmentTypes.GOLDEN,
+    };
     
     public static readonly ResourceItem[] INITIAL_CITY_RESOURCES = new ResourceItem[]
     {

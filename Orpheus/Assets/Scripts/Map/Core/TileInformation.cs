@@ -86,10 +86,13 @@ public struct TileInformation
     //buildings on a tile
     public List<TileBuilding> Buildings;
 
+    public List<AugmentTypes> Augments;
+
     public TileInformation(TileType tileType)
     {
         Resources = new();
         Buildings = new();
+        Augments = new();
         Type = tileType;
     }
 }

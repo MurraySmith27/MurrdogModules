@@ -130,6 +130,7 @@ public class MapSystem : Singleton<MapSystem>
 
             tile.Buildings = new();
             tile.Resources = new();
+            tile.Augments = new();
             if (GameConstants.INITIAL_CITY_RESOURCES[i].Quantity > 0)
             {
                 tile.Resources.Add(GameConstants.INITIAL_CITY_RESOURCES[i]);
@@ -141,6 +142,11 @@ public class MapSystem : Singleton<MapSystem>
                 TileBuilding newBuilding = new TileBuilding();
                 newBuilding.Type = GameConstants.INITIAL_CITY_BUILDINGS[i];
                 tile.Buildings.Add(newBuilding);
+            }
+
+            if (GameConstants.INITIAL_CITY_AUGMENTS[i] != AugmentTypes.NONE)
+            {
+                tile.Augments.Add(GameConstants.INITIAL_CITY_AUGMENTS[i]);
             }
             
             PlaceTile(startingCityPos + GameConstants.INITIAL_CITY_TILES[i], tile);
@@ -357,6 +363,13 @@ public class MapSystem : Singleton<MapSystem>
                 city.IsLocationInCity(position + new Vector2Int(1, -1))
                 );
         }) != null;
+    }
+
+    public List<AugmentTypes> GetAugmentsOnTile(Vector2Int augments)
+    {
+        TileInformation tileInformation = _tiles[augments.x, augments.y];
+
+        return tileInformation.Augments;
     }
 
     public Vector2Int AddRandomTileToCity(Guid cityGuid)
@@ -622,6 +635,7 @@ public class MapSystem : Singleton<MapSystem>
                 newTile.Type = chunk[i,j];
                 newTile.Resources = resources[i,j];
                 newTile.Buildings = new List<TileBuilding>();
+                newTile.Augments = new();
 
                 newTiles[i, j] = newTile;
             }
