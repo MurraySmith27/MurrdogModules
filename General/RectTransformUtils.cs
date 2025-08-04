@@ -17,7 +17,7 @@ public static class RectTransformUtils
         
         return raycastResults.Select((RaycastResult result) => { return result.gameObject.transform as RectTransform; }).ToList();
     }
-    
+
     public static bool IsMouseOverRectTransform(RectTransform rectTransform)
     {
         PointerEventData eventData = new PointerEventData(EventSystem.current);
@@ -34,6 +34,24 @@ public static class RectTransformUtils
         }
 
         return false;
+    }
+    
+    public static RectTransform RaycastRectTransform(LayerMask layerMask)
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, raycastResults);
+        
+        foreach (RaycastResult result in raycastResults)
+        {
+            if (result.gameObject.layer == layerMask.value)
+            {
+                return result.gameObject.GetComponent<RectTransform>();
+            }
+        }
+
+        return null;
     }
 
     public static Vector2 GetPositionOutsideRectTransform(RectTransform rectTransform, Vector2 preferredDirection, Vector2 offset)
