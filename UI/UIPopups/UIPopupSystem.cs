@@ -192,6 +192,11 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       }
    }
 
+   public UIPopupComponent GetCurrentlyShownPopup()
+   {
+      return _activePopup.Item2;
+   }
+
    //stashing popups should be used when you want to keep the existing popup queue, but hide them all temporarily
    public void StashAllPopups()
    {
