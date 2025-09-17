@@ -1,0 +1,17 @@
+{
+    "name": "ChocDino.UIFX.TMP",
+    "rootNamespace": "",
+    "references": [
+        "Unity.TextMeshPro",
+        "ChocDino.UIFX"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

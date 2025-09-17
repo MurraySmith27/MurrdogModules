@@ -11,7 +11,9 @@ using UnityEngine.SceneManagement;
 public enum PanelShowBehaviour
 {
    KEEP_PREVIOUS,
-   HIDE_PREVIOUS
+   HIDE_PREVIOUS,
+   SHOW_NEXT,
+   
 }
 
 public class UIPopupSystem : Singleton<UIPopupSystem>
@@ -179,7 +181,14 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
             }
             else
             {
-               _popupQueue.AddLast((popupId, newPopup.GetComponent<UIPopupComponent>()));
+               if (showBehaviour == PanelShowBehaviour.SHOW_NEXT)
+               {
+                  _popupQueue.AddFirst((popupId, newPopup.GetComponent<UIPopupComponent>()));
+               }
+               else
+               {
+                  _popupQueue.AddLast((popupId, newPopup.GetComponent<UIPopupComponent>()));
+               }
             }
          }
 
