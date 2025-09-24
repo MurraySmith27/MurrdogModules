@@ -13,7 +13,7 @@ public enum PanelShowBehaviour
    KEEP_PREVIOUS,
    HIDE_PREVIOUS,
    SHOW_NEXT,
-   
+   FORCE_CLEAR_QUEUE,
 }
 
 public class UIPopupSystem : Singleton<UIPopupSystem>
@@ -162,7 +162,21 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
          }
          else if (_activePopup.Item1 != popupId)
          {
-            if (showBehaviour == PanelShowBehaviour.HIDE_PREVIOUS)
+            if (showBehaviour == PanelShowBehaviour.FORCE_CLEAR_QUEUE)
+            {
+               if (_activePopup.Item2 != null)
+               {
+                  _activePopup.Item2.OnPopupHide();
+                  OnPopupHidden?.Invoke(_activePopup.Item1);
+
+                  _popupQueue.Clear();
+               }
+
+               _activePopup = (popupId, newPopup.GetComponent<UIPopupComponent>());
+               newPopup.OnPopupShow();
+               OnPopupShown?.Invoke(popupId);
+            }
+            else if (showBehaviour == PanelShowBehaviour.HIDE_PREVIOUS)
             {
                if (_activePopup.Item2 != null)
                {
