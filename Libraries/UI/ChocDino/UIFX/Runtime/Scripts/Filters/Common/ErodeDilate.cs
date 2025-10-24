@@ -15,6 +15,7 @@ namespace ChocDino.UIFX
 		{
 			internal static int ErodeRadius = Shader.PropertyToID("_ErodeRadius");
 			internal static int DilateRadius = Shader.PropertyToID("_DilateRadius");
+			internal static int AccountForRotation = Shader.PropertyToID("_AccountForRotation");
 		}
 		private static class ShaderKeyword
 		{
@@ -41,6 +42,7 @@ namespace ChocDino.UIFX
 
 		private float _erodeSize = 0f;
 		private float _dilateSize = 0f;
+		private bool _accountForRotation = true;
 		private DistanceShape _distanceShape = DistanceShape.Circle;
 		private bool _alphaOnly = false;
 
@@ -187,9 +189,9 @@ namespace ChocDino.UIFX
 				_materialsDirty = true;
 				_sourceTexture = sourceTexture;
 			}
+				CreateShaders();
 			if (_material == null)
 			{
-				CreateShaders();
 			}
 		}
 
@@ -202,6 +204,7 @@ namespace ChocDino.UIFX
 		{
 			_material.SetFloat(ShaderProp.ErodeRadius, GetScaledSize(_erodeSize));
 			_material.SetFloat(ShaderProp.DilateRadius, GetScaledSize(_dilateSize));
+			_material.SetInt(ShaderProp.AccountForRotation, _accountForRotation ? 1 : 0);
 			if (_distanceShape == DistanceShape.Square)
 			{
 				_material.DisableKeyword(ShaderKeyword.DistDiamond);

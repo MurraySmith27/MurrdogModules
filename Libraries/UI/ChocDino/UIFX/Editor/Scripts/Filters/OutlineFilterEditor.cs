@@ -63,6 +63,8 @@ namespace ChocDino.UIFX.Editor
 		//private SerializedProperty _propTextureScale;
 		private SerializedProperty _propSourceAlpha;
 		private SerializedProperty _propStrength;
+		private SerializedProperty _propUpdateOnTransform;
+		private SerializedProperty _propAccountForRotation;
 
 		private readonly AboutInfo aboutInfo = 
 				new AboutInfo("UIFX - Outline Filter\n© Chocolate Dinosaur Ltd", "uifx-logo-outline-filter")
@@ -121,6 +123,8 @@ namespace ChocDino.UIFX.Editor
 			_propDirection = VerifyFindProperty("_direction");
 			_propSourceAlpha = VerifyFindProperty("_sourceAlpha");
 			_propStrength = VerifyFindProperty("_strength");
+			_propUpdateOnTransform = VerifyFindProperty("_updateOnTransform");
+			_propAccountForRotation = VerifyFindProperty("_accountForRotation");
 			//_gradientEditor = new GradientShaderEditor(_propGradient);
 		}
 
@@ -199,6 +203,8 @@ namespace ChocDino.UIFX.Editor
 			EditorGUI.indentLevel++;
 			EditorGUILayout.PropertyField(_propSourceAlpha);
 			DrawStrengthProperty(_propStrength);
+			EditorGUILayout.PropertyField(_propUpdateOnTransform);
+			EditorGUILayout.PropertyField(_propAccountForRotation);
 			EditorGUI.indentLevel--;
 
 			if (OnInspectorGUI_Baking(filter))

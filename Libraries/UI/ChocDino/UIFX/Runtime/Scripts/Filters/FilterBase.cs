@@ -82,6 +82,9 @@ namespace ChocDino.UIFX
 		private Material _resolveMaterial;
 		private Texture2D _readableTexture;
 		
+		[SerializeField] public bool _updateOnTransform = true;
+		[SerializeField] public bool _accountForRotation = true;
+		
 		protected void LOG(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = "")
 		{
 			ChocDino.UIFX.Log.LOG(message, this, LogType.Log, callerName);
@@ -398,14 +401,18 @@ namespace ChocDino.UIFX
 			{
 				bool forceUpdate = _forceUpdate;
 
-				// Detect a change to the matrix (this also detects changes to the camera and viewport)
-				if (MathUtils.HasMatrixChanged(_previousLocalToWorldMatrix, this.transform.localToWorldMatrix, false))
+				if (_updateOnTransform)
 				{
-					forceUpdate = true;
-					_previousLocalToWorldMatrix = this.transform.localToWorldMatrix;
+					// Detect a change to the matrix (this also detects changes to the camera and viewport)
+					if (MathUtils.HasMatrixChanged(_previousLocalToWorldMatrix, this.transform.localToWorldMatrix,
+						    false))
+					{
+						forceUpdate = true;
+						_previousLocalToWorldMatrix = this.transform.localToWorldMatrix;
+					}
 				}
 
-				#if UIFX_FILTERS_FORCE_UPDATE_PLAYMODE
+#if UIFX_FILTERS_FORCE_UPDATE_PLAYMODE
 				if (Application.isPlaying)
 				{
 					forceUpdate = true;
