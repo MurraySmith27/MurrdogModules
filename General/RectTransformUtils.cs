@@ -45,7 +45,7 @@ public static class RectTransformUtils
         
         foreach (RaycastResult result in raycastResults)
         {
-            if (result.gameObject.layer == layerMask.value)
+            if ((layerMask.value & (1 << result.gameObject.layer)) != 0)
             {
                 return result.gameObject.GetComponent<RectTransform>();
             }
