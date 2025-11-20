@@ -274,9 +274,9 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
       else if (_activePopup.Item1 == popupId)
       {
          _activePopup.Item2.OnPopupHide();
+         _activePopup = ("", null);
          OnPopupHidden?.Invoke(popupId);
          
-         _activePopup = ("", null);
 
          if (!_isCurrentlyStashed)
          {
