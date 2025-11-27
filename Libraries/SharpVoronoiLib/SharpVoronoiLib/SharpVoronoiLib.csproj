@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Version>1.1.0</Version>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>13</LangVersion>
+        <TargetFrameworks>net9.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <Title>SharpVoronoiLib</Title>
+        <Authors>various</Authors>
+        <Description>Generate a Voronoi diagram from a set of points in a plane (using Fortune's Algorithm) with edge clipping and border closure. Includes Lloyds relaxation algorithm. Original version published as VoronoiLib.</Description>
+        <Copyright>MIT License, various authors</Copyright>
+        <PackageProjectUrl>https://github.com/RudyTheDev/SharpVoronoiLib</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/RudyTheDev/SharpVoronoiLib/blob/main/License.md</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/RudyTheDev/SharpVoronoiLib</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>voronoi lloyds fortune's tessellation </PackageTags>
+        <PackageReleaseNotes></PackageReleaseNotes>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <CETCompat>false</CETCompat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2025.2.2">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+</Project>

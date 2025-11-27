@@ -1,0 +1,67 @@
+﻿using System.Collections.Generic;
+
+namespace SharpVoronoiLib
+{
+
+    internal class FortunesTessellation : ITessellationAlgorithm
+    {
+        public List<VoronoiEdge> Run(List<VoronoiSite> sites, double minX, double minY, double maxX, double maxY,
+            out int duplicateCount)
+        {
+            MinHeap<FortuneEvent> eventQueue = new MinHeap<FortuneEvent>(5 * sites.Count);
+
+            HashSet<VoronoiSite> siteCache = new HashSet<VoronoiSite>(VoronoiSiteComparer.Instance);
+
+            duplicateCount = 0;
+
+            foreach (VoronoiSite site in sites)
+            {
+                // If the site has already been marked as a duplicate before (such as prior to relaxing), count and skip it
+                if (site.SkippedAsDuplicate)
+                {
+                    duplicateCount++;
+                    continue;
+                }
+
+                if (!siteCache.Add(site))
+                {
+                    site.MarkSkippedAsDuplicate();
+                    duplicateCount++;
+                    continue;
+                }
+
+                FortuneSiteEvent siteEvent = new FortuneSiteEvent(site);
+
+                eventQueue.Insert(siteEvent);
+
+                site.Tessellated();
+            }
+
+            //init tree
+            BeachLine beachLine = new BeachLine();
+            List<VoronoiEdge>
+                edges = new List<VoronoiEdge>((int)(sites.Count *
+                                                    3.05f)); // slight over-allocation, but it's basically ~3 unique per cell (~6 total per cell) for random sites
+
+            //init edge list
+            while (eventQueue.Count != 0)
+            {
+                FortuneEvent nextEvent = eventQueue.Pop();
+
+                switch (nextEvent)
+                {
+                    case FortuneSiteEvent siteEvent:
+                        beachLine.AddBeachSection(siteEvent, eventQueue, edges);
+                        break;
+
+                    case FortuneCircleEvent circleEvent:
+                        if (!circleEvent.Discarded)
+                            beachLine.RemoveBeachSection(circleEvent, eventQueue, edges);
+                        break;
+                }
+            }
+
+            return edges;
+        }
+    }
+}

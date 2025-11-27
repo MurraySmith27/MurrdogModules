@@ -93,7 +93,7 @@ public class SDFMaskCameraDepthWriter : Singleton<SDFMaskCameraDepthWriter>
         }
     }
 
-    private void OnMapChunkGenerated(int row, int col, int width, int height)
+    private void OnMapChunkGenerated(int row, int col, int width, int height, int layer)
     {
         RenderSDFTextureThisFrame();
     }
