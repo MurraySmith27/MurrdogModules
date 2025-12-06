@@ -46,6 +46,9 @@ public class SDFMaskCameraDepthWriter : Singleton<SDFMaskCameraDepthWriter>
 
         MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
         MapSystem.Instance.OnMapChunkGenerated += OnMapChunkGenerated;
+        
+        FogOfWarSystem.Instance.OnRevealedTilesUpdated -= OnFogOfWarUpdated;
+        FogOfWarSystem.Instance.OnRevealedTilesUpdated += OnFogOfWarUpdated;
     }
 
     private void OnDestroy()
@@ -55,6 +58,11 @@ public class SDFMaskCameraDepthWriter : Singleton<SDFMaskCameraDepthWriter>
         if (MapSystem.IsAvailable)
         {
             MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
+        }
+
+        if (FogOfWarSystem.IsAvailable)
+        {
+            FogOfWarSystem.Instance.OnRevealedTilesUpdated -= OnFogOfWarUpdated;
         }
     }
 
@@ -94,6 +102,11 @@ public class SDFMaskCameraDepthWriter : Singleton<SDFMaskCameraDepthWriter>
     }
 
     private void OnMapChunkGenerated(int row, int col, int width, int height, int layer)
+    {
+        RenderSDFTextureThisFrame();
+    }
+
+    private void OnFogOfWarUpdated(List<Vector2Int> updatedPositions)
     {
         RenderSDFTextureThisFrame();
     }
