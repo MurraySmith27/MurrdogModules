@@ -133,7 +133,7 @@ public class SDFMaskCameraDepthWriter : Singleton<SDFMaskCameraDepthWriter>
         Texture _camDepthTexture = _camera.targetTexture;
         if (!m_depthTexture)
         {
-            m_depthTexture = new Texture2D(_camDepthTexture.width, _camDepthTexture.height, TextureFormat.RGB24, false);
+            m_depthTexture = new Texture2D(_camDepthTexture.width, _camDepthTexture.height, TextureFormat.RGBA32, false);
         }
         
         Graphics.Blit(_camDepthTexture, temp);
