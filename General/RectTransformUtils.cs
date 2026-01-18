@@ -63,7 +63,7 @@ public static class RectTransformUtils
         float yComponent = Mathf.Lerp(corners[0].y, corners[1].y,
             (preferredDirection.normalized.y + 1f) / 2f);
         
-        Vector4 worldPos = rectTransform.localToWorldMatrix * new Vector2(xComponent, yComponent);
+        Vector4 worldPos = new Vector2(xComponent, yComponent);
 
         return offset + new Vector2(worldPos.x, worldPos.y);
     }
