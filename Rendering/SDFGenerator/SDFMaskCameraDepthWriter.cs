@@ -106,9 +106,10 @@ public class SDFMaskCameraDepthWriter : Singleton<SDFMaskCameraDepthWriter>
         RenderSDFTextureThisFrame();
     }
 
-    private void OnFogOfWarUpdated(List<Vector2Int> updatedPositions)
+    private void OnFogOfWarUpdated(List<Vector2Int> updatedPositions, Guid player)
     {
-        RenderSDFTextureThisFrame();
+        if (player == PlayerSystem.Instance.GetActivePlayerId())
+            RenderSDFTextureThisFrame();
     }
 
     public void RenderSDFTextureThisFrame()
