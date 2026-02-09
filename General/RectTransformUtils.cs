@@ -59,12 +59,12 @@ public static class RectTransformUtils
         var corners = new Vector3[4];
         rectTransform.GetWorldCorners(corners);
         float xComponent = Mathf.Lerp(corners[0].x, corners[3].x,
-            (preferredDirection.normalized.x + 1f) / 2f);
+            (preferredDirection.x + 1f) / 2f);
         float yComponent = Mathf.Lerp(corners[0].y, corners[1].y,
-            (preferredDirection.normalized.y + 1f) / 2f);
+            (preferredDirection.y + 1f) / 2f);
         
-        Vector4 worldPos = rectTransform.localToWorldMatrix * new Vector2(xComponent, yComponent);
-
-        return offset + new Vector2(worldPos.x, worldPos.y);
+        Vector2 centerPosition = new Vector2(corners[3].x - corners[0].x, corners[1].y - corners[0].y);
+        
+        return new Vector2(offset.x * Mathf.Sign(xComponent - centerPosition.x), offset.y * Mathf.Sign(yComponent - centerPosition.y)) + new Vector2(xComponent, yComponent);
     }
 }
