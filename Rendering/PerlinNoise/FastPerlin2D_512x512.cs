@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public static class FastPerlin2D_512x512
+public class FastPerlin2D_512x512
 {
     private static readonly int[] perm = {
         151,160,137,91,90,15,
@@ -28,9 +28,9 @@ public static class FastPerlin2D_512x512
         78,66,215,61,156,180
     };
 
-    private static bool _instantiated = false;
+    private bool _instantiated = false;
 
-    private static void Instantiate()
+    private void Instantiate()
     {
         if (!_instantiated)
         {
@@ -39,8 +39,8 @@ public static class FastPerlin2D_512x512
     }
 
     // Duplicate the permutation array for wrapping
-    private static readonly int[] p = new int[512];
-    public static void SetSeed(int seed)
+    private readonly int[] p = new int[512];
+    public void SetSeed(int seed)
     {
         var rng = new System.Random(seed);
 
@@ -61,15 +61,15 @@ public static class FastPerlin2D_512x512
         _instantiated = true;
     }
 
-    public static void SetRandomSeed()
+    public void SetRandomSeed()
     {
         SetSeed(Environment.TickCount);
     }
 
-    private static float Fade(float t)
+    private float Fade(float t)
         => t * t * t * (t * (t * 6 - 15) + 10); // quintic fade
 
-    private static float Grad(int hash, float x, float y)
+    private float Grad(int hash, float x, float y)
     {
         int h = hash & 7; // 8 gradients
         float u = h < 4 ? x : y;
@@ -77,7 +77,7 @@ public static class FastPerlin2D_512x512
         return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
     }
 
-    public static float Noise(float x, float y)
+    public float Noise(float x, float y)
     {
         if (!_instantiated)
         {

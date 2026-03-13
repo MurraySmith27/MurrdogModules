@@ -19,6 +19,9 @@ public abstract class RealtimeInputChannel : ScriptableObject
 
     public event UnityAction<RealtimeInputChannelCallbackArgs> MoveEvent;
     
+    public event UnityAction<RealtimeInputChannelCallbackArgs> SprintStartEvent;
+    public event UnityAction<RealtimeInputChannelCallbackArgs> SprintEndEvent;
+    
     public event UnityAction<RealtimeInputChannelCallbackArgs> SelectEvent;
     
     public event UnityAction<RealtimeInputChannelCallbackArgs> BackEvent;
@@ -26,6 +29,16 @@ public abstract class RealtimeInputChannel : ScriptableObject
     protected void InvokeMoveEvent(Vector2 input)
     {
         MoveEvent?.Invoke(new(vector2Arg: input));
+    }
+
+    protected void InvokeSprintStartEvent()
+    {
+        SprintStartEvent?.Invoke(new());
+    }
+    
+    protected void InvokeSprintEndEvent()
+    {
+        SprintEndEvent?.Invoke(new());
     }
     
     protected void InvokeSelectEvent()
