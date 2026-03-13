@@ -139,6 +139,7 @@ void HSVBlendNormalized_float(float3 HSV_A, float3 HSV_B, float T, out float3 Ou
     // Clamp: never exceed the brighter of the two inputs
     outV = min(outV, max(valA, valB));
 
+    float a = 0;
     // Snap hue when achromatic
     if (outS < 0.01)
     {
@@ -293,12 +294,4 @@ void HSVBlendNormalizedMax_float(float3 HSV_A, float3 HSV_B, float T, out float3
 
     Out = float3(outH, saturate(outS), outV);
 }
-
-void HSVBlendNormalizedMax_half(half3 HSV_A, half3 HSV_B, half T, out half3 Out)
-{
-    float3 result;
-    HSVBlendNormalizedMax_float((float3)HSV_A, (float3)HSV_B, (float)T, result);
-    Out = (half3)result;
-}
-
 #endif // HSV_BLEND_NORMALIZED_INCLUDED
