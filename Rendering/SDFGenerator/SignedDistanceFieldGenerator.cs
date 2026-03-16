@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering;
 
-public class SignedDistanceFieldGenerator : Singleton<SignedDistanceFieldGenerator>
+public class SignedDistanceFieldGenerator : MonoBehaviour 
 {
     public struct Pixel
     {
@@ -40,12 +40,14 @@ public class SignedDistanceFieldGenerator : Singleton<SignedDistanceFieldGenerat
 
     private bool useDistanceField1;
 
+    [SerializeField] private SDFMaskCameraDepthWriter depthWriter;
+
     public Action<RenderTexture> OnSDFUpdated;
 
     
     private void Start()
     {
-        SDFMaskCameraDepthWriter.Instance.m_onSDFDepthTextureChanged += OnSDFDepthTextureChanged;
+        depthWriter.m_onSDFDepthTextureChanged += OnSDFDepthTextureChanged;
 
         m_scalarTextureToSdfProcedure1 = new ScalarTextureToSdfTextureProcedure();
         m_scalarTextureToSdfProcedure2 = new ScalarTextureToSdfTextureProcedure();

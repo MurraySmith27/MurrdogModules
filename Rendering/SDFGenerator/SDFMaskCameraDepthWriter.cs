@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 
 public delegate void SDFDepthTextureChangedEvent(Texture2D depthTexture);
-public class SDFMaskCameraDepthWriter : Singleton<SDFMaskCameraDepthWriter>
+public class SDFMaskCameraDepthWriter : MonoBehaviour 
 {
     public SDFDepthTextureChangedEvent m_onSDFDepthTextureChanged;
 

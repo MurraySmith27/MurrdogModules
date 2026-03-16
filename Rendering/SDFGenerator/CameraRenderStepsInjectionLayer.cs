@@ -3,6 +3,8 @@ using UnityEngine.Rendering;
  
 public class CameraRenderStepsInjectionLayer : MonoBehaviour
 {
+
+    [SerializeField] private SDFMaskCameraDepthWriter _cameraDepthWriter;
     void OnEnable()
     {
         RenderPipelineManager.beginCameraRendering += PreRender;
@@ -11,18 +13,15 @@ public class CameraRenderStepsInjectionLayer : MonoBehaviour
  
     private void PreRender(ScriptableRenderContext _context, Camera _camera)
     {
-        if (_camera.TryGetComponent<SDFMaskCameraDepthWriter>(out SDFMaskCameraDepthWriter _cameraRenderControl))
-        {
-            _cameraRenderControl.PreRender(_context, _camera);
-        }
+        if (_camera.gameObject == _cameraDepthWriter.gameObject)
+            _cameraDepthWriter.PreRender(_context, _camera);
     }
  
     private void PostRender(ScriptableRenderContext _context, Camera _camera)
     {
-        if (_camera.TryGetComponent<SDFMaskCameraDepthWriter>(out SDFMaskCameraDepthWriter _cameraRenderControl))
-        {
-            _cameraRenderControl.PostRender(_context, _camera);
-        }
+        
+        if (_camera.gameObject == _cameraDepthWriter.gameObject)
+            _cameraDepthWriter.PostRender(_context, _camera);
     }
  
     private void OnDisable()
