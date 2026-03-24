@@ -6,23 +6,27 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering;
 
-public class SignedDistanceFieldGenerator : MonoBehaviour 
+public class SignedDistanceFieldGenerator : MonoBehaviour
 {
     public struct Pixel
     {
         public float distance;
     }
-    
+
     [SerializeField] private string m_rendererPropertyName = "_TopDownDistanceField";
 
     [SerializeField] private string m_prevTextureRendererPropertyName = "_PrevTopDownDistanceField";
-    
+
     [SerializeField] private float m_maxPixelSquaredDistanceDf = 50f;
-    
+
     [SerializeField] float _sourceValueThreshold = 0.5f;
-    [SerializeField] ScalarTextureToSdfTextureProcedure.DownSampling _downSampling = ScalarTextureToSdfTextureProcedure.DownSampling.None;
-    [SerializeField] ScalarTextureToSdfTextureProcedure.Precision _precision = ScalarTextureToSdfTextureProcedure.Precision._32;
-    
+
+    [SerializeField] ScalarTextureToSdfTextureProcedure.DownSampling
+        _downSampling = ScalarTextureToSdfTextureProcedure.DownSampling.None;
+
+    [SerializeField]
+    ScalarTextureToSdfTextureProcedure.Precision _precision = ScalarTextureToSdfTextureProcedure.Precision._32;
+
     private int m_texWidth, m_texHeight;
 
     private Pixel[] m_texBuffer;
@@ -34,45 +38,69 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
 
     private UnityEvent<RenderTexture> _sdfTextureEvent = new UnityEvent<RenderTexture>();
 
-    private Texture2D distanceField1;
-    
-    private Texture2D distanceField2;
+    [SerializeField] private RenderTexture lastRenderedDistanceField1;
 
-    private bool useDistanceField1;
+    [SerializeField] private RenderTexture lastRenderedDistanceField2;
+
+    private bool useDistanceField1 = true;
 
     [SerializeField] private SDFMaskCameraDepthWriter depthWriter;
 
     public Action<RenderTexture> OnSDFUpdated;
 
-    
+
     private void Start()
     {
         depthWriter.m_onSDFDepthTextureChanged += OnSDFDepthTextureChanged;
+        depthWriter.m_onSDFDepthTextureChangedPartial += OnSDFDepthTextureChangedPartial;
 
         m_scalarTextureToSdfProcedure1 = new ScalarTextureToSdfTextureProcedure();
         m_scalarTextureToSdfProcedure2 = new ScalarTextureToSdfTextureProcedure();
         // _sdfTextureEvent.AddListener(ApplyPixelDataToRendererMaterialBlock);
     }
 
-    private void OnSDFDepthTextureChanged(Texture2D depthTexture)
+    private void OnSDFDepthTextureChanged(Texture depthTexture)
     {
-    
         if (useDistanceField1)
         {
-            m_scalarTextureToSdfProcedure1.Update( depthTexture, _sourceValueThreshold, _downSampling, _precision, false, false );
-            _sdfTextureEvent.Invoke( m_scalarTextureToSdfProcedure1.sdfTexture );
-            
-            OnSDFUpdated?.Invoke( m_scalarTextureToSdfProcedure1.sdfTexture );
+            var texture = m_scalarTextureToSdfProcedure1.Update(depthTexture, _sourceValueThreshold, _downSampling,
+                _precision, false,
+                false);
+#if UNITY_EDITOR
+            if (!lastRenderedDistanceField1)
+            {
+                lastRenderedDistanceField1 = new RenderTexture(m_scalarTextureToSdfProcedure1.sdfTexture.width, m_scalarTextureToSdfProcedure1.sdfTexture.height, m_scalarTextureToSdfProcedure1.sdfTexture.graphicsFormat,
+                    GraphicsFormat.D16_UNorm); }
+
+            Graphics.CopyTexture(
+                m_scalarTextureToSdfProcedure1.sdfTexture, 0, 0, 0, 0, m_scalarTextureToSdfProcedure1.sdfTexture.width, m_scalarTextureToSdfProcedure1.sdfTexture.height,
+                lastRenderedDistanceField1, 0, 0, 0, 0);
+#endif
+            _sdfTextureEvent.Invoke(m_scalarTextureToSdfProcedure1.sdfTexture);
+
+            OnSDFUpdated?.Invoke(m_scalarTextureToSdfProcedure1.sdfTexture);
         }
         else
         {
-            m_scalarTextureToSdfProcedure2.Update( depthTexture, _sourceValueThreshold, _downSampling, _precision, false, false );
-            _sdfTextureEvent.Invoke( m_scalarTextureToSdfProcedure2.sdfTexture );
+            var texture = m_scalarTextureToSdfProcedure2.Update(depthTexture, _sourceValueThreshold, _downSampling,
+                _precision, false, false);
+#if UNITY_EDITOR
+            if (!lastRenderedDistanceField2)
+            {
+                lastRenderedDistanceField2 = new RenderTexture(m_scalarTextureToSdfProcedure2.sdfTexture.width, m_scalarTextureToSdfProcedure2.sdfTexture.height, m_scalarTextureToSdfProcedure2.sdfTexture.graphicsFormat,
+                    GraphicsFormat.D16_UNorm);
+            }
 
-            OnSDFUpdated?.Invoke( m_scalarTextureToSdfProcedure2.sdfTexture );
+            Graphics.CopyTexture(
+                m_scalarTextureToSdfProcedure2.sdfTexture, 0, 0, 0, 0, m_scalarTextureToSdfProcedure2.sdfTexture.width, m_scalarTextureToSdfProcedure2.sdfTexture.height,
+                lastRenderedDistanceField2, 0, 0, 0, 0);
+#endif
+            _sdfTextureEvent.Invoke(m_scalarTextureToSdfProcedure2.sdfTexture);
+
+            OnSDFUpdated?.Invoke(m_scalarTextureToSdfProcedure2.sdfTexture);
         }
 
-        useDistanceField1 = !useDistanceField1;
+        // useDistanceField1 = !useDistanceField1;
 
         // m_texWidth = depthTexture.width;
         // m_texHeight = depthTexture.height;
@@ -103,13 +131,70 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         // m_sdfDestinationRenderer.SetPropertyBlock(block);
     }
 
+    private void OnSDFDepthTextureChangedPartial(Texture depthTexture, Vector2Int regionCenter, int regionSize)
+    {
+        Vector2Int regionOffset = new Vector2Int(depthTexture.width - regionCenter.x, regionCenter.y) - new Vector2Int(regionSize / 2, regionSize / 2);
+        Vector2Int regionSizeVec = new Vector2Int(regionSize, regionSize);
+
+        // Always use procedure1 for partial updates — no ping-pong needed since the texture is updated in place.
+        // m_scalarTextureToSdfProcedure1.Update(
+        //     depthTexture, _sourceValueThreshold,
+        //     _downSampling, _precision, false, false,
+        //     regionOffset, regionSizeVec);
+        //
+        // OnSDFUpdated?.Invoke(m_scalarTextureToSdfProcedure1.sdfTexture);
+
+        if (useDistanceField1)
+        {
+            var texture = m_scalarTextureToSdfProcedure1.Update(depthTexture, _sourceValueThreshold, _downSampling,
+                _precision, false, false, regionOffset, regionSizeVec, m_scalarTextureToSdfProcedure1.sdfTexture);
+
+#if UNITY_EDITOR
+            if (!lastRenderedDistanceField1)
+            {
+                lastRenderedDistanceField1 = new RenderTexture(m_scalarTextureToSdfProcedure1.sdfTexture.width, m_scalarTextureToSdfProcedure1.sdfTexture.height, m_scalarTextureToSdfProcedure1.sdfTexture.graphicsFormat,
+                    GraphicsFormat.D16_UNorm);
+            }
+
+            Graphics.CopyTexture(
+               m_scalarTextureToSdfProcedure1.sdfTexture, 0, 0, 0, 0, m_scalarTextureToSdfProcedure1.sdfTexture.width, m_scalarTextureToSdfProcedure1.sdfTexture.height,
+                lastRenderedDistanceField1, 0, 0, 0, 0);
+#endif
+            _sdfTextureEvent.Invoke(m_scalarTextureToSdfProcedure1.sdfTexture);
+
+            OnSDFUpdated?.Invoke(m_scalarTextureToSdfProcedure1.sdfTexture);
+        }
+        else
+        {
+            var texture = m_scalarTextureToSdfProcedure2.Update(depthTexture, _sourceValueThreshold, _downSampling,
+                _precision, false,
+                false, regionOffset, regionSizeVec, m_scalarTextureToSdfProcedure1.sdfTexture);
+#if UNITY_EDITOR
+            if (!lastRenderedDistanceField2)
+            {
+                lastRenderedDistanceField2 = new RenderTexture(m_scalarTextureToSdfProcedure2.sdfTexture.width, m_scalarTextureToSdfProcedure2.sdfTexture.height, m_scalarTextureToSdfProcedure2.sdfTexture.graphicsFormat,
+                    GraphicsFormat.D16_UNorm);
+            }
+
+            Graphics.CopyTexture(
+                m_scalarTextureToSdfProcedure2.sdfTexture, 0, 0, 0, 0, m_scalarTextureToSdfProcedure2.sdfTexture.width, m_scalarTextureToSdfProcedure2.sdfTexture.height,
+                lastRenderedDistanceField2, 0, 0, 0, 0);
+#endif
+            _sdfTextureEvent.Invoke(m_scalarTextureToSdfProcedure2.sdfTexture);
+
+            OnSDFUpdated?.Invoke(m_scalarTextureToSdfProcedure2.sdfTexture);
+        }
+
+        // useDistanceField1 = !useDistanceField1;
+    }
+
     private void JumpFloodingAlgorithm(Texture2D tex)
     {
         Color[] pixelData = tex.GetPixels();
 
         int[] seedPixels = new int[pixelData.Length];
 
-        for(int i = 0; i < pixelData.Length; i++)
+        for (int i = 0; i < pixelData.Length; i++)
         {
             if (pixelData[i].r > 0)
             {
@@ -140,30 +225,31 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         int k = Mathf.FloorToInt(tex.width * tex.height / d);
         while (k > 0)
         {
-            
             for (int y = 0; y < tex.height; y++)
             {
                 for (int x = 0; x < tex.width; x++)
                 {
                     Color p = pixelData[y * tex.width + x];
-                    
-                    for (int xoffset = -k; xoffset < k+1; xoffset += k)
+
+                    for (int xoffset = -k; xoffset < k + 1; xoffset += k)
                     {
                         if (x + xoffset < 0 || x + xoffset >= tex.width)
                         {
                             continue;
                         }
+
                         for (int yoffset = -k; yoffset < k + 1; yoffset += k)
                         {
                             if (y + yoffset < 0 || y + yoffset >= tex.height)
                             {
                                 continue;
                             }
+
                             Color q = pixelData[(y + yoffset) * tex.width + (x + xoffset)];
 
                             bool pDefined = p.g > 0;
                             bool qDefined = q.g > 0;
-                            
+
                             if (qDefined)
                             {
                                 int seedOfQ = seedPixels[(y + yoffset) * tex.width + (x + xoffset)];
@@ -173,9 +259,10 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
                                 {
                                     p.r = Mathf.Min(1f, (squaredDistanceFromPToSeedOfQ / m_maxPixelSquaredDistanceDf));
                                     p.g = 1;
-                                    seedPixels[y * tex.width + x] = seedPixels[(y + yoffset) * tex.width + (x + xoffset)];
+                                    seedPixels[y * tex.width + x] =
+                                        seedPixels[(y + yoffset) * tex.width + (x + xoffset)];
                                 }
-                                
+
                                 int seed = seedPixels[y * tex.width + x];
                                 float squaredDistanceFromPToSeedOfP =
                                     SquaredDistanceToSeed(x, y, seed);
@@ -190,14 +277,14 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
                     }
                 }
             }
-            
+
             d *= 2f;
             k = Mathf.FloorToInt(tex.width * tex.height / d);
         }
 
         tex.SetPixels(pixelData);
     }
-    
+
     public void Sweep()
     {
         //clean the field so any none edge pixels simply contain 99999 for outer
@@ -205,7 +292,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         ClearNoneEdgePixels();
 
         //seperate the field into 2 grids - 1 for inner pixels and 1 for outer pixels
-        float[] outside_grid,inside_grid;
+        float[] outside_grid, inside_grid;
         BuildSweepGrids(out outside_grid, out inside_grid);
 
         //run the 8PSSEDT sweep on each grid
@@ -233,12 +320,12 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
     {
         bool is_outer = IsOuterPixel(x, y);
         if (is_outer != IsOuterPixel(x - 1, y - 1)) return true; //[-1,-1]
-        if (is_outer != IsOuterPixel(x, y - 1)) return true;     //[ 0,-1]
+        if (is_outer != IsOuterPixel(x, y - 1)) return true; //[ 0,-1]
         if (is_outer != IsOuterPixel(x + 1, y - 1)) return true; //[+1,-1]
-        if (is_outer != IsOuterPixel(x - 1, y)) return true;     //[-1, 0]
-        if (is_outer != IsOuterPixel(x + 1, y)) return true;     //[+1, 0]
+        if (is_outer != IsOuterPixel(x - 1, y)) return true; //[-1, 0]
+        if (is_outer != IsOuterPixel(x + 1, y)) return true; //[+1, 0]
         if (is_outer != IsOuterPixel(x - 1, y + 1)) return true; //[-1,+1]
-        if (is_outer != IsOuterPixel(x, y + 1)) return true;     //[ 0,+1]
+        if (is_outer != IsOuterPixel(x, y + 1)) return true; //[ 0,+1]
         if (is_outer != IsOuterPixel(x + 1, y + 1)) return true; //[+1,+1]
         return false;
     }
@@ -253,11 +340,11 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
                 bool isEdge = IsEdgePixel(x, y);
                 if (!isEdge)
                     pix.distance = pix.distance > 0 ? 99999f : -99999f;
-                SetPixel(x,y,pix);
+                SetPixel(x, y, pix);
             }
         }
     }
-    
+
     void BuildSweepGrids(out float[] outside_grid, out float[] inside_grid)
     {
         outside_grid = new float[m_texBuffer.Length];
@@ -280,7 +367,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
             }
         }
     }
-    
+
     public void Compare(float[] grid, int x, int y, int xoffset, int yoffset)
     {
         //calculate the location of the other pixel, and bail if in valid
@@ -301,7 +388,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         if (new_dist < curr_dist)
             grid[y * m_texWidth + x] = new_dist;
     }
-    
+
     public void SweepGrid(float[] grid)
     {
         // Pass 0
@@ -358,7 +445,6 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
 
     public void ApplyPixelDataToRendererMaterialBlock(RenderTexture rt)
     {
-        
         // MaterialPropertyBlock block = new MaterialPropertyBlock();
         // m_sdfDestinationRenderer.GetPropertyBlock(block);
         //
@@ -379,7 +465,6 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         //
         //
         // m_sdfDestinationRenderer.SetPropertyBlock(block);
-        
     }
 
     // public void Update()
