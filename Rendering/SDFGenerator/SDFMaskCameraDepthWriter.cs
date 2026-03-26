@@ -166,18 +166,20 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         return false;
     }
 
-    private void WorldPosToTileIndex(Vector3 worldPos, out int tileI, out int tileJ)
+    private void WorldPosToUV(Vector3 worldPos, out float u, out float v)
     {
-        Vector3 delta = worldPos - _mainCamera.transform.position;
+        Vector3 delta   = worldPos - _mainCamera.transform.position;
         float rightProj = Vector3.Dot(delta, _mainCamera.transform.right);
         float upProj    = Vector3.Dot(delta, _mainCamera.transform.up);
-
         float halfRight = _mainCamera.orthographicSize * _mainCamera.aspect;
         float halfUp    = _mainCamera.orthographicSize;
+        u = (rightProj + halfRight) / (halfRight * 2f);
+        v = (upProj    + halfUp)    / (halfUp    * 2f);
+    }
 
-        float u = (rightProj + halfRight) / (halfRight * 2f);
-        float v = (upProj    + halfUp)    / (halfUp    * 2f);
-
+    private void WorldPosToTileIndex(Vector3 worldPos, out int tileI, out int tileJ)
+    {
+        WorldPosToUV(worldPos, out float u, out float v);
         tileI = Mathf.Clamp(Mathf.FloorToInt(u * GridDim), 0, GridDim - 1);
         tileJ = Mathf.Clamp(Mathf.FloorToInt(v * GridDim), 0, GridDim - 1);
     }
@@ -221,8 +223,9 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
     {
         Vector3 worldPos = MapUtils.GetTileWorldPositionFromGridPosition(gridPosition, 0);
 
-        int pixelX = Mathf.RoundToInt(worldPos.x / _worldToTextureScalingFactor * m_destinationDepthRenderTexture.width);
-        int pixelY = Mathf.RoundToInt(worldPos.z / _worldToTextureScalingFactor * m_destinationDepthRenderTexture.height);
+        WorldPosToUV(worldPos, out float u, out float v);
+        int pixelX = Mathf.RoundToInt(u * m_destinationDepthRenderTexture.width);
+        int pixelY = Mathf.RoundToInt(v * m_destinationDepthRenderTexture.height);
 
         WorldPosToTileIndex(worldPos, out int tileI, out int tileJ);
         _pendingPartialCenter[tileJ * GridDim + tileI] = new Vector2Int(pixelX, pixelY);

@@ -158,7 +158,7 @@ void _ShowSeedsKernel( uint2 localId : SV_DispatchThreadID )
 	if( id.x >= _RegionOffset.x + _RegionSize.x || id.y >= _RegionOffset.y + _RegionSize.y ) return;
 	if( id.x >= _Resolution.x || id.y >= _Resolution.y ) return;
 
-	_SdfTex[ id ] = any( _FloodTexRead[ id ].xy ) ? 1 : 0;
+	// _SdfTex[ id ] = any( _FloodTexRead[ id ].xy ) ? 1 : 0;
 }
 
 
@@ -171,5 +171,5 @@ void _FillFromPrevKernel( uint2 id : SV_DispatchThreadID )
 	bool inRegion = id.x >= _RegionOffset.x && id.x < _RegionOffset.x + _RegionSize.x
 	             && id.y >= _RegionOffset.y && id.y < _RegionOffset.y + _RegionSize.y;
 	if( inRegion ) return;
-	_SdfTex[ id ] = _PrevSdfTex[ id ];
+	// _SdfTex[ id ] = _PrevSdfTex[ id ];
 }

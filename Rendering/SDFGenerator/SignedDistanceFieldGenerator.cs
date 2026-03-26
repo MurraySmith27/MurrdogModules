@@ -133,7 +133,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
 
     private void OnSDFDepthTextureChangedPartial(Texture depthTexture, Vector2Int regionCenter, int regionSize)
     {
-        Vector2Int regionOffset = new Vector2Int(depthTexture.width - regionCenter.x, regionCenter.y) - new Vector2Int(regionSize / 2, regionSize / 2);
+        Vector2Int regionOffset = regionCenter - new Vector2Int(regionSize / 2, regionSize / 2);
         Vector2Int regionSizeVec = new Vector2Int(regionSize, regionSize);
 
         // Always use procedure1 for partial updates — no ping-pong needed since the texture is updated in place.
