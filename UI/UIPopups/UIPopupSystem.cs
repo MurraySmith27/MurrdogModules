@@ -301,6 +301,11 @@ public class UIPopupSystem : Singleton<UIPopupSystem>
    {
       return _activePopup.Item2 != null;
    }
+
+   public bool IsPopupQueueEmpty()
+   {
+      return _popupQueue.Count == 0;
+   }
    
    public bool IsPopupShowing(string popupName)
    {
