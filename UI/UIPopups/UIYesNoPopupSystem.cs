@@ -40,7 +40,10 @@ public class UIYesNoPopupSystem : Singleton<UIYesNoPopupSystem>
 
     public void DismissYesNoPopup()
     {
-        UIPopupSystem.Instance.HidePopup(_yesNoPopupId);
+        if (_yesNoPopupComponent != null)
+        {
+            _yesNoPopupComponent.OnNoPressed();
+        }
     }
 
     public bool IsYesNoPopupShowing()
