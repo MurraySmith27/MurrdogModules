@@ -24,152 +24,242 @@
 #define THREAD_GROUP_WIDTH 8
 
 Texture2D _SeedTexRead;
-RWTexture2D<uint4> _FloodTex;
-Texture2D<uint4> _FloodTexRead;
-RWTexture2D<float> _SdfTex;
-Texture2D<float> _PrevSdfTex;
+RWTexture2D<uint4> _FloodTexR;
+RWTexture2D<uint4> _FloodTexG;
+RWTexture2D<uint4> _FloodTexB;
+Texture2D<uint4> _FloodTexReadR;
+Texture2D<uint4> _FloodTexReadG;
+Texture2D<uint4> _FloodTexReadB;
+RWTexture2D<float4> _SdfTex;
+Texture2D<float4> _PrevSdfTex;
 
-CBUFFER_START( Often )
-	float _SeedThreshold;
-	float2 _TexelSize;
-	uint2 _Resolution;
-	uint2 _RegionOffset;
-	uint2 _RegionSize;
+CBUFFER_START(Often)
+    float _SeedThreshold;
+    float2 _TexelSize;
+    uint2 _Resolution;
+    uint2 _RegionOffset;
+    uint2 _RegionSize;
 CBUFFER_END
 
-CBUFFER_START( Always )
-	int _StepSize;
+CBUFFER_START(Always)
+    int _StepSize;
 CBUFFER_END
 
 SamplerState _LinearClamp;
 
 
 #define NEIGHBOUR_COUNT 9
-static const int2 offsets[ NEIGHBOUR_COUNT ] = {
-	int2( -1, -1 ), int2( 0, -1 ), int2( 1, -1 ),
-	int2( -1, 0 ), int2( 0, 0 ), int2( 1, 0 ),
-	int2( -1, 1 ), int2( 0, 1 ), int2( 1, 1 ),
+static const int2 offsets[NEIGHBOUR_COUNT] = {
+    int2(-1, -1), int2(0, -1), int2(1, -1),
+    int2(-1, 0), int2(0, 0), int2(1, 0),
+    int2(-1, 1), int2(0, 1), int2(1, 1),
 };
 
 
 [numthreads( THREAD_GROUP_WIDTH, THREAD_GROUP_WIDTH, 1 )]
-void _SeedKernel( uint2 localCoord : SV_DispatchThreadID )
+void _SeedKernel(uint2 localCoord : SV_DispatchThreadID)
 {
-	uint2 coord = localCoord + _RegionOffset;
-	if( coord.x >= _RegionOffset.x + _RegionSize.x || coord.y >= _RegionOffset.y + _RegionSize.y ) return;
-	if( coord.x >= _Resolution.x || coord.y >= _Resolution.y ) return;
+    uint2 coord = localCoord + _RegionOffset;
+    if (coord.x >= _RegionOffset.x + _RegionSize.x || coord.y >= _RegionOffset.y + _RegionSize.y) return;
+    if (coord.x >= _Resolution.x || coord.y >= _Resolution.y) return;
 
-	// Sample and test for seed.
-	float2 uv = ( coord + 0.5 ) * _TexelSize;
-	bool isInsideSeed = _SeedTexRead.SampleLevel( _LinearClamp, uv, 0 ).r > _SeedThreshold;
+    // Sample and test for seed.
+    float2 uv = (coord + 0.5) * _TexelSize;
+    bool isInsideSeedR = _SeedTexRead.SampleLevel(_LinearClamp, uv, 0).r > _SeedThreshold;
+    bool isInsideSeedG = _SeedTexRead.SampleLevel(_LinearClamp, uv, 0).g > _SeedThreshold;
+    bool isInsideSeedB = _SeedTexRead.SampleLevel(_LinearClamp, uv, 0).b > _SeedThreshold;
 
-	// Since reading outside texture bounds returns zero, we shift all coordinates (1,1) so that (0,0) can be used to indicate "no seed coordinate".
-	int2 seed = coord + int2( 1, 1 );
+    // Since reading outside texture bounds returns zero, we shift all coordinates (1,1) so that (0,0) can be used to indicate "no seed coordinate".
+    int2 seed = coord + int2(1, 1);
 
-	// TODO add border
-	#ifdef _ADD_BORDERS
+    // TODO add border
+    #ifdef _ADD_BORDERS
 		if( coord.x == 0 || coord.y == 0 || coord.x >= _Resolution.x-1 || coord.y >= _Resolution.y-1 ) isInsideSeed = true;
-	#endif
+    #endif
 
-	// Store inside seeds at xy and outside seeds at zw.
-	_FloodTex[ coord ] = isInsideSeed ? uint4( seed, 0, 0 ) : uint4( 0, 0, seed );
+    // Store inside seeds at xy and outside seeds at zw.
+    _FloodTexR[coord] = isInsideSeedR ? uint4(seed, 0, 0) : uint4(0, 0, seed);
+    _FloodTexG[coord] = isInsideSeedG ? uint4(seed, 0, 0) : uint4(0, 0, seed);
+    _FloodTexB[coord] = isInsideSeedB ? uint4(seed, 0, 0) : uint4(0, 0, seed);
 }
 
 
-
-groupshared uint2x3 sharedCoordDist[ NEIGHBOUR_COUNT ];
+groupshared uint2x3 sharedCoordDistR[NEIGHBOUR_COUNT];
+groupshared uint2x3 sharedCoordDistG[NEIGHBOUR_COUNT];
+groupshared uint2x3 sharedCoordDistB[NEIGHBOUR_COUNT];
 
 [numthreads( 1, 1, NEIGHBOUR_COUNT )]
-void _FloodKernel( uint2 localCoord : SV_DispatchThreadID, uint3 gtId : SV_GroupThreadID )
+void _FloodKernel(uint2 localCoord : SV_DispatchThreadID, uint3 gtId : SV_GroupThreadID)
 {
-	uint2 coord = localCoord + _RegionOffset;
+    uint2 coord = localCoord + _RegionOffset;
 
-	// Get the jump offset.
-	int2 sampleCoord = (int2)coord + offsets[ gtId.z ] * _StepSize;
+    // Get the jump offset.
+    int2 sampleCoord = (int2)coord + offsets[gtId.z] * _StepSize;
 
-	// Sample.
-	int4 seed = _FloodTex[ sampleCoord ]; // Reads outside bounds will return zeros.
-	int2 shiftedCoord = (int2)coord + int2( 1, 1 );
-	int4 diff = seed - shiftedCoord.xyxy;
-	sharedCoordDist[ gtId.z ] = int2x3(
-		seed.xy, any( seed.xy ) ? dot( diff.xy, diff.xy ) : 9999999, // enough to be ignored
-		seed.zw, any( seed.zw ) ? dot( diff.zw, diff.zw ) : 9999999
-	);
+    // Sample.
+    int4 seedR = _FloodTexR[sampleCoord]; // Reads outside bounds will return zeros.
+    int2 shiftedCoordR = (int2)coord + int2(1, 1);
+    int4 diffR = seedR - shiftedCoordR.xyxy;
+    sharedCoordDistR[gtId.z] = int2x3(
+        seedR.xy, any(seedR.xy) ? dot(diffR.xy, diffR.xy) : 9999999, // enough to be ignored
+        seedR.zw, any(seedR.zw) ? dot(diffR.zw, diffR.zw) : 9999999
+    );
 
-	// Wait until all threads in this group has executed issued reads/writes to groupshared memory.
-	GroupMemoryBarrier();
+    int4 seedG = _FloodTexG[sampleCoord]; // Reads outside bounds will return zeros.
+    int2 shiftedCoordG = (int2)coord + int2(1, 1);
+    int4 diffG = seedG - shiftedCoordG.xyxy;
+    sharedCoordDistG[gtId.z] = int2x3(
+        seedG.xy, any(seedG.xy) ? dot(diffG.xy, diffG.xy) : 9999999, // enough to be ignored
+        seedG.zw, any(seedG.zw) ? dot(diffG.zw, diffG.zw) : 9999999
+    );
 
-	// If first thread in group, read from shared memory and find coordinate with smallest distance.
-	if( gtId.z == 0 )
-	{
-		uint bestOuterDist = 9999999;
-		uint bestInnerDist = 9999999;
-		uint2 bestOuterCoord = int2( 0, 0 );
-		uint2 bestInnerCoord = int2( 0, 0 );
-		uint2x3 data;
-		[unroll]
-		for( int i = 0; i < NEIGHBOUR_COUNT; i++ )
-		{
-			data = sharedCoordDist[ i ];
-			if( data._m02 < bestInnerDist ){
-				bestInnerDist = data._m02;
-				bestInnerCoord = data._m00_m01;
-			}
-			if( data._m12 < bestOuterDist ){
-				bestOuterDist = data._m12;
-				bestOuterCoord = data._m10_m11;
-			}
-		}
+    int4 seedB = _FloodTexB[sampleCoord]; // Reads outside bounds will return zeros.
+    int2 shiftedCoordB = (int2)coord + int2(1, 1);
+    int4 diffB = seedB - shiftedCoordB.xyxy;
+    sharedCoordDistB[gtId.z] = int2x3(
+        seedB.xy, any(seedB.xy) ? dot(diffB.xy, diffB.xy) : 9999999, // enough to be ignored
+        seedB.zw, any(seedB.zw) ? dot(diffB.zw, diffB.zw) : 9999999
+    );
 
-		// Write.
-		_FloodTex[ (int2)coord ] = uint4( bestInnerCoord, bestOuterCoord );
-	}
+    // Wait until all threads in this group has executed issued reads/writes to groupshared memory.
+    GroupMemoryBarrier();
+
+    // If first thread in group, read from shared memory and find coordinate with smallest distance.
+    if (gtId.z == 0)
+    {
+        uint bestOuterDistR = 9999999;
+        uint bestInnerDistR = 9999999;
+        uint2 bestOuterCoordR = int2(0, 0);
+        uint2 bestInnerCoordR = int2(0, 0);
+        uint2x3 dataR;
+        uint bestOuterDistG = 9999999;
+        uint bestInnerDistG = 9999999;
+        uint2 bestOuterCoordG = int2(0, 0);
+        uint2 bestInnerCoordG = int2(0, 0);
+        uint2x3 dataG;
+        uint bestOuterDistB = 9999999;
+        uint bestInnerDistB = 9999999;
+        uint2 bestOuterCoordB = int2(0, 0);
+        uint2 bestInnerCoordB = int2(0, 0);
+        uint2x3 dataB;
+        [unroll]
+        for (int i = 0; i < NEIGHBOUR_COUNT; i++)
+        {
+            dataR = sharedCoordDistR[i];
+            if (dataR._m02 < bestInnerDistR)
+            {
+                bestInnerDistR = dataR._m02;
+                bestInnerCoordR = dataR._m00_m01;
+            }
+            if (dataR._m12 < bestOuterDistR)
+            {
+                bestOuterDistR = dataR._m12;
+                bestOuterCoordR = dataR._m10_m11;
+            }
+            dataG = sharedCoordDistG[i];
+            if (dataG._m02 < bestInnerDistG)
+            {
+                bestInnerDistG = dataG._m02;
+                bestInnerCoordG = dataG._m00_m01;
+            }
+            if (dataG._m12 < bestOuterDistG)
+            {
+                bestOuterDistG = dataG._m12;
+                bestOuterCoordG = dataG._m10_m11;
+            }
+            dataB = sharedCoordDistB[i];
+            if (dataB._m02 < bestInnerDistB)
+            {
+                bestInnerDistB = dataB._m02;
+                bestInnerCoordB = dataB._m00_m01;
+            }
+            if (dataB._m12 < bestOuterDistB)
+            {
+                bestOuterDistB = dataB._m12;
+                bestOuterCoordB = dataB._m10_m11;
+            }
+        }
+
+        // Write.
+        _FloodTexR[(int2)coord] = uint4(bestInnerCoordR, bestOuterCoordR);
+        _FloodTexG[(int2)coord] = uint4(bestInnerCoordG, bestOuterCoordG);
+        _FloodTexB[(int2)coord] = uint4(bestInnerCoordB, bestOuterCoordB);
+    }
 }
 
 
 [numthreads( THREAD_GROUP_WIDTH, THREAD_GROUP_WIDTH, 1 )]
-void _DistKernel( uint2 localCoord : SV_DispatchThreadID )
+void _DistKernel(uint2 localCoord : SV_DispatchThreadID)
 {
-	uint2 coord = localCoord + _RegionOffset;
-	if( coord.x >= _RegionOffset.x + _RegionSize.x || coord.y >= _RegionOffset.y + _RegionSize.y ) return;
-	if( coord.x >= _Resolution.x || coord.y >= _Resolution.y ) return;
+    uint2 coord = localCoord + _RegionOffset;
+    if (coord.x >= _RegionOffset.x + _RegionSize.x || coord.y >= _RegionOffset.y + _RegionSize.y) return;
+    if (coord.x >= _Resolution.x || coord.y >= _Resolution.y) return;
+    int2 shiftedCoord = (int2)coord + int2(1, 1);
 
-	int4 closestCoords = _FloodTexRead[ coord ];
-	int2 shiftedCoord = (int2)coord + int2( 1, 1 );
-	float4 diff = closestCoords - shiftedCoord.xyxy;
+    int4 closestCoordsR = _FloodTexReadR[coord];
+    float4 diffR = closestCoordsR - shiftedCoord.xyxy;
 
-	float outerDist = any( closestCoords.xy ) ? length( diff.xy ) : 0;
-	float innerDist = any( closestCoords.zw ) ? length( diff.zw ) : 0;
-	float sd = outerDist - innerDist; // If coord is inside then outerDist will be zero, else innerDist will be zero.
-	
-	// Use same convension as Unity's SDF Bake Tool
-	// "the underlying surface scales such that the largest side of the Texture is of length 1".
-	// https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@15.0/manual/sdf-in-vfx-graph.html
-	sd *= min( _TexelSize.x, _TexelSize.y );
-	
-	_SdfTex[ coord ] = sd;
+    float outerDistR = any(closestCoordsR.xy) ? length(diffR.xy) : 0;
+    float innerDistR = any(closestCoordsR.zw) ? length(diffR.zw) : 0;
+    float sdR = outerDistR - innerDistR; // If coord is inside then outerDist will be zero, else innerDist will be zero.
+
+    // Use same convension as Unity's SDF Bake Tool
+    // "the underlying surface scales such that the largest side of the Texture is of length 1".
+    // https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@15.0/manual/sdf-in-vfx-graph.html
+    sdR *= min(_TexelSize.x, _TexelSize.y);
+
+    int4 closestCoordsG = _FloodTexReadG[coord];
+    float4 diffG = closestCoordsG - shiftedCoord.xyxy;
+
+    float outerDistG = any(closestCoordsG.xy) ? length(diffG.xy) : 0;
+    float innerDistG = any(closestCoordsG.zw) ? length(diffG.zw) : 0;
+    float sdG = outerDistG - innerDistG; // If coord is inside then outerDist will be zero, else innerDist will be zero.
+
+    // Use same convension as Unity's SDF Bake Tool
+    // "the underlying surface scales such that the largest side of the Texture is of length 1".
+    // https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@15.0/manual/sdf-in-vfx-graph.html
+    sdG *= min(_TexelSize.x, _TexelSize.y);
+
+    int4 closestCoordsB = _FloodTexReadB[coord];
+    float4 diffB = closestCoordsB - shiftedCoord.xyxy;
+
+    float outerDistB = any(closestCoordsB.xy) ? length(diffB.xy) : 0;
+    float innerDistB = any(closestCoordsB.zw) ? length(diffB.zw) : 0;
+    float sdB = outerDistB - innerDistB; // If coord is inside then outerDist will be zero, else innerDist will be zero.
+
+    // Use same convension as Unity's SDF Bake Tool
+    // "the underlying surface scales such that the largest side of the Texture is of length 1".
+    // https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@15.0/manual/sdf-in-vfx-graph.html
+    sdB *= min(_TexelSize.x, _TexelSize.y);
+
+    _SdfTex[coord] = float4(sdR, sdG, sdB, 1);
 }
 
 
 [numthreads( THREAD_GROUP_WIDTH, THREAD_GROUP_WIDTH, 1 )]
-void _ShowSeedsKernel( uint2 localId : SV_DispatchThreadID )
+void _ShowSeedsKernel(uint2 localId : SV_DispatchThreadID)
 {
-	uint2 id = localId + _RegionOffset;
-	if( id.x >= _RegionOffset.x + _RegionSize.x || id.y >= _RegionOffset.y + _RegionSize.y ) return;
-	if( id.x >= _Resolution.x || id.y >= _Resolution.y ) return;
+    uint2 id = localId + _RegionOffset;
+    if (id.x >= _RegionOffset.x + _RegionSize.x || id.y >= _RegionOffset.y + _RegionSize.y) return;
+    if (id.x >= _Resolution.x || id.y >= _Resolution.y) return;
 
-	_SdfTex[ id ] = any( _FloodTexRead[ id ].xy ) ? 1 : 0;
+    _SdfTex[id] = float4(
+        any(_FloodTexReadR[id].xy) ? 1 : 0,
+        any(_FloodTexReadG[id].xy) ? 1 : 0,
+        any(_FloodTexReadB[id].xy) ? 1 : 0,
+        1
+    );
 }
 
 
 // Fills pixels outside the updated region with values from the previous SDF texture,
 // so partial updates don't leave black/zero in unvisited areas.
 [numthreads( THREAD_GROUP_WIDTH, THREAD_GROUP_WIDTH, 1 )]
-void _FillFromPrevKernel( uint2 id : SV_DispatchThreadID )
+void _FillFromPrevKernel(uint2 id : SV_DispatchThreadID)
 {
-	if( id.x >= _Resolution.x || id.y >= _Resolution.y ) return;
-	bool inRegion = id.x >= _RegionOffset.x && id.x < _RegionOffset.x + _RegionSize.x
-	             && id.y >= _RegionOffset.y && id.y < _RegionOffset.y + _RegionSize.y;
-	if( inRegion ) return;
-	// _SdfTex[ id ] = _PrevSdfTex[ id ];
+    if (id.x >= _Resolution.x || id.y >= _Resolution.y) return;
+    bool inRegion = id.x >= _RegionOffset.x && id.x < _RegionOffset.x + _RegionSize.x
+        && id.y >= _RegionOffset.y && id.y < _RegionOffset.y + _RegionSize.y;
+    if (inRegion) return;
+    // _SdfTex[ id ] = _PrevSdfTex[ id ];
 }

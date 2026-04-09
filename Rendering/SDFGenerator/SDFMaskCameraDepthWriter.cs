@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MEC;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 
 
@@ -30,6 +31,8 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
 
     // Side length (in SDF texture pixels) of the square patch updated on a partial render.
     [SerializeField] private int _patchSizePixels = 64;
+
+    [SerializeField] private int rendererIndex = 3;
 
     // ── Tile cameras ─────────────────────────────────────────────────────────
 
@@ -110,7 +113,7 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         var tileRTDesc = m_destinationDepthRenderTexture.descriptor;
         tileRTDesc.width = tileW;
         tileRTDesc.height = tileH;
-
+        
         for (int j = 0; j < GridDim; j++)
         {
             for (int i = 0; i < GridDim; i++)
@@ -135,6 +138,9 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
                 cam.allowHDR = _mainCamera.allowHDR;
                 cam.allowMSAA = _mainCamera.allowMSAA;
 
+                var additionalData = cam.GetUniversalAdditionalCameraData();
+                additionalData.SetRenderer(rendererIndex);
+                
                 var rt = new RenderTexture(tileRTDesc);
                 rt.name = $"TileRT_{i}_{j}";
                 rt.Create();

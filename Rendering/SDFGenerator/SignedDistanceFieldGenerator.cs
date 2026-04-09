@@ -32,6 +32,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
     private Pixel[] m_texBuffer;
 
     [SerializeField] private SDFMaskCameraDepthWriter m_SDFMaskCameraDepthWriter;
+    [SerializeField] private bool showSource = false;
 
     private ScalarTextureToSdfTextureProcedure m_scalarTextureToSdfProcedure1;
     private ScalarTextureToSdfTextureProcedure m_scalarTextureToSdfProcedure2;
@@ -65,7 +66,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         {
             var texture = m_scalarTextureToSdfProcedure1.Update(depthTexture, _sourceValueThreshold, _downSampling,
                 _precision, false,
-                false);
+                showSource);
 #if UNITY_EDITOR
             if (!lastRenderedDistanceField1)
             {
@@ -83,7 +84,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         else
         {
             var texture = m_scalarTextureToSdfProcedure2.Update(depthTexture, _sourceValueThreshold, _downSampling,
-                _precision, false, false);
+                _precision, false, showSource);
 #if UNITY_EDITOR
             if (!lastRenderedDistanceField2)
             {
@@ -147,7 +148,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         if (useDistanceField1)
         {
             var texture = m_scalarTextureToSdfProcedure1.Update(depthTexture, _sourceValueThreshold, _downSampling,
-                _precision, false, false, regionOffset, regionSizeVec, m_scalarTextureToSdfProcedure1.sdfTexture);
+                _precision, false, showSource, regionOffset, regionSizeVec, m_scalarTextureToSdfProcedure1.sdfTexture);
 
 #if UNITY_EDITOR
             if (!lastRenderedDistanceField1)
@@ -168,7 +169,7 @@ public class SignedDistanceFieldGenerator : MonoBehaviour
         {
             var texture = m_scalarTextureToSdfProcedure2.Update(depthTexture, _sourceValueThreshold, _downSampling,
                 _precision, false,
-                false, regionOffset, regionSizeVec, m_scalarTextureToSdfProcedure1.sdfTexture);
+                showSource, regionOffset, regionSizeVec, m_scalarTextureToSdfProcedure1.sdfTexture);
 #if UNITY_EDITOR
             if (!lastRenderedDistanceField2)
             {

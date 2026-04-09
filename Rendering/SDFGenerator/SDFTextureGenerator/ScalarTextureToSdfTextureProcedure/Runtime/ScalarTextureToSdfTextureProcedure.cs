@@ -12,7 +12,9 @@ namespace Simplex.Procedures
 	public class ScalarTextureToSdfTextureProcedure
 	{
 		RenderTexture _sdfTexture;
-		RenderTexture _floodTexture;
+		RenderTexture _floodTextureR;
+		RenderTexture _floodTextureG;
+		RenderTexture _floodTextureB;
 
 		ComputeShader _computeShader;
 		int _SeedKernel;
@@ -36,8 +38,12 @@ namespace Simplex.Procedures
 		static class ShaderIDs
 		{
 			public static readonly int _SeedTexRead = Shader.PropertyToID( nameof( _SeedTexRead ) );
-			public static readonly int _FloodTex = Shader.PropertyToID( nameof( _FloodTex ) );
-			public static readonly int _FloodTexRead = Shader.PropertyToID( nameof( _FloodTexRead ) );
+			public static readonly int _FloodTexR = Shader.PropertyToID( nameof( _FloodTexR ) );
+			public static readonly int _FloodTexG = Shader.PropertyToID( nameof( _FloodTexG ) );
+			public static readonly int _FloodTexB = Shader.PropertyToID( nameof( _FloodTexB ) );
+			public static readonly int _FloodTexReadR = Shader.PropertyToID( nameof( _FloodTexReadR ) );
+			public static readonly int _FloodTexReadG = Shader.PropertyToID( nameof( _FloodTexReadG ) );
+			public static readonly int _FloodTexReadB = Shader.PropertyToID( nameof( _FloodTexReadB ) );
 			public static readonly int _SdfTex = Shader.PropertyToID( nameof( _SdfTex ) );
 			public static readonly int _Resolution = Shader.PropertyToID( nameof( _Resolution ) );
 			public static readonly int _StepSize = Shader.PropertyToID( nameof( _StepSize ) );
@@ -98,8 +104,9 @@ namespace Simplex.Procedures
 			}
 			GraphicsFormat sdfFormat;
 			switch( precision ) {
-				case Precision._16: sdfFormat = GraphicsFormat.R16_SFloat; break;
-				default: sdfFormat = GraphicsFormat.R32_SFloat; break;
+				case Precision._16:
+					sdfFormat = GraphicsFormat.R8G8B8A8_UNorm; break;
+				default: sdfFormat = GraphicsFormat.R32G32B32A32_SFloat; break;
 			}
 			if( !_sdfTexture || _sdfTexture.width != resolution.x || _sdfTexture.height != resolution.y || _sdfTexture.graphicsFormat != sdfFormat ) {
 				_sdfTexture?.Release();
@@ -108,13 +115,25 @@ namespace Simplex.Procedures
 				_computeShader.SetTexture( _DistKernel, ShaderIDs._SdfTex, _sdfTexture );
 				_computeShader.SetTexture( _FillFromPrevKernel, ShaderIDs._SdfTex, _sdfTexture );
 			}
-			if( !_floodTexture || _floodTexture.width != resolution.x || _floodTexture.height != resolution.y ) {
-				_floodTexture?.Release();
-				_floodTexture = CreateTexture( "FloodTexture", resolution, GraphicsFormat.R32G32B32A32_UInt );
-				_computeShader.SetTexture( _SeedKernel, ShaderIDs._FloodTex, _floodTexture );
-				_computeShader.SetTexture( _FloodKernel, ShaderIDs._FloodTex, _floodTexture );
-				_computeShader.SetTexture( _DistKernel, ShaderIDs._FloodTexRead, _floodTexture );
-				_computeShader.SetTexture( _ShowSeedsKernel, ShaderIDs._FloodTexRead, _floodTexture );
+			if( !_floodTextureR || _floodTextureR.width != resolution.x || _floodTextureR.height != resolution.y ) {
+				_floodTextureR?.Release();
+				_floodTextureG?.Release();
+				_floodTextureB?.Release();
+				_floodTextureR = CreateTexture( "FloodTextureR", resolution, GraphicsFormat.R32G32B32A32_SFloat );
+				_floodTextureG = CreateTexture( "FloodTextureG", resolution, GraphicsFormat.R32G32B32A32_SFloat );
+				_floodTextureB = CreateTexture( "FloodTextureB", resolution, GraphicsFormat.R32G32B32A32_SFloat );
+				_computeShader.SetTexture( _SeedKernel, ShaderIDs._FloodTexR, _floodTextureR );
+				_computeShader.SetTexture( _SeedKernel, ShaderIDs._FloodTexG, _floodTextureG );
+				_computeShader.SetTexture( _SeedKernel, ShaderIDs._FloodTexB, _floodTextureB );
+				_computeShader.SetTexture( _FloodKernel, ShaderIDs._FloodTexR, _floodTextureR );
+				_computeShader.SetTexture( _FloodKernel, ShaderIDs._FloodTexG, _floodTextureG );
+				_computeShader.SetTexture( _FloodKernel, ShaderIDs._FloodTexB, _floodTextureB );
+				_computeShader.SetTexture( _DistKernel, ShaderIDs._FloodTexReadR, _floodTextureR );
+				_computeShader.SetTexture( _DistKernel, ShaderIDs._FloodTexReadG, _floodTextureG );
+				_computeShader.SetTexture( _DistKernel, ShaderIDs._FloodTexReadB, _floodTextureB );
+				_computeShader.SetTexture( _ShowSeedsKernel, ShaderIDs._FloodTexReadR, _floodTextureR );
+				_computeShader.SetTexture( _ShowSeedsKernel, ShaderIDs._FloodTexReadG, _floodTextureG );
+				_computeShader.SetTexture( _ShowSeedsKernel, ShaderIDs._FloodTexReadB, _floodTextureB );
 				_computeShader.SetInts( ShaderIDs._Resolution, new int[]{ resolution.x, resolution.y } );
 				_computeShader.SetVector( ShaderIDs._TexelSize, _sdfTexture.texelSize );
 			}
@@ -201,9 +220,13 @@ namespace Simplex.Procedures
 		public void Release()
 		{
 			_sdfTexture?.Release();
-			_floodTexture?.Release();
+			_floodTextureR?.Release();
+			_floodTextureG?.Release();
+			_floodTextureB?.Release();
 			_sdfTexture = null;
-			_floodTexture = null;
+			_floodTextureR = null;
+			_floodTextureG = null;
+			_floodTextureB = null;
 		}
 
 
