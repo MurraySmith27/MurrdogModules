@@ -137,6 +137,7 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
                 cam.depth = _mainCamera.depth;
                 cam.allowHDR = _mainCamera.allowHDR;
                 cam.allowMSAA = _mainCamera.allowMSAA;
+                cam.useOcclusionCulling = _mainCamera.useOcclusionCulling;
 
                 var additionalData = cam.GetUniversalAdditionalCameraData();
                 additionalData.SetRenderer(rendererIndex);
@@ -301,7 +302,6 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
             yield return Timing.WaitForOneFrame;
         }
 
-        Debug.LogError("rendering!!!");
         if (isPartial)
         {
             DoPartialSDFUpdate(gridPosition);
