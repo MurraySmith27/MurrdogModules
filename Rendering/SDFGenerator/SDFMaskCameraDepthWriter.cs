@@ -46,8 +46,6 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
 
     private float _timeSinceLastDepthUpdate;
     private float _timeBetweenDepthUpdates;
-    private bool _cityConstructed;
-    private Material _greenOverrideMaterial;
 
     // Partial-update batch state: all affected tile cameras share the same computed center/size.
     // The partial event fires once after all cameras in the batch have post-rendered.
@@ -66,21 +64,12 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         _mainCamera = GetComponent<Camera>();
         _mainCamera.enabled = false; // tile cameras take over all rendering
 
-        InitializeRenderTexture();
-
-        var overrideShader = Shader.Find("Hidden/SDFGreenChannelOverride");
-        if (overrideShader != null)
-            _greenOverrideMaterial = new Material(overrideShader);
-
         SetTimeBetweenDepthUpdate(GlobalSettings.GraphicsQuality);
         GlobalSettings.OnGraphicsQualitySettingsChanged -= SetTimeBetweenDepthUpdate;
         GlobalSettings.OnGraphicsQualitySettingsChanged += SetTimeBetweenDepthUpdate;
 
         MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
         MapSystem.Instance.OnMapChunkGenerated += OnMapChunkGenerated;
-
-        MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
-        MapSystem.Instance.OnBuildingConstructed += OnBuildingConstructed;
 
         FogOfWarSystem.Instance.OnRevealedTilesUpdated -= OnFogOfWarUpdated;
         FogOfWarSystem.Instance.OnRevealedTilesUpdated += OnFogOfWarUpdated;
@@ -93,10 +82,7 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         GlobalSettings.OnGraphicsQualitySettingsChanged -= SetTimeBetweenDepthUpdate;
 
         if (MapSystem.IsAvailable)
-        {
             MapSystem.Instance.OnMapChunkGenerated -= OnMapChunkGenerated;
-            MapSystem.Instance.OnBuildingConstructed -= OnBuildingConstructed;
-        }
 
         if (FogOfWarSystem.IsAvailable)
             FogOfWarSystem.Instance.OnRevealedTilesUpdated -= OnFogOfWarUpdated;
@@ -109,14 +95,6 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
 
     // ── Tile camera setup ─────────────────────────────────────────────────────
 
-    private void InitializeRenderTexture()
-    {
-        var prev = RenderTexture.active;
-        RenderTexture.active = m_destinationDepthRenderTexture;
-        GL.Clear(false, true, new Color(0f, 1f, 0f, 1f));
-        RenderTexture.active = prev;
-    }
-    
     private void CreateTileCameras()
     {
         int fullW = m_destinationDepthRenderTexture.width;
@@ -262,12 +240,6 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
     private void OnMapChunkGenerated(int row, int col, int width, int height, int layer)
     {
         RenderSDFTextureThisFrame(new Vector2Int(col, row));
-    }
-
-    private void OnBuildingConstructed(int row, int col, BuildingType building, int layer, ResourceType builtOverResource, Guid playerOwner)
-    {
-        if (building == BuildingType.CityCapital)
-            _cityConstructed = true;
     }
 
     private void OnFogOfWarUpdated(List<Vector2Int> updatedPositions, Guid player)
@@ -430,9 +402,6 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         int tileH = fullH / GridDim;
         int offsetX = tileI * tileW;
         int offsetY = tileJ * tileH;
-
-        if (!_cityConstructed && _greenOverrideMaterial != null)
-            Graphics.Blit(null, _tileRTs[tileI, tileJ], _greenOverrideMaterial);
 
         // Copy tile render directly into the matching region of the combined RT (pure GPU copy).
         Graphics.CopyTexture(
