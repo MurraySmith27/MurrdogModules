@@ -77,14 +77,19 @@ public class FastPerlin2D_512x512
         return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
     }
 
-    public float Noise(float x, float y)
+    public float Noise(float x, float y, int wrapX = 0, int wrapY = 0)
     {
         if (!_instantiated)
         {
             Instantiate();
         }
-        int xi = (int)Mathf.Floor(x) & 255;
-        int yi = (int)Mathf.Floor(y) & 255;
+        int xFloor = (int)Mathf.Floor(x);
+        int xi     = wrapX > 0 ? ((xFloor % wrapX + wrapX) % wrapX) : (xFloor & 255);
+        int xiNext = wrapX > 0 ? ((xi + 1) % wrapX)                 : (xi + 1);
+
+        int yFloor = (int)Mathf.Floor(y);
+        int yi     = wrapY > 0 ? ((yFloor % wrapY + wrapY) % wrapY) : (yFloor & 255);
+        int yiNext = wrapY > 0 ? ((yi + 1) % wrapY)                 : (yi + 1);
 
         float xf = x - Mathf.Floor(x);
         float yf = y - Mathf.Floor(y);
@@ -92,13 +97,13 @@ public class FastPerlin2D_512x512
         float u = Fade(xf);
         float v = Fade(yf);
 
-        int aa = p[p[xi] + yi];
-        int ab = p[p[xi] + yi + 1];
-        int ba = p[p[xi + 1] + yi];
-        int bb = p[p[xi + 1] + yi + 1];
+        int aa = p[p[xi]     + yi];
+        int ab = p[p[xi]     + yiNext];
+        int ba = p[p[xiNext] + yi];
+        int bb = p[p[xiNext] + yiNext];
 
         float x1 = Mathf.Lerp(
-            Grad(aa, xf,     yf), 
+            Grad(aa, xf,     yf),
             Grad(ba, xf - 1, yf),
             u
         );

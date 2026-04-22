@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using SharpVoronoiLib.Exceptions;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace SharpVoronoiLib
 {
-
     /// <summary>
     /// An Euclidean plane where a Voronoi diagram can be constructed from <see cref="VoronoiSite"/>s
     /// producing a tesselation of cells with <see cref="VoronoiEdge"/> line segments and <see cref="VoronoiPoint"/> vertices.
@@ -112,6 +113,7 @@ namespace SharpVoronoiLib
         private KDTreeNearestSiteLookup? _kdTreeNearestSiteLookupAlgorithm;
 
         private BorderEdgeGeneration _lastBorderGeneration;
+        private bool _lastWrapHorizontal;
 
         private int _duplicateSitesCount;
 
@@ -169,17 +171,18 @@ namespace SharpVoronoiLib
 
         [PublicAPI]
         public List<VoronoiEdge> Tessellate(
-            BorderEdgeGeneration borderGeneration = BorderEdgeGeneration.MakeBorderEdges)
+            BorderEdgeGeneration borderGeneration = BorderEdgeGeneration.MakeBorderEdges, bool wrapHorizontal = false)
         {
             if (Sites == null) throw new VoronoiDoesntHaveSitesException();
 
 
             _lastBorderGeneration = borderGeneration;
+            _lastWrapHorizontal = wrapHorizontal;
 
             // Tessellate
 
             if (_tessellationAlgorithm == null)
-                _tessellationAlgorithm = new FortunesTessellation();
+                _tessellationAlgorithm = new FortunesTessellationHorizontalWrap();
 
             List<VoronoiEdge> edges = _tessellationAlgorithm.Run(Sites, MinX, MinY, MaxX, MaxY, out int duplicateCount);
             _duplicateSitesCount = duplicateCount;
@@ -201,6 +204,108 @@ namespace SharpVoronoiLib
                     _borderClosingAlgorithm = new GenericBorderClosing();
 
                 edges = _borderClosingAlgorithm.Close(edges, MinX, MinY, MaxX, MaxY, Sites);
+            }
+
+            if (wrapHorizontal)
+            {
+                //at the end of fortune's algo, add the wraparound nodes as neighbors
+
+                Func<VoronoiSite, double, double, double> computeDistance =
+                    (VoronoiSite site, double height, double Y) =>
+                    {
+                        return Mathf.Sqrt((float)(Mathf.Pow((float)(site.Y - Y), 2) +
+                                                  Mathf.Pow((float)(site.X - height), 2)));
+                    };
+
+                double epsilon = 0.001f;
+
+                Func<double, double, bool> ApproxEqual = (double a, double b) =>
+                {
+                    return (a - b) < epsilon && (b - a) < epsilon;
+                };
+
+                Action<VoronoiSite, VoronoiEdge, double> updateWraparoundNeighbors =
+                    (VoronoiSite siteWithNullNeighbor, VoronoiEdge edge, double Y) =>
+                    {
+                        double minDistance = double.MaxValue;
+                        VoronoiSite minDistanceSite = null;
+                        VoronoiEdge minDistanceEdge = null;
+                        //find closest site near same position at start
+                        for (int i = 0; i < edges.Count; i++)
+                        {
+                            double distance = 0;
+                            if (edges[i].Left != null)
+                            {
+                                distance = computeDistance(edges[i].Left, edge.Mid.X, Y);
+                                if (distance < minDistance)
+                                {
+                                    minDistance = distance;
+                                    minDistanceSite = edges[i].Left;
+                                    minDistanceEdge = edges[i];
+                                }
+                            }
+
+                            if (edges[i].Right != null)
+                            {
+                                distance = computeDistance(edges[i].Right, edge.Mid.X, Y);
+                                if (distance < minDistance)
+                                {
+                                    minDistance = distance;
+                                    minDistanceSite = edges[i].Right;
+                                    minDistanceEdge = edges[i];
+                                }
+                            }
+                        }
+
+                        if (minDistanceSite != null)
+                        {
+                            minDistanceSite.AddNeighbour(siteWithNullNeighbor);
+
+                            if (edge.Left == null)
+                            {
+                                edge.Left = minDistanceSite;
+                            }
+                            else if (edge.Right == null)
+                            {
+                                edge.Right = minDistanceSite;
+                            }
+
+                            if (minDistanceEdge.Left == null)
+                            {
+                                minDistanceEdge.Left = siteWithNullNeighbor;
+                            }
+                            else if (minDistanceEdge.Right == null)
+                            {
+                                minDistanceEdge.Right = siteWithNullNeighbor;
+                            }
+                        }
+                    };
+                foreach (var edge in edges)
+                {
+                    VoronoiSite siteWithNullNeighbor = null;
+                    if (edge.Left == null)
+                    {
+                        siteWithNullNeighbor = edge.Right;
+                    }
+
+                    if (edge.Right == null)
+                    {
+                        siteWithNullNeighbor = edge.Left;
+                    }
+
+                    if (siteWithNullNeighbor != null)
+                    {
+                        //border edge, ensure it's on the left side before adding neighbor
+                        if (edge.Mid.Y.ApproxEqual(MaxY))
+                        {
+                            updateWraparoundNeighbors(siteWithNullNeighbor, edge, MinY);
+                        }
+                        else if (edge.Mid.Y.ApproxEqual(MinY))
+                        {
+                            updateWraparoundNeighbors(siteWithNullNeighbor, edge, MaxY);
+                        }
+                    }
+                }
             }
 
             // Done
@@ -234,7 +339,7 @@ namespace SharpVoronoiLib
                     reTessellate)
                 {
                     // Re-tesselate with the new site locations
-                    Tessellate(_lastBorderGeneration); // will set Edges
+                    Tessellate(_lastBorderGeneration, _lastWrapHorizontal); // will set Edges
                 }
             }
 
@@ -280,7 +385,8 @@ namespace SharpVoronoiLib
 
         [PublicAPI]
         public static List<VoronoiEdge> TessellateRandomSitesOnce(int numberOfSites, double minX, double minY,
-            double maxX, double maxY, BorderEdgeGeneration borderGeneration = BorderEdgeGeneration.MakeBorderEdges)
+            double maxX, double maxY, BorderEdgeGeneration borderGeneration = BorderEdgeGeneration.MakeBorderEdges,
+            bool wrapHorizontal = false)
         {
             if (numberOfSites < 0) throw new ArgumentOutOfRangeException(nameof(numberOfSites));
 
@@ -289,12 +395,13 @@ namespace SharpVoronoiLib
 
             plane.GenerateRandomSites(numberOfSites);
 
-            return plane.Tessellate(borderGeneration);
+            return plane.Tessellate(borderGeneration, wrapHorizontal);
         }
 
         [PublicAPI]
         public static List<VoronoiEdge> TessellateOnce(List<VoronoiSite> sites, double minX, double minY, double maxX,
-            double maxY, BorderEdgeGeneration borderGeneration = BorderEdgeGeneration.MakeBorderEdges)
+            double maxY, BorderEdgeGeneration borderGeneration = BorderEdgeGeneration.MakeBorderEdges,
+            bool wrapHorizontal = false)
         {
             if (sites == null) throw new ArgumentNullException(nameof(sites));
 
@@ -303,7 +410,7 @@ namespace SharpVoronoiLib
 
             plane.SetSites(sites);
 
-            return plane.Tessellate(borderGeneration);
+            return plane.Tessellate(borderGeneration, wrapHorizontal);
         }
 
 

@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Numerics;
+using UnityEngine;
 
 namespace SharpVoronoiLib
 {
-
-    internal class FortunesTessellation : ITessellationAlgorithm
+    internal class FortunesTessellationHorizontalWrap : ITessellationAlgorithm
     {
         public List<VoronoiEdge> Run(List<VoronoiSite> sites, double minX, double minY, double maxX, double maxY,
             out int duplicateCount)
@@ -60,7 +63,7 @@ namespace SharpVoronoiLib
                         break;
                 }
             }
-            
+
             
 
             return edges;

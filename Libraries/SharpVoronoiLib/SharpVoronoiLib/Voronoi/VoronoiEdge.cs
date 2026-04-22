@@ -65,14 +65,14 @@ namespace SharpVoronoiLib
         /// Can be null if this is a border edge and there are no sites within the bounds.
         /// </summary>
         [PublicAPI]
-        public VoronoiSite? Right { get; }
+        public VoronoiSite? Right { get; set; }
 
         /// <summary>
         /// One of the two sites that this edge separates, the other being <see cref="Right"/>.
         /// Can be null if this is a border edge.
         ///  </summary>
         [PublicAPI]
-        public VoronoiSite? Left { get; }
+        public VoronoiSite? Left { get; set; }
 
 
         /// <summary>

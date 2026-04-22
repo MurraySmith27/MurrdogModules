@@ -55,6 +55,15 @@ static const int2 offsets[NEIGHBOUR_COUNT] = {
     int2(-1, 1), int2(0, 1), int2(1, 1),
 };
 
+// Returns the shortest signed X difference accounting for horizontal wrap-around.
+int WrapDiffX(int d)
+{
+    int w = (int)_Resolution.x;
+    if (d >  w / 2) return d - w;
+    if (d < -(w / 2)) return d + w;
+    return d;
+}
+
 
 [numthreads( THREAD_GROUP_WIDTH, THREAD_GROUP_WIDTH, 1 )]
 void _SeedKernel(uint2 localCoord : SV_DispatchThreadID)
@@ -95,11 +104,14 @@ void _FloodKernel(uint2 localCoord : SV_DispatchThreadID, uint3 gtId : SV_GroupT
 
     // Get the jump offset.
     int2 sampleCoord = (int2)coord + offsets[gtId.z] * _StepSize;
+    // Wrap X horizontally; Y remains clamped (OOB reads return zero = no seed).
+    sampleCoord.x = ((sampleCoord.x % (int)_Resolution.x) + (int)_Resolution.x) % (int)_Resolution.x;
 
     // Sample.
     int4 seedR = _FloodTexR[sampleCoord]; // Reads outside bounds will return zeros.
     int2 shiftedCoordR = (int2)coord + int2(1, 1);
     int4 diffR = seedR - shiftedCoordR.xyxy;
+    diffR.x = WrapDiffX(diffR.x); diffR.z = WrapDiffX(diffR.z);
     sharedCoordDistR[gtId.z] = int2x3(
         seedR.xy, any(seedR.xy) ? dot(diffR.xy, diffR.xy) : 9999999, // enough to be ignored
         seedR.zw, any(seedR.zw) ? dot(diffR.zw, diffR.zw) : 9999999
@@ -108,6 +120,7 @@ void _FloodKernel(uint2 localCoord : SV_DispatchThreadID, uint3 gtId : SV_GroupT
     int4 seedG = _FloodTexG[sampleCoord]; // Reads outside bounds will return zeros.
     int2 shiftedCoordG = (int2)coord + int2(1, 1);
     int4 diffG = seedG - shiftedCoordG.xyxy;
+    diffG.x = WrapDiffX(diffG.x); diffG.z = WrapDiffX(diffG.z);
     sharedCoordDistG[gtId.z] = int2x3(
         seedG.xy, any(seedG.xy) ? dot(diffG.xy, diffG.xy) : 9999999, // enough to be ignored
         seedG.zw, any(seedG.zw) ? dot(diffG.zw, diffG.zw) : 9999999
@@ -116,6 +129,7 @@ void _FloodKernel(uint2 localCoord : SV_DispatchThreadID, uint3 gtId : SV_GroupT
     int4 seedB = _FloodTexB[sampleCoord]; // Reads outside bounds will return zeros.
     int2 shiftedCoordB = (int2)coord + int2(1, 1);
     int4 diffB = seedB - shiftedCoordB.xyxy;
+    diffB.x = WrapDiffX(diffB.x); diffB.z = WrapDiffX(diffB.z);
     sharedCoordDistB[gtId.z] = int2x3(
         seedB.xy, any(seedB.xy) ? dot(diffB.xy, diffB.xy) : 9999999, // enough to be ignored
         seedB.zw, any(seedB.zw) ? dot(diffB.zw, diffB.zw) : 9999999
@@ -196,8 +210,10 @@ void _DistKernel(uint2 localCoord : SV_DispatchThreadID)
     if (coord.x >= _Resolution.x || coord.y >= _Resolution.y) return;
     int2 shiftedCoord = (int2)coord + int2(1, 1);
 
-    int4 closestCoordsR = _FloodTexReadR[coord];
-    float4 diffR = closestCoordsR - shiftedCoord.xyxy;
+    int4 closestCoordsR = (int4)_FloodTexReadR[coord];
+    int4 idiffR = closestCoordsR - shiftedCoord.xyxy;
+    idiffR.x = WrapDiffX(idiffR.x); idiffR.z = WrapDiffX(idiffR.z);
+    float4 diffR = idiffR;
 
     float outerDistR = any(closestCoordsR.xy) ? length(diffR.xy) : 0;
     float innerDistR = any(closestCoordsR.zw) ? length(diffR.zw) : 0;
@@ -208,8 +224,10 @@ void _DistKernel(uint2 localCoord : SV_DispatchThreadID)
     // https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@15.0/manual/sdf-in-vfx-graph.html
     sdR *= min(_TexelSize.x, _TexelSize.y);
 
-    int4 closestCoordsG = _FloodTexReadG[coord];
-    float4 diffG = closestCoordsG - shiftedCoord.xyxy;
+    int4 closestCoordsG = (int4)_FloodTexReadG[coord];
+    int4 idiffG = closestCoordsG - shiftedCoord.xyxy;
+    idiffG.x = WrapDiffX(idiffG.x); idiffG.z = WrapDiffX(idiffG.z);
+    float4 diffG = idiffG;
 
     float outerDistG = any(closestCoordsG.xy) ? length(diffG.xy) : 0;
     float innerDistG = any(closestCoordsG.zw) ? length(diffG.zw) : 0;
@@ -220,8 +238,10 @@ void _DistKernel(uint2 localCoord : SV_DispatchThreadID)
     // https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@15.0/manual/sdf-in-vfx-graph.html
     sdG *= min(_TexelSize.x, _TexelSize.y);
 
-    int4 closestCoordsB = _FloodTexReadB[coord];
-    float4 diffB = closestCoordsB - shiftedCoord.xyxy;
+    int4 closestCoordsB = (int4)_FloodTexReadB[coord];
+    int4 idiffB = closestCoordsB - shiftedCoord.xyxy;
+    idiffB.x = WrapDiffX(idiffB.x); idiffB.z = WrapDiffX(idiffB.z);
+    float4 diffB = idiffB;
 
     float outerDistB = any(closestCoordsB.xy) ? length(diffB.xy) : 0;
     float innerDistB = any(closestCoordsB.zw) ? length(diffB.zw) : 0;
