@@ -55,6 +55,13 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
     private int _pendingPartialCount; // cameras still to post-render before firing the partial event
     private int _pendingFullCount; // remaining tile cameras to post-render for a full update
 
+    // Wrap-batch state: cameras for the seam-wrapped counterpart of a partial update.
+    // Fires a second partial event so the SDF generator processes each side of the seam separately.
+    private bool[] _cameraInWrapBatch;
+    private Vector2Int _wrapBatchCenter;
+    private int _wrapBatchSize;
+    private int _pendingWrapCount;
+
     [SerializeField] private int updateFrameDelay = 0;
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -105,6 +112,7 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         _tileCameras = new Camera[GridDim, GridDim];
         _tileRTs = new RenderTexture[GridDim, GridDim];
         _cameraInPartialBatch = new bool[GridDim * GridDim];
+        _cameraInWrapBatch = new bool[GridDim * GridDim];
 
         float tileOrthoSize = _mainCamera.orthographicSize / GridDim;
         float tileSizeRight = _mainCamera.orthographicSize * _mainCamera.aspect * 2f / GridDim;
@@ -315,10 +323,13 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
     private void DoFullSDFUpdate()
     {
         _pendingFullCount = GridDim * GridDim;
-        // Clear any pending partial state so full-update cameras don't double-fire.
+        // Clear any pending partial/wrap state so full-update cameras don't double-fire.
         for (int k = 0; k < _cameraInPartialBatch.Length; k++)
             _cameraInPartialBatch[k] = false;
+        for (int k = 0; k < _cameraInWrapBatch.Length; k++)
+            _cameraInWrapBatch[k] = false;
         _pendingPartialCount = 0;
+        _pendingWrapCount = 0;
 
         foreach (var cam in _tileCameras)
             cam.enabled = true;
@@ -326,10 +337,25 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
     
     public void DoPartialSDFUpdate(List<Vector2Int> updatedPositions)
     {
-        // Compute bounding box in pixel space across all updated positions.
+        // Expand with in-frustum wrapped counterparts (map rotates around X axis).
+        int mapSize = GameConstants.STARTING_MAP_SIZE.x;
+        var allPositions = new List<Vector2Int>(updatedPositions);
+        foreach (var gridPos in updatedPositions)
+        {
+            foreach (int offset in new[] { mapSize, -mapSize })
+            {
+                var wrapped = new Vector2Int(gridPos.x, gridPos.y + offset);
+                Vector3 wrappedWorld = MapUtils.GetTileWorldPositionFromGridPosition(wrapped, 0);
+                WorldPosToUV(wrappedWorld, out float wu, out float wv);
+                if (wu >= 0f && wu <= 1f && wv >= 0f && wv <= 1f)
+                    allPositions.Add(wrapped);
+            }
+        }
+
+        // Compute bounding box in pixel space across all positions.
         int minX = int.MaxValue, minY = int.MaxValue;
         int maxX = int.MinValue, maxY = int.MinValue;
-        foreach (var gridPos in updatedPositions)
+        foreach (var gridPos in allPositions)
         {
             Vector3 worldPos = MapUtils.GetTileWorldPositionFromGridPosition(gridPos, 0);
             WorldPosToUV(worldPos, out float u, out float v);
@@ -344,12 +370,15 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         // Reset batch state and store the computed center/size.
         for (int k = 0; k < _cameraInPartialBatch.Length; k++)
             _cameraInPartialBatch[k] = false;
+        for (int k = 0; k < _cameraInWrapBatch.Length; k++)
+            _cameraInWrapBatch[k] = false;
         _pendingPartialCount = 0;
+        _pendingWrapCount = 0;
         _partialBatchCenter = new Vector2Int((minX + maxX) / 2, (minY + maxY) / 2);
         _partialBatchSize = Mathf.Max(maxX - minX + 1, maxY - minY + 1, _patchSizePixels);
 
-        // Enable every tile camera that covers at least one updated position.
-        foreach (var gridPos in updatedPositions)
+        // Enable every tile camera that covers at least one position.
+        foreach (var gridPos in allPositions)
         {
             Vector3 worldPos = MapUtils.GetTileWorldPositionFromGridPosition(gridPos, 0);
             WorldPosToTileIndex(worldPos, out int tileI, out int tileJ);
@@ -372,6 +401,11 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
 
         for (int k = 0; k < _cameraInPartialBatch.Length; k++)
             _cameraInPartialBatch[k] = false;
+        for (int k = 0; k < _cameraInWrapBatch.Length; k++)
+            _cameraInWrapBatch[k] = false;
+        _pendingPartialCount = 0;
+        _pendingWrapCount = 0;
+
         _partialBatchCenter = new Vector2Int(pixelX, pixelY);
         _partialBatchSize = _patchSizePixels;
 
@@ -380,6 +414,28 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         _cameraInPartialBatch[camIdx] = true;
         _pendingPartialCount = 1;
         _tileCameras[tileI, tileJ].enabled = true;
+
+        // Check wrapped counterpart (map rotates around X axis: grid.y wraps by STARTING_MAP_SIZE.x).
+        int mapSize = GameConstants.STARTING_MAP_SIZE.x;
+        foreach (int offset in new[] { mapSize, -mapSize })
+        {
+            Vector3 wrappedWorld = MapUtils.GetTileWorldPositionFromGridPosition(
+                new Vector2Int(gridPosition.x, gridPosition.y + offset), 0);
+            WorldPosToUV(wrappedWorld, out float wu, out float wv);
+            if (wu < 0f || wu > 1f || wv < 0f || wv > 1f) continue;
+
+            int wpx = Mathf.RoundToInt(wu * m_destinationDepthRenderTexture.width);
+            int wpy = Mathf.RoundToInt(wv * m_destinationDepthRenderTexture.height);
+            WorldPosToTileIndex(wrappedWorld, out int wI, out int wJ);
+            int wIdx = wJ * GridDim + wI;
+
+            if (_cameraInPartialBatch[wIdx] || _cameraInWrapBatch[wIdx]) continue;
+            _cameraInWrapBatch[wIdx] = true;
+            _pendingWrapCount++;
+            _wrapBatchCenter = new Vector2Int(wpx, wpy);
+            _wrapBatchSize = _patchSizePixels;
+            _tileCameras[wI, wJ].enabled = true;
+        }
     }
 
     // ── Post-render callback ──────────────────────────────────────────────────
@@ -420,6 +476,18 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
                     m_onSDFDepthTextureChangedPartial.GetInvocationList().Length > 0)
                     m_onSDFDepthTextureChangedPartial(m_destinationDepthRenderTexture, _partialBatchCenter,
                         _partialBatchSize);
+            }
+        }
+        else if (_cameraInWrapBatch[cameraIndex])
+        {
+            _cameraInWrapBatch[cameraIndex] = false;
+            _pendingWrapCount--;
+            if (_pendingWrapCount <= 0)
+            {
+                if (m_onSDFDepthTextureChangedPartial != null &&
+                    m_onSDFDepthTextureChangedPartial.GetInvocationList().Length > 0)
+                    m_onSDFDepthTextureChangedPartial(m_destinationDepthRenderTexture, _wrapBatchCenter,
+                        _wrapBatchSize);
             }
         }
         else if (_pendingFullCount > 0)

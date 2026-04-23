@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FastPerlin2D_512x512
 {
-    private static readonly int[] perm = {
+    private int[] perm = {
         151,160,137,91,90,15,
         131,13,201,95,96,53,194,233,7,225,140,36,103,30,
         69,142,8,99,37,240,21,10,23,
@@ -84,11 +84,11 @@ public class FastPerlin2D_512x512
             Instantiate();
         }
         int xFloor = (int)Mathf.Floor(x);
-        int xi     = wrapX > 0 ? ((xFloor % wrapX + wrapX) % wrapX) : (xFloor & 255);
+        int xi     = wrapX > 0 ? ((xFloor % wrapX + wrapX) % wrapX) & 255 : (xFloor & 255);
         int xiNext = wrapX > 0 ? ((xi + 1) % wrapX)                 : (xi + 1);
 
         int yFloor = (int)Mathf.Floor(y);
-        int yi     = wrapY > 0 ? ((yFloor % wrapY + wrapY) % wrapY) : (yFloor & 255);
+        int yi     = wrapY > 0 ? ((yFloor % wrapY + wrapY) % wrapY) & 255 : (yFloor & 255);
         int yiNext = wrapY > 0 ? ((yi + 1) % wrapY)                 : (yi + 1);
 
         float xf = x - Mathf.Floor(x);
