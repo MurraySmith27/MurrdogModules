@@ -344,7 +344,7 @@ public class SDFMaskCameraDepthWriter : MonoBehaviour
         {
             foreach (int offset in new[] { mapSize, -mapSize })
             {
-                var wrapped = new Vector2Int(gridPos.x, gridPos.y + offset);
+                var wrapped = MapUtils.GetPosWrapAroundBufferedTilePosition(new Vector2Int(gridPos.x, gridPos.y + offset));
                 Vector3 wrappedWorld = MapUtils.GetTileWorldPositionFromGridPosition(wrapped, 0);
                 WorldPosToUV(wrappedWorld, out float wu, out float wv);
                 if (wu >= 0f && wu <= 1f && wv >= 0f && wv <= 1f)
